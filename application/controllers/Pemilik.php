@@ -7,11 +7,14 @@ class Pemilik extends CI_Controller {
  	{
 	   	parent::__construct();
 	   	$this->load->model('model_pemilik','',TRUE);
+	   	$this->load->model('model_kos','',TRUE);
  	}
 
 	public function masuk()
 	{
+		$this->load->view('template/header');
 		$this->load->view('masuk_pemilik');
+		$this->load->view('template/footer');
 	}
 
 	public function login()
@@ -31,7 +34,7 @@ class Pemilik extends CI_Controller {
 		        );
 		    	$this->session->set_userdata('logged_in_pemilik', $sess_array);
 		    }
-		    redirect('pemilik/berhasil');
+		    redirect('pemilik/beranda');
     	}
     	else
     		echo "Gagal Masuk Session";
@@ -39,7 +42,9 @@ class Pemilik extends CI_Controller {
 
 	public function daftar()
 	{
+		$this->load->view('template/header');
 		$this->load->view('daftar_pemilik');
+		$this->load->view('template/footer');
 	}
 
 	public function pendaftaran()
@@ -59,17 +64,32 @@ class Pemilik extends CI_Controller {
 	        	'username' => $username
 	        );
 	    	$this->session->set_userdata('logged_in_pemilik', $sess_array);
-	    	redirect('pemilik/berhasil');
+	    	redirect('pemilik/beranda');
 		}
 		else
 			echo "Gagal Masuk Session";
 	}
 
-	public function berhasil()
+	public function beranda()
 	{
-		$session_data = $this->session->userdata('logged_in_pemilik');
-   		$username = $session_data['username'];
-   		echo "Username Anda: $username";
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $data['username'] = $session_data['username'];
+
+            $data['fasilitas'] = $this->model_kos->fasilitas();
+            $data['tipe'] = $this->model_kos->tipe();
+
+            $data['jumlah'] = $this->model_kos->count_list($data['username']);
+            $data['kos'] = $this->model_kos->list_kos($data['username']);
+
+            $this->load->view('template/header');
+			$this->load->view('beranda_pemilik', $data);
+			$this->load->view('template/footer');
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
 	}
 
 	public function logout()

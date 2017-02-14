@@ -1,6 +1,5 @@
 <?php
-Class Model_pemilik extends CI_Model
-{
+class Model_pemilik extends CI_Model {
 	function daftar($username, $password, $nama, $email, $telepon)
 	{
 	   $data = array(
@@ -21,9 +20,9 @@ Class Model_pemilik extends CI_Model
  	function login($username, $password)
  	{
  		$query = "SELECT * FROM pemilik p WHERE p.usernamepemilik = '$username' AND p.passwordpemilik = '$password'";
-		$result = $this->db->query($query);
-		if($result->num_rows() == 1)
-			return $result->result();
+		$run = $this->db->query($query);
+		if($run->num_rows() == 1)
+			return $run->result();
 		else
 			return false;
  	}

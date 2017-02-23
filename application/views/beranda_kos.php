@@ -45,8 +45,8 @@
                             <a href="<?php echo site_url('kos/delete?kos='.$row->idKos.'')?>"><button class="btn btn-danger">Hapus</button></a>
                         </div>
                         <div class="col-lg-12 text-center">
-                            <button class="btn btn-primary">Tambah Tipe Kos</button>
-                            <button class="btn btn-primary">Tambah Fasilitas Kos</button>
+                            <a href="<?php echo site_url('kos/tambah_tipe?kos='.$row->idKos.'')?>"><button class="btn btn-primary">Tambah Tipe Kos</button></a>
+                            <a href="<?php echo site_url('kos/tambah_fasilitas?kos='.$row->idKos.'')?>"><button class="btn btn-primary">Tambah Fasilitas Kos</button></a>
                         </div>
                     <?php } ?>
     
@@ -63,7 +63,7 @@
                                         foreach($tipe as $row) { ?>
                                             <tr>
                                                 <td><?php echo $row->tipeKos ?></td>
-                                                <td><button class="btn btn-danger btn-sm">Hapus</button></td>
+                                                <td><a href="<?php echo site_url('kos/delete_tipe?kos='.$row->idKos.'&tipe='.$row->idKosTipeKos.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a></td>
                                             </tr>
                                         <?php }
                                     ?>
@@ -84,7 +84,7 @@
                                         foreach($fasilitas as $row) { ?>
                                             <tr>
                                                 <td><?php echo $row->namaFasilitasKos ?></td>
-                                                <td><button class="btn btn-danger btn-sm">Hapus</button></td>
+                                                <td><a href="<?php echo site_url('kos/delete_fasilitas?kos='.$row->idKos.'&fasilitas='.$row->idKosFasilitasKos.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a></td>
                                             </tr>
                                         <?php }
                                     ?>

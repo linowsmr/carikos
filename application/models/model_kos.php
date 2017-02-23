@@ -100,4 +100,30 @@ class Model_kos extends CI_Model {
  		$this->db->where('idKos', $id);
    		$this->db->delete('kos');
  	}
+
+ 	function tipe_kos_non($id)
+ 	{
+ 		$query = "SELECT * FROM tipekos t WHERE t.idTipeKos NOT IN (SELECT kt.idTipeKos FROM kos_tipekos kt, tipekos tk WHERE kt.idTipeKos = tk.idTipeKos AND kt.idKos = '$id')";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function fasilitas_kos_non($id)
+ 	{
+ 		$query = "SELECT * FROM fasilitaskos f WHERE f.idFasilitasKos NOT IN (SELECT kf.idFasilitasKos FROM kos_fasilitaskos kf, fasilitaskos fk WHERE kf.idFasilitasKos = fk.idFasilitasKos AND kf.idKos = '$id')";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function hapus_tipe($id)
+ 	{
+ 		$this->db->where('idKosTipeKos', $id);
+ 		$this->db->delete('kos_tipekos');
+ 	}
+
+ 	function hapus_fasilitas($id)
+ 	{
+ 		$this->db->where('idKosFasilitasKos', $id);
+ 		$this->db->delete('kos_fasilitaskos');
+ 	}
 }

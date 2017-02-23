@@ -7,6 +7,7 @@ class Kos extends CI_Controller {
  	{
 	   	parent::__construct();
 	   	$this->load->model('model_kos','',TRUE);
+	   	$this->load->model('model_kamar','',TRUE);
  	}
 
 	public function daftar()
@@ -44,12 +45,16 @@ class Kos extends CI_Controller {
             $data['username'] = $session_data['username'];
 
             $id = $this->input->get('kos');
+            $data['id'] = $id;
 
             $data['detail'] = $this->model_kos->detail_kos($id);
 
             if($data['detail']){
             	$data['fasilitas'] = $this->model_kos->fasilitas_kos($id);
 	            $data['tipe'] = $this->model_kos->tipe_kos($id);
+	            $data['jumlah'] = $this->model_kamar->count_list($id);
+	            $data['kamar'] = $this->model_kamar->list_kamar($id);
+	            $data['fasilitaskamar'] = $this->model_kamar->fasilitas();
 
 	            foreach($data['detail'] as $row){
 	            	$pemilik = $row->usernamePemilik;
@@ -85,5 +90,45 @@ class Kos extends CI_Controller {
 		$this->model_kos->delete($id);
 
 		redirect('pemilik/beranda');
+	}
+
+	public function tambah_tipe()
+	{
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $data['username'] = $session_data['username'];
+
+            $id = $this->input->get('kos');
+            $data['id'] = $id;
+
+            $data['detail'] = $this->model_kos->detail_kos($id);
+
+            if($data['detail']){
+            	$data['fasilitas'] = $this->model_kos->fasilitas_kos($id);
+	            $data['tipe'] = $this->model_kos->tipe_kos($id);
+
+	            foreach($data['detail'] as $row){
+	            	$data['nama'] = $row->namaKos;
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($data['username'] == $pemilik){
+	            	$this->load->view('template/header');
+					$this->load->view('beranda_kos', $data);
+					$this->load->view('template/footer');
+	            }
+	            else {
+	            	echo "Bukan Kos Anda";
+	            }
+            }
+            else {
+            	echo "Data Tidak Ditemukan";
+            }
+            
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
 	}
 }

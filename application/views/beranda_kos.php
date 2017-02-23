@@ -99,9 +99,114 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                <h2>Daftar Kamar</h2>
+                <h2>Foto Kos</h2>
                     <hr class="small">
                 </div>
+            </div>
+        </div>
+    </aside>
+    <aside class="call-to-action">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <?php
+                	foreach($detail as $row) { ?>
+	                	<h2>Daftar Kamar <?php echo $row->namaKos ?></h2>
+		                    <hr class="small" style="border-color: black;">
+		                </div>
+                	<?php }
+                    if($jumlah < 1) { ?>
+                        <h4 class="text-center">Kos Belum Memiliki Kamar</h4>
+                    <?php
+                        }
+                    else { ?>
+                        <div class="row">
+                            <div class="col-lg-1">
+                            </div>
+                            <div class="col-lg-10">
+                                <table class="table table-stripped">
+                                    <thead>
+                                      <tr>
+                                        <th>Jenis Kamar</th>
+                                        <th>Harga Kamar</th>
+                                        <th>Jumlah Kamar</th>
+                                        <th></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            foreach($kamar as $row) { ?>
+                                                <tr>
+                                                    <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><?php echo $row->jenisKamar ?></a></td>
+                                                    <td><?php echo $row->hargaKamar ?></td>
+                                                    <td><?php echo $row->jumlahKamar ?></td>
+                                                    <td>
+                                                        <a href="<?php echo site_url('kamar/delete?kamar='.$row->idKamar.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a>
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-1">
+                            </div>
+                        </div>
+                    <?php }
+                ?>
+            </div>
+        </div>
+    </aside>
+    <aside class="call-to-action bg-primary">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                	<h2>Daftar Kamar</h2>
+                    <hr class="small">
+	                <div class="row">
+	                    <form action="<?php echo site_url('kamar/daftar')?>" method="post">
+	                        <div class="col-lg-4"></div>
+	                        <div class="col-lg-4">
+	                            <div class="form-group">
+	                                <h4>Jenis Kamar</h4>
+	                                <input type="name" class="form-control" name="jenis">
+	                            </div>
+	                            <div class="form-group">
+	                                <h4>Harga Kamar</h4>
+	                                <div class="input-group">
+	                                	<span class="input-group-addon">Rp</span>
+	                                	<input type="name" class="form-control" name="harga">
+	                                	<span class="input-group-addon">,00</span>
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <h4>Jumlah Kamar</h4>
+	                                <div class="input-group">
+	                                	<input type="name" class="form-control" name="jumlah">
+	                                	<span class="input-group-addon">Kamar</span>
+	                                </div>
+	                            </div>
+	                            <div class="form-group">
+	                                <h4>Fasilitas Kamar</h4>
+	                                <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitas[]">
+	                                    <?php
+	                                        foreach($fasilitaskamar as $row){ ?>
+	                                            <option value="<?php echo $row->idFasilitasKamar ?>"><?php echo $row->namaFasilitasKamar ?></option>
+	                                        <?php }
+	                                    ?>
+	                                </select>
+	                            </div>
+	                            <div class="form-group">
+	                                <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">
+	                            </div>
+	                        </div>
+	                        <div class="col-lg-4"></div>
+	                        <div class="col-lg-12">
+	                            <button type="submit" class="btn btn-lg btn-light">Daftar</button>
+	                        </div>
+	                    </form>
+	                </div>
+	            </div>
             </div>
         </div>
     </aside>

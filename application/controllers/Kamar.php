@@ -24,7 +24,7 @@ class Kamar extends CI_Controller {
 	            $this->model_kamar->insert_fasilitas($insert, $fasilitas[$a]);
 	        }
 
-	        redirect('kos/beranda?kos='.$insert.'');
+	        redirect('kos/beranda?kos='.$idKos.'');
 		}
 		else {
 			echo "Gagal Input";

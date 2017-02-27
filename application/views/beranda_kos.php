@@ -41,7 +41,7 @@
                             <p><?php echo $row->teleponKos ?></p>
                         </div>
                         <div class="col-lg-12 text-center">
-                            <button class="btn btn-success">Ubah</button>
+                            <a href="<?php echo site_url('kos/update?kos='.$row->idKos.'')?>"><button class="btn btn-success">Ubah</button></a>
                             <a href="<?php echo site_url('kos/delete?kos='.$row->idKos.'')?>"><button class="btn btn-danger">Hapus</button></a>
                         </div>
                         <div class="col-lg-12 text-center">
@@ -62,8 +62,14 @@
                                     <?php
                                         foreach($tipe as $row) { ?>
                                             <tr>
-                                                <td><?php echo $row->tipeKos ?></td>
-                                                <td><a href="<?php echo site_url('kos/delete_tipe?kos='.$row->idKos.'&tipe='.$row->idKosTipeKos.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a></td>
+                                                <td><p><?php echo $row->tipeKos ?></p></td>
+                                                <td>
+                                                    <form action="<?php echo site_url('kos/delete_tipe') ?>" method="post">
+                                                        <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                                        <input type="hidden" name="tipe" value="<?php echo $row->idKosTipeKos ?>"></input>
+                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         <?php }
                                     ?>
@@ -83,8 +89,14 @@
                                     <?php
                                         foreach($fasilitas as $row) { ?>
                                             <tr>
-                                                <td><?php echo $row->namaFasilitasKos ?></td>
-                                                <td><a href="<?php echo site_url('kos/delete_fasilitas?kos='.$row->idKos.'&fasilitas='.$row->idKosFasilitasKos.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a></td>
+                                                <td><p><?php echo $row->namaFasilitasKos ?></p></td>
+                                                <td>
+                                                    <form action="<?php echo site_url('kos/delete_fasilitas') ?>" method="post">
+                                                        <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                                        <input type="hidden" name="fasilitas" value="<?php echo $row->idFasilitasKos ?>"></input>
+                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         <?php }
                                     ?>

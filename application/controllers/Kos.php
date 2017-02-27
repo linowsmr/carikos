@@ -81,15 +81,89 @@ class Kos extends CI_Controller {
 
 	public function update()
 	{
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $data['username'] = $session_data['username'];
 
+            $id = $this->input->get('kos');
+
+            $data['detail'] = $this->model_kos->detail_kos($id);
+
+            if($data['detail']){
+	            foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($data['username'] == $pemilik){
+	            	$this->load->view('template/header');
+					$this->load->view('ubah_kos', $data);
+					$this->load->view('template/footer');
+	            }
+	            else {
+	            	echo "Bukan Kos Anda";
+	            }
+            }
+            else {
+            	echo "Data Tidak Ditemukan";
+            }
+            
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
+	}
+
+	public function update_data()
+	{
+		$id = $this->input->post('id');
+		$nama = $this->input->post('nama');
+		$alamat = $this->input->post('alamat');
+		$telepon = $this->input->post('telepon');
+
+		$update = $this->model_kos->update($id, $nama, $alamat, $telepon);
+		if($update == 'Berhasil'){
+			redirect('kos/beranda?kos='.$id.'');
+		}
+		else{
+			echo "Gagal Update Data";
+		}
 	}
 
 	public function delete()
 	{
-		$id = $this->input->get('kos');
-		$this->model_kos->delete($id);
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $data['username'] = $session_data['username'];
 
-		redirect('pemilik/beranda');
+            $id = $this->input->get('kos');
+
+            $data['detail'] = $this->model_kos->detail_kos($id);
+
+            if($data['detail']){
+	            foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($data['username'] == $pemilik){
+	            	$id = $this->input->get('kos');
+					$this->model_kos->delete($id);
+
+					redirect('pemilik/beranda');
+	            }
+	            else {
+	            	echo "Bukan Kos Anda";
+	            }
+            }
+            else {
+            	echo "Data Tidak Ditemukan";
+            }
+            
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
 	}
 
 	public function tambah_tipe()
@@ -146,8 +220,8 @@ class Kos extends CI_Controller {
 
 	public function delete_tipe()
 	{
-		$kos = $this->input->get('kos');
-		$id = $this->input->get('tipe');
+		$kos = $this->input->post('kos');
+		$id = $this->input->post('tipe');
 		$this->model_kos->hapus_tipe($id);
 
 		redirect('kos/beranda?kos='.$kos.'');
@@ -207,8 +281,8 @@ class Kos extends CI_Controller {
 
 	public function delete_fasilitas()
 	{
-		$kos = $this->input->get('kos');
-		$id = $this->input->get('fasilitas');
+		$kos = $this->input->post('kos');
+		$id = $this->input->post('fasilitas');
 		$this->model_kos->hapus_fasilitas($id);
 
 		redirect('kos/beranda?kos='.$kos.'');

@@ -95,6 +95,23 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
+ 	function update($id, $nama, $alamat, $telepon)
+ 	{
+ 		$data = array (
+					'NAMAKOS' => $nama,
+			   		'ALAMATKOS' => $alamat,
+			   		'TELEPONKOS' => $telepon
+		);
+
+		$this->db->where('IDKOS', $id);
+	    $run = $this->db->update('kos', $data);
+
+	    if($run)
+			return "Berhasil";
+		else
+			return "Gagal";
+ 	}
+
  	function delete($id)
  	{
  		$this->db->where('idKos', $id);

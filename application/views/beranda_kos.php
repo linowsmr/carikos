@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <body>
 
     <!-- Navigation -->
@@ -40,13 +39,25 @@
                             <h3>Telepon</h3>
                             <p><?php echo $row->teleponKos ?></p>
                         </div>
-                        <div class="col-lg-12 text-center">
-                            <a href="<?php echo site_url('kos/update?kos='.$row->idKos.'')?>"><button class="btn btn-success">Ubah</button></a>
-                            <a href="<?php echo site_url('kos/delete?kos='.$row->idKos.'')?>"><button class="btn btn-danger">Hapus</button></a>
+                        <div class="col-lg-6" style="text-align: right;">
+                            <form action="<?php echo site_url('kos/update') ?>" method="get">
+                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                <button type="submit" class="btn btn-success">Ubah</button>
+                            </form>
+                            <form action="<?php echo site_url('kos/tambah_tipe') ?>" method="get">
+                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                <button type="submit" class="btn btn-primary">Tambah Tipe Kos</button>
+                            </form>
                         </div>
-                        <div class="col-lg-12 text-center">
-                            <a href="<?php echo site_url('kos/tambah_tipe?kos='.$row->idKos.'')?>"><button class="btn btn-primary">Tambah Tipe Kos</button></a>
-                            <a href="<?php echo site_url('kos/tambah_fasilitas?kos='.$row->idKos.'')?>"><button class="btn btn-primary">Tambah Fasilitas Kos</button></a>
+                        <div class="col-lg-6">
+                            <form action="<?php echo site_url('kos/delete') ?>" method="post">
+                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                <button type="submit" class="btn btn-danger">Hapus</button>
+                            </form>
+                            <form action="<?php echo site_url('kos/tambah_fasilitas') ?>" method="get">
+                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                <button type="submit" class="btn btn-primary">Tambah Fasilitas Kos</button>
+                            </form>
                         </div>
                     <?php } ?>
     
@@ -93,7 +104,7 @@
                                                 <td>
                                                     <form action="<?php echo site_url('kos/delete_fasilitas') ?>" method="post">
                                                         <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                                        <input type="hidden" name="fasilitas" value="<?php echo $row->idFasilitasKos ?>"></input>
+                                                        <input type="hidden" name="fasilitas" value="<?php echo $row->idKosFasilitasKos ?>"></input>
                                                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                     </form>
                                                 </td>
@@ -111,8 +122,31 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                <h2>Foto Kos</h2>
+                    <h2>Foto Kos</h2>
                     <hr class="small">
+                    <div class="container">
+                        <div class="row">
+                            <?php
+                                foreach($foto as $row){ ?>
+                                    <div class="col-lg-3">
+                                        <a class="thumbnail fancybox" rel="ligthbox" href="<?php echo base_url();?>assets/images/kos/<?php echo $row->namaFile ?>">
+                                            <img class="img-responsive" alt="" src="<?php echo base_url();?>assets/images/kos/<?php echo $row->namaFile ?>" />
+                                        </a>
+                                        <form action="<?php echo site_url('kos/hapus_foto') ?>" method="post">
+                                            <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                            <input type="hidden" name="foto" value="<?php echo $row->idFotoKos ?>"></input>
+                                            <input type="hidden" name="nama" value="<?php echo $row->namaFile ?>"></input>
+                                            <button type="submit" class="btn btn-danger btn-xs">Hapus Foto</button>
+                                        </form>
+                                    </div>
+                                <?php }
+                            ?>
+                        </div>
+                    </div>
+                    <form action="<?php echo site_url('kos/tambah_foto') ?>" method="get">
+                        <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                        <button type="submit" class="btn btn-default">Tambah Foto Kos</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -149,11 +183,15 @@
                                         <?php
                                             foreach($kamar as $row) { ?>
                                                 <tr>
-                                                    <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><?php echo $row->jenisKamar ?></a></td>
-                                                    <td><?php echo $row->hargaKamar ?></td>
-                                                    <td><?php echo $row->jumlahKamar ?></td>
+                                                    <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><p><?php echo $row->jenisKamar ?></p></a></td>
+                                                    <td><p><?php echo $row->hargaKamar ?></p></td>
+                                                    <td><p><?php echo $row->jumlahKamar ?></p></td>
                                                     <td>
-                                                        <a href="<?php echo site_url('kamar/delete?kamar='.$row->idKamar.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a>
+                                                        <form action="<?php echo site_url('kamar/delete') ?>" method="post">
+                                                            <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                                            <input type="hidden" name="kamar" value="<?php echo $row->idKamar ?>"></input>
+                                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -176,25 +214,25 @@
                 	<h2>Daftar Kamar</h2>
                     <hr class="small">
 	                <div class="row">
-	                    <form action="<?php echo site_url('kamar/daftar')?>" method="post">
+	                    <form action="<?php echo site_url('kamar/daftar')?>" method="post" enctype="multipart/form-data">
 	                        <div class="col-lg-4"></div>
 	                        <div class="col-lg-4">
 	                            <div class="form-group">
 	                                <h4>Jenis Kamar</h4>
-	                                <input type="name" class="form-control" name="jenis">
+	                                <input type="name" class="form-control" name="jenis" required>
 	                            </div>
 	                            <div class="form-group">
 	                                <h4>Harga Kamar</h4>
 	                                <div class="input-group">
 	                                	<span class="input-group-addon">Rp</span>
-	                                	<input type="name" class="form-control" name="harga">
+	                                	<input type="name" class="form-control" name="harga" required>
 	                                	<span class="input-group-addon">,00</span>
 	                                </div>
 	                            </div>
 	                            <div class="form-group">
 	                                <h4>Jumlah Kamar</h4>
 	                                <div class="input-group">
-	                                	<input type="name" class="form-control" name="jumlah">
+	                                	<input type="name" class="form-control" name="jumlah" required>
 	                                	<span class="input-group-addon">Kamar</span>
 	                                </div>
 	                            </div>
@@ -208,6 +246,10 @@
 	                                    ?>
 	                                </select>
 	                            </div>
+                                <div class="form-group">
+                                    <h4>Foto Kamar</h4>
+                                    <input type="file" name="foto[]" multiple required>
+                                </div>
 	                            <div class="form-group">
 	                                <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">
 	                            </div>

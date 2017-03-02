@@ -67,9 +67,78 @@ class Model_kamar extends CI_Model {
 		return $run->result();
  	}
 
+ 	function fasilitas_kamar_non($id)
+ 	{
+ 		$query = "SELECT * FROM fasilitaskamar f WHERE f.idFasilitasKamar NOT IN (SELECT kf.idFasilitasKamar FROM kamar_fasilitaskamar kf, fasilitaskamar fk WHERE kf.idFasilitasKamar = fk.idFasilitasKamar AND kf.idKamar = '$id')";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function hapus_fasilitas($id)
+ 	{
+ 		$this->db->where('idKamarFasilitasKamar', $id);
+ 		$this->db->delete('kamar_fasilitaskamar');
+ 	}
+
+ 	function update($id, $jenis, $harga, $jumlah)
+ 	{
+ 		$data = array(
+	   		'JENISKAMAR' => $jenis,
+	   		'HARGAKAMAR' => $harga,
+	   		'JUMLAHKAMAR' => $jumlah
+	   	);
+
+	   	$this->db->where('IDKAMAR', $id);
+	    $run = $this->db->update('kamar', $data);
+
+	    if($run)
+			return "Berhasil";
+		else
+			return "Gagal";
+ 	}
+
+ 	function delete_fasilitas_kamar($id)
+ 	{
+ 		$this->db->where('idKamar', $id);
+   		$this->db->delete('kamar_fasilitaskamar');
+ 	}
+
+ 	function delete_foto_kamar($id)
+ 	{
+ 		$this->db->where('idKamar', $id);
+   		$this->db->delete('fotokamar');
+ 	}
+
  	function delete($id)
  	{
  		$this->db->where('idKamar', $id);
    		$this->db->delete('kamar');
+ 	}
+
+ 	function insert_foto($id, $image)
+ 	{
+ 		$data = array(
+	   		'NAMAFILEKAMAR' => $image,
+	   		'IDKAMAR' => $id
+	   	);
+
+		$run = $this->db->insert('fotokamar', $data);
+		// if($run)
+		// 	return "Berhasil";
+		// else
+		// 	return "Gagal";
+ 	}
+
+ 	function list_foto($id)
+ 	{
+ 		$query = "SELECT * FROM fotokamar fk WHERE fk.idKamar = '$id'";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function hapus_foto($id)
+ 	{
+ 		$this->db->where('idFotoKamar', $id);
+ 		$this->db->delete('fotokamar');
  	}
 }	

@@ -41,10 +41,17 @@
 
     <script src="<?php echo base_url();?>assets/js/bootstrap-multiselect.min.js"></script>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
     <script>
         $(document).ready(function () {
             $('#multiple-select-fasilitas').multiselect();
             $('#multiple-select-tipe').multiselect();
+
+            $(".fancybox").fancybox({
+                openEffect: "none",
+                closeEffect: "none"
+            });
         });
     </script>
 

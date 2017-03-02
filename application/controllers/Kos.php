@@ -30,6 +30,32 @@ class Kos extends CI_Controller {
 	            $this->model_kos->insert_fasilitas($insert, $fasilitas[$b]);
 	        }
 
+	        $extension=array("jpeg","jpg","png","JPEG","JPG","PNG");
+	        if(isset($_FILES['foto'])){
+	        	$name_array = $_FILES['foto']['name'];
+	        	$tmp_name_array = $_FILES['foto']['tmp_name'];
+	        	
+    	 		for($i=0; $i < count($tmp_name_array); $i++){
+    				$ext=pathinfo($name_array[$i],PATHINFO_EXTENSION);
+    				$hash = "-";
+    				$name_file = $insert.$hash.$name_array[$i];
+    				if(in_array($ext,$extension)){
+    					if(!file_exists("assets/images/kos/".$name_file)){
+    						move_uploaded_file($tmp_name_array[$i], "assets/images/kos/".$name_file);
+    						$this->model_kos->insert_foto($insert, $name_file);
+    					}
+    					else {
+    						$filename = basename($name_file, $ext);
+    						$newFileName=$filename.time().".".$ext;
+    						move_uploaded_file($tmp_name_array[$i], "assets/images/kos/".$newFileName);
+    						$this->model_kos->insert_foto($insert, $newFileName);
+    					}
+    				}
+    				else
+    					echo "Salah Ekstensi";
+    			}
+	        }
+
 	        redirect('kos/beranda?kos='.$insert.'');
 		}
 		else {
@@ -52,6 +78,7 @@ class Kos extends CI_Controller {
             if($data['detail']){
             	$data['fasilitas'] = $this->model_kos->fasilitas_kos($id);
 	            $data['tipe'] = $this->model_kos->tipe_kos($id);
+	            $data['foto'] = $this->model_kos->list_foto($id);
 	            $data['jumlah'] = $this->model_kamar->count_list($id);
 	            $data['kamar'] = $this->model_kamar->list_kamar($id);
 	            $data['fasilitaskamar'] = $this->model_kamar->fasilitas();
@@ -137,7 +164,7 @@ class Kos extends CI_Controller {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $data['username'] = $session_data['username'];
 
-            $id = $this->input->get('kos');
+            $id = $this->input->post('kos');
 
             $data['detail'] = $this->model_kos->detail_kos($id);
 
@@ -147,7 +174,14 @@ class Kos extends CI_Controller {
 	            }
 
 	            if($data['username'] == $pemilik){
-	            	$id = $this->input->get('kos');
+	            	$this->model_kos->delete_fasilitas_kos($id);
+	            	$this->model_kos->delete_tipe_kos($id);
+
+	            	$data['foto'] = $this->model_kos->list_foto($id);
+	            	foreach($data['foto'] as $row){
+	            		unlink("assets/images/kos/".$row->namaFile);
+	            	}
+	            	$this->model_kos->delete_foto_kos($id);
 					$this->model_kos->delete($id);
 
 					redirect('pemilik/beranda');
@@ -284,6 +318,86 @@ class Kos extends CI_Controller {
 		$kos = $this->input->post('kos');
 		$id = $this->input->post('fasilitas');
 		$this->model_kos->hapus_fasilitas($id);
+
+		redirect('kos/beranda?kos='.$kos.'');
+	}
+
+	public function tambah_foto()
+	{
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $data['username'] = $session_data['username'];
+
+            $id = $this->input->get('kos');
+            $data['id'] = $id;
+
+            $data['detail'] = $this->model_kos->detail_kos($id);
+
+            if($data['detail']){
+
+	            foreach($data['detail'] as $row){
+	            	$data['nama'] = $row->namaKos;
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($data['username'] == $pemilik){
+	            	$this->load->view('template/header');
+					$this->load->view('tambah_foto_kos', $data);
+					$this->load->view('template/footer');
+	            }
+	            else {
+	            	echo "Bukan Kos Anda";
+	            }
+            }
+            else {
+            	echo "Data Tidak Ditemukan";
+            }
+            
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
+	}
+
+	public function tambah_foto_baru()
+	{
+		$id = $this->input->post('id');
+		$extension=array("jpeg","jpg","png","JPEG","JPG","PNG");
+	        if(isset($_FILES['foto'])){
+	        	$name_array = $_FILES['foto']['name'];
+	        	$tmp_name_array = $_FILES['foto']['tmp_name'];
+	        	
+    	 		for($i=0; $i < count($tmp_name_array); $i++){
+    				$ext=pathinfo($name_array[$i],PATHINFO_EXTENSION);
+    				$hash = "-";
+    				$name_file = $id.$hash.$name_array[$i];
+    				if(in_array($ext,$extension)){
+    					if(!file_exists("assets/images/kos/".$name_file)){
+    						move_uploaded_file($tmp_name_array[$i], "assets/images/kos/".$name_file);
+    						$this->model_kos->insert_foto($id, $name_file);
+    					}
+    					else {
+    						$filename = basename($name_file, $ext);
+    						$newFileName=$filename.time().".".$ext;
+    						move_uploaded_file($tmp_name_array[$i], "assets/images/kos/".$newFileName);
+    						$this->model_kos->insert_foto($id, $newFileName);
+    					}
+    				}
+    				else
+    					echo "Salah Ekstensi";
+    			}
+	        }
+	    redirect('kos/beranda?kos='.$id.'');    
+	}
+
+	public function hapus_foto()
+	{
+		$kos = $this->input->post('kos');
+		$id = $this->input->post('foto');
+		$nama_file = $this->input->post('nama');
+		$this->model_kos->hapus_foto($id);
+		unlink("assets/images/kos/".$nama_file);
 
 		redirect('kos/beranda?kos='.$kos.'');
 	}

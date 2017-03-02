@@ -56,11 +56,14 @@
                                                 foreach($kos as $row) { ?>
                                                     <tr>
                                                         <td>
-                                                            <a href="<?php echo site_url('kos/beranda?kos='.$row->idKos.'')?>"><?php echo $row->namaKos ?></a>
+                                                            <a href="<?php echo site_url('kos/beranda?kos='.$row->idKos.'')?>"><p><?php echo $row->namaKos ?></p></a>
                                                         </td>
-                                                        <td><?php echo $row->alamatKos ?></td>
+                                                        <td><p><?php echo $row->alamatKos ?></p></td>
                                                         <td>
-                                                            <a href="<?php echo site_url('kos/delete?kos='.$row->idKos.'')?>"><button class="btn btn-danger btn-sm">Hapus</button></a>
+                                                            <form action="<?php echo site_url('kos/delete') ?>" method="post">
+                                                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
+                                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
+                                                            </form>
                                                         </td>
                                                     </tr>
                                                 <?php }
@@ -85,24 +88,24 @@
                     <h2>Daftar Kos</h2>
                     <hr class="small">
                     <div class="row">
-                        <form action="<?php echo site_url('kos/daftar')?>" method="post">
+                        <form action="<?php echo site_url('kos/daftar')?>" method="post" enctype="multipart/form-data">
                             <div class="col-lg-4"></div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <h4>Nama Kos</h4>
-                                    <input type="name" class="form-control" name="nama">
+                                    <input type="name" class="form-control" name="nama" required>
                                 </div>
                                 <div class="form-group">
                                     <h4>Alamat Kos</h4>
-                                    <textarea class="form-control" rows="3" name="alamat"></textarea>
+                                    <textarea class="form-control" rows="3" name="alamat" required></textarea>
                                 </div>
                                 <div class="form-group">
                                     <h4>Telepon Kos</h4>
-                                    <input type="name" class="form-control" name="telepon">
+                                    <input type="name" class="form-control" name="telepon" required>
                                 </div>
                                 <div class="form-group">
                                     <h4>Tipe Kos</h4>
-                                    <select id="multiple-select-tipe" multiple="multiple" name="tipe[]">
+                                    <select id="multiple-select-tipe" multiple="multiple" name="tipe[]" required>
                                         <?php
                                             foreach($tipe as $row){ ?>
                                                 <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
@@ -119,6 +122,10 @@
                                             <?php }
                                         ?>
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Foto Kos</h4>
+                                    <input type="file" name="foto[]" multiple required>
                                 </div>
                                 <div class="form-group">
                                     <input type="hidden" class="form-control" name="pemilik" value="<?php echo $username ?>">

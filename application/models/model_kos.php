@@ -28,6 +28,13 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
+ 	function list_foto($id)
+ 	{
+ 		$query = "SELECT * FROM fotokos fk WHERE fk.idKos = '$id'";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
  	function insert($nama, $alamat, $telepon, $pemilik)
  	{
  		$data = array(
@@ -74,6 +81,20 @@ class Model_kos extends CI_Model {
 		// 	return "Gagal";
  	}
 
+ 	function insert_foto($id, $image)
+ 	{
+ 		$data = array(
+	   		'NAMAFILE' => $image,
+	   		'IDKOS' => $id
+	   	);
+
+		$run = $this->db->insert('fotokos', $data);
+		// if($run)
+		// 	return "Berhasil";
+		// else
+		// 	return "Gagal";
+ 	}
+
  	function detail_kos($id)
  	{
  		$query = "SELECT * FROM kos WHERE idKos = '$id'";
@@ -112,6 +133,24 @@ class Model_kos extends CI_Model {
 			return "Gagal";
  	}
 
+ 	function delete_fasilitas_kos($id)
+ 	{
+ 		$this->db->where('idKos', $id);
+   		$this->db->delete('kos_fasilitaskos');
+ 	}
+
+ 	function delete_tipe_kos($id)
+ 	{
+ 		$this->db->where('idKos', $id);
+   		$this->db->delete('kos_tipekos');
+ 	}
+
+ 	function delete_foto_kos($id)
+ 	{
+ 		$this->db->where('idKos', $id);
+   		$this->db->delete('fotokos');
+ 	}
+
  	function delete($id)
  	{
  		$this->db->where('idKos', $id);
@@ -142,5 +181,11 @@ class Model_kos extends CI_Model {
  	{
  		$this->db->where('idKosFasilitasKos', $id);
  		$this->db->delete('kos_fasilitaskos');
+ 	}
+
+ 	function hapus_foto($id)
+ 	{
+ 		$this->db->where('idFotoKos', $id);
+ 		$this->db->delete('fotokos');
  	}
 }

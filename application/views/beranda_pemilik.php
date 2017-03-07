@@ -88,7 +88,7 @@
                     <h2>Daftar Kos</h2>
                     <hr class="small">
                     <div class="row">
-                        <form action="<?php echo site_url('kos/daftar')?>" method="post" enctype="multipart/form-data">
+                        <form id="kos" action="<?php echo site_url('kos/daftar')?>" method="post" enctype="multipart/form-data">
                             <div class="col-lg-4"></div>
                             <div class="col-lg-4">
                                 <div class="form-group">
@@ -97,50 +97,74 @@
                                 </div>
                                 <div class="form-group">
                                     <h4>Alamat Kos</h4>
-                                    <textarea class="form-control" rows="3" name="alamat" required></textarea>
+                                    <textarea class="form-control" rows="3" id="alamat" name="alamat" required></textarea>
+                                    <input id="submit" type="button" value="Verifikasi Alamat"  class="btn btn-lg btn-light" onclick="myFunction()">
                                 </div>
-                                <div class="form-group">
-                                    <h4>Telepon Kos</h4>
-                                    <input type="name" class="form-control" name="telepon" required>
+                                <div id="form-2" style="display: none;">
+                                    <br>
+                                    <div class="form-group">
+                                        <h4>Telepon Kos</h4>
+                                        <input type="name" class="form-control" name="telepon" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Tipe Kos</h4>
+                                        <select id="multiple-select-tipe" multiple="multiple" name="tipe[]" required>
+                                            <?php
+                                                foreach($tipe as $row){ ?>
+                                                    <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
+                                                <?php }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Fasilitas Kos</h4>
+                                        <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitas[]">
+                                            <?php
+                                                foreach($fasilitas as $row){ ?>
+                                                    <option value="<?php echo $row->idFasilitasKos ?>"><?php echo $row->namaFasilitasKos ?></option>
+                                                <?php }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Foto Kos</h4>
+                                        <input type="file" name="foto[]" multiple required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="latlng" name="latlng">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" name="pemilik" value="<?php echo $username ?>">
+                                    </div>
+                                    <div class="col-lg-4"></div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="btn btn-lg btn-light">Daftar</button>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <h4>Tipe Kos</h4>
-                                    <select id="multiple-select-tipe" multiple="multiple" name="tipe[]" required>
-                                        <?php
-                                            foreach($tipe as $row){ ?>
-                                                <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
-                                            <?php }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <h4>Fasilitas Kos</h4>
-                                    <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitas[]">
-                                        <?php
-                                            foreach($fasilitas as $row){ ?>
-                                                <option value="<?php echo $row->idFasilitasKos ?>"><?php echo $row->namaFasilitasKos ?></option>
-                                            <?php }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <h4>Foto Kos</h4>
-                                    <input type="file" name="foto[]" multiple required>
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" class="form-control" name="pemilik" value="<?php echo $username ?>">
-                                </div>
-                            </div>
-                            <div class="col-lg-4"></div>
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-lg btn-light">Daftar</button>
-                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </aside>
+    <script>
+        function myFunction() {
+            var geocoder = new google.maps.Geocoder();
+            var address = document.getElementById('alamat').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === google.maps.GeocoderStatus.OK) {
+                  document.getElementById("latlng").value = results[0].geometry.location;
+                  alert('Alamat Tersedia');
+                  document.getElementById('form-2').style.display = "";
+                } else {
+                  alert('Alamat Tidak Terdaftar');
+                }
+            });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
+    </script>
 </body>
 
 </html>

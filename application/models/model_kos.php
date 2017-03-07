@@ -35,11 +35,12 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
- 	function insert($nama, $alamat, $telepon, $pemilik)
+ 	function insert($nama, $alamat, $latlng, $telepon, $pemilik)
  	{
  		$data = array(
 	   		'NAMAKOS' => $nama,
 	   		'ALAMATKOS' => $alamat,
+	   		'LATLNGKOS' => $latlng,
 	   		'TELEPONKOS' => $telepon,
 	   		'USERNAMEPEMILIK' => $pemilik
 	   	);

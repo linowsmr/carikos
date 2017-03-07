@@ -9,5 +9,10 @@ class Home extends CI_Controller {
 		$this->load->view('homepage');
 		$this->load->view('template/footer');
 	}
+
+	public function geocoder()
+	{
+		$this->load->view('geocoder');
+	}
 	
 }

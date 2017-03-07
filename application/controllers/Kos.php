@@ -14,12 +14,13 @@ class Kos extends CI_Controller {
 	{
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
+		$latlng = $this->input->post('latlng');
 		$telepon = $this->input->post('telepon');
 		$tipe = $this->input->post('tipe');
 		$fasilitas = $this->input->post('fasilitas');
 		$pemilik = $this->input->post('pemilik');
 
-		$insert = $this->model_kos->insert($nama, $alamat, $telepon, $pemilik);
+		$insert = $this->model_kos->insert($nama, $alamat, $latlng, $telepon, $pemilik);
 
 		if($insert != "Gagal"){
 			for($a=0; $a<sizeof($tipe); $a++){

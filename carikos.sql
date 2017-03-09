@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 02 Mar 2017 pada 11.33
+-- Generation Time: 09 Mar 2017 pada 12.41
 -- Versi Server: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -52,18 +52,17 @@ INSERT INTO `fasilitaskamar` (`idFasilitasKamar`, `namaFasilitasKamar`) VALUES
 CREATE TABLE IF NOT EXISTS `fasilitaskos` (
 `idFasilitasKos` int(100) NOT NULL,
   `namaFasilitasKos` varchar(200) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `fasilitaskos`
 --
 
 INSERT INTO `fasilitaskos` (`idFasilitasKos`, `namaFasilitasKos`) VALUES
-(1, 'Parkir Mobil'),
-(2, 'Parkir Motor'),
-(3, 'Internet/Wi-Fi'),
-(4, 'Cucian'),
-(5, 'Akses Kunci 24 Jam');
+(1, 'Internet/Wi-Fi'),
+(2, 'Cucian'),
+(3, 'Akses Kunci 24 Jam'),
+(4, 'Penjaga Kos');
 
 -- --------------------------------------------------------
 
@@ -96,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `fotokos` (
 `idFotoKos` int(100) NOT NULL,
   `namaFile` varchar(200) NOT NULL,
   `idKos` int(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `fotokos`
@@ -104,7 +103,13 @@ CREATE TABLE IF NOT EXISTS `fotokos` (
 
 INSERT INTO `fotokos` (`idFotoKos`, `namaFile`, `idKos`) VALUES
 (1, '1-2.PNG', 1),
-(2, '1-4.PNG', 1);
+(2, '1-4.PNG', 1),
+(3, '2-1.PNG', 2),
+(4, '3-1.PNG', 3),
+(5, '4-1.PNG', 4),
+(6, '5-1.jpg', 5),
+(7, '6-1.jpg', 6),
+(8, '6-1.PNG', 6);
 
 -- --------------------------------------------------------
 
@@ -165,16 +170,23 @@ CREATE TABLE IF NOT EXISTS `kos` (
 `idKos` int(100) NOT NULL,
   `namaKos` varchar(200) NOT NULL,
   `alamatKos` varchar(500) NOT NULL,
+  `latLngKos` varchar(200) NOT NULL,
   `teleponKos` varchar(15) NOT NULL,
+  `idParkiranKos` int(100) NOT NULL,
   `usernamePemilik` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kos`
 --
 
-INSERT INTO `kos` (`idKos`, `namaKos`, `alamatKos`, `teleponKos`, `usernamePemilik`) VALUES
-(1, 'Kos Mewah', 'Jalan Bhaskara Utara D10', '4514205', 'luwandino');
+INSERT INTO `kos` (`idKos`, `namaKos`, `alamatKos`, `latLngKos`, `teleponKos`, `idParkiranKos`, `usernamePemilik`) VALUES
+(1, 'Kos Mewah', 'Jalan Bhaskara Utara D10', '(-7.265753999999999, 112.79346099999998)', '4514205', 1, 'luwandino'),
+(2, 'Kos Melati', 'Jalan Raya Dharmahusada Indah A30', '(-7.2718601, 112.77134090000004)', '4514204', 4, 'luwandino'),
+(3, 'Kos Mawar', 'Jalan Bhaskara Utara D10', '(-7.265753999999999, 112.79346099999998)', '4514204', 2, 'luwandino'),
+(4, 'Kos Mawar', 'Jalan Raya Dharmahusada Indah A30', '(-7.2718601, 112.77134090000004)', '4514204', 3, 'luwandino'),
+(5, 'Kos Mewah', 'Jalan Balai Pustaka Raya 20, Jakarta', '(-6.196854, 106.88442199999997)', '4895205', 1, 'luwandino'),
+(6, 'Kos Baru', 'Teknik Informatika ITS', '(-7.279810399999999, 112.79760920000001)', '60111', 2, 'luwandino');
 
 -- --------------------------------------------------------
 
@@ -186,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `kos_fasilitaskos` (
 `idKosFasilitasKos` int(100) NOT NULL,
   `idKos` int(100) NOT NULL,
   `idFasilitasKos` int(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kos_fasilitaskos`
@@ -196,7 +208,23 @@ INSERT INTO `kos_fasilitaskos` (`idKosFasilitasKos`, `idKos`, `idFasilitasKos`) 
 (1, 1, 1),
 (2, 1, 2),
 (3, 1, 3),
-(4, 1, 5);
+(4, 1, 5),
+(5, 2, 1),
+(6, 2, 2),
+(7, 2, 4),
+(8, 3, 1),
+(9, 3, 2),
+(10, 3, 4),
+(11, 4, 1),
+(12, 4, 2),
+(13, 4, 4),
+(14, 5, 1),
+(15, 5, 2),
+(16, 5, 3),
+(17, 5, 6),
+(18, 6, 1),
+(19, 6, 3),
+(20, 6, 4);
 
 -- --------------------------------------------------------
 
@@ -208,14 +236,45 @@ CREATE TABLE IF NOT EXISTS `kos_tipekos` (
 `idKosTipeKos` int(100) NOT NULL,
   `idKos` int(100) NOT NULL,
   `idTipeKos` int(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `kos_tipekos`
 --
 
 INSERT INTO `kos_tipekos` (`idKosTipeKos`, `idKos`, `idTipeKos`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 2, 1),
+(3, 2, 2),
+(4, 3, 1),
+(5, 3, 2),
+(6, 4, 1),
+(7, 4, 2),
+(8, 5, 1),
+(9, 6, 1),
+(10, 6, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `parkirankos`
+--
+
+CREATE TABLE IF NOT EXISTS `parkirankos` (
+`idParkiranKos` int(100) NOT NULL,
+  `luasParkiran` varchar(200) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `parkirankos`
+--
+
+INSERT INTO `parkirankos` (`idParkiranKos`, `luasParkiran`) VALUES
+(1, '> 23'),
+(2, '15,1 - 23'),
+(3, '7,6 - 15'),
+(4, '1,6 - 7,5'),
+(5, '0 - 1,5');
 
 -- --------------------------------------------------------
 
@@ -316,6 +375,12 @@ ALTER TABLE `kos_tipekos`
  ADD PRIMARY KEY (`idKosTipeKos`);
 
 --
+-- Indexes for table `parkirankos`
+--
+ALTER TABLE `parkirankos`
+ ADD PRIMARY KEY (`idParkiranKos`);
+
+--
 -- Indexes for table `pemilik`
 --
 ALTER TABLE `pemilik`
@@ -340,7 +405,7 @@ MODIFY `idFasilitasKamar` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 -- AUTO_INCREMENT for table `fasilitaskos`
 --
 ALTER TABLE `fasilitaskos`
-MODIFY `idFasilitasKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `idFasilitasKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `fotokamar`
 --
@@ -350,7 +415,7 @@ MODIFY `idFotoKamar` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT for table `fotokos`
 --
 ALTER TABLE `fotokos`
-MODIFY `idFotoKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `idFotoKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `kamar`
 --
@@ -365,17 +430,22 @@ MODIFY `idKamarFasilitasKamar` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1
 -- AUTO_INCREMENT for table `kos`
 --
 ALTER TABLE `kos`
-MODIFY `idKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `idKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `kos_fasilitaskos`
 --
 ALTER TABLE `kos_fasilitaskos`
-MODIFY `idKosFasilitasKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+MODIFY `idKosFasilitasKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `kos_tipekos`
 --
 ALTER TABLE `kos_tipekos`
-MODIFY `idKosTipeKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `idKosTipeKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT for table `parkirankos`
+--
+ALTER TABLE `parkirankos`
+MODIFY `idParkiranKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `tipekos`
 --

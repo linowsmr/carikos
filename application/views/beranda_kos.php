@@ -38,6 +38,8 @@
                             <p><?php echo $row->alamatKos ?></p>
                             <h3>Telepon</h3>
                             <p><?php echo $row->teleponKos ?></p>
+                            <h3>Luas Parkiran (Dalam m<sup>2</sup>)</h3>
+                            <p><?php echo $row->luasParkiran ?></p>
                         </div>
                         <div class="col-lg-6" style="text-align: right;">
                             <form action="<?php echo site_url('kos/update') ?>" method="get">

@@ -16,11 +16,12 @@ class Kos extends CI_Controller {
 		$alamat = $this->input->post('alamat');
 		$latlng = $this->input->post('latlng');
 		$telepon = $this->input->post('telepon');
+		$parkiran = $this->input->post('parkiran');
 		$tipe = $this->input->post('tipe');
 		$fasilitas = $this->input->post('fasilitas');
 		$pemilik = $this->input->post('pemilik');
 
-		$insert = $this->model_kos->insert($nama, $alamat, $latlng, $telepon, $pemilik);
+		$insert = $this->model_kos->insert($nama, $alamat, $latlng, $telepon, $parkiran, $pemilik);
 
 		if($insert != "Gagal"){
 			for($a=0; $a<sizeof($tipe); $a++){
@@ -117,6 +118,7 @@ class Kos extends CI_Controller {
             $id = $this->input->get('kos');
 
             $data['detail'] = $this->model_kos->detail_kos($id);
+            $data['parkir'] = $this->model_kos->parkiran();
 
             if($data['detail']){
 	            foreach($data['detail'] as $row){
@@ -148,8 +150,9 @@ class Kos extends CI_Controller {
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
 		$telepon = $this->input->post('telepon');
+		$parkiran = $this->input->post('parkiran');
 
-		$update = $this->model_kos->update($id, $nama, $alamat, $telepon);
+		$update = $this->model_kos->update($id, $nama, $alamat, $telepon, $parkiran);
 		if($update == 'Berhasil'){
 			redirect('kos/beranda?kos='.$id.'');
 		}

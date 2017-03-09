@@ -107,6 +107,17 @@
                                         <input type="name" class="form-control" name="telepon" required>
                                     </div>
                                     <div class="form-group">
+                                        <h4>Luas Parkiran (Dalam m<sup>2</sup>)</h4>
+                                        <select class="form-control" name="parkiran">
+                                        	<option></option>
+                                            <?php
+                                                foreach($parkir as $row){ ?>
+                                                    <option value="<?php echo $row->idParkiranKos ?>"><?php echo $row->luasParkiran ?></option>
+                                                <?php }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
                                         <h4>Tipe Kos</h4>
                                         <select id="multiple-select-tipe" multiple="multiple" name="tipe[]" required>
                                             <?php

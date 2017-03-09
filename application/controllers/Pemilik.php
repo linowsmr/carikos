@@ -79,6 +79,7 @@ class Pemilik extends CI_Controller {
 
             $data['fasilitas'] = $this->model_kos->fasilitas();
             $data['tipe'] = $this->model_kos->tipe();
+            $data['parkir'] = $this->model_kos->parkiran();
 
             $data['jumlah'] = $this->model_kos->count_list($data['username']);
             $data['kos'] = $this->model_kos->list_kos($data['username']);

@@ -32,7 +32,9 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <?php
-                        foreach($detail as $row) { ?>
+                        foreach($detail as $row) { 
+                            $luasParkir = $row->idParkiranKos;
+                            $idKos = $row->idKos; ?>
                             <h2>Ubah Kos "<?php echo $row->namaKos ?>"</h2>
                             <hr class="small">
                             <div class="row">
@@ -52,7 +54,24 @@
                                             <input type="name" class="form-control" name="telepon" value="<?php echo $row->teleponKos ?>" required>
                                         </div>
                                         <div class="form-group">
-                                            <input type="hidden" class="form-control" name="id" value="<?php echo $row->idKos ?>">
+                                            <h4>Luas Parkiran (Dalam m<sup>2</sup>)</h4>
+                                            <select class="form-control" name="parkiran">
+                                                <option></option>
+                                                <?php
+                                                    }
+                                                    foreach($parkir as $row){ 
+                                                        if($luasParkir == $row->idParkiranKos) { ?>
+                                                            <option value="<?php echo $row->idParkiranKos ?>" selected><?php echo $row->luasParkiran ?></option>
+                                                    <?php
+                                                        } else { ?>
+                                                            <option value="<?php echo $row->idParkiranKos ?>"><?php echo $row->luasParkiran ?></option>
+                                                        <?php }
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" name="id" value="<?php echo $idKos ?>">
                                         </div>
                                     </div>
                                     <div class="col-lg-4"></div>
@@ -61,8 +80,6 @@
                                     </div>
                                 </form>
                             </div>
-                        <?php }
-                    ?>
                 </div>
             </div>
         </div>

@@ -14,6 +14,13 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
+ 	function parkiran()
+ 	{
+ 		$query = "SELECT * FROM parkirankos";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
  	function count_list($pemilik)
  	{
  		$query = "SELECT * FROM kos WHERE usernamePemilik = '$pemilik'";
@@ -35,13 +42,14 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
- 	function insert($nama, $alamat, $latlng, $telepon, $pemilik)
+ 	function insert($nama, $alamat, $latlng, $telepon, $parkiran, $pemilik)
  	{
  		$data = array(
 	   		'NAMAKOS' => $nama,
 	   		'ALAMATKOS' => $alamat,
 	   		'LATLNGKOS' => $latlng,
 	   		'TELEPONKOS' => $telepon,
+	   		'IDPARKIRANKOS' => $parkiran,
 	   		'USERNAMEPEMILIK' => $pemilik
 	   	);
 
@@ -98,7 +106,7 @@ class Model_kos extends CI_Model {
 
  	function detail_kos($id)
  	{
- 		$query = "SELECT * FROM kos WHERE idKos = '$id'";
+ 		$query = "SELECT * FROM kos k, parkirankos pk WHERE k.idParkiranKos = pk.idParkiranKos AND k.idKos = '$id'";
 		$run = $this->db->query($query);
 		return $run->result();
  	}
@@ -117,12 +125,13 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
- 	function update($id, $nama, $alamat, $telepon)
+ 	function update($id, $nama, $alamat, $telepon, $parkiran)
  	{
  		$data = array (
 					'NAMAKOS' => $nama,
 			   		'ALAMATKOS' => $alamat,
-			   		'TELEPONKOS' => $telepon
+			   		'TELEPONKOS' => $telepon,
+			   		'IDPARKIRANKOS' => $parkiran
 		);
 
 		$this->db->where('IDKOS', $id);

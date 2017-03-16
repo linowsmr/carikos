@@ -11,7 +11,8 @@
 		        <th>Nama</th>
 		        <th>Alamat</th>
 		        <th>Telepon</th>
-		        <th>Nilai Kos</th>
+		        <th>Jumlah Kamar</th>
+		        <th>Pemilik</th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -21,7 +22,8 @@
 		        <th><?php echo $kos_item['namaKos'] ?></th>
 		        <th><?php echo $kos_item['alamatKos'] ?></th>
 		        <th><?php echo $kos_item['teleponKos'] ?></th>
-		        <th><?php echo $kos_item['nilaiKos'] ?></th>
+		        <th><?php echo $kos_item['jumlahKamar'] ?></th>
+		        <th><?php echo $kos_item['namaPemilik'] ?></th>
 		      </tr>
 		      <?php } ?>
 		    </tbody>

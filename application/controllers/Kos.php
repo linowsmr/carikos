@@ -401,4 +401,11 @@ class Kos extends CI_Controller {
 
 		redirect('kos/beranda?kos='.$kos.'');
 	}
+
+	public function lihatKos()
+	{
+		$data['kos'] = $this->model_kos->lihatKos();
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/indekos', $data);
+	}
 }

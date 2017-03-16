@@ -185,4 +185,10 @@ class Model_kos extends CI_Model {
  		$this->db->where('idFotoKos', $id);
  		$this->db->delete('fotokos');
  	}
+ 	function lihatKos()
+ 	{
+ 		$query = "SELECT k.namaKos, k.alamatKos, k.teleponKos, p.namaPemilik, (SELECT SUM(jumlahKamar) FROM kamar km WHERE km.idKos = k.idKos) as jumlahKamar From kos k, pemilik p WHERE k.usernamePemilik = p.usernamePemilik";
+ 		$run = $this->db->query($query);
+ 		return $run->result_array();
+ 	}
 }

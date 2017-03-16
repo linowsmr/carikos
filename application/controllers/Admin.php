@@ -42,10 +42,17 @@ class Admin extends CI_Controller {
             $session_data = $this->session->userdata('logged_in_admin');
             $data['username'] = $session_data['username'];
 
-            $this->load->view('admin/admheader');
+            $this->load->view('admin/admheader', $data);
         }
         else {
             redirect('admin');
         }
 	}
+
+	public function logout()
+    {
+    	$this->session->unset_userdata('logged_in_admin');
+   		session_destroy();
+   		redirect('admin');
+    }
 }

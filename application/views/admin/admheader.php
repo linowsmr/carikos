@@ -48,7 +48,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo site_url('admin/')?>">CariKos</a>
+                <a class="navbar-brand" href="<?php echo site_url('admin/beranda')?>">CariKos</a>
+            </div>
+
+            <div class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-user fa-fw"></i><span class="caret"></span>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><h4 style="margin-left: 20px; text-transform: uppercase; font-weight: bold;"><?php echo $username?></h4></li>
+                      <li class="divider"></li>
+                      <li><a href="<?php echo site_url('admin/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
+                  </ul>
+                </li>
             </div>
 
             <div class="navbar-default sidebar" role="navigation">
@@ -66,7 +79,7 @@
                             <!-- /input-group -->
                         </li>
                         <li>
-                            <a href="<?php echo site_url('admin/')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a href="<?php echo site_url('admin/beranda')?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-table fa-fw"></i> Master Data<span class="fa arrow"></span></a>

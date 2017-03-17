@@ -7,7 +7,8 @@ class Admin extends CI_Controller {
  	{
 	   	parent::__construct();
 	   	$this->load->model('model_admin','',TRUE);
-
+	   	$this->load->model('model_kos','',TRUE);
+	   	$this->load->model('model_pemilik','',TRUE);
  	}
 	public function login(){
 		$this->load->library('session');
@@ -40,9 +41,13 @@ class Admin extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_admin')))
         {
             $session_data = $this->session->userdata('logged_in_admin');
-            $data['username'] = $session_data['username'];
+            $nama['username'] = $session_data['username'];
+            $data['kos'] = $this->model_kos->jumlahKos();
+            $data['kamar'] = $this->model_kos->jumlahKamar();
+            $data['pemilik'] = $this->model_pemilik->jumlahPemilik();
 
-            $this->load->view('admin/admheader', $data);
+            $this->load->view('admin/admheader', $nama);
+            $this->load->view('admin/index', $data);
         }
         else {
             redirect('admin');
@@ -55,4 +60,10 @@ class Admin extends CI_Controller {
    		session_destroy();
    		redirect('admin');
     }
+    public function lihatKos()
+	{
+		$data['kos'] = $this->model_kos->lihatKos();
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/indekos', $data);
+	}
 }

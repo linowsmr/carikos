@@ -191,4 +191,16 @@ class Model_kos extends CI_Model {
  		$run = $this->db->query($query);
  		return $run->result_array();
  	}
+ 	function jumlahKamar()
+ 	{
+ 		$query = "SELECT SUM(jumlahKamar) as totalKamar FROM kamar km, kos k WHERE km.idKos = k.idKos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+ 	function jumlahKos()
+ 	{
+ 		$query = "SELECT COUNT(*) as total from kos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
 }

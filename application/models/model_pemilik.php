@@ -27,4 +27,11 @@ class Model_pemilik extends CI_Model {
 			return false;
  	}
 
+ 	function jumlahPemilik()
+ 	{
+ 		$query = "SELECT COUNT(*) as total from pemilik";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+
 }

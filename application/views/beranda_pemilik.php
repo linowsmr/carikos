@@ -119,7 +119,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h4>Tipe Kos</h4>
-                                        <select id="multiple-select-tipe" multiple="multiple" name="tipe[]" required>
+                                        <select class="form-control" name="tipe" required>
                                             <?php
                                                 foreach($tipe as $row){ ?>
                                                     <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h4>Foto Kos</h4>
-                                        <input type="file" name="foto[]" multiple required>
+                                        <input type="file" name="foto[]" multiple>
                                     </div>
                                     <div class="form-group">
                                         <input type="hidden" class="form-control" id="latlng" name="latlng">

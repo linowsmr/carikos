@@ -79,7 +79,7 @@
                                                 <td>
                                                     <form action="<?php echo site_url('kos/delete_tipe') ?>" method="post">
                                                         <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                                        <input type="hidden" name="tipe" value="<?php echo $row->idKosTipeKos ?>"></input>
+                                                        <input type="hidden" name="tipe" value="<?php echo $row->idTipeKos ?>"></input>
                                                         <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                                     </form>
                                                 </td>

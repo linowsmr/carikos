@@ -46,13 +46,67 @@
         </div>
     </header>
 
-    <!-- About -->
     <section id="tentang" class="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Cari Kos di Lokasi yang Anda Inginkan</h2>
-                    <p class="lead">Geser Lokasi Anda untuk Menampilkan Kos</p>
+                    <h2>Cari Kos yang Anda Inginkan</h2>
+                    <hr class="small" style="border-color: black;">
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+	                    <form action="<?php echo site_url('pencarian/index') ?>" method="get">
+	                		<div class="form-group">
+	                            <h4>Kota</h4>
+	                            <select class="form-control" name="kota">
+	                            	<option></option>
+	                            	<option value="Surabaya">Surabaya</option>
+	                            </select>
+	                        </div>
+	                		<div class="form-group">
+	                            <h4>Harga</h4>
+	                            <select class="form-control" name="harga">
+	                            	<option></option>
+	                            	<option value="4">> Rp1.500.000,00</option>
+	                            	<option value="3">Rp1.000.001,00 - Rp1.500.000,00</option>
+	                            	<option value="2">Rp500.001,00 - Rp1.000.000,00</option>
+	                            	<option value="1">Rp0 - Rp500.000,00</option>
+	                            </select>
+	                        </div>
+	                		<div class="form-group">
+	                            <h4>Tipe Kos</h4>
+	                            <select class="form-control" name="tipe">
+	                            	<option></option>
+	                                <?php
+	                                    foreach($tipe as $row){ ?>
+	                                        <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
+	                                    <?php }
+	                                ?>
+	                            </select>
+	                        </div>
+	                		<div class="form-group">
+	                            <h4>Fasilitas Kos</h4>
+	                            <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitaskos[]">
+	                                <?php
+	                                    foreach($fasilitas as $row){ ?>
+	                                        <option value="<?php echo $row->idFasilitasKos ?>"><?php echo $row->namaFasilitasKos ?></option>
+	                                    <?php }
+	                                ?>
+	                            </select>
+	                        </div>
+	                		<div class="form-group">
+	                            <h4>Fasilitas Kamar</h4>
+	                            <select id="multiple-select-tipe" multiple="multiple" name="fasilitaskamar[]">
+	                                <?php
+	                                    foreach($fasilitaskamar as $row){ ?>
+	                                        <option value="<?php echo $row->idFasilitasKamar ?>"><?php echo $row->namaFasilitasKamar ?></option>
+	                                    <?php }
+	                                ?>
+	                            </select>
+	                        </div>
+	                    	<button type="submit" class="btn btn-lg btn-dark">Cari</button>
+	                    </form>
+	                </div>
+	                <div class="col-lg-4"></div>
                 </div>
             </div>
             <!-- /.row -->
@@ -61,7 +115,7 @@
     </section>
 
     <!-- Map -->
-    <section id="cari" class="map">
+    <!-- <section id="cari" class="map">
         <script type="text/javascript">
             function initMap() {
                 var myLatlng = new google.maps.LatLng(-7.279790, 112.797522);
@@ -145,7 +199,7 @@
         <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
         </script>
-    </section>
+    </section> -->
 
     <aside id="daftar" class="call-to-action bg-primary">
         <div class="container">

@@ -42,13 +42,14 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
- 	function insert($nama, $alamat, $latlng, $telepon, $parkiran, $pemilik)
+ 	function insert($nama, $alamat, $latlng, $telepon, $tipe, $parkiran, $pemilik)
  	{
  		$data = array(
 	   		'NAMAKOS' => $nama,
 	   		'ALAMATKOS' => $alamat,
 	   		'LATLNGKOS' => $latlng,
 	   		'TELEPONKOS' => $telepon,
+	   		'IDTIPEKOS' => $idTipeKos,
 	   		'IDPARKIRANKOS' => $parkiran,
 	   		'USERNAMEPEMILIK' => $pemilik
 	   	);
@@ -60,20 +61,6 @@ class Model_kos extends CI_Model {
 		}
 		else
 			return "Gagal";
- 	}
-
- 	function insert_tipe($id, $tipe)
- 	{
- 		$data = array(
-	   		'IDKOS' => $id,
-	   		'IDTIPEKOS' => $tipe
-	   	);
-
-		$run = $this->db->insert('kos_tipekos', $data);
-		// if($run)
-		// 	return "Berhasil";
-		// else
-		// 	return "Gagal";
  	}
 
  	function insert_fasilitas($id, $fasilitas)
@@ -120,7 +107,7 @@ class Model_kos extends CI_Model {
 
  	function tipe_kos($id)
  	{
- 		$query = "SELECT * FROM kos_tipekos kt, tipekos tk WHERE kt.idTipeKos = tk.idTipeKos AND kt.idKos = '$id'";
+ 		$query = "SELECT * FROM kos k, tipekos tk WHERE k.idTipeKos = tk.idTipeKos AND k.idKos = '$id'";
 		$run = $this->db->query($query);
 		return $run->result();
  	}

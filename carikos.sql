@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 09 Mar 2017 pada 12.41
+-- Generation Time: 20 Mar 2017 pada 08.47
 -- Versi Server: 5.6.21
 -- PHP Version: 5.5.19
 
@@ -172,6 +172,7 @@ CREATE TABLE IF NOT EXISTS `kos` (
   `alamatKos` varchar(500) NOT NULL,
   `latLngKos` varchar(200) NOT NULL,
   `teleponKos` varchar(15) NOT NULL,
+  `idTipeKos` int(100) NOT NULL,
   `idParkiranKos` int(100) NOT NULL,
   `usernamePemilik` varchar(50) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
@@ -180,13 +181,13 @@ CREATE TABLE IF NOT EXISTS `kos` (
 -- Dumping data untuk tabel `kos`
 --
 
-INSERT INTO `kos` (`idKos`, `namaKos`, `alamatKos`, `latLngKos`, `teleponKos`, `idParkiranKos`, `usernamePemilik`) VALUES
-(1, 'Kos Mewah', 'Jalan Bhaskara Utara D10', '(-7.265753999999999, 112.79346099999998)', '4514205', 1, 'luwandino'),
-(2, 'Kos Melati', 'Jalan Raya Dharmahusada Indah A30', '(-7.2718601, 112.77134090000004)', '4514204', 4, 'luwandino'),
-(3, 'Kos Mawar', 'Jalan Bhaskara Utara D10', '(-7.265753999999999, 112.79346099999998)', '4514204', 2, 'luwandino'),
-(4, 'Kos Mawar', 'Jalan Raya Dharmahusada Indah A30', '(-7.2718601, 112.77134090000004)', '4514204', 3, 'luwandino'),
-(5, 'Kos Mewah', 'Jalan Balai Pustaka Raya 20, Jakarta', '(-6.196854, 106.88442199999997)', '4895205', 1, 'luwandino'),
-(6, 'Kos Baru', 'Teknik Informatika ITS', '(-7.279810399999999, 112.79760920000001)', '60111', 2, 'luwandino');
+INSERT INTO `kos` (`idKos`, `namaKos`, `alamatKos`, `latLngKos`, `teleponKos`, `idTipeKos`, `idParkiranKos`, `usernamePemilik`) VALUES
+(1, 'Kos Mewah', 'Jalan Bhaskara Utara D10', '(-7.265753999999999, 112.79346099999998)', '4514205', 1, 1, 'luwandino'),
+(2, 'Kos Melati', 'Jalan Raya Dharmahusada Indah A30', '(-7.2718601, 112.77134090000004)', '4514204', 2, 4, 'luwandino'),
+(3, 'Kos Mawar', 'Jalan Bhaskara Utara D10', '(-7.265753999999999, 112.79346099999998)', '4514204', 2, 2, 'luwandino'),
+(4, 'Kos Mawar', 'Jalan Raya Dharmahusada Indah A30', '(-7.2718601, 112.77134090000004)', '4514204', 3, 3, 'luwandino'),
+(5, 'Kos Mewah', 'Jalan Balai Pustaka Raya 20, Jakarta', '(-6.196854, 106.88442199999997)', '4895205', 1, 1, 'luwandino'),
+(6, 'Kos Baru', 'Teknik Informatika ITS', '(-7.279810399999999, 112.79760920000001)', '60111', 3, 2, 'luwandino');
 
 -- --------------------------------------------------------
 
@@ -306,7 +307,7 @@ INSERT INTO `pemilik` (`usernamePemilik`, `passwordPemilik`, `namaPemilik`, `ema
 CREATE TABLE IF NOT EXISTS `tipekos` (
 `idTipeKos` int(100) NOT NULL,
   `tipeKos` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data untuk tabel `tipekos`
@@ -314,7 +315,8 @@ CREATE TABLE IF NOT EXISTS `tipekos` (
 
 INSERT INTO `tipekos` (`idTipeKos`, `tipeKos`) VALUES
 (1, 'Pria'),
-(2, 'Wanita');
+(2, 'Wanita'),
+(3, 'Campur');
 
 --
 -- Indexes for dumped tables
@@ -450,7 +452,7 @@ MODIFY `idParkiranKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `tipekos`
 --
 ALTER TABLE `tipekos`
-MODIFY `idTipeKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `idTipeKos` int(100) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

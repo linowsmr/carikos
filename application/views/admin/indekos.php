@@ -4,18 +4,17 @@
             <h1 class="page-header">Indekos</h1>
         </div>
     </div>
-    <div class="container">
-    	<table class="table table-hover">
-		    <thead>
-		      <tr>
+    <table class="table table-hover">
+		<thead>
+		    <tr>
 		        <th>Nama</th>
 		        <th>Alamat</th>
 		        <th>Telepon</th>
-		        <th>Jumlah Kamar</th>
+		        <th width="50px">Jumlah Kamar</th>
 		        <th>Pemilik</th>
-		      </tr>
-		    </thead>
-		    <tbody>
+		   </tr>
+		</thead>
+		<tbody>
 		    <?php
 		    foreach ($kos as $kos_item) {?>
 		      <tr>
@@ -26,7 +25,6 @@
 		        <th><?php echo $kos_item['namaPemilik'] ?></th>
 		      </tr>
 		      <?php } ?>
-		    </tbody>
-		</table>
-	</div>
+		</tbody>
+	</table>
 </div>

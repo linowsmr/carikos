@@ -88,8 +88,12 @@
                                     <a href="<?php echo site_url('admin/lihatKos')?>"><i class="fa fa-home fa-fw"></i> Indekos</a>
                                 </li>
                                 <li>
+                                    <a href="<?php echo site_url('admin/reservasi')?>"><i class="fa fa-book fa-fw"></i> Reservasi</a>
+                                </li>
+                                <li>
                                     <a href="<?php echo site_url('admin/trans')?>"><i class="fa fa-dollar fa-fw"></i> Transaksi</a>
                                 </li>
+                                
                             </ul>
                         </li>
                         <li>
@@ -101,7 +105,6 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
-    </div>
 
   <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/Admin/vendor/jquery/jquery.min.js"></script>

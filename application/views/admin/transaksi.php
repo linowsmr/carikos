@@ -8,24 +8,20 @@
     	<table class="table table-hover">
 		    <thead>
 		      <tr>
-		        <th width="50px">ID</th>
-		        <th width="100px">Tanggal</th>
-		        <th width="150px">Pemesan</th>
-		        <th width="100px">Pembayaran (Rp)</th>
+		        <th>ID Transaksi</th>
+		        <th>ID Reservasi</th>
+		        <th>Tanggal</th>
+		        <th>Pemesan</th>
+		        <th>Total (Rp.)</th>
 		      </tr>
 		    </thead>
 		    <tbody>
 		      <tr>
-		        <th>01</th>
-		        <th>12 Maret 2017</th>
-		        <th>Nyoman</th>
-		        <th>6000000</th>
-		      </tr>
-		      <tr>
-		        <th>02</th>
-		        <th>14 April 2017</th>
-		        <th>Ridho</th>
-		        <th>1500000</th>
+		        <th>1</th>
+		        <th>1</th>
+		        <th>21 Maret 2017</th>
+		        <th>Nyoman Pande Wahyu</th>
+		        <th>500000</th>
 		      </tr>
 		    </tbody>
 		</table>

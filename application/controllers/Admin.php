@@ -66,4 +66,14 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/admheader');
 		$this->load->view('admin/indekos', $data);
 	}
+	public function reservasi()
+	{
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/reservasi');
+	}
+	public function trans()
+	{
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/transaksi');
+	}
 }

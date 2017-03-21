@@ -101,6 +101,7 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+    </div>
 
   <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/Admin/vendor/jquery/jquery.min.js"></script>

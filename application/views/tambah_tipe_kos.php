@@ -31,10 +31,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Tambah Tipe Kos</h2>
+                    <h2>Ubah Tipe Kos</h2>
                     <hr class="small">
                     <div class="row">
-                        <form action="<?php echo site_url('kos/tambah_tipe_baru')?>" method="post">
+                        <form action="<?php echo site_url('kos/ubah_tipe_baru')?>" method="post">
                             <div class="col-lg-4"></div>
                             <div class="col-lg-4">
                                 <div class="form-group">
@@ -55,7 +55,8 @@
                                         </tbody>
                                     </table>
                                     <h4>Tipe Kos Baru</h4>
-                                    <select id="multiple-select-tipe" multiple="multiple" name="tipe[]">
+                                    <select class="form-control" name="tipe">
+                                        <option></option>
                                         <?php
                                             foreach($tipe as $row){ ?>
                                                 <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>

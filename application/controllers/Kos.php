@@ -200,7 +200,7 @@ class Kos extends CI_Controller {
         }
 	}
 
-	public function tambah_tipe()
+	public function ubah_tipe()
 	{
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
@@ -240,15 +240,12 @@ class Kos extends CI_Controller {
         }
 	}
 
-	public function tambah_tipe_baru()
+	public function ubah_tipe_baru()
 	{
 		$tipe = $this->input->post('tipe');
 		$id = $this->input->post('id');
 
-		for($a=0; $a<sizeof($tipe); $a++){
-            $this->model_kos->insert_tipe($id, $tipe[$a]);
-        }
-
+        $this->model_kos->update_tipe($id, $tipe);
         redirect('kos/beranda?kos='.$id.'');
 	}
 

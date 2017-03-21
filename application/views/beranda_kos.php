@@ -46,9 +46,9 @@
                                 <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
                                 <button type="submit" class="btn btn-success">Ubah</button>
                             </form>
-                            <form action="<?php echo site_url('kos/tambah_tipe') ?>" method="get">
+                            <form action="<?php echo site_url('kos/ubah_tipe') ?>" method="get">
                                 <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                <button type="submit" class="btn btn-primary">Tambah Tipe Kos</button>
+                                <button type="submit" class="btn btn-success">Ubah Tipe Kos</button>
                             </form>
                         </div>
                         <div class="col-lg-6">
@@ -68,7 +68,6 @@
                                 <thead>
                                   <tr>
                                     <th>Tipe Kos</th>
-                                    <th></th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -76,13 +75,6 @@
                                         foreach($tipe as $row) { ?>
                                             <tr>
                                                 <td><p><?php echo $row->tipeKos ?></p></td>
-                                                <td>
-                                                    <form action="<?php echo site_url('kos/delete_tipe') ?>" method="post">
-                                                        <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                                        <input type="hidden" name="tipe" value="<?php echo $row->idTipeKos ?>"></input>
-                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                    </form>
-                                                </td>
                                             </tr>
                                         <?php }
                                     ?>

@@ -130,6 +130,16 @@ class Model_kos extends CI_Model {
 			return "Gagal";
  	}
 
+ 	function update_tipe($id, $idTipeKos)
+ 	{
+ 		$data = array (
+					'IDTIPEKOS' => $idTipeKos
+		);
+
+		$this->db->where('IDKOS', $id);
+	    $run = $this->db->update('kos', $data);
+ 	}
+
  	function delete_fasilitas_kos($id)
  	{
  		$this->db->where('idKos', $id);
@@ -156,7 +166,7 @@ class Model_kos extends CI_Model {
 
  	function tipe_kos_non($id)
  	{
- 		$query = "SELECT * FROM tipekos t WHERE t.idTipeKos NOT IN (SELECT kt.idTipeKos FROM kos_tipekos kt, tipekos tk WHERE kt.idTipeKos = tk.idTipeKos AND kt.idKos = '$id')";
+ 		$query = "SELECT * FROM tipekos t WHERE t.idTipeKos NOT IN (SELECT k.idTipeKos FROM kos k WHERE k.idKos = '$id')";
 		$run = $this->db->query($query);
 		return $run->result();
  	}

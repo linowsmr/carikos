@@ -49,7 +49,7 @@ class Model_kos extends CI_Model {
 	   		'ALAMATKOS' => $alamat,
 	   		'LATLNGKOS' => $latlng,
 	   		'TELEPONKOS' => $telepon,
-	   		'IDTIPEKOS' => $idTipeKos,
+	   		'IDTIPEKOS' => $tipe,
 	   		'IDPARKIRANKOS' => $parkiran,
 	   		'USERNAMEPEMILIK' => $pemilik
 	   	);

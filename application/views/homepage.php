@@ -39,7 +39,7 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <h1>CariKos</h1>
-            <h3>Sekarang Cari Kos Menjadi Lebih Mudah</h3>
+            <h3>Cari Kos Menjadi Lebih Mudah</h3>
             <br>
             <a href="#contact" class="btn btn-dark btn-lg">Cari Kos</a>
             <a href="#daftar" class="btn btn-dark btn-lg">Daftar Kos</a>

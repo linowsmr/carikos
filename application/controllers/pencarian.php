@@ -6,8 +6,6 @@ class Pencarian extends CI_Controller {
 	function __construct()
  	{
 	   	parent::__construct();
-	   	$this->load->model('model_kos','',TRUE);
-	   	$this->load->model('model_kamar','',TRUE);
 	   	$this->load->model('model_pencarian','',TRUE);
  	}
 
@@ -42,103 +40,6 @@ class Pencarian extends CI_Controller {
 
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 
-		$point = array();
-		$dataPoint = array();
-
-		foreach($data['hasil'] as $row){
-			$latlong = substr($row->latLngKos, 1, -1);
-			$coord = explode(", ", $latlong);
-
-			array_push($point, $coord[0]);
-			array_push($point, $coord[1]);
-		}
-
-		$totalCoord = sizeof($data['hasil']);
-
-		for($i =0; $i < $totalCoord; $i++){
-			for($j =0; $j < 2; $j++){
-				$dataPoint[$i][$j] = array_shift($point);
-			}
-		}
-
-		// $dataPoint[0][0] = $point[0];
-		// $dataPoint[0][1] = $point[1];
-		// $dataPoint[1][0] = $point[2];
-		// $dataPoint[1][1] = $point[3];
-		
-		require_once "assets/KMeans/Space.php";
-		require_once "assets/KMeans/Point.php";
-		require_once "assets/KMeans/Cluster.php";
-
-		// create a 2-dimentions space
-		$space = new KMeans\Space(2);
-
-		// add points to space
-		foreach ($dataPoint as $coordinates)
-			$space->addPoint($coordinates);
-
-		// cluster these 50 points in 3 clusters
-		$clusters = $space->solve(2);
-
-		//var_dump($clusters);
-
-		// display the cluster centers and attached points
-		foreach ($clusters as $i => $cluster){
-			printf("----- Cluster %s (%f,%f): %d points -----", $i, $cluster[0], $cluster[1], count($cluster));
-			$latLngCluster = "($cluster[0], $cluster[1])";
-			//$idCluster = $this->model_pencarian->cluster($latLngCluster);
-
-			foreach ($cluster as $j => $member){
-				$latlng = "($member[0], $member[1])";
-				$idKos = $this->model_pencarian->pencarian_by_latlng($latlng);
-				foreach($idKos as $row){
-					//$this->model_pencarian->update_idcluster($row->idKos, $idCluster);
-					printf("$row->idKos");
-				}
-				//printf("$idKos");
-			}
-			?>
-			<script type="text/javascript">
-				function initMap() {
-				  var bounds = new google.maps.LatLngBounds;
-
-				  var origin = {lat: -7.2798797, lng: 112.7971214};
-				  var destination = {lat: -7.290426999999999, lng: 112.79645700000003};
-
-				  var geocoder = new google.maps.Geocoder;
-
-				  var service = new google.maps.DistanceMatrixService;
-				  service.getDistanceMatrix({
-				    origins: [origin],
-				    destinations: [destination],
-				    travelMode: google.maps.TravelMode.DRIVING,
-				    unitSystem: google.maps.UnitSystem.METRIC
-				  }, function(response, status) {
-				    if (status !== google.maps.DistanceMatrixStatus.OK) {
-				      alert('Error was: ' + status);
-				    } else {
-				      var originList = response.originAddresses;
-				      var destinationList = response.destinationAddresses;
-
-				      for (var i = 0; i < originList.length; i++) {
-				        var results = response.rows[i].elements;
-				        for (var j = 0; j < results.length; j++) {
-				          var element = results[j];
-				          var distance = element.distance.text;
-				          var duration = element.duration.text;
-
-				          alert(distance);
-				        }
-				      }
-				    }
-				  });
-				}
-			</script>
-			<?php
-		}
+		var_dump($data['hasil']);
 	}
-	
 }
-?>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap"
-        async defer></script>

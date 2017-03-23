@@ -76,4 +76,9 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/admheader');
 		$this->load->view('admin/transaksi');
 	}
+	public function lapkeu()
+	{
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/laporan');
+	}
 }

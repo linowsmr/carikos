@@ -141,4 +141,16 @@ class Model_kamar extends CI_Model {
  		$this->db->where('idFotoKamar', $id);
  		$this->db->delete('fotokamar');
  	}
+ 	function jumlahKamar()
+ 	{
+ 		$query = "SELECT SUM(jumlahKamar) as totalKamar FROM kamar km, kos k WHERE km.idKos = k.idKos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+ 	function lihatKamar($id)
+ 	{
+ 		$query = "SELECT * FROM kamar where idKos = '$id'";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
 }	

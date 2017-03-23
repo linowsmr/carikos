@@ -197,19 +197,25 @@ class Model_kos extends CI_Model {
  	}
  	function lihatKos()
  	{
- 		$query = "SELECT k.namaKos, k.alamatKos, k.teleponKos, p.namaPemilik, (SELECT SUM(jumlahKamar) FROM kamar km WHERE km.idKos = k.idKos) as jumlahKamar From kos k, pemilik p WHERE k.usernamePemilik = p.usernamePemilik";
+ 		$query = "SELECT k.idKos, k.namaKos, k.alamatKos, k.teleponKos, p.namaPemilik, (SELECT SUM(jumlahKamar) FROM kamar km WHERE km.idKos = k.idKos) as jumlahKamar From kos k, pemilik p WHERE k.usernamePemilik = p.usernamePemilik";
  		$run = $this->db->query($query);
  		return $run->result_array();
- 	}
- 	function jumlahKamar()
- 	{
- 		$query = "SELECT SUM(jumlahKamar) as totalKamar FROM kamar km, kos k WHERE km.idKos = k.idKos";
- 		$run = $this->db->query($query);
- 		return $run->result();
  	}
  	function jumlahKos()
  	{
  		$query = "SELECT COUNT(*) as total from kos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+ 	function idKos()
+ 	{
+ 		$query = "SELECT idKos FROM kos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+ 	function namaKos($id)
+ 	{
+ 		$query = "SELECT namaKos FROM kos where idKos = '$id'";
  		$run = $this->db->query($query);
  		return $run->result();
  	}

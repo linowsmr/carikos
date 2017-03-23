@@ -23,5 +23,5 @@
 		      <?php } ?>
 		</tbody>
 	</table>
-	<a href="<?php echo site_url('admin/lihatKos')?>"><button type="button" class="btn btn-default">Back</button></a>
+	<a href="<?php echo site_url('admin/lihatKos')?>"><button type="button" class="btn btn-default">Kembali</button></a>
 </div>

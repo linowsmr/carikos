@@ -178,7 +178,7 @@
                                             foreach($kamar as $row) { ?>
                                                 <tr>
                                                     <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><p><?php echo $row->jenisKamar ?></p></a></td>
-                                                    <td><p><?php echo $row->hargaKamar ?></p></td>
+                                                    <td><p><?php echo number_format($row->hargaKamar) ?></p></td>
                                                     <td><p><?php echo $row->jumlahKamar ?></p></td>
                                                     <td>
                                                         <form action="<?php echo site_url('kamar/delete') ?>" method="post">

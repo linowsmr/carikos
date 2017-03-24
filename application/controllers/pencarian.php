@@ -39,7 +39,9 @@ class Pencarian extends CI_Controller {
 		$fasilitaskamar = implode(",", $kamar);
 
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
-
-		var_dump($data['hasil']);
+		//var_dump($data['hasil']);
+		$this->load->view('template/header');
+		$this->load->view('hasil_pencarian', $data);
+		$this->load->view('template/footer');
 	}
 }

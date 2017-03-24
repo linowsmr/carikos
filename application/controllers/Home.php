@@ -21,15 +21,5 @@ class Home extends CI_Controller {
 		$this->load->view('homepage', $data);
 		$this->load->view('template/footer');
 	}
-	
-	public function coba()
-	{
-		$this->load->view('page');
-		redirect('Home/coba2');
-	}
 
-	public function coba2()
-	{
-		$this->load->view('page2');
-	}
 }

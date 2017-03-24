@@ -93,7 +93,7 @@ class Model_kos extends CI_Model {
 
  	function detail_kos($id)
  	{
- 		$query = "SELECT * FROM kos k, parkirankos pk WHERE k.idParkiranKos = pk.idParkiranKos AND k.idKos = '$id'";
+ 		$query = "SELECT * FROM kos k, parkirankos pk, cluster c WHERE k.idParkiranKos = pk.idParkiranKos AND k.idCluster = c.idCluster AND k.idKos = '$id'";
 		$run = $this->db->query($query);
 		return $run->result();
  	}

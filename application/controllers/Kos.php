@@ -8,7 +8,7 @@ class Kos extends CI_Controller {
 	   	parent::__construct();
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_kamar','',TRUE);
-	   	$this->load->model('model_pencarian','',TRUE);
+	   	$this->load->model('model_cluster','',TRUE);
  	}
 
 	public function daftar()
@@ -66,7 +66,7 @@ class Kos extends CI_Controller {
 	{
 		$id = $this->input->get('kos');
 
-		$data['latlng'] = $this->model_pencarian->data_latlng();
+		$data['latlng'] = $this->model_cluster->data_latlng();
 
 		$point = array();
 		$dataPoint = array();
@@ -110,13 +110,13 @@ class Kos extends CI_Controller {
 		foreach ($clusters as $i => $cluster){
 			printf("Cluster %s (%f,%f): %d points <br>", $i, $cluster[0], $cluster[1], count($cluster));
 			$latLngCluster = "($cluster[0], $cluster[1])";
-			$idCluster = $this->model_pencarian->cluster($latLngCluster);
+			$idCluster = $this->model_cluster->cluster($latLngCluster);
 
 			foreach ($cluster as $j => $member){
 				$latlng = "($member[0], $member[1])";
-				$idKos = $this->model_pencarian->pencarian_by_latlng($latlng);
+				$idKos = $this->model_cluster->pencarian_by_latlng($latlng);
 				foreach($idKos as $row){
-					$this->model_pencarian->update_idcluster($row->idKos, $idCluster);
+					$this->model_cluster->update_idcluster($row->idKos, $idCluster);
 					echo "- $row->idKos <br>";
 				}
 			}
@@ -136,7 +136,8 @@ class Kos extends CI_Controller {
             $data['id'] = $id;
 
             $data['detail'] = $this->model_kos->detail_kos($id);
-
+            $data['mod_cluster'] = $this->model_cluster;
+            
             if($data['detail']){
             	$data['fasilitas'] = $this->model_kos->fasilitas_kos($id);
 	            $data['tipe'] = $this->model_kos->tipe_kos($id);

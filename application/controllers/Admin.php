@@ -9,6 +9,7 @@ class Admin extends CI_Controller {
 	   	$this->load->model('model_admin','',TRUE);
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_pemilik','',TRUE);
+	   	$this->load->model('model_kamar','',TRUE);
  	}
 	public function login(){
 		$this->load->library('session');
@@ -43,7 +44,7 @@ class Admin extends CI_Controller {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
             $data['kos'] = $this->model_kos->jumlahKos();
-            $data['kamar'] = $this->model_kos->jumlahKamar();
+            $data['kamar'] = $this->model_kamar->jumlahKamar();
             $data['pemilik'] = $this->model_pemilik->jumlahPemilik();
 
             $this->load->view('admin/admheader', $nama);
@@ -63,6 +64,9 @@ class Admin extends CI_Controller {
     public function lihatKos()
 	{
 		$data['kos'] = $this->model_kos->lihatKos();
+		$id = $this->input->get('kos');
+		$data['id'] = $id;
+
 		$this->load->view('admin/admheader');
 		$this->load->view('admin/indekos', $data);
 	}
@@ -75,5 +79,20 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('admin/admheader');
 		$this->load->view('admin/transaksi');
+	}
+	public function lapkeu()
+	{
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/laporan');
+	}
+	public function lihatKamar()
+	{
+		$id = $this->input->get('kos');
+		$data['id'] = $id;
+		$data['namaKos'] = $this->model_kos->namaKos($id);
+		$data['kamar'] = $this->model_kamar->lihatKamar($id);
+
+		$this->load->view('admin/admheader');
+		$this->load->view('admin/kamar', $data);
 	}
 }

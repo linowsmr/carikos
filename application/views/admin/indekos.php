@@ -12,18 +12,18 @@
 		        <th>Telepon</th>
 		        <th width="50px">Jumlah Kamar</th>
 		        <th>Pemilik</th>
+		        <th></th>
 		   </tr>
 		</thead>
 		<tbody>
 		    <?php
 		    foreach ($kos as $kos_item) {?>
 		      <tr>
-		        <th><?php echo $kos_item['namaKos'] ?></th>
+		        <th><a href="<?php echo site_url('admin/lihatKamar?kos='.$kos_item['idKos'].'')?>" style="color: black;"><?php echo $kos_item['namaKos'] ?></a></th>
 		        <th><?php echo $kos_item['alamatKos'] ?></th>
 		        <th><?php echo $kos_item['teleponKos'] ?></th>
 		        <th><?php echo $kos_item['jumlahKamar'] ?></th>
 		        <th><?php echo $kos_item['namaPemilik'] ?></th>
-		      </tr>
 		      <?php } ?>
 		</tbody>
 	</table>

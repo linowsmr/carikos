@@ -40,12 +40,21 @@ class Model_Cluster extends CI_Model {
 	    $run = $this->db->update('kos', $data);
  	}
 
- 	function add($id)
+ 	function cek_destinasi($idCluster, $idDestinasi)
+ 	{
+ 		$query = "SELECT * FROM cluster_destinasi cd WHERE cd.idCluster = $idCluster AND cd.idDestinasi = $idDestinasi";
+		$run = $this->db->query($query);
+		return $run->num_rows();
+ 	}
+
+ 	function destinasi($idCluster, $idDestinasi, $distance)
  	{
  		$data = array(
-	   		'ID' => $id
+	   		'IDCLUSTER' => $idCluster,
+	   		'IDDESTINASI' => $idDestinasi,
+	   		'JARAKDESTINASI' => $distance
 	   	);
 
-		$run = $this->db->insert('tes', $data);
+	   	$run = $this->db->insert('cluster_destinasi', $data);
  	}
 }

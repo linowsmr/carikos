@@ -7,11 +7,11 @@ class Model_Pencarian extends CI_Model {
 		$run = $this->db->query($query);
 		return $run->result();
  	}
- 	
+
  	function bp()
  	{
  		$query = "SELECT * FROM bp";
  		$run = $this->db->query($query);
- 		return $run->result;
+ 		return $run->result();
  	}
 }

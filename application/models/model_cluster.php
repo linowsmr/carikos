@@ -102,4 +102,24 @@ class Model_Cluster extends CI_Model {
 	   	$this->db->where('IDCLUSTER', $idCluster);
 	    $run = $this->db->update('cluster', $data);
  	}
+
+ 	function update_nilai_kos($idKos, $nilai)
+ 	{
+ 		$data = array(
+	   		'NILAIPARKIRANPENJAGAKOS' => $nilai
+	   	);
+
+	   	$this->db->where('IDKOS', $idKos);
+	    $run = $this->db->update('kos', $data);
+ 	}
+
+ 	function update_nilai_kamar($idKamar, $nilai)
+ 	{
+ 		$data = array(
+	   		'NILAIFASILITASKAMAR' => $nilai
+	   	);
+
+	   	$this->db->where('IDKAMAR', $idKamar);
+	    $run = $this->db->update('kamar', $data);
+ 	}
 }

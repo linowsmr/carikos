@@ -7,6 +7,8 @@ class Pencarian extends CI_Controller {
  	{
 	   	parent::__construct();
 	   	$this->load->model('model_pencarian','',TRUE);
+	   	$this->load->model('model_kamar','',TRUE);
+	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_cluster','',TRUE);
  	}
 
@@ -163,10 +165,21 @@ class Pencarian extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
-	public function kamar(){
-		$kamar = $this->input->get('kamar');
-		$harga = $this->input->get('harga');
-		echo $kamar;
-		echo $harga;
+	public function lihatKamar()
+	{
+		$idKamar = $this->input->post('idKamar');
+		$idKos = $this->input->post('idKos');
+		$data['harga'] = $this->input->post('hargaKamar');
+		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
+		$data['fasilitasKos'] =  $this->model_kos->fasilitas_kos($idKos);
+		$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
+		$data['fotoKos'] =  $this->model_kos->list_foto($idKos);
+		$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
+		$data['fasilitasKamar'] =  $this->model_kamar->fasilitas_kamar($idKamar);
+		$data['fotoKamar'] =  $this->model_kamar->list_foto($idKamar);
+
+		$this->load->view('template/header');
+		$this->load->view('detailKamar', $data);
+		$this->load->view('template/footer');
 	}
 }

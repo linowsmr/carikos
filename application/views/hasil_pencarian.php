@@ -104,7 +104,7 @@
                                     $hargaBaru = $hargaLama + $hargaLama * ($ok/10);
                                 }
                                 ?>
-                                <a href="<?php echo site_url('pencarian/kamar?kamar='.$row->idKamar.'&harga='.round($hargaBaru).'')?>">
+                                <!-- <a href="<?php echo site_url('pencarian/kamar?kamar='.$row->idKamar.'&harga='.round($hargaBaru).'')?>"> -->
                                 <div class="col-lg-3">
                                     <div class="col-lg-12" style="background: url(<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>); background-size: cover; background-position: center; height: 25%"></div>
                                     <div class="col-lg-12" style="background-color: #337ab7; color: white">
@@ -113,8 +113,15 @@
                                         <h4><?php echo $row->namaKos ?></h4>
                                         <h4>Rp.<?php echo number_format(round($hargaBaru))?></h4>
                                         <h4><?php echo $row->nilaiDestinasiCluster?></h4>
+                                        <form action="<?php echo site_url('pencarian/lihatKamar')?>" method="post">
+                                            <input type="hidden" name="idKamar" class="form-control" value="<?php echo $row->idKamar?>">
+                                            <input type="hidden" name="idKos" class="form-control" value="<?php echo $row->idKos?>">
+                                            <input type="hidden" name="hargaKamar" class="form-control" value="<?php echo round($hargaBaru)?>">
+                                            <button type="submit" class="btn btn-warning">Pesan</button>
+                                        </form>
                                     </div>                                    
-                                </div></a>
+                                </div>
+                                <!-- </a> -->
                                 <div class="col-lg-1"></div>
                             <?php }
                         ?>

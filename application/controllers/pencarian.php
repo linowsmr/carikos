@@ -44,7 +44,7 @@ class Pencarian extends CI_Controller {
 		$cluster = $this->model_cluster->ambil_cluster();
 		foreach($cluster as $row){
 			$idCluster = $row->idCluster;
-			if($row->nilaiDestinasiCluster == 0){
+			if($row->nilaiDestinasiCluster == 0 || $row->nilaiDestinasiCluster == ""){
 				$jarakMinimarket = $this->model_cluster->jarak_destinasi($idCluster, 1);
 				$jarakSupermarket = $this->model_cluster->jarak_destinasi($idCluster, 2);
 
@@ -100,48 +100,64 @@ class Pencarian extends CI_Controller {
 		}
 
 		//exit();
-		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+		$hasilPencarian = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 		$data['bp'] = $this->model_pencarian->bp();
 
-		foreach($data['hasil'] as $row){
+		foreach($hasilPencarian as $row){
 			$idKos = $row->idKos;
 			$idKamar = $row->idKamar;
+			$nilaiParkiranPenjagaKos = $row->nilaiParkiranPenjagaKos;
+			$nilaiFasilitas = $row->nilaiFasilitasKamar;
 
-			$luasParkiran = $this->model_cluster->luas_parkiran($idKos);
-			foreach($luasParkiran as $row){
-				$luas = $row->idParkiranKos;
-				if($luas == 1)
-					$nilaiLuasParkir = 100;
-				else if($luas == 2)
-					$nilaiLuasParkir = 75;
-				else if($luas == 3)
-					$nilaiLuasParkir = 50;
-				else if($luas == 4)
-					$nilaiLuasParkir = 25;
-				else if($luas == 5)
-					$nilaiLuasParkir = 0;
-			}
+			if($nilaiParkiranPenjagaKos == 0 || $nilaiParkiranPenjagaKos == ""){
+				$luasParkiran = $this->model_cluster->luas_parkiran($idKos);
+				$bobotLuasParkiran = 0.1;
+				foreach($luasParkiran as $row){
+					$luas = $row->idParkiranKos;
+					if($luas == 1)
+						$nilaiLuasParkir = 100*$bobotLuasParkiran;
+					else if($luas == 2)
+						$nilaiLuasParkir = 75*$bobotLuasParkiran;
+					else if($luas == 3)
+						$nilaiLuasParkir = 50*$bobotLuasParkiran;
+					else if($luas == 4)
+						$nilaiLuasParkir = 25*$bobotLuasParkiran;
+					else if($luas == 5)
+						$nilaiLuasParkir = 0*$bobotLuasParkiran;
+				}
 
-			$penjagaKos = $this->model_cluster->penjaga_kos($idKos);
-			if($penjagaKos == 1)
-				$nilaiPenjagaKos = 100;
-			else
-				$nilaiPenjagaKos = 0;
-
-			$fasilitas = $this->model_cluster->fasilitas_lengkap($idKamar);
-			foreach($fasilitas as $row){
-				$fasilitasKamar = $row->fasilitasTiga;
-				if($fasilitasKamar == 3)
-					$nilaiFasilitasKamar = 100;
-				else if($fasilitasKamar == 2)
-					$nilaiFasilitasKamar = 50;
+				$penjagaKos = $this->model_cluster->penjaga_kos($idKos);
+				$bobotPenjagaKos = 0.07;
+				if($penjagaKos == 1)
+					$nilaiPenjagaKos = 100*$bobotPenjagaKos;
 				else
-					$nilaiFasilitasKamar = 0;
-			}
+					$nilaiPenjagaKos = 0*$bobotPenjagaKos;
 
-			//echo "ID Kamar = $idKamar, Nilai Luas Parkiran = $nilaiLuasParkir, Nilai Penjaga Kos = $nilaiPenjagaKos, dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
+				$nilaiParkiranPenjaga = $nilaiLuasParkir + $nilaiPenjagaKos;
+				$this->model_cluster->update_nilai_kos($idKos, $nilaiParkiranPenjaga);
+			}
+			
+			if($nilaiFasilitas == 0 || $nilaiFasilitas == ""){
+				$fasilitas = $this->model_cluster->fasilitas_lengkap($idKamar);
+				$bobotFasilitasKamar = 0.34;
+				foreach($fasilitas as $row){
+					$fasilitasKamar = $row->fasilitasTiga;
+					if($fasilitasKamar == 3)
+						$nilaiFasilitasKamar = 100*$bobotFasilitasKamar;
+					else if($fasilitasKamar == 2)
+						$nilaiFasilitasKamar = 50*$bobotFasilitasKamar;
+					else
+						$nilaiFasilitasKamar = 0*$bobotFasilitasKamar;
+				}
+				$this->model_cluster->update_nilai_kamar($idKamar, $nilaiFasilitasKamar);
+			}
+			
+			//echo "Nilai Parkiran dan Penjaga = $nilaiParkiranPenjaga dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
 		}
-		
+
+		//exit();
+		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+
 		$this->load->view('template/header');
 		$this->load->view('hasil_pencarian', $data);
 		$this->load->view('template/footer');

@@ -101,6 +101,47 @@ class Pencarian extends CI_Controller {
 
 		//exit();
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+
+		foreach($data['hasil'] as $row){
+			$idKos = $row->idKos;
+
+			$luasParkiran = $this->model_cluster->luas_parkiran($idKos);
+			foreach($luasParkiran as $row){
+				$luas = $row->idParkiranKos;
+				if($luas == 1)
+					$nilaiLuasParkir = 100;
+				else if($luas == 2)
+					$nilaiLuasParkir = 75;
+				else if($luas == 3)
+					$nilaiLuasParkir = 50;
+				else if($luas == 4)
+					$nilaiLuasParkir = 25;
+				else if($luas == 5)
+					$nilaiLuasParkir = 0;
+			}
+
+			$penjagaKos = $this->model_cluster->penjaga_kos($idKos);
+			if($penjagaKos == 1)
+				$nilaiPenjagaKos = 100;
+			else
+				$nilaiPenjagaKos = 0;
+
+			$idKamar = $row->idKamar;
+
+			$fasilitas = $this->model_cluster->fasilitas_lengkap($idKamar);
+			foreach($fasilitas as $row){
+				$fasilitasKamar = $row->fasilitasTiga;
+				if($fasilitasKamar == 3)
+					$nilaiFasilitasKamar = 100;
+				else if($fasilitasKamar == 2)
+					$nilaiFasilitasKamar = 50;
+				else
+					$nilaiFasilitasKamar = 0;
+			}
+
+			echo "Nilai Luas Parkiran = $nilaiLuasParkir, Nilai Penjaga Kos = $nilaiPenjagaKos, dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
+		}
+		exit();
 		//var_dump($data['hasil']);
 		$this->load->view('template/header');
 		$this->load->view('hasil_pencarian', $data);

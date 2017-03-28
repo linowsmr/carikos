@@ -99,7 +99,7 @@ class Pencarian extends CI_Controller {
 			$nilaiDestinasi = 0;
 		}
 
-		exit();
+		//exit();
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 		//var_dump($data['hasil']);
 		$this->load->view('template/header');

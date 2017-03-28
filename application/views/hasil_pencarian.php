@@ -59,7 +59,6 @@
                             foreach($hasil as $row){ 
                                 $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar;
                                 $bulan = date("m");
-                                echo $skor;
 
                                 if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 10 || $bulan == 11 || $bulan == 12){
                                     $nilaiBulan = 1;

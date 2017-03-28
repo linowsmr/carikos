@@ -66,7 +66,9 @@
                                 if($bulan == 5 || $bulan == 6){
                                     $nilaiBulan = 1;
                                 }
-                                
+                                if($bulan == 1 || $bulan == 2 || $bulan == 3){
+                                    $nilaiBulan = 0
+                                }
 
                                 $oh1 = $a + $nilai*$b + $nilai*$c;
                                 $oh2 =

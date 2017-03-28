@@ -92,4 +92,14 @@ class Model_Cluster extends CI_Model {
 		$run = $this->db->query($query);
 		return $run->result();
  	}
+
+ 	function nilai_destinasi($idCluster, $nilaiDestinasi)
+ 	{
+ 		$data = array(
+	   		'NILAIDESTINASICLUSTER' => $nilaiDestinasi
+	   	);
+
+	   	$this->db->where('IDCLUSTER', $idCluster);
+	    $run = $this->db->update('cluster', $data);
+ 	}
 }

@@ -52,6 +52,7 @@
                                         <h4><?php echo $row->jenisKamar ?></h4>
                                         <hr style="margin-top: 0%; margin-bottom: 0%">
                                         <h4><?php echo $row->namaKos ?></h4>
+                                        <h4><?php echo $row->hargaKamar ?></h4>
                                     </div>                                    
                                 </div></a>
                                 <div class="col-lg-1"></div>
@@ -78,6 +79,7 @@
                                         <h4><?php echo $row->jenisKamar ?></h4>
                                         <hr style="margin-top: 0%; margin-bottom: 0%; border-color: black;">
                                         <h4><?php echo $row->namaKos ?></h4>
+                                        <h4><?php echo $row->hargaKamar ?></h4>
                                     </div>                                    
                                 </div></a>
                                 <div class="col-lg-1"></div>

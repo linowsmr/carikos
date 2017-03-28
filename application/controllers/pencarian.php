@@ -92,9 +92,9 @@ class Pencarian extends CI_Controller {
 					else if($jarakFinalMasjid > 5)
 						$nilaiDestinasi = $nilaiDestinasi + 0*$bobotTempatIbadah;
 					
-					echo "ID Cluster = $idCluster, Nilai Sementara = $nilaiDestinasi <br>";
+					//echo "ID Cluster = $idCluster, Nilai Sementara = $nilaiDestinasi <br>";
 				}
-
+				$this->model_cluster->nilai_destinasi($idCluster, $nilaiDestinasi);
 			}
 			$nilaiDestinasi = 0;
 		}

@@ -101,9 +101,7 @@ class Pencarian extends CI_Controller {
 
 		//exit();
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
-<<<<<<< HEAD
 		$data['bp'] = $this->model_pencarian->bp();
-=======
 
 		foreach($data['hasil'] as $row){
 			$idKos = $row->idKos;
@@ -142,10 +140,9 @@ class Pencarian extends CI_Controller {
 					$nilaiFasilitasKamar = 0;
 			}
 
-			echo "Nilai Luas Parkiran = $nilaiLuasParkir, Nilai Penjaga Kos = $nilaiPenjagaKos, dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
+			//echo "Nilai Luas Parkiran = $nilaiLuasParkir, Nilai Penjaga Kos = $nilaiPenjagaKos, dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
 		}
-		exit();
->>>>>>> origin/master
+
 		//var_dump($data['hasil']);
 		$this->load->view('template/header');
 		$this->load->view('hasil_pencarian', $data);

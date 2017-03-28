@@ -57,21 +57,51 @@
                                 $i = $row->i;
                             }
                             foreach($hasil as $row){ 
-                                $nilai = $row->nilaiDestinasiCluster;
+                                $skor = $row->nilaiDestinasiCluster;
                                 $bulan = date("m");
 
                                 if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 10 || $bulan == 11 || $bulan == 12){
-                                    $nilaiBulan = 0;
-                                }
-                                if($bulan == 5 || $bulan == 6){
                                     $nilaiBulan = 1;
                                 }
-                                if($bulan == 1 || $bulan == 2 || $bulan == 3){
-                                    $nilaiBulan = 0
+                                if($bulan == 5 || $bulan == 6){
+                                    $nilaiBulan = 2;
+                                }
+                                if($bulan == 7 || $bulan == 8 || $bulan == 9){
+                                    $nilaiBulan = 3;
                                 }
 
-                                $oh1 = $a + $nilai*$b + $nilai*$c;
-                                $oh2 =
+                                if($skor >= 76 && $skor <= 100){
+                                    $nilaiSkor == 4;
+                                }
+                                elseif($skor >= 50 && $skor < 76){
+                                    $nilaiSkor == 3;
+                                }
+                                elseif($skor >= 25 && $skor < 50){
+                                    $nilaiSkor == 2;
+                                }
+                                elseif($skor == 0 && $skor < 25){
+                                    $nilaiSkor == 1;
+                                }
+
+                                $oh1 = $a + $nilaiSkor*$b + $nilaiBulan*$c;
+                                $oh2 = $d + $nilaiSkor*$d + $nilaiBulan*$f;
+                                
+                                //$h1 = 1 / (1+exp($oh1*(-1)));
+                                //$h2 = 1 / (1+exp($0h2*(-1)));
+
+                                $ok = $g + $oh1*$h + $oh2*$i;
+
+                                $hargaLama = $row->hargaKamar;
+
+                                if($nilaiBulan == 1){
+                                    $hargaBaru = $hargaLama - $hargaLama * ($ok/20);
+                                }
+                                if($nilaiBulan == 2){
+                                    $hargaBaru = $hargaLama + $hargaLama * ($ok/20);
+                                }
+                                if($nilaiBaru == 3){
+                                    $hargaBaru = $hargaLama + $hargaLama * ($ok/10);
+                                }
                                 ?>
                                 <a href=""><div class="col-lg-3">
                                     <div class="col-lg-12" style="background: url(<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>); background-size: cover; background-position: center; height: 25%"></div>
@@ -79,7 +109,7 @@
                                         <h4><?php echo $row->jenisKamar ?></h4>
                                         <hr style="margin-top: 0%; margin-bottom: 0%">
                                         <h4><?php echo $row->namaKos ?></h4>
-                                        <h4><?php echo $row->hargaKamar ?></h4>
+                                        <h4><?php echo $nilaiBaru ?></h4>
                                         <h4><?php echo $row->nilaiDestinasiCluster?></h4>
                                     </div>                                    
                                 </div></a>

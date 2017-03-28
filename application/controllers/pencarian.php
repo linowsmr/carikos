@@ -162,4 +162,11 @@ class Pencarian extends CI_Controller {
 		$this->load->view('hasil_pencarian', $data);
 		$this->load->view('template/footer');
 	}
+
+	public function kamar(){
+		$kamar = $this->input->get('kamar');
+		$harga = $this->input->get('harga');
+		echo $kamar;
+		echo $harga;
+	}
 }

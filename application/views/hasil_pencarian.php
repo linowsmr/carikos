@@ -105,7 +105,8 @@
                                     $hargaBaru = $hargaLama + $hargaLama * ($ok/10);
                                 }
                                 ?>
-                                <a href=""><div class="col-lg-3">
+                                <a href="<?php echo site_url('pencarian/kamar?kamar='.$row->idKamar.'&harga='.round($hargaBaru).'')?>">
+                                <div class="col-lg-3">
                                     <div class="col-lg-12" style="background: url(<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>); background-size: cover; background-position: center; height: 25%"></div>
                                     <div class="col-lg-12" style="background-color: #337ab7; color: white">
                                         <h4><?php echo $row->jenisKamar ?></h4>

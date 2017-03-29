@@ -57,7 +57,7 @@ class Cluster extends CI_Controller {
 
 		// display the cluster centers and attached points
 		foreach ($clusters as $i => $cluster){
-			printf("Cluster %s (%f,%f): %d points <br>", $i, $cluster[0], $cluster[1], count($cluster));
+			//printf("Cluster %s (%f,%f): %d points <br>", $i, $cluster[0], $cluster[1], count($cluster));
 			$latLngCluster = "($cluster[0], $cluster[1])";
 			$idCluster = $this->model_cluster->cluster($latLngCluster);
 
@@ -66,7 +66,7 @@ class Cluster extends CI_Controller {
 				$idKos = $this->model_cluster->pencarian_by_latlng($latlng);
 				foreach($idKos as $row){
 					$this->model_cluster->update_idcluster($row->idKos, $idCluster);
-					echo "- $row->idKos <br>";
+					//echo "- $row->idKos <br>";
 				}
 			}
 		}
@@ -112,6 +112,8 @@ class Cluster extends CI_Controller {
 
 	public function cluster_supermarket()
 	{
+		//echo "Masuk ke Supermarket";
+		
 		$id = $this->input->get('kos');
 		$data['detail'] = $this->model_kos->detail_kos($id);
 
@@ -120,7 +122,7 @@ class Cluster extends CI_Controller {
 			$idCluster = $row->idCluster;
 		}
 
-		$result = $this->model_cluster->cek_destinasi($idCluster, 1);
+		$result = $this->model_cluster->cek_destinasi($idCluster, 2);
 
 		if($result == 0) {
 			if($data['detail']){
@@ -155,7 +157,7 @@ class Cluster extends CI_Controller {
 			$idCluster = $row->idCluster;
 		}
 
-		$result = $this->model_cluster->cek_destinasi($idCluster, 1);
+		$result = $this->model_cluster->cek_destinasi($idCluster, 3);
 
 		if($result == 0) {
 			if($data['detail']){

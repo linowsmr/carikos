@@ -43,9 +43,10 @@
                         $lat = $coord[0];
                         $lng = $coord[1];
                         $idCluster = $row->idCluster;
-                        $idKos = $row->idKos;
-                        ?>
-                    <?php } ?>
+                        //$idKos = $row->idKos;
+                        //echo "$idCluster";
+                    }
+                ?>
             </div>
         </div>
     </aside>
@@ -138,7 +139,7 @@
                                     }
                                   }
                                 }
-                                console.log(array[0]);
+                                //console.log(array[0]);
                                 form(array[0]);
                               });
                             }
@@ -148,7 +149,7 @@
                                 // Fetching HTML Elements in Variables by ID.
                                 var x = document.getElementById("form");
                                 var createform = document.createElement('form'); // Create New Element Form
-                                createform.setAttribute("action", "<?php echo site_url('cluster/cluster_data_supermarket')?>"); // Setting Action Attribute on Form
+                                createform.setAttribute("action", "<?php echo site_url('cluster/cluster_data_supermarket_pencarian')?>"); // Setting Action Attribute on Form
                                 createform.setAttribute("method", "post"); // Setting Method Attribute on Form
                                 x.appendChild(createform);
 

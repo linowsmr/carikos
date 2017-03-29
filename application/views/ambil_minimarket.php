@@ -123,7 +123,12 @@
                                     var results = response.rows[i].elements;
                                     for (var j = 0; j < results.length; j++) {
                                       var element = results[j];
-                                      var distance = element.distance.text.slice(0, -2).replace(",", ".");
+                                      if(element.distance.text.slice(-1) == "m")
+                                        var distance = element.distance.value/1000;
+                                      else
+                                        var distance = element.distance.value;
+                                      
+                                      //console.log(distance);
                                       if(distance < 5){
                                         if(array.length == 0)
                                             var newItem = array.push(distance);

@@ -43,10 +43,18 @@ class Pencarian extends CI_Controller {
 
 		$nilaiDestinasi = 0;
 
+		$hasilPencarian = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+
 		$cluster = $this->model_cluster->ambil_cluster();
-		foreach($cluster as $row){
+		foreach($hasilPencarian as $row){
 			$idCluster = $row->idCluster;
 			if($row->nilaiDestinasiCluster == 0 || $row->nilaiDestinasiCluster == ""){
+
+				$cekMinimarket = $this->model_cluster->cek_destinasi($idCluster, 1);
+				if($cekMinimarket == 0){
+					//redirect('')
+				}
+
 				$jarakMinimarket = $this->model_cluster->jarak_destinasi($idCluster, 1);
 				$jarakSupermarket = $this->model_cluster->jarak_destinasi($idCluster, 2);
 
@@ -102,7 +110,7 @@ class Pencarian extends CI_Controller {
 		}
 
 		//exit();
-		$hasilPencarian = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+		
 		$data['bp'] = $this->model_pencarian->bp();
 
 		foreach($hasilPencarian as $row){

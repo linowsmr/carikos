@@ -55,6 +55,9 @@ class Cluster extends CI_Controller {
 		// cluster these 50 points in 3 clusters
 		$clusters = $space->solve(2);
 
+		$this->model_cluster->hapus_cluster();
+		$this->model_cluster->hapus_cluster_destinasi();
+		
 		// display the cluster centers and attached points
 		foreach ($clusters as $i => $cluster){
 			//printf("Cluster %s (%f,%f): %d points <br>", $i, $cluster[0], $cluster[1], count($cluster));
@@ -179,7 +182,133 @@ class Cluster extends CI_Controller {
 		$distance = $this->input->post('distance');
 
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
-		redirect('kos/beranda?kos='.$id.'');
+
+		redirect('cluster/cek_cluster_lain?cluster='.$idCluster.'&kos='.$id.'');
+	}
+
+	public function cek_cluster_lain()
+	{
+		$id = $this->input->get('kos');
+		$idCluster = $this->input->get('cluster');
+
+		$clusterLainNum = $this->model_cluster->cek_cluster_num($idCluster);
+		
+		if($clusterLainNum > 0){
+			$clusterLain = $this->model_cluster->cek_cluster($idCluster);
+
+			foreach($clusterLain as $row){
+				$idClusterBaru = $row->idCluster;
+			}
+
+			$cekMinimarket = $this->model_cluster->cek_destinasi($idClusterBaru, 1);
+
+			if($cekMinimarket == 0){
+				redirect('cluster/cluster_minimarket_pencarian?cluster='.$idClusterBaru.'&kos='.$id.'');
+			}
+			else
+				redirect('kos/beranda?kos='.$id.'');
+		}
+		else
+			redirect('kos/beranda?kos='.$id.'');
+	}
+
+	public function cluster_minimarket_pencarian()
+	{
+		$data['idKos'] = $this->input->get('kos');
+
+		$idCluster = $this->input->get('cluster');
+		$data['detail'] = $this->model_cluster->ambil_cluster_id($idCluster);
+
+		$result = $this->model_cluster->cek_destinasi($idCluster, 1);
+
+		if($result == 0) {
+			if($data['detail']){
+				$this->load->view('template/header');
+				$this->load->view('ambil_minimarket_pencarian', $data);
+				$this->load->view('template/footer');
+			}
+		}
+		else {
+			redirect('cluster/cluster_supermarket_pencarian?cluster='.$idCluster.'&kos='.$data['idKos'].'');
+		}
+	}
+
+	function cluster_data_minimarket_pencarian()
+	{
+		$id = $this->input->post('kos');
+		$idCluster = $this->input->post('cluster');
+		$idDestination = $this->input->post('destination');
+		$distance = $this->input->post('distance');
+
+		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
+		//$this->load->view('berhasil');
+		redirect('cluster/cluster_supermarket_pencarian?cluster='.$idCluster.'&kos='.$id.'');
+	}
+
+	public function cluster_supermarket_pencarian()
+	{
+		//echo "Masuk ke Supermarket";
+		$data['idKos'] = $this->input->get('kos');
+		$idCluster = $this->input->get('cluster');
+		$data['detail'] = $this->model_cluster->ambil_cluster_id($idCluster);
+
+		$result = $this->model_cluster->cek_destinasi($idCluster, 2);
+
+		if($result == 0) {
+			if($data['detail']){
+				$this->load->view('template/header');
+				$this->load->view('ambil_supermarket_pencarian', $data);
+				$this->load->view('template/footer');
+			}
+		}
+		else {
+			redirect('cluster/cluster_masjid_pencarian?cluster='.$idCluster.'&kos='.$data['idKos'].'');
+		}
+	}
+
+	function cluster_data_supermarket_pencarian()
+	{
+		$id = $this->input->post('kos');
+		$idCluster = $this->input->post('cluster');
+		$idDestination = $this->input->post('destination');
+		$distance = $this->input->post('distance');
+
+		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
+		//$this->load->view('berhasil');
+		redirect('cluster/cluster_masjid_pencarian?cluster='.$idCluster.'&kos='.$id.'');
+	}
+
+	public function cluster_masjid_pencarian()
+	{
+		$data['idKos'] = $this->input->get('kos');
+		$idCluster = $this->input->get('cluster');
+		$data['detail'] = $this->model_cluster->ambil_cluster_id($idCluster);
+
+		$result = $this->model_cluster->cek_destinasi($idCluster, 3);
+
+		if($result == 0) {
+			if($data['detail']){
+				$this->load->view('template/header');
+				$this->load->view('ambil_masjid_pencarian', $data);
+				$this->load->view('template/footer');
+			}
+		}
+		else {
+			//echo "Masuk ke Kos";
+			redirect('cluster/cek_cluster_lain?kos='.$data['idKos'].'');
+		}
+	}
+
+	function cluster_data_masjid_pencarian()
+	{
+		$id = $this->input->post('kos');
+		$idCluster = $this->input->post('cluster');
+		$idDestination = $this->input->post('destination');
+		$distance = $this->input->post('distance');
+
+		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
+		//$this->load->view('berhasil');
+		redirect('cluster/cek_cluster_lain?cluster='.$idCluster.'&kos='.$id.'');
 	}
 
 }

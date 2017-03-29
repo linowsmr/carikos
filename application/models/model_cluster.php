@@ -15,6 +15,18 @@ class Model_Cluster extends CI_Model {
 		return $run->result();
  	}
 
+ 	function hapus_cluster()
+ 	{
+ 		$query = "DELETE FROM cluster";
+		$run = $this->db->query($query);
+ 	}
+
+ 	function hapus_cluster_destinasi()
+ 	{
+ 		$query = "DELETE FROM cluster_destinasi";
+		$run = $this->db->query($query);
+ 	}
+
  	function cluster($latlngcluster)
  	{
  		$data = array(
@@ -61,6 +73,13 @@ class Model_Cluster extends CI_Model {
  	function ambil_cluster()
  	{
  		$query = "SELECT * FROM cluster";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function ambil_cluster_id($idCluster)
+ 	{
+ 		$query = "SELECT * FROM cluster WHERE idCluster = $idCluster";
 		$run = $this->db->query($query);
 		return $run->result();
  	}
@@ -121,5 +140,19 @@ class Model_Cluster extends CI_Model {
 
 	   	$this->db->where('IDKAMAR', $idKamar);
 	    $run = $this->db->update('kamar', $data);
+ 	}
+
+ 	function cek_cluster($idCluster)
+ 	{
+ 		$query = "SELECT * FROM cluster c WHERE c.nilaiDestinasiCluster = 0 AND c.idCluster NOT LIKE $idCluster LIMIT 1";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function cek_cluster_num($idCluster)
+ 	{
+ 		$query = "SELECT * FROM cluster c WHERE c.nilaiDestinasiCluster = 0 AND c.idCluster NOT LIKE $idCluster LIMIT 1";
+		$run = $this->db->query($query);
+		return $run->num_rows();
  	}
 }

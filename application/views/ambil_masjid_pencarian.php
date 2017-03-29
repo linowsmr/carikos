@@ -43,9 +43,10 @@
                         $lat = $coord[0];
                         $lng = $coord[1];
                         $idCluster = $row->idCluster;
-                        $idKos = $row->idKos;
-                        ?>
-                    <?php } ?>
+                        //$idKos = $row->idKos;
+                        //echo "$idCluster";
+                    }
+                ?>
             </div>
         </div>
     </aside>
@@ -86,7 +87,7 @@
                             function performSearch() {
                               var request = {
                                 bounds: map.getBounds(),
-                                keyword: 'Supermarket'
+                                keyword: 'Masjid'
                               };
                               service.radarSearch(request, callback);
                             }
@@ -138,7 +139,7 @@
                                     }
                                   }
                                 }
-                                console.log(array[0]);
+                                //console.log(array[0]);
                                 form(array[0]);
                               });
                             }
@@ -148,7 +149,7 @@
                                 // Fetching HTML Elements in Variables by ID.
                                 var x = document.getElementById("form");
                                 var createform = document.createElement('form'); // Create New Element Form
-                                createform.setAttribute("action", "<?php echo site_url('cluster/cluster_data_supermarket')?>"); // Setting Action Attribute on Form
+                                createform.setAttribute("action", "<?php echo site_url('cluster/cluster_data_masjid_pencarian')?>"); // Setting Action Attribute on Form
                                 createform.setAttribute("method", "post"); // Setting Method Attribute on Form
                                 x.appendChild(createform);
 
@@ -188,7 +189,7 @@
                                 var idDestinationElement = document.createElement('input'); // Create Input Field for Name
                                 idDestinationElement.setAttribute("type", "text");
                                 idDestinationElement.setAttribute("name", "destination");
-                                idDestinationElement.setAttribute("value", 2);
+                                idDestinationElement.setAttribute("value", 3);
                                 createform.appendChild(idDestinationElement);
 
                                 var messagebreak = document.createElement('br');

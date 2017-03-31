@@ -105,6 +105,20 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
+ 	function fasilitas_kos_min_penjaga($id)
+ 	{
+ 		$query = "SELECT * FROM kos_fasilitaskos kf, fasilitaskos fk WHERE kf.idFasilitasKos = fk.idFasilitasKos AND kf.idKos = '$id' AND fk.idFasilitasKos NOT LIKE 4";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function cek_penjaga_kos($id)
+ 	{
+ 		$query = "SELECT * FROM kos_fasilitaskos kf WHERE kf.idKos = '$id' AND kf.idFasilitasKos = 4";
+		$run = $this->db->query($query);
+		return $run->num_rows();
+ 	}
+
  	function tipe_kos($id)
  	{
  		$query = "SELECT * FROM kos k, tipekos tk WHERE k.idTipeKos = tk.idTipeKos AND k.idKos = '$id'";

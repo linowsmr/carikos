@@ -57,15 +57,13 @@
 	                    <form action="<?php echo site_url('pencarian/index') ?>" method="get">
 	                		<div class="form-group">
 	                            <h4>Kota</h4>
-	                            <select class="form-control" name="kota">
-	                            	<option></option>
+	                            <select class="form-control selectpicker" name="kota" title="Tidak Ada yang Dipilih">
 	                            	<option value="Surabaya">Surabaya</option>
 	                            </select>
 	                        </div>
 	                		<div class="form-group">
 	                            <h4>Harga</h4>
-	                            <select class="form-control" name="harga">
-	                            	<option></option>
+	                            <select class="form-control selectpicker" name="harga" title="Tidak Ada yang Dipilih">
 	                            	<option value="4">> Rp1.500.000,00</option>
 	                            	<option value="3">Rp1.000.001,00 - Rp1.500.000,00</option>
 	                            	<option value="2">Rp500.001,00 - Rp1.000.000,00</option>
@@ -74,8 +72,7 @@
 	                        </div>
 	                		<div class="form-group">
 	                            <h4>Tipe Kos</h4>
-	                            <select class="form-control" name="tipe">
-	                            	<option></option>
+	                            <select class="form-control selectpicker" name="tipe" title="Tidak Ada yang Dipilih">
 	                                <?php
 	                                    foreach($tipe as $row){ ?>
 	                                        <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
@@ -103,6 +100,18 @@
 	                                ?>
 	                            </select>
 	                        </div>
+                            <!-- <div class="form-group">
+                                <h4>Dekat dengan Jurusan</h4>
+                                <select class="selectpicker" name="jurusan" data-live-search="true" title="Tidak Ada yang Dipilih">
+                                    <optgroup label="Institut Teknologi Sepuluh Nopember">
+                                        <?php
+                                            foreach($jurusan as $row){ ?>
+                                                <option value="<?php echo $row->idJurusan ?>"><?php echo $row->namaJurusan ?></option>
+                                            <?php }
+                                        ?>
+                                    </optgroup>
+                                </select>
+                            </div> -->
 	                    	<button type="submit" class="btn btn-lg btn-dark">Cari</button>
 	                    </form>
 	                </div>

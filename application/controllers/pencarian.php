@@ -37,6 +37,10 @@ class Pencarian extends CI_Controller {
 		$tipe = $this->input->get('tipe');
 		$kos = $this->input->get('fasilitaskos');
 		$kamar = $this->input->get('fasilitaskamar');
+		// $jurusan = $this->input->get('jurusan');
+
+		// if($jurusan != "")
+		// 	$data['jurusan'] = $this->model_pencarian->ambil_jurusan($jurusan);
 
 		$fasilitaskos = implode(",", $kos);
 		$fasilitaskamar = implode(",", $kamar);
@@ -165,6 +169,7 @@ class Pencarian extends CI_Controller {
 			//echo "Nilai Parkiran dan Penjaga = $nilaiParkiranPenjaga dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
 		}
 
+
 		//exit();
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 
@@ -179,12 +184,27 @@ class Pencarian extends CI_Controller {
 		$idKos = $this->input->post('idKos');
 		$data['harga'] = $this->input->post('hargaKamar');
 		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
-		$data['fasilitasKos'] =  $this->model_kos->fasilitas_kos($idKos);
+		foreach($data['detailKos'] as $row){
+			$idCluster = $row->idCluster;
+		}
+
+		$data['fasilitasKos'] =  $this->model_kos->fasilitas_kos_min_penjaga($idKos);
+		
+		$cekPenjagaKos = $this->model_kos->cek_penjaga_kos($idKos);
+		if($cekPenjagaKos > 0)
+			$data['penjagaKos'] = "Ya";
+		else if($cekPenjagaKos <= 0)
+			$data['penjagaKos'] = "Tidak";
+
 		$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
 		$data['fotoKos'] =  $this->model_kos->list_foto($idKos);
 		$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
 		$data['fasilitasKamar'] =  $this->model_kamar->fasilitas_kamar($idKamar);
 		$data['fotoKamar'] =  $this->model_kamar->list_foto($idKamar);
+
+		$data['minimarket'] = $this->model_cluster->jarak_destinasi($idCluster, 1);
+		$data['supermarket'] = $this->model_cluster->jarak_destinasi($idCluster, 2);
+		$data['masjid'] = $this->model_cluster->jarak_destinasi($idCluster, 3);
 
 		$this->load->view('template/header');
 		$this->load->view('detailKamar', $data);

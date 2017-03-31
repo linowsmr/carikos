@@ -33,11 +33,10 @@
         <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
     </footer>
 
-    <!-- jQuery -->
-    <script src="<?php echo base_url();?>assets/bootstrap/js/jquery.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="<?php echo base_url();?>assets/js/bootstrap-select.min.js"></script>
 
     <script src="<?php echo base_url();?>assets/js/bootstrap-multiselect.min.js"></script>
 

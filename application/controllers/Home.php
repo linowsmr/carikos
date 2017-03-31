@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 	   	parent::__construct();
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_kamar','',TRUE);
+	   	$this->load->model('model_pencarian', '',TRUE);
  	}
 
 	public function index()
@@ -15,7 +16,7 @@ class Home extends CI_Controller {
 		$data['fasilitas'] = $this->model_kos->fasilitas();
         $data['tipe'] = $this->model_kos->tipe();
 	    $data['fasilitaskamar'] = $this->model_kamar->fasilitas();
-
+	    $data['jurusan'] = $this->model_pencarian->list_jurusan();
 
 		$this->load->view('template/header');
 		$this->load->view('homepage', $data);

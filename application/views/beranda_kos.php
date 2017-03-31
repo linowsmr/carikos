@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-      #map {
-        height: 100%;
-      }
-    </style>
 </head>
 <body>
 

@@ -56,6 +56,15 @@
                                 $h = $row->h;
                                 $i = $row->i;
                             }
+
+                            if(isset($jurusan)){
+                                foreach($jurusan as $row){
+                                    $latJurusan = $row->latJurusan;
+                                    $lngJurusan = $row->lngJurusan;
+                                }
+                            }
+                            
+
                             foreach($hasil as $row){ 
                                 $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar;
                                 $bulan = date("m");
@@ -111,14 +120,13 @@
                                         <h4><?php echo $row->jenisKamar ?></h4>
                                         <hr style="margin-top: 0%; margin-bottom: 0%">
                                         <h4><?php echo $row->namaKos ?></h4>
-                                        <h4>Rp.<?php echo number_format(round($hargaBaru))?></h4>
-                                        <h4><?php echo $skor ?></h4>
-                                        <h4><?php echo $row->nilaiDestinasiCluster ?></h4>
+                                        <h4>Rp<?php echo number_format(round($hargaBaru))?></h4>
+                                        <h4>Tersedia <?php echo $row->jumlahKamar ?> Kamar</h4>
                                         <form action="<?php echo site_url('pencarian/lihatKamar')?>" method="post">
                                             <input type="hidden" name="idKamar" class="form-control" value="<?php echo $row->idKamar?>">
                                             <input type="hidden" name="idKos" class="form-control" value="<?php echo $row->idKos?>">
                                             <input type="hidden" name="hargaKamar" class="form-control" value="<?php echo round($hargaBaru)?>">
-                                            <button type="submit" class="btn btn-warning">Pesan</button>
+                                            <button type="submit" class="btn btn-light">Lihat Kamar</button>
                                         </form>
                                     </div>                                    
                                 </div>
@@ -153,7 +161,7 @@
                             }
                             foreach($hasil as $row){ 
                                 $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar;
-                                $bulan = 3;
+                                $bulan = date("m");
 
                                 if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 10 || $bulan == 11 || $bulan == 12){
                                     $nilaiBulan = 1;
@@ -177,6 +185,7 @@
                                 if($skor >= 76 && $skor <= 100){
                                     $nilaiSkor = 4;
                                 }
+                                //echo $nilaiSkor;
 
                                 $oh1 = $a + $nilaiSkor*$b + $nilaiBulan*$c;
                                 $oh2 = $d + $nilaiSkor*$d + $nilaiBulan*$f;
@@ -198,16 +207,23 @@
                                     $hargaBaru = $hargaLama + $hargaLama * ($ok/10);
                                 }
                                 ?>
-                                <a href=""><div class="col-lg-3">
+                                <div class="col-lg-3">
                                     <div class="col-lg-12" style="background: url(<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>); background-size: cover; background-position: center; height: 25%"></div>
-                                    <div class="col-lg-12" style="background-color: #337ab7; color: white">
+                                    <div class="col-lg-12" style="background-color: white; color: black">
                                         <h4><?php echo $row->jenisKamar ?></h4>
-                                        <hr style="margin-top: 0%; margin-bottom: 0%">
+                                        <hr style="margin-top: 0%; margin-bottom: 0%; border-color: black;">
                                         <h4><?php echo $row->namaKos ?></h4>
                                         <h4>Rp.<?php echo number_format(round($hargaBaru))?></h4>
-                                        <h4><?php echo $row->nilaiDestinasiCluster?></h4>
+                                        <h4>Tersedia <?php echo $row->jumlahKamar ?> Kamar</h4>
+                                        <form action="<?php echo site_url('pencarian/lihatKamar')?>" method="post">
+                                            <input type="hidden" name="idKamar" class="form-control" value="<?php echo $row->idKamar?>">
+                                            <input type="hidden" name="idKos" class="form-control" value="<?php echo $row->idKos?>">
+                                            <input type="hidden" name="hargaKamar" class="form-control" value="<?php echo round($hargaBaru)?>">
+                                            <button type="submit" class="btn btn-dark">Lihat Kamar</button>
+                                        </form>
                                     </div>                                    
-                                </div></a>
+                                </div>
+                                <!-- </a> -->
                                 <div class="col-lg-1"></div>
                             <?php }
                         ?>
@@ -220,3 +236,4 @@
 </body>
 
 </html>
+

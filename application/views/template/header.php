@@ -13,6 +13,8 @@
     <!-- Custom CSS -->
     <link href="<?php echo base_url();?>assets/bootstrap/css/stylish-portfolio.css" rel="stylesheet">
 
+    <link href="<?php echo base_url();?>assets/css/bootstrap-select.min.css" rel="stylesheet">
+
     <link href="<?php echo base_url();?>assets/css/bootstrap-multiselect.min.css" rel="stylesheet">
 
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet">
@@ -21,6 +23,9 @@
     <link href="<?php echo base_url();?>assets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
+    <!-- jQuery -->
+    <script src="<?php echo base_url();?>assets/bootstrap/js/jquery.js"></script>
+    
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

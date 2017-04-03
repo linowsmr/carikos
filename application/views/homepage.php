@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <style>
-       #cari {
-        height: 100%;
-        width: 100%;
-       }
-    </style>
-</head>
-
 <body>
 
     <!-- Navigation -->
@@ -122,93 +113,6 @@
         </div>
         <!-- /.container -->
     </section>
-
-    <!-- Map -->
-    <!-- <section id="cari" class="map">
-        <script type="text/javascript">
-            function initMap() {
-                var myLatlng = new google.maps.LatLng(-7.279790, 112.797522);
-                var mapOptions = {
-                  zoom: 18,
-                  center: myLatlng
-                }
-                var map = new google.maps.Map(document.getElementById("cari"), mapOptions);
-
-                var contentString = '<div id="content">'+
-                                    '<div id="siteNotice">'+
-                                    '</div>'+
-                                    '<h1 id="firstHeading" class="firstHeading">Nama Kos</h1>'+
-                                    '<div id="bodyContent">'+
-                                    '<p>Deskripsi dan Informasi Mengenai Kos</p>'+
-                                    '</div>'+
-                                    '</div>';
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
-
-                var location1 = new google.maps.LatLng(-7.282042, 112.799655);
-                var marker1 = new google.maps.Marker({
-                    position: location1
-                });
-                marker1.addListener('click', function() {
-                    infowindow.open(map, marker1);
-                });
-                marker1.setMap(map);
-
-
-                var location2 = new google.maps.LatLng(-7.282242, 112.799652);
-                var marker2 = new google.maps.Marker({
-                    position: location2
-                });
-                marker2.addListener('click', function() {
-                    infowindow.open(map, marker2);
-                });
-                marker2.setMap(map);
-
-
-                var location3 = new google.maps.LatLng(-7.281840, 112.799829);
-                var marker3 = new google.maps.Marker({
-                    position: location3
-                });
-                marker3.addListener('click', function() {
-                    infowindow.open(map, marker3);
-                });
-                marker3.setMap(map);
-
-                var location4 = new google.maps.LatLng(-7.281875, 112.799641);
-                var marker4 = new google.maps.Marker({
-                    position: location4
-                });
-                marker4.addListener('click', function() {
-                    infowindow.open(map, marker4);
-                });
-                marker4.setMap(map);
-
-                var location5 = new google.maps.LatLng(-7.282040, 112.800000);
-                var marker5 = new google.maps.Marker({
-                    position: location5
-                });
-                marker5.addListener('click', function() {
-                    infowindow.open(map, marker5);
-                });
-                marker5.setMap(map);
-
-                var location6 = new google.maps.LatLng(-7.281859, 112.799997);
-                var marker6 = new google.maps.Marker({
-                    position: location6
-                });
-                marker6.addListener('click', function() {
-                    infowindow.open(map, marker6);
-                });
-                marker6.setMap(map);
-            }
-
-        </script>
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
-        </script>
-    </section> -->
 
     <aside id="daftar" class="call-to-action bg-primary">
         <div class="container">

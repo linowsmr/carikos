@@ -1,5 +1,6 @@
 <?php
     foreach($detailKos as $row){
+        $idKos = $row->idKos;
         $namaKos = $row->namaKos;
         $alamatKos = $row->alamatKos;
         $teleponKos = $row->teleponKos;
@@ -12,6 +13,7 @@
     }
 
     foreach($detailKamar as $row){
+        $idKamar = $row->idKamar;
         $jenisKamar = $row->jenisKamar;
         $jumlahKamar = $row->jumlahKamar;
     }
@@ -70,10 +72,14 @@
     		<div class="container">
     			<div class="row">
     			 	<div class="col-lg-12 text-center">
-    			 	 	<h2><?php echo "$jenisKamar - $namaKos"; ?>
-    			 	 	</h2>
+    			 	 	<h2><?php echo "$jenisKamar - $namaKos"; ?></h2>
     			 	 	<hr class="small" style="border-color: black;">
-                    	<br>
+                        <form action="<?php echo site_url('pemesanan/index') ?>" method="POST">
+                            <input type="hidden" name="kamar" value="<?php echo $idKamar ?>"></input>
+                            <input type="hidden" name="kos" value="<?php echo $idKos ?>"></input>
+                            <input type="hidden" name="harga" value="<?php echo $harga ?>"></input>
+                            <button type="submit" class="btn btn-lg btn-dark">Pesan Kamar</button>
+                        </form>
     			 	</div>
                     <div class="col-lg-6 text-center">
                         <h3>Detail Kamar</h3>

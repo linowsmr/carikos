@@ -128,7 +128,7 @@
                     <div class="col-lg-6">
                         <form>
                             <input type="hidden" name="pemesanan" value="<?php echo $idPemesanan ?>"></input>
-                            <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Lanjut ke Pembayaran</button>
+                            <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Lanjut Ke Pembayaran</button>
                         </form>
                     </div>
                     <div class="col-lg-4"></div>

@@ -75,16 +75,16 @@ class Pemilik extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $data['fasilitas'] = $this->model_kos->fasilitas();
             $data['tipe'] = $this->model_kos->tipe();
             $data['parkir'] = $this->model_kos->parkiran();
 
-            $data['jumlah'] = $this->model_kos->count_list($data['username']);
-            $data['kos'] = $this->model_kos->list_kos($data['username']);
+            $data['jumlah'] = $this->model_kos->count_list($dataPemilik['username']);
+            $data['kos'] = $this->model_kos->list_kos($dataPemilik['username']);
 
-            $this->load->view('template/header');
+            $this->load->view('template/header_pemilik', $dataPemilik);
 			$this->load->view('beranda_pemilik', $data);
 			$this->load->view('template/footer');
         }

@@ -67,7 +67,7 @@ class Kos extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kos');
             $data['id'] = $id;
@@ -86,8 +86,8 @@ class Kos extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('beranda_kos', $data);
 					$this->load->view('template/footer');
 	            }
@@ -110,7 +110,7 @@ class Kos extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kos');
 
@@ -122,8 +122,8 @@ class Kos extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('ubah_kos', $data);
 					$this->load->view('template/footer');
 	            }
@@ -163,7 +163,7 @@ class Kos extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->post('kos');
 
@@ -174,7 +174,7 @@ class Kos extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
+	            if($dataPemilik['username'] == $pemilik){
 	            	$this->model_kos->delete_fasilitas_kos($id);
 	            	$this->model_kos->delete_tipe_kos($id);
 
@@ -206,7 +206,7 @@ class Kos extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kos');
             $data['id'] = $id;
@@ -222,8 +222,8 @@ class Kos extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('tambah_tipe_kos', $data);
 					$this->load->view('template/footer');
 	            }
@@ -264,7 +264,7 @@ class Kos extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kos');
             $data['id'] = $id;
@@ -280,8 +280,8 @@ class Kos extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('tambah_fasilitas_kos', $data);
 					$this->load->view('template/footer');
 	            }
@@ -325,7 +325,7 @@ class Kos extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kos');
             $data['id'] = $id;
@@ -339,8 +339,8 @@ class Kos extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('tambah_foto_kos', $data);
 					$this->load->view('template/footer');
 	            }

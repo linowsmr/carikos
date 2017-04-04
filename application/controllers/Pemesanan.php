@@ -55,4 +55,21 @@ class Pemesanan extends CI_Controller {
 			echo "Gagal";
 	}
 
+	public function pemesanan()
+	{
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $dataPemilik['username'] = $session_data['username'];
+
+            $cek = $this->model_pemesanan->count_pemesanan($data['username']);
+
+            $this->load->view('template/header_pemilik', $dataPemilik);
+			$this->load->view('beranda_pemilik', $data);
+			$this->load->view('template/footer');
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
+	}
 }

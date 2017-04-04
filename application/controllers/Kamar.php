@@ -62,7 +62,7 @@ class Kamar extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kamar');
 
@@ -73,8 +73,8 @@ class Kamar extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('ubah_kamar', $data);
 					$this->load->view('template/footer');
 	            }
@@ -131,7 +131,7 @@ class Kamar extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kamar');
             $data['id'] = $id;
@@ -146,8 +146,8 @@ class Kamar extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('beranda_kamar', $data);
 					$this->load->view('template/footer');
 	            }
@@ -170,7 +170,7 @@ class Kamar extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kamar');
             $data['id'] = $id;
@@ -186,8 +186,8 @@ class Kamar extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('tambah_fasilitas_kamar', $data);
 					$this->load->view('template/footer');
 	            }
@@ -231,7 +231,7 @@ class Kamar extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_pemilik')))
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
-            $data['username'] = $session_data['username'];
+            $dataPemilik['username'] = $session_data['username'];
 
             $id = $this->input->get('kamar');
             $data['id'] = $id;
@@ -245,8 +245,8 @@ class Kamar extends CI_Controller {
 	            	$pemilik = $row->usernamePemilik;
 	            }
 
-	            if($data['username'] == $pemilik){
-	            	$this->load->view('template/header');
+	            if($dataPemilik['username'] == $pemilik){
+	            	$this->load->view('template/header_pemilik', $dataPemilik);
 					$this->load->view('tambah_foto_kamar', $data);
 					$this->load->view('template/footer');
 	            }

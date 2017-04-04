@@ -7,6 +7,7 @@ class Kamar extends CI_Controller {
  	{
 	   	parent::__construct();
 	   	$this->load->model('model_kamar','',TRUE);
+	   	$this->load->model('model_pemesanan','',TRUE);
  	}
 
 	public function daftar()
@@ -63,7 +64,8 @@ class Kamar extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kamar');
 
             $data['detail'] = $this->model_kamar->detail_kamar($id);
@@ -132,7 +134,8 @@ class Kamar extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kamar');
             $data['id'] = $id;
 
@@ -171,7 +174,8 @@ class Kamar extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kamar');
             $data['id'] = $id;
 
@@ -232,7 +236,8 @@ class Kamar extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kamar');
             $data['id'] = $id;
 

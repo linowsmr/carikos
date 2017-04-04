@@ -9,6 +9,7 @@ class Kos extends CI_Controller {
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_kamar','',TRUE);
 	   	$this->load->model('model_cluster','',TRUE);
+	   	$this->load->model('model_pemesanan','',TRUE);
  	}
 
 	public function daftar()
@@ -68,6 +69,7 @@ class Kos extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
 
             $id = $this->input->get('kos');
             $data['id'] = $id;
@@ -111,7 +113,8 @@ class Kos extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kos');
 
             $data['detail'] = $this->model_kos->detail_kos($id);
@@ -164,7 +167,8 @@ class Kos extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->post('kos');
 
             $data['detail'] = $this->model_kos->detail_kos($id);
@@ -207,7 +211,8 @@ class Kos extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kos');
             $data['id'] = $id;
 
@@ -265,7 +270,8 @@ class Kos extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kos');
             $data['id'] = $id;
 
@@ -326,7 +332,8 @@ class Kos extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $id = $this->input->get('kos');
             $data['id'] = $id;
 

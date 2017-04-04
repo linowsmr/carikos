@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<?php echo site_url('pemilik/beranda') ?>">KOS</a></li>
-            <li><a href="<?php echo site_url('pemesanan/pemilik') ?>">PEMESANAN</a></li>
+            <li><a href="<?php echo site_url('pemesanan/pemilik') ?>">PEMESANAN <span class="badge"><?php echo $notifikasi ?></span></a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <?php echo $username ?>  <i class="fa fa-caret-down"></i>

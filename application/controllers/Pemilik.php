@@ -8,6 +8,7 @@ class Pemilik extends CI_Controller {
 	   	parent::__construct();
 	   	$this->load->model('model_pemilik','',TRUE);
 	   	$this->load->model('model_kos','',TRUE);
+	   	$this->load->model('model_pemesanan','',TRUE);
  	}
 
 	public function masuk()
@@ -76,7 +77,8 @@ class Pemilik extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_pemilik');
             $dataPemilik['username'] = $session_data['username'];
-
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
             $data['fasilitas'] = $this->model_kos->fasilitas();
             $data['tipe'] = $this->model_kos->tipe();
             $data['parkir'] = $this->model_kos->parkiran();

@@ -44,7 +44,7 @@ class Pemesanan extends CI_Controller {
 		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
 		$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
 
-		$data['idPemesanan'] = $this->model_pemesanan->tambah_pemesanan($data['durasi'], $data['harga'], $username, $data['harga'], $idKamar);
+		$data['idPemesanan'] = $this->model_pemesanan->tambah_pemesanan($data['durasi'], $data['harga'], $username, $idKamar);
 
 		if($data['idPemesanan'] != "Gagal"){
 			$this->load->view('template/header');

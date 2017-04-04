@@ -16,7 +16,7 @@
         $jumlahKamar = $row->jumlahKamar;
     }
 
-    $hargaKamar = $harga;
+    $hargaKamar = number_format($harga);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,52 +63,75 @@
                         <br>
     			 	</div>
                     <div class="col-lg-2"></div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-6" style="border: 1px solid #dedede;">
                         <h3 style="margin-bottom: 3%;">Detail Pemesanan</h3>
-                        <form action="<?php echo site_url('pemilik/login')?>" method="post">
-                            <div class="form-group">
-                                <h4>Nama Pemesan</h4>
-                                <input type="text" class="form-control" name="nama" required>
-                                <small>Isi nama pemesan sesuai KTP/Paspor/SIM (tanpa tanda baca/gelar)</small>
-                            </div>
-                            <div class="form-group">
-                                <h4>Nomor Telepon Pemesan</h4>
-                                <div class="input-group">
-                                    <span class="input-group-addon">+62</span>
-                                    <input type="text" class="form-control" name="telepon" required>
-                                </div>
-                                <small>Contoh: +62812345678</small>
-                            </div>
-                            <div class="form-group">
-                                <h4>Email Pemesan</h4>
-                                <input type="email" class="form-control" name="email" required>
-                                <small>Contoh: email@example.com</small>
-                            </div>
-                            <div class="form-group" style="width: 50%;">
-                                <h4>Durasi Pemesanan</h4>
-                                <div class="input-group">
-                                    <input type="number" min="0" class="form-control" name="durasi" required>
-                                    <span class="input-group-addon">bulan</span>
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-dark" style="float: right;">Lanjutkan Pemesanan</button>
-                        </form>
+                        <div class="col-lg-12">
+                            <h4>Nama Pemesan</h4>
+                            <h5><?php echo $nama ?></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Nomor Telepon Pemesan</h4>
+                            <h5><?php echo $telepon ?></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Email Pemesan</h4>
+                            <h5><?php echo $email ?></h5>
+                        </div>
+                        <div class="col-lg-12">
+                            <hr>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Nama Kos</h4>
+                            <h5><?php echo $namaKos ?></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Tipe Kos</h4>
+                            <h5><?php echo $tipeKos ?></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Jenis Kamar</h4>
+                            <h5><?php echo $jenisKamar ?></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Harga Kamar</h4>
+                            <h5>Rp<?php echo $hargaKamar ?>/bulan</h5>
+                        </div>
                     </div>
                     <div class="col-lg-4">
-                        <h3 style="margin-bottom: 3%; margin-left: 4%;">Rincian Kamar</h3>
-                        <div class="col-lg-5" style="text-align: left;">
-                            <h4>Nama Kos</h4>
-                            <h4>Jenis Kamar</h4>
-                            <h4>Harga Kamar</h4>
-                            <h4>Tipe Kos</h4>
+                    </div>
+                    <div class="col-lg-12">
+                        <br>
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-6" style="border: 1px solid #dedede;">
+                        <h3 style="margin-bottom: 3%;">Rincian Pembayaran</h3>
+                        <div class="col-lg-12">
+                        <h4><?php echo $namaKos ?></h4>
                         </div>
-                        <div class="col-lg-6" style="text-align: right;">
-                            <h4><?php echo $namaKos ?></h4>
+                        <div class="col-lg-6">
                             <h4><?php echo $jenisKamar ?></h4>
-                            <h4>Rp<?php echo $hargaKamar ?>/bulan</h4>
-                            <h4><?php echo $tipeKos ?></h4>
+                            <h4>Durasi Sewa</h4>
+                            <h3>Total Pembayaran</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Rp<?php echo $hargaKamar ?></h4>
+                            <h4><?php echo $durasi ?> bulan</h4>
+                            <h3>Rp<?php echo number_format($totalPembayaran) ?></h3>
                         </div>
                     </div>
+                    <div class="col-lg-4">
+                    </div>
+                    <div class="col-lg-12">
+                        <br>
+                    </div>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-6">
+                        <form>
+                            <input type="hidden" name="pemesanan" value="<?php echo $idPemesanan ?>"></input>
+                            <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Lanjut ke Pembayaran</button>
+                        </form>
+                    </div>
+                    <div class="col-lg-4"></div>
     			</div>
     		</div>
     	</aside>

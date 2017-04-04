@@ -67,7 +67,7 @@
 
                             foreach($hasil as $row){ 
                                 $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar;
-                                $bulan = 7;
+                                $bulan = date("m");
 
                                 $lr = 0.5;
                                 $err = 1;

@@ -11,22 +11,39 @@ class Transaksi extends CI_Controller {
 
 	public function index()
 	{
-		$data['idPemesanan'] = $this->input->post('pemesanan');
-		$data['totalPembayaran'] = $this->input->post('totalPembayaran');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
 
-		$this->load->view('template/header');
-		$this->load->view('detail_pembayaran', $data);
-		$this->load->view('template/footer');
+            $data['idPemesanan'] = $this->input->post('pemesanan');
+			$data['totalPembayaran'] = $this->input->post('totalPembayaran');
+
+			$this->load->view('template/header_akun', $dataAkun);
+			$this->load->view('detail_pembayaran', $data);
+			$this->load->view('template/footer');
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
+
 	}
 
 	public function konfirmasi()
 	{
-		$data['idPemesanan'] = $this->input->post('pemesanan');
-		$data['totalPembayaran'] = $this->input->post('totalPembayaran');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
 
-		$this->load->view('template/header');
-		$this->load->view('konfirmasi_pembayaran', $data);
-		$this->load->view('template/footer');
+            $data['idPemesanan'] = $this->input->post('pemesanan');
+			$data['totalPembayaran'] = $this->input->post('totalPembayaran');
+
+			$this->load->view('template/header_akun', $dataAkun);
+			$this->load->view('konfirmasi_pembayaran', $data);
+			$this->load->view('template/footer');
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
 	}
 
 	public function konfBayar()

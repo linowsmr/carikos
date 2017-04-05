@@ -57,7 +57,7 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="#"><i class="fa fa-user fa-fw"></i> Daftar Transaksi</a>
                     </li>
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Verifikasi Pembayaran</a>
+                    <li><a href="<?php echo site_url('transaksi/konfirmasi') ?>"><i class="fa fa-user fa-fw"></i> Verifikasi Pembayaran</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->

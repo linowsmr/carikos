@@ -30,7 +30,14 @@
                                         </thead>
                                         <tbody>
                                             <?php
-                                                foreach($pemesanan as $row) { ?>
+                                                foreach($pemesanan as $row) { 
+                                                    if($row->status == 0)
+                                                        $status = "Belum Bayar";
+                                                    else if($row->status == 1)
+                                                        $status = "Lunas";
+                                                    else if($row->status == 2)
+                                                        $status = "Batal";
+                                                    ?>
                                                     <tr>
                                                         <td>
                                                             <a href="<?php echo site_url('kos/beranda?kos='.$row->idKos.'')?>"><?php echo $row->namaKos ?></a>
@@ -42,8 +49,8 @@
                                                         <td><?php echo $row->teleponAkun ?></td>
                                                         <td><?php echo $row->emailAkun ?></td>
                                                         <td><?php echo $row->durasiPemesanan ?> bulan</td>
-                                                        <td>Rp<?php echo number_format($row->durasiPemesanan*$row->hargaPemesanan) ?>,00</td>
-                                                        <td>Belum Lunas</td>
+                                                        <td>Rp<?php echo number_format($row->durasiPemesanan*$row->hargaKamar) ?>,00</td>
+                                                        <td><?php echo $status ?></td>
                                                     </tr>
                                                 <?php }
                                             ?>

@@ -45,12 +45,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>                        
           </button>
-          <a class="navbar-brand" href="<?php echo site_url('home/index') ?>">CariKos</a>
+          <a class="navbar-brand" href="<?php echo site_url('pemilik/beranda') ?>">CariKos</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="<?php echo site_url('pemilik/beranda') ?>">KOS</a></li>
-            <li><a href="<?php echo site_url('pemesanan/pemilik') ?>">PEMESANAN <span class="badge"><?php echo $notifikasi ?></span></a></li>
+            <li><a href="<?php echo site_url('pemesanan/pemilik') ?>">PEMESANAN 
+                <?php
+                    if($notifikasi > 0){ ?>
+                        <span class="badge"><?php echo $notifikasi ?></span>
+                    <?php }
+                ?> 
+            </a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <?php echo $username ?>  <i class="fa fa-caret-down"></i>

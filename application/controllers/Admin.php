@@ -10,6 +10,8 @@ class Admin extends CI_Controller {
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_pemilik','',TRUE);
 	   	$this->load->model('model_kamar','',TRUE);
+	   	$this->load->model('model_pemesanan','',TRUE);
+	   	$this->load->model('model_transaksi','',TRUE);
  	}
 	public function login(){
 		$this->load->library('session');
@@ -85,9 +87,10 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $data['pemesanan'] = $this->model_pemesanan->daftar_pemesanan();
 
 			$this->load->view('admin/admheader',$nama);
-			$this->load->view('admin/reservasi');
+			$this->load->view('admin/reservasi',$data);
         }
         else
         {
@@ -101,9 +104,10 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $data['transaksi'] = $this->model_transaksi->data_transaksi();
 
 			$this->load->view('admin/admheader',$nama);
-			$this->load->view('admin/transaksi');
+			$this->load->view('admin/transaksi', $data);
         }
         else
         {
@@ -124,5 +128,18 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin/admheader');
 		$this->load->view('admin/kamar', $data);
+	}
+	public function verTrans()
+	{
+		$status = $this->input->post('status');
+		$idTransaksi = $this->input->post('transaksi');
+
+		$update = $this->model_transaksi->verifikasi($idTransaksi,$status);
+		if($cek != 'Gagal'){
+			redirect('admin/trans');
+		}
+		else{
+			echo 'gagal';
+		}
 	}
 }

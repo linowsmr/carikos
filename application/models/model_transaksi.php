@@ -20,4 +20,25 @@ class Model_transaksi extends CI_Model {
 		else
 			return "Gagal";
  	}
+
+ 	function data_transaksi()
+ 	{
+ 		$query = "SELECT * FROM transaksi";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+
+ 	function verifikasi($idTransaksi,$status)
+ 	{
+ 		$data = array (
+			'STATUS' => $status
+		);
+		$this->db->where('IDTRANSAKSI',$idTransaksi);
+		$run = $this->db->update('transaksi',$data);
+
+		if($run)
+			return "Berhasil";
+		else
+			return "Gagal";
+ 	}
 }

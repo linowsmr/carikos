@@ -32,4 +32,11 @@ class Model_pemesanan extends CI_Model {
  		$run = $this->db->query($query);
 		return $run->result();
  	}
+
+ 	function daftar_pemesanan()
+ 	{
+ 		$query = "SELECT  p.idPemesanan, p.durasiPemesanan, p.hargaPemesanan, a.namaAkun, km.jenisKamar, k.namaKos from pemesanan p, kamar km, kos k, akun a where p.usernameAkun = a.username and p.idKamar = km.idKamar and km.idKos = k.idKos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
 }

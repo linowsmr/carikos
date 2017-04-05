@@ -4,26 +4,48 @@
             <h1 class="page-header">Transaksi</h1>
         </div>
     </div>
-    <div class="container">
     	<table class="table table-hover">
 		    <thead>
 		      <tr>
 		        <th>ID Transaksi</th>
-		        <th>ID Reservasi</th>
-		        <th>Tanggal</th>
-		        <th>Pemesan</th>
-		        <th>Total (Rp.)</th>
+		        <th>ID Pemesanan</th>
+		        <th>Tanggal Pembayaran</th>
+		        <th>Total Pembayaran</th>
+		        <th>Bank Asal</th>
+		        <th>Nomor Rekening</th>
+		        <th>Nama Pemilik</th>
+		        <th>Status</th>
+		        <th></th>
 		      </tr>
 		    </thead>
 		    <tbody>
-		      <tr>
-		        <th>1</th>
-		        <th>1</th>
-		        <th>21 Maret 2017</th>
-		        <th>Nyoman Pande Wahyu</th>
-		        <th>500000</th>
-		      </tr>
+		      <?php 
+		      	foreach ($transaksi as $row) {?>
+		      		<tr>
+		      			<th><?php echo $row->idTransaksi?></th>
+		      			<th><?php echo $row->idPemesanan?></th>
+		      			<th><?php echo $row->tanggalTransaksi?></th>
+		      			<th>Rp<?php echo number_format($row->totalPembayaran)?></th>
+		      			<th>Bank <?php echo $row->bank?></th>
+		      			<th><?php echo $row->nomorRekening?></th>
+		      			<th><?php echo $row->namaTabungan?></th>
+		      			<th><?php $status = $row->status; 
+		      				if ($status == 0) {
+		      					echo "Belum bayar";?>
+		      					<th>
+		      						<form action="<?php echo site_url('admin/verTrans')?>" method="POST">
+		      							<input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
+		      							<input type="hidden" name="status" value="1"></input>
+		      							<button type="submit" class="btn btn-primary">Verifikasi</button>
+		      						</form>
+		      					</th>
+		      				<?php }
+		      				else{
+		      					echo "Lunas";
+		      				}?>
+		      			</th>
+		      		</tr>
+		      	<?php }?>
 		    </tbody>
 		</table>
-	</div>
 </div>

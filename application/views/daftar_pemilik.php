@@ -43,7 +43,7 @@
                             <form action="<?php echo site_url('pemilik/pendaftaran')?>" method="post">
                                 <div class="form-group">
                                     <h4>Nama Akun</h4>
-                                    <input type="name" class="form-control" name="akun" required>
+                                    <input type="text" class="form-control" name="akun" required>
                                 </div>
                                 <div class="form-group">
                                     <h4>Kata Sandi</h4>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <h4>Nama Lengkap</h4>
-                                    <input type="name" class="form-control" name="nama" required>
+                                    <input type="text" class="form-control" name="nama" required>
                                 </div>
                                 <div class="form-group">
                                     <h4>Alamat Email</h4>
@@ -59,7 +59,16 @@
                                 </div>
                                 <div class="form-group">
                                     <h4>Nomor Telepon</h4>
-                                    <input type="name" class="form-control" name="telepon" required>
+                                    <input type="text" class="form-control" name="telepon" required>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Hak Akses</h4>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="akses" value="pencari">Pencari Kos
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input type="radio" name="akses" value="pemilik">Pemilik Kos
+                                    </label>
                                 </div>
                                 <button type="submit" class="btn btn-lg btn-light">Daftar</button>
                             </form>

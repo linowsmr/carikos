@@ -49,8 +49,19 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo site_url('pemilik/beranda') ?>">KOS</a></li>
-            <li><a href="<?php echo site_url('pemesanan/pemilik') ?>">PEMESANAN <span class="badge"><?php echo $notifikasi ?></span></a></li>
+            <li><a href="<?php echo site_url('home/index') ?>">Cari Kos</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    Transaksi  <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Daftar Transaksi</a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Verifikasi Pembayaran</a>
+                    </li>
+                </ul>
+                <!-- /.dropdown-user -->
+            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <?php echo $username ?>  <i class="fa fa-caret-down"></i>

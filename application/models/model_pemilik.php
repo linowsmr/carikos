@@ -1,5 +1,12 @@
 <?php
 class Model_pemilik extends CI_Model {
+	function cek($username)
+	{
+		$query = "SELECT usernamePemilik FROM pemilik WHERE usernamePemilik = '$username'";
+ 		$run = $this->db->query($query);
+ 		return $run->num_rows();
+	}
+
 	function daftar($username, $password, $nama, $email, $telepon)
 	{
 	   $data = array(

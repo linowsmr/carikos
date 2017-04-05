@@ -173,9 +173,21 @@ class Pencarian extends CI_Controller {
 		//exit();
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 
-		$this->load->view('template/header');
-		$this->load->view('hasil_pencarian', $data);
-		$this->load->view('template/footer');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
+
+            $this->load->view('template/header_akun', $dataAkun);
+			$this->load->view('hasil_pencarian', $data);
+			$this->load->view('template/footer');
+        }
+
+        else {
+        	$this->load->view('template/header');
+			$this->load->view('hasil_pencarian', $data);
+			$this->load->view('template/footer');
+        }
 	}
 
 	public function lihatKamar()
@@ -206,8 +218,19 @@ class Pencarian extends CI_Controller {
 		$data['supermarket'] = $this->model_cluster->jarak_destinasi($idCluster, 2);
 		$data['masjid'] = $this->model_cluster->jarak_destinasi($idCluster, 3);
 
-		$this->load->view('template/header');
-		$this->load->view('detailKamar', $data);
-		$this->load->view('template/footer');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
+
+            $this->load->view('template/header_akun', $dataAkun);
+			$this->load->view('detailKamar', $data);
+			$this->load->view('template/footer');
+        }
+        else {
+        	$this->load->view('template/header');
+			$this->load->view('detailKamar', $data);
+			$this->load->view('template/footer');
+        }
 	}
 }

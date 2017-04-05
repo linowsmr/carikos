@@ -1,4 +1,10 @@
 <?php
+    foreach ($akun as $row) {
+        $usernameAkun = $row->username;
+        $namaAkun = $row->namaAkun;
+        $emailAkun = $row->emailAkun;
+        $teleponAkun = $row->teleponAkun;
+    }
     foreach($detailKos as $row){
         $idKos = $row->idKos;
         $namaKos = $row->namaKos;
@@ -28,32 +34,7 @@
     </style>
     </head>
 	<body>
-
-	    <!-- Navigation -->
-	    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-	    <nav id="sidebar-wrapper">
-	        <ul class="sidebar-nav">
-	            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-	            <li class="sidebar-brand">
-	                <a href="#top" onclick=$("#menu-close").click();>CariKos</a>
-	            </li>
-	            <li>
-	                <a href="#top" onclick=$("#menu-close").click();>Beranda</a>
-	            </li>
-	            <li>
-	                <a href="#tentang" onclick=$("#menu-close").click();>Tentang</a>
-	            </li>
-	            <li>
-	                <a href="#cari" onclick=$("#menu-close").click();>Cari Kos</a>
-	            </li>
-	            <li>
-	                <a href="#daftar" onclick=$("#menu-close").click();>Daftar Kos</a>
-	            </li>
-	        </ul>
-	    </nav>
-
-	    <div id="top"></div>
-    	<aside class="call-to-action">
+        <aside class="call-to-action">
     		<div class="container">
     			<div class="row">
     			 	<div class="col-lg-12 text-center">
@@ -69,20 +50,21 @@
                                 <section style="margin-left: 5%; margin-right: 5%;">
                                     <div class="form-group">
                                         <h4>Nama Pemesan</h4>
-                                        <input type="text" class="form-control" name="nama" required>
+                                        <input type="text" class="form-control" name="nama" value="<?php echo $namaAkun ?>" required>
                                         <small>Isi nama pemesan sesuai KTP/Paspor/SIM (tanpa tanda baca/gelar)</small>
                                     </div>
                                     <div class="form-group">
                                         <h4>Nomor Telepon Pemesan</h4>
-                                        <div class="input-group">
+                                        <!-- <div class="input-group">
                                             <span class="input-group-addon">+62</span>
-                                            <input type="text" class="form-control" name="telepon" required>
-                                        </div>
-                                        <small>Contoh: +62812345678</small>
+                                            <input type="text" class="form-control" name="telepon" value="<?php echo $teleponAkun ?>" required>
+                                        </div> -->
+                                        <input type="text" class="form-control" name="telepon" value="<?php echo $teleponAkun ?>" required>
+                                        <small>Contoh: 0812345678</small>
                                     </div>
                                     <div class="form-group">
                                         <h4>Email Pemesan</h4>
-                                        <input type="email" class="form-control" name="email" required>
+                                        <input type="email" class="form-control" name="email" value="<?php echo $emailAkun ?>" required>
                                         <small>Contoh: email@example.com</small>
                                     </div>
                                     <div class="form-group" style="width: 50%;">

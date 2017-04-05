@@ -2,30 +2,6 @@
 <html lang="en">
 
 <body>
-
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>CariKos</a>
-            </li>
-            <li>
-                <a href="#top" onclick=$("#menu-close").click();>Beranda</a>
-            </li>
-            <li>
-                <a href="#tentang" onclick=$("#menu-close").click();>Tentang</a>
-            </li>
-            <li>
-                <a href="#cari" onclick=$("#menu-close").click();>Cari Kos</a>
-            </li>
-            <li>
-                <a href="#daftar" onclick=$("#menu-close").click();>Daftar Kos</a>
-            </li>
-        </ul>
-    </nav>
-
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
@@ -33,7 +9,11 @@
             <h3>Cari Kos Menjadi Lebih Mudah</h3>
             <br>
             <a href="#contact" class="btn btn-dark btn-lg">Cari Kos</a>
-            <a href="#daftar" class="btn btn-dark btn-lg">Daftar Kos</a>
+            <?php
+                if($akun == 0){ ?>
+                    <a href="#daftar" class="btn btn-dark btn-lg">Daftar Kos</a>
+                <?php }
+            ?>
         </div>
     </header>
 
@@ -114,62 +94,42 @@
         <!-- /.container -->
     </section>
 
-    <aside id="daftar" class="call-to-action bg-primary">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Daftar Kos</h2>
-                    <hr class="small">
-                    <h4>Anda Harus Masuk Terlebih Dahulu Untuk Melakukan Pendaftaran Kos</h4>
-                    <br>
+    <?php
+        if($akun == 0){ ?>
+            <aside id="daftar" class="call-to-action bg-primary">
+                <div class="container">
                     <div class="row">
-                        <div class="col-lg-4">
-                        </div>
-                        <div class="col-lg-4">
-                            <form action="<?php echo site_url('pemilik/login')?>" method="post">
-                                <div class="form-group">
-                                    <h4>Nama Akun</h4>
-                                    <input type="name" class="form-control" name="akun" required>
+                        <div class="col-lg-12 text-center">
+                            <h2>Daftar Kos</h2>
+                            <hr class="small">
+                            <h4>Anda Harus Masuk Terlebih Dahulu Untuk Melakukan Pendaftaran Kos</h4>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-4">
                                 </div>
-                                <div class="form-group">
-                                    <h4>Kata Sandi</h4>
-                                    <input type="password" class="form-control" name="password" required>
+                                <div class="col-lg-4">
+                                    <form action="<?php echo site_url('pemilik/login')?>" method="post">
+                                        <div class="form-group">
+                                            <h4>Nama Akun</h4>
+                                            <input type="name" class="form-control" name="akun" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <h4>Kata Sandi</h4>
+                                            <input type="password" class="form-control" name="password" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-lg btn-light">Masuk</button>
+                                    </form>
+                                    <h5>Belum punya akun ? <a href="<?php echo site_url('pemilik/daftar')?>" style="color: #66ccff">Daftar</a></h5>
                                 </div>
-                                <button type="submit" class="btn btn-lg btn-light">Masuk</button>
-                            </form>
-                            <h5>Belum punya akun ? <a href="<?php echo site_url('pemilik/daftar')?>" style="color: #66ccff">Daftar</a></h5>
-                        </div>
-                        <div class="col-lg-4">
+                                <div class="col-lg-4">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Disable Google Maps scrolling
-    // See http://stackoverflow.com/a/25904582/1607849
-    // Disable scroll zooming and bind back the click event
-    var onMapMouseleaveHandler = function(event) {
-        var that = $(this);
-        that.on('click', onMapClickHandler);
-        that.off('mouseleave', onMapMouseleaveHandler);
-        that.find('iframe').css("pointer-events", "none");
-    }
-    var onMapClickHandler = function(event) {
-            var that = $(this);
-            // Disable the click handler until the user leaves the map area
-            that.off('click', onMapClickHandler);
-            // Enable scrolling zoom
-            that.find('iframe').css("pointer-events", "auto");
-            // Handle the mouse leave event
-            that.on('mouseleave', onMapMouseleaveHandler);
-        }
-        // Enable map zooming with mouse scroll when the user clicks the map
-    $('.map').on('click', onMapClickHandler);
-    </script>
+            </aside>
+        <?php }
+    ?>
 
 </body>
 

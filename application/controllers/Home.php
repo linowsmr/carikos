@@ -18,9 +18,22 @@ class Home extends CI_Controller {
 	    $data['fasilitaskamar'] = $this->model_kamar->fasilitas();
 	    $data['jurusan'] = $this->model_pencarian->list_jurusan();
 
-		$this->load->view('template/header');
-		$this->load->view('homepage', $data);
-		$this->load->view('template/footer');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
+
+            $data['akun'] = 1;
+            $this->load->view('template/header_akun_home', $dataAkun);
+			$this->load->view('homepage', $data);
+			$this->load->view('template/footer');
+        }
+        else {
+        	$data['akun'] = 0;
+            $this->load->view('template/header');
+			$this->load->view('homepage', $data);
+			$this->load->view('template/footer');
+        }
 	}
 
 }

@@ -7,6 +7,7 @@ class Pemilik extends CI_Controller {
  	{
 	   	parent::__construct();
 	   	$this->load->model('model_pemilik','',TRUE);
+	   	$this->load->model('model_akun','',TRUE);
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_pemesanan','',TRUE);
  	}
@@ -57,18 +58,42 @@ class Pemilik extends CI_Controller {
 		$nama = $this->input->post('nama');
 		$email = $this->input->post('email');
 		$telepon = $this->input->post('telepon');
+		$akses = $this->input->post('akses');
 
-		$status = $this->model_pemilik->daftar($username, $password, $nama, $email, $telepon);
+		$cekAkun = $this->model_akun->cek($username);
+		$cekPemilik = $this->model_pemilik->cek($username);
 
-		if($status == 'Berhasil'){
-			$sess_array = array(
-	        	'username' => $username
-	        );
-	    	$this->session->set_userdata('logged_in_pemilik', $sess_array);
-	    	redirect('pemilik/beranda');
+		if($cekAkun > 0 || $cekPemilik > 0){
+			echo "Username Sudah Tersedia";
 		}
-		else
-			echo "Gagal Masuk Session";
+		else {
+			if($akses == "pencari"){
+				$status = $this->model_akun->daftar($username, $password, $nama, $email, $telepon);
+
+				if($status == 'Berhasil'){
+					$sess_array = array(
+			        	'username' => $username
+			        );
+			    	$this->session->set_userdata('logged_in_akun', $sess_array);
+			    	redirect('home/index');
+				}
+				else
+					echo "Gagal Masuk Session";
+			}
+			else if($akses == "pemilik"){
+				$status = $this->model_pemilik->daftar($username, $password, $nama, $email, $telepon);
+
+				if($status == 'Berhasil'){
+					$sess_array = array(
+			        	'username' => $username
+			        );
+			    	$this->session->set_userdata('logged_in_pemilik', $sess_array);
+			    	redirect('pemilik/beranda');
+				}
+				else
+					echo "Gagal Masuk Session";
+			}
+		}
 	}
 
 	public function beranda()

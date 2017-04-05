@@ -6,6 +6,7 @@ class Pemesanan extends CI_Controller {
 	function __construct()
  	{
 	   	parent::__construct();
+	   	$this->load->model('model_akun','',TRUE);
 	   	$this->load->model('model_kamar','',TRUE);
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_pemesanan','',TRUE);
@@ -13,46 +14,65 @@ class Pemesanan extends CI_Controller {
 
 	public function index()
 	{
-		$idKamar = $this->input->post('kamar');
-		$idKos = $this->input->post('kos');
-		$data['harga'] = $this->input->post('harga');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
 
-		$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
-		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
-		$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
+            $idKamar = $this->input->post('kamar');
+			$idKos = $this->input->post('kos');
+			$data['harga'] = $this->input->post('harga');
 
-		$this->load->view('template/header');
-		$this->load->view('data_pemesanan', $data);
-		$this->load->view('template/footer');
+			$data['akun'] = $this->model_akun->ambil_akun($dataAkun['username']);
+			$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
+			$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
+			$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
+
+			$this->load->view('template/header_akun', $dataAkun);
+			$this->load->view('data_pemesanan', $data);
+			$this->load->view('template/footer');
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
 	}
 
 	public function pesan()
 	{
-		$username = $this->input->post('username');
-		$data['nama'] = $this->input->post('nama');
-		$kodeTelepon = "+62";
-		$data['telepon'] = $kodeTelepon.$this->input->post('telepon');
-		$data['email'] = $this->input->post('email');
-		$data['durasi'] = $this->input->post('durasi');
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
 
-		$idKamar = $this->input->post('kamar');
-		$idKos = $this->input->post('kos');
-		$data['harga'] = $this->input->post('harga');
-		$data['totalPembayaran'] = $data['durasi']*$data['harga'];
+            $username = $this->input->post('username');
+			$data['nama'] = $this->input->post('nama');
+			$kodeTelepon = "+62";
+			$data['telepon'] = $kodeTelepon.$this->input->post('telepon');
+			$data['email'] = $this->input->post('email');
+			$data['durasi'] = $this->input->post('durasi');
 
-		$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
-		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
-		$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
+			$idKamar = $this->input->post('kamar');
+			$idKos = $this->input->post('kos');
+			$data['harga'] = $this->input->post('harga');
+			$data['totalPembayaran'] = $data['durasi']*$data['harga'];
 
-		$data['idPemesanan'] = $this->model_pemesanan->tambah_pemesanan($data['durasi'], $data['harga'], $username, $idKamar);
+			$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
+			$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
+			$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
 
-		if($data['idPemesanan'] != "Gagal"){
-			$this->load->view('template/header');
-			$this->load->view('detail_pemesanan', $data);
-			$this->load->view('template/footer');
-		}
-		else
-			echo "Gagal";
+			$data['idPemesanan'] = $this->model_pemesanan->tambah_pemesanan($data['durasi'], $data['harga'], $username, $idKamar);
+
+			if($data['idPemesanan'] != "Gagal"){
+				$this->load->view('template/header_akun', $dataAkun);
+				$this->load->view('detail_pemesanan', $data);
+				$this->load->view('template/footer');
+			}
+			else
+				echo "Gagal";
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
+
+		
 	}
 
 	public function pemilik()

@@ -35,37 +35,31 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
-    <!-- Navbar -->
-    <nav id="top" class="navbar navbar-default" style="margin-bottom: 0%;">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>                        
-          </button>
-          <a class="navbar-brand" href="<?php echo site_url('home/index') ?>">CariKos</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="<?php echo site_url('pemilik/beranda') ?>">KOS</a></li>
-            <li><a href="<?php echo site_url('pemesanan/pemilik') ?>">PEMESANAN <span class="badge"><?php echo $notifikasi ?></span></a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    <?php echo $username ?>  <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Edit Profile</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="<?php echo site_url('pemilik/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
-                <!-- /.dropdown-user -->
+    <!-- Navigation -->
+    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+    <nav id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+            <li class="sidebar-brand">
+                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>CariKos | <?php echo $username ?></a>
             </li>
-          </ul>
-        </div>
-      </div>
+            <li>
+                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Cari Kos</a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Daftar Transaksi</a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Verifikasi Pembayaran</a>
+            </li>
+            <li>
+                <a href="#" onclick=$("#menu-close").click();>Edit Profil</a>
+            </li>
+            <li>
+                <a href="<?php echo site_url('akun/logout') ?>" onclick=$("#menu-close").click();>Logout</a>
+            </li>
+        </ul>
     </nav>
 </body>

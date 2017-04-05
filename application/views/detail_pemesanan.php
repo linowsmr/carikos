@@ -93,8 +93,9 @@
                     </div>
                     <div class="col-lg-2"></div>
                     <div class="col-lg-6">
-                        <form>
+                        <form action="<?php echo site_url('transaksi/')?>" method="POST">
                             <input type="hidden" name="pemesanan" value="<?php echo $idPemesanan ?>"></input>
+                            <input type="hidden" name="totalPembayaran" value="<?php echo $totalPembayaran ?>"></input>
                             <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Lanjut Ke Pembayaran</button>
                         </form>
                     </div>

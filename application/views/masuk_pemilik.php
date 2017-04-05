@@ -2,31 +2,6 @@
 <html lang="en">
 
 <body>
-
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top" onclick=$("#menu-close").click();>CariKos</a>
-            </li>
-            <li>
-                <a href="#top" onclick=$("#menu-close").click();>Beranda</a>
-            </li>
-            <li>
-                <a href="#tentang" onclick=$("#menu-close").click();>Tentang</a>
-            </li>
-            <li>
-                <a href="#cari" onclick=$("#menu-close").click();>Cari Kos</a>
-            </li>
-            <li>
-                <a href="#daftar" onclick=$("#menu-close").click();>Daftar Kos</a>
-            </li>
-        </ul>
-    </nav>
-
-    <div id="top"></div>
     <aside id="daftar" class="call-to-action bg-primary">
         <div class="container">
             <div class="row">

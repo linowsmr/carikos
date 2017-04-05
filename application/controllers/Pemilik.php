@@ -25,21 +25,45 @@ class Pemilik extends CI_Controller {
     	$username = $this->input->post('akun');
     	$password = $this->input->post('password');
 
-    	$result = $this->model_pemilik->login($username, $password);
+    	$cekPemilik = $this->model_pemilik->cek($username);
+    	$cekAkun = $this->model_akun->cek($username);
+    	if($cekPemilik > 0){
+    		$result = $this->model_pemilik->login($username, $password);
 
-    	if($result){
-    		$sess_array = array();
-		    foreach($result as $row)
-		    {
-		    	$sess_array = array(
-		        	'username' => $row->usernamePemilik
-		        );
-		    	$this->session->set_userdata('logged_in_pemilik', $sess_array);
-		    }
-		    redirect('pemilik/beranda');
+	    	if($result){
+	    		$sess_array = array();
+			    foreach($result as $row)
+			    {
+			    	$sess_array = array(
+			        	'username' => $row->usernamePemilik
+			        );
+			    	$this->session->set_userdata('logged_in_pemilik', $sess_array);
+			    }
+			    redirect('pemilik/beranda');
+	    	}
+	    	else
+	    		echo "Gagal Masuk Session";
+    	}
+    	else if($cekAkun > 0){
+    		$result = $this->model_akun->login($username, $password);
+
+	    	if($result){
+	    		$sess_array = array();
+			    foreach($result as $row)
+			    {
+			    	$sess_array = array(
+			        	'username' => $row->username
+			        );
+			    	$this->session->set_userdata('logged_in_akun', $sess_array);
+			    }
+			    redirect('home/index');
+	    	}
+	    	else
+	    		echo "Gagal Masuk Session";
     	}
     	else
-    		echo "Gagal Masuk Session";
+    		echo "Gagal Masuk";
+    	
 	}
 
 	public function daftar()
@@ -124,6 +148,6 @@ class Pemilik extends CI_Controller {
     {
     	$this->session->unset_userdata('logged_in_pemilik');
    		session_destroy();
-   		redirect('pemilik/masuk');
+   		redirect('home/index');
     }
 }

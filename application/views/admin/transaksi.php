@@ -30,7 +30,8 @@
 		      			<th><?php echo $row->nomorRekening?></th>
 		      			<th><?php echo $row->namaTabungan?></th>
 		      			<th><?php $status = $row->status; 
-		      				if ($status == 0) {
+		      				if($status == 0) 
+		      				{
 		      					echo "Belum bayar";?>
 		      					<th>
 		      						<form action="<?php echo site_url('admin/verTrans')?>" method="POST">
@@ -40,8 +41,13 @@
 		      						</form>
 		      					</th>
 		      				<?php }
-		      				else{
+		      				elseif ($status == 1) 
+		      				{
 		      					echo "Lunas";
+		      				}
+		      				else
+		      				{
+		      					echo "Batal";
 		      				}?>
 		      			</th>
 		      		</tr>

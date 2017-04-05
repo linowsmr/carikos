@@ -53,6 +53,11 @@
 
             <div class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                      <i class="fa fa-bell fa-fw"></i><span class="caret"></span>
+                  </a>
+                </li>
+                <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                       <i class="fa fa-user fa-fw"></i><span class="caret"></span>
                   </a>
@@ -62,6 +67,7 @@
                       <li><a href="<?php echo site_url('admin/logout')?>"><i class="fa fa-sign-out fa-fw"></i> Keluar</a></li>
                   </ul>
                 </li>
+                
             </div>
 
             <div class="navbar-default sidebar" role="navigation">

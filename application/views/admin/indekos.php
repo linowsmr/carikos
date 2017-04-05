@@ -19,11 +19,12 @@
 		    <?php
 		    foreach ($kos as $kos_item) {?>
 		      <tr>
-		        <th><a href="<?php echo site_url('admin/lihatKamar?kos='.$kos_item['idKos'].'')?>" style="color: black;"><?php echo $kos_item['namaKos'] ?></a></th>
+		        <th><a href="<?php echo site_url('admin/lihatKamar?kos='.$kos_item['idKos'].'')?>"><?php echo $kos_item['namaKos'] ?></a></th>
 		        <th><?php echo $kos_item['alamatKos'] ?></th>
 		        <th><?php echo $kos_item['teleponKos'] ?></th>
 		        <th><?php echo $kos_item['jumlahKamar'] ?></th>
 		        <th><?php echo $kos_item['namaPemilik'] ?></th>
+		        <th></th>
 		      <?php } ?>
 		</tbody>
 	</table>

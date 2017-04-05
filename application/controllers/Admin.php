@@ -116,18 +116,39 @@ class Admin extends CI_Controller {
 	}
 	public function lapkeu()
 	{
-		$this->load->view('admin/admheader');
-		$this->load->view('admin/laporan');
+		if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
+
+            $this->load->view('admin/admheader',$nama);
+			$this->load->view('admin/laporan');
+        }
+        else
+        {
+            redirect('admin');
+        }
 	}
 	public function lihatKamar()
 	{
-		$id = $this->input->get('kos');
-		$data['id'] = $id;
-		$data['namaKos'] = $this->model_kos->namaKos($id);
-		$data['kamar'] = $this->model_kamar->lihatKamar($id);
+		if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
 
-		$this->load->view('admin/admheader');
-		$this->load->view('admin/kamar', $data);
+            $id = $this->input->get('kos');
+			$data['id'] = $id;
+			$data['namaKos'] = $this->model_kos->namaKos($id);
+			$data['kamar'] = $this->model_kamar->lihatKamar($id);
+
+			$this->load->view('admin/admheader',$nama);
+			$this->load->view('admin/kamar', $data);
+        }
+        else
+        {
+            redirect('admin');
+        }
+		
 	}
 	public function verTrans()
 	{

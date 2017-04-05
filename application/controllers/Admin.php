@@ -63,22 +63,52 @@ class Admin extends CI_Controller {
     }
     public function lihatKos()
 	{
-		$data['kos'] = $this->model_kos->lihatKos();
-		$id = $this->input->get('kos');
-		$data['id'] = $id;
+		if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
+            $data['kos'] = $this->model_kos->lihatKos();
+			$id = $this->input->get('kos');
+			$data['id'] = $id;
 
-		$this->load->view('admin/admheader');
-		$this->load->view('admin/indekos', $data);
+			$this->load->view('admin/admheader',$nama);
+			$this->load->view('admin/indekos', $data);
+        }
+        else
+        {
+            redirect('admin');
+        }
 	}
 	public function reservasi()
 	{
-		$this->load->view('admin/admheader');
-		$this->load->view('admin/reservasi');
+		if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
+
+			$this->load->view('admin/admheader',$nama);
+			$this->load->view('admin/reservasi');
+        }
+        else
+        {
+            redirect('admin');
+        }
+		
 	}
 	public function trans()
 	{
-		$this->load->view('admin/admheader');
-		$this->load->view('admin/transaksi');
+		if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
+
+			$this->load->view('admin/admheader',$nama);
+			$this->load->view('admin/transaksi');
+        }
+        else
+        {
+            redirect('admin');
+        }
 	}
 	public function lapkeu()
 	{

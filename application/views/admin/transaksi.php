@@ -15,7 +15,6 @@
 		        <th>Nomor Rekening</th>
 		        <th>Nama Pemilik</th>
 		        <th>Status</th>
-		        <th></th>
 		      </tr>
 		    </thead>
 		    <tbody>
@@ -29,26 +28,23 @@
 		      			<th>Bank <?php echo $row->bank?></th>
 		      			<th><?php echo $row->nomorRekening?></th>
 		      			<th><?php echo $row->namaTabungan?></th>
-		      			<th><?php $status = $row->status; 
-		      				if($status == 0) 
-		      				{
-		      					echo "Belum bayar";?>
-		      					<th>
-		      						<form action="<?php echo site_url('admin/verTrans')?>" method="POST">
-		      							<input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
-		      							<input type="hidden" name="status" value="1"></input>
-		      							<button type="submit" class="btn btn-primary">Verifikasi</button>
-		      						</form>
-		      					</th>
+		      			<?php
+		      				if($row->status == 0) {?>
+		      					<th>Belum bayar</th>
 		      				<?php }
-		      				elseif ($status == 1) 
-		      				{
-		      					echo "Lunas";
-		      				}
-		      				else
-		      				{
-		      					echo "Batal";
-		      				}?>
+		      				else if ($row->status == 1) 
+		      				{?>
+		      					<th><form action="<?php echo site_url('admin/verTrans')?>" method="POST">
+		      							<input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
+		      							<button type="submit" class="btn btn-primary">Verifikasi</button>
+		      						</form></th>
+		      				<?php }
+		      				else if ($row->status == 2){?>
+		      					<th>Lunas</th>
+							<?php }
+		      				else if($row->status == 3){?>
+		      					<th>Batal</th>
+		      				<?php } ?>
 		      			</th>
 		      		</tr>
 		      	<?php }?>

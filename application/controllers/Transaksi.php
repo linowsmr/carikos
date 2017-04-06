@@ -18,8 +18,6 @@ class Transaksi extends CI_Controller {
 
             $data['idPemesanan'] = $this->input->post('pemesanan');
 			$data['totalPembayaran'] = $this->input->post('totalPembayaran');
-			$status = 0;
-			$data['idTransaksi'] = $this->model_transaksi->transaksi($data['idPemesanan'],$data['totalPembayaran'],$status);
 
 			$this->load->view('template/header_akun', $dataAkun);
 			$this->load->view('detail_pembayaran', $data);
@@ -37,8 +35,8 @@ class Transaksi extends CI_Controller {
             $session_data = $this->session->userdata('logged_in_akun');
             $dataAkun['username'] = $session_data['username'];
 
-            $data['idTransaksi'] = $this->model_transaksi->data_transaksi();
-			$data['totalPembayaran'] = $this->model_transaksi->data_transaksi();
+            $data['idPemesanan'] = $this->input->post('pemesanan');
+			$data['totalPembayaran'] = $this->input->post('totalPembayaran');
 
 			$this->load->view('template/header_akun', $dataAkun);
 			$this->load->view('konfirmasi_pembayaran', $data);
@@ -50,13 +48,14 @@ class Transaksi extends CI_Controller {
 
 	public function konfBayar()
 	{
-		$idTransaksi = $this->input->post('idTransaksi');
+		$idPemesanan = $this->input->post('idPemesanan');
+		$totalBayar = $this->input->post('totalBayar');
 		$norek = $this->input->post('norek');
 		$namarek = $this->input->post('namarek');
 		$bank = $this->input->post('bank');
-		$status = 1;
+		$status = $this->input->post('status');
 		
-		$cek = $this->model_transaksi->verifikasi($idTransaksi,$norek,$namarek,$bank,$status);
+		$cek = $this->model_transaksi->transaksi($idPemesanan,$totalBayar,$norek,$namarek,$bank,$status);
 		if($cek != 'Gagal'){
 			redirect('home');
 		}

@@ -152,7 +152,7 @@ class Admin extends CI_Controller {
 	}
 	public function verTrans()
 	{
-		$status = 2;
+		$status = $this->input->post('status');
 		$idTransaksi = $this->input->post('transaksi');
 
 		$update = $this->model_transaksi->verifikasi($idTransaksi,$status);

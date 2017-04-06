@@ -1,10 +1,3 @@
-<?php 
- foreach ($totalPembayaran as $row) {
-     $totalPembayaran = $row->totalPembayaran;
- }
- foreach ($idTransaksi as $row) {
-     $idTransaksi = $row->idTransaksi;
- }?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -65,7 +58,8 @@
                                 </section>
                             </div>
                             <br>
-                            <input type="hidden" name="idTransaksi" value="<?php echo $idTransaksi?>"></input>
+                            <input type="hidden" name="idPemesanan" value="<?php echo $idPemesanan?>"></input>
+                            <input type="hidden" name="status" value="0"></input>
                             <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -0.05%">Konfirmasi</button>
                         </form>
                     </div>

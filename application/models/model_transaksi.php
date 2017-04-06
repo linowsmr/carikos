@@ -1,11 +1,14 @@
 <?php
 class Model_transaksi extends CI_Model {
  	
- 	function transaksi($idPemesanan, $totalBayar,$status)
+ 	function transaksi($idPemesanan, $totalBayar, $norek, $namarek, $bank, $status)
  	{
  		$data = array(
 	   		'IDPEMESANAN' => $idPemesanan,
 	   		'TOTALPEMBAYARAN' => $totalBayar,
+	   		'NOMORREKENING' => $norek,
+	   		'NAMATABUNGAN' => $namarek,
+	   		'BANK' => $bank,
 	   		'STATUS' => $status
 	   	);
 
@@ -25,15 +28,11 @@ class Model_transaksi extends CI_Model {
  		return $run->result();
  	}
 
- 	function verifikasi($idTransaksi,$norek,$namarek,$bank,$tanggalKonfrimasi,$status)
+ 	function verifikasi($idTransaksi,$status)
  	{
  		$data = array (
- 			'NOMORREKENING' => $norek,
- 			'NAMATABUNGAN' => $namarek,
- 			'BANK' => $bank,
 			'STATUS' => $status
 		);
-
 		$this->db->where('IDTRANSAKSI',$idTransaksi);
 		$run = $this->db->update('transaksi',$data);
 

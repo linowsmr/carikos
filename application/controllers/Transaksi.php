@@ -65,4 +65,21 @@ class Transaksi extends CI_Controller {
 		}
 	}
 
+	public function daftar()
+	{
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
+
+            $data['cek'] = $this->model_transaksi->count_transaksi($dataAkun['username']);
+            $data['transaksi'] = $this->model_transaksi->ambil_transaksi($dataAkun['username']);
+
+			$this->load->view('template/header_akun', $dataAkun);
+			$this->load->view('daftar_transaksi', $data);
+			$this->load->view('template/footer');
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
+	}
 }

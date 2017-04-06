@@ -31,6 +31,11 @@
                                 <h3 style="margin-left: 2.5%; margin-bottom: 3%;">Data Pembayaran</h3>
                                 <section style="margin-left: 5%; margin-right: 5%;">
                                     <div class="form-group">
+                                        <h4>ID Transaksi</h4>
+                                        <input type="text" class="form-control" name="idTransaksi" required>
+                                        <small>ID Transaksi yang Didapat Saat Melakukan Pemesanan</small>
+                                    </div>
+                                    <div class="form-group">
                                         <h4>Bank Rekening Asal</h4>
                                         <select class="form-control selectpicker" name="bank" title="Tidak Ada yang Dipilih">
                                             <option value="BNI">Bank BNI</option>
@@ -65,7 +70,6 @@
                                 </section>
                             </div>
                             <br>
-                            <input type="hidden" name="idTransaksi" value="<?php echo $idTransaksi?>"></input>
                             <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -0.05%">Konfirmasi</button>
                         </form>
                     </div>

@@ -49,10 +49,10 @@
                 <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Cari Kos</a>
             </li>
             <li>
-                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Daftar Transaksi</a>
+                <a href="<?php echo site_url('transaksi/daftar') ?>" onclick=$("#menu-close").click();>Daftar Transaksi</a>
             </li>
             <li>
-                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Verifikasi Pembayaran</a>
+                <a href="<?php echo site_url('Transaksi/konfirmasi') ?>" onclick=$("#menu-close").click();>Konfirmasi Pembayaran</a>
             </li>
             <li>
                 <a href="#" onclick=$("#menu-close").click();>Edit Profil</a>

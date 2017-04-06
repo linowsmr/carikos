@@ -41,4 +41,18 @@ class Model_transaksi extends CI_Model {
 		else
 			return "Gagal";
  	}
+
+ 	function count_transaksi($username)
+ 	{
+ 		$query = "SELECT * FROM pemesanan p, transaksi t WHERE p.idPemesanan = t.idPemesanan AND p.usernameAkun = '$username'";
+ 		$run = $this->db->query($query);
+		return $run->num_rows();
+ 	}
+
+ 	function ambil_transaksi($username)
+ 	{
+ 		$query = "SELECT * FROM pemesanan p, transaksi t, akun a, kamar km, kos k WHERE p.idPemesanan = t.idPemesanan AND p.usernameAkun = a.username AND p.idKamar = km.idKamar AND km.idKos = k.idKos AND p.usernameAkun = '$username' ORDER BY t.idTransaksi DESC";
+ 		$run = $this->db->query($query);
+		return $run->result();
+ 	}
 }

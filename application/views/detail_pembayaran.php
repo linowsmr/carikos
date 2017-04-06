@@ -21,11 +21,11 @@
                     <div class="col-lg-6" style="border: 1px solid #dedede;">
                         <h3 style="margin-bottom: 3%;">Rincian Pembayaran</h3>
                         <div class="col-lg-6">
-                            <h4>ID Pemesanan</h4>
+                            <h4>ID Transaksi</h4>
                             <h3>Total Pembayaran</h3>
                         </div>
                         <div class="col-lg-6">
-                            <h4><?php echo $idPemesanan?></h4>
+                            <h4><?php echo $idTransaksi?></h4>
                             <h3>Rp<?php echo number_format($totalPembayaran) ?></h3>
                         </div>
                     </div>

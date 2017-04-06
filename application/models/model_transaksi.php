@@ -18,6 +18,13 @@ class Model_transaksi extends CI_Model {
 			return "Gagal";
  	}
 
+ 	function jumlah_kamar($idPemesanan)
+ 	{
+ 		$query = "SELECT km.idKamar, km.jumlahKamar FROM kamar km, pemesanan p WHERE km.idKamar = p.idKamar AND p.idPemesanan = $idPemesanan";
+ 		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
  	function data_transaksi()
  	{
  		$query = "SELECT * FROM transaksi";

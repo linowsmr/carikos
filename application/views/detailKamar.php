@@ -72,7 +72,7 @@
                         <div class="col-lg-6" style="text-align: left;">
                             <h4>Rp<?php echo $hargaKamar ?>/bulan</h4>
                             <br>
-                            <h4><?php echo $jumlahKamar ?> Kamar</h4>
+                            <h4><?php echo $jmlKamar ?> Kamar</h4>
                             <br><br>
                             <h4>Nanti akan Ditambahkan</h4>
                             <br>

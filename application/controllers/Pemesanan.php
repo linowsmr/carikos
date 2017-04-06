@@ -14,26 +14,29 @@ class Pemesanan extends CI_Controller {
 
 	public function index()
 	{
+		$data['kamar'] = $this->input->post('kamar');
+		$data['kos'] = $this->input->post('kos');
+		$data['harga'] = $this->input->post('harga');
+		
 		if(!empty($this->session->userdata('logged_in_akun')))
         {
             $session_data = $this->session->userdata('logged_in_akun');
             $dataAkun['username'] = $session_data['username'];
 
-            $idKamar = $this->input->post('kamar');
-			$idKos = $this->input->post('kos');
-			$data['harga'] = $this->input->post('harga');
-
 			$data['akun'] = $this->model_akun->ambil_akun($dataAkun['username']);
-			$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
-			$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
-			$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
+			$data['detailKamar'] =  $this->model_kamar->detail_kamar($data['kamar']);
+			$data['detailKos'] =  $this->model_kos->detail_kos($data['kos']);
+			$data['tipeKos'] =  $this->model_kos->tipe_kos($data['kos']);
 
 			$this->load->view('template/header_akun', $dataAkun);
 			$this->load->view('data_pemesanan', $data);
 			$this->load->view('template/footer');
         }
-        else
-        	echo "Anda Harus Login Terlebih Dahulu";
+        else {
+        	$this->load->view('template/header');
+			$this->load->view('masuk_akun', $data);
+			$this->load->view('template/footer');
+		}
 	}
 
 	public function pesan()

@@ -36,20 +36,20 @@
                                                         $status = "Pembayaran Sedang Diverifikasi";
                                                     else if($row->status == 2)
                                                         $status = "Lunas";
+                                                    else if($row->status == 3)
+                                                        $status = "Batal";
                                                     ?>
                                                     <tr>
                                                         <td><p><?php echo $row->namaKos ?></p></td>
-                                                        <td>
-                                                            <a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><p><?php echo $row->jenisKamar ?></p></a>
-                                                        </td>
-                                                        <td><p><?php echo $row->tanggalTransaksi ?></p></td>
+                                                        <td><p><?php echo $row->jenisKamar ?></p></td>
+                                                        <td><p><?php echo substr($row->tanggalTransaksi, 0, 10) ?></p></td>
                                                         <td><p><?php echo $row->durasiPemesanan ?> bulan</p></td>
-                                                        <td><p>Rp<?php echo number_format($row->durasiPemesanan*$row->hargaKamar) ?>,00</p></td>
+                                                        <td><p>Rp<?php echo number_format($row->durasiPemesanan*$row->hargaKamar) ?></p></td>
                                                         <td><p><?php echo $status ?></p></td>
                                                         <?php
                                                             if($row->status == 0){ ?>
                                                                 <td>
-                                                                    <form action="<?php echo site_url('')?>" method="POST">
+                                                                    <form action="<?php echo site_url('transaksi/pembatalan')?>" method="POST">
                                                                         <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
                                                                         <button type="submit" class="btn btn-danger btn-sm">Pembatalan</button>
                                                                     </form>
@@ -57,7 +57,7 @@
                                                             <?php }
                                                             else{ ?>
                                                                 <td>
-                                                                    <form action="<?php echo site_url('')?>" method="POST">
+                                                                    <form action="<?php echo site_url('transaksi/pembatalan')?>" method="POST">
                                                                         <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
                                                                         <button type="submit" class="btn btn-danger btn-sm" disabled>Pembatalan</button>
                                                                     </form>

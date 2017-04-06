@@ -82,4 +82,14 @@ class Transaksi extends CI_Controller {
         else
         	echo "Anda Harus Login Terlebih Dahulu";
 	}
+
+	public function pembatalan()
+	{
+		$idTransaksi = $this->input->post('transaksi');
+		$status = 3;
+		
+		$batal = $this->model_transaksi->pembatalan_transaksi($idTransaksi, $status);
+
+		redirect('transaksi/daftar');
+	}
 }

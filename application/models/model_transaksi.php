@@ -55,4 +55,14 @@ class Model_transaksi extends CI_Model {
  		$run = $this->db->query($query);
 		return $run->result();
  	}
+
+ 	function pembatalan_transaksi($transaksi, $status)
+ 	{
+ 		$data = array (
+ 			'STATUS' => $status
+		);
+
+		$this->db->where('IDTRANSAKSI',$transaksi);
+		$run = $this->db->update('transaksi',$data);
+ 	}
 }

@@ -310,4 +310,5 @@ class Kamar extends CI_Controller {
 
 		redirect('kamar/beranda?kamar='.$kamar.'');
 	}
+
 }

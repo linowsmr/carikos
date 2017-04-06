@@ -61,7 +61,7 @@ class Transaksi extends CI_Controller {
 			redirect('home');
 		}
 		else{
-			echo 'gagal';
+			echo 'Gagal';
 		}
 	}
 

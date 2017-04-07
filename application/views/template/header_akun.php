@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>                        
           </button>
-          <a href="<?php echo site_url('home/index') ?>"><img class="navbar-brand" src="<?php echo base_url();?>assets/images/carikos.png" style="width: 11%; height: 11%; margin-top: -1%;margin-bottom: -30%;"></a>
+          <a href="<?php echo site_url('home/index') ?>"><img class="navbar-brand" src="<?php echo base_url();?>assets/images/carikos-logo.png" style="width: 11%; height: 11%; margin-top: -1%;margin-bottom: -30%;"></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">

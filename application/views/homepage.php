@@ -5,8 +5,8 @@
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <img src="<?php echo base_url();?>assets/images/carikos.png" style="width: 25%; height: 25%;">
-            <br>
+            <img src="<?php echo base_url();?>assets/images/carikos-logo.png" style="width: 28%; height: 25%;">
+            <br><br>
             <a href="#cari" class="btn btn-dark btn-lg">Cari Kos</a>
             <?php
                 if($akun == 0){ ?>

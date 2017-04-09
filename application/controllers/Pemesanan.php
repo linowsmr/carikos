@@ -51,7 +51,27 @@ class Pemesanan extends CI_Controller {
 			$kodeTelepon = "+62";
 			$data['telepon'] = $kodeTelepon.$this->input->post('telepon');
 			$data['email'] = $this->input->post('email');
-			$data['durasi'] = $this->input->post('durasi');
+			$data['masuk'] = $this->input->post('masuk');
+			$data['keluar'] = $this->input->post('keluar');
+
+			$masuk = date_create($data['masuk']);
+			$keluar = date_create($data['keluar']);
+
+			$diff = date_diff($masuk, $keluar);
+
+			$tahun = $diff->format("%y");
+			$bulan = $diff->format("%m");
+			$hari = $diff->format("%d");
+			
+			$data['durasi'] = 0;
+			if($tahun > 0)
+				$data['durasi'] = $data['durasi'] + $tahun*12;
+			if($bulan > 0)
+				$data['durasi'] = $data['durasi'] + $bulan;
+			if($hari > 0)
+				$data['durasi'] = $data['durasi'] + 1;
+			if($data['durasi'] < 1)
+				echo "Salah Input Tanggal";
 
 			$idKamar = $this->input->post('kamar');
 			$idKos = $this->input->post('kos');
@@ -62,7 +82,7 @@ class Pemesanan extends CI_Controller {
 			$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
 			$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);
 
-			$data['idPemesanan'] = $this->model_pemesanan->tambah_pemesanan($data['durasi'], $data['harga'], $username, $idKamar);
+			$data['idPemesanan'] = $this->model_pemesanan->tambah_pemesanan($data['masuk'], $data['keluar'], $data['durasi'], $data['harga'], $username, $idKamar);
 
 			if($data['idPemesanan'] != "Gagal"){
 				$this->load->view('template/header_akun', $dataAkun);

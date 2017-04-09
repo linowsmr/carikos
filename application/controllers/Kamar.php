@@ -16,9 +16,13 @@ class Kamar extends CI_Controller {
 		$harga = $this->input->post('harga');
 		$jumlah = $this->input->post('jumlah');
 		$fasilitas = $this->input->post('fasilitas');
+		$panjang = $this->input->post('panjang');
+		$lebar = $this->input->post('lebar');
+		$kali = " X ";
+		$luas = $panjang.$kali.$lebar;
 		$idKos = $this->input->post('id');
 
-		$insert = $this->model_kamar->insert($jenis, $harga, $jumlah, $idKos);
+		$insert = $this->model_kamar->insert($jenis, $harga, $jumlah, $luas, $idKos);
 
 		if($insert != "Gagal"){
 	        for($a=0; $a<sizeof($fasilitas); $a++){

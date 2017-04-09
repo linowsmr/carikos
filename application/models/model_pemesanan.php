@@ -1,9 +1,11 @@
 <?php
 class Model_pemesanan extends CI_Model {
  	
- 	function tambah_pemesanan($durasi, $harga, $username, $idKamar)
+ 	function tambah_pemesanan($masuk, $keluar, $durasi, $harga, $username, $idKamar)
  	{
  		$data = array(
+ 			'TANGGALMASUK' => $masuk,
+ 			'TANGGALKELUAR' => $keluar,
 	   		'DURASIPEMESANAN' => $durasi,
 	   		'HARGAPEMESANAN' => $harga,
 	   		'USERNAMEAKUN' => $username,

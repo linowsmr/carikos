@@ -67,12 +67,14 @@
                                         <input type="email" class="form-control" name="email" value="<?php echo $emailAkun ?>" required>
                                         <small>Contoh: email@example.com</small>
                                     </div>
+
                                     <div class="form-group" style="width: 50%;">
-                                        <h4>Durasi Pemesanan</h4>
-                                        <div class="input-group">
-                                            <input type="number" min="0" class="form-control" name="durasi" required>
-                                            <span class="input-group-addon">bulan</span>
-                                        </div>
+                                        <h4>Tanggal Masuk</h4>
+                                        <input type="date" class="form-control" name="masuk" required>
+                                    </div>
+                                    <div class="form-group" style="width: 50%;">
+                                        <h4>Tanggal Keluar</h4>
+                                        <input type="date" class="form-control" name="keluar" required>
                                     </div>
                                 </section>
                             </div>

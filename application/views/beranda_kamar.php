@@ -8,6 +8,11 @@
                 <?php
                     foreach($detail as $row){ ?>
                         <div class="col-lg-12 text-center">
+                            <ol class="breadcrumb">
+                                <li><a href="<?php echo site_url('pemilik/beranda') ?>">Kos</a></li>
+                                <li><a href="<?php echo site_url('kos/beranda?kos='.$row->idKos.'') ?>"><?php echo $row->namaKos ?></a></li> 
+                                <li class="active"><?php echo $row->jenisKamar ?></li>     
+                            </ol>
                             <h2>Jenis Kamar "<?php echo $row->jenisKamar ?>"</h2>
                             <hr class="small" style="border-color: black;">
                             <h3>Harga</h3>

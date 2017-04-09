@@ -7,12 +7,13 @@ class Model_kamar extends CI_Model {
 		return $run->result();
  	}
 
- 	function insert($jenis, $harga, $jumlah, $id)
+ 	function insert($jenis, $harga, $jumlah, $luas, $id)
  	{
  		$data = array(
 	   		'JENISKAMAR' => $jenis,
 	   		'HARGAKAMAR' => $harga,
 	   		'JUMLAHKAMAR' => $jumlah,
+	   		'LUASKAMAR' => $luas,
 	   		'IDKOS' => $id
 	   	);
 

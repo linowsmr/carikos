@@ -172,6 +172,7 @@ class Pencarian extends CI_Controller {
 
 		//exit();
 		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+		$data['kamarTerpakai'] = $this->model_kamar->terpakai();
 
 		if(!empty($this->session->userdata('logged_in_akun')))
         {
@@ -194,7 +195,9 @@ class Pencarian extends CI_Controller {
 	{
 		$idKamar = $this->input->post('idKamar');
 		$idKos = $this->input->post('idKos');
+		$data['jmlKamar'] = $this->input->post('jmlKamar');
 		$data['harga'] = $this->input->post('hargaKamar');
+		
 		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
 		foreach($data['detailKos'] as $row){
 			$idCluster = $row->idCluster;

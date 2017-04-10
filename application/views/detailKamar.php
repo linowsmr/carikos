@@ -16,6 +16,7 @@
         $idKamar = $row->idKamar;
         $jenisKamar = $row->jenisKamar;
         $jumlahKamar = $row->jumlahKamar;
+        $luasKamar = $row->luasKamar;
     }
 
     foreach($minimarket as $row){
@@ -65,17 +66,17 @@
                             <br>
                             <h4><b>Jumlah Kamar yang Tersedia</b></h4>
                             <br>
-                            <h4><b>Luas Kamar</b></h4>
+                            <h4><b>Luas Kamar (Dalam m)</b></h4>
                             <br>
                             <h4><b>Fasilitas Kamar</b></h4>
                         </div>
                         <div class="col-lg-6" style="text-align: left;">
                             <h4>Rp<?php echo $hargaKamar ?>/bulan</h4>
                             <br>
-                            <h4><?php echo $jumlahKamar ?> Kamar</h4>
+                            <h4><?php echo $jmlKamar ?> Kamar</h4>
                             <br><br>
-                            <h4>Nanti akan Ditambahkan</h4>
-                            <br>
+                            <h4><?php echo $luasKamar ?></h4>
+                            <br><br>
                             <?php foreach($fasilitasKamar as $row){ ?>
                                 <h4><?php echo $row->namaFasilitasKamar ?></h4>
                             <?php } ?>

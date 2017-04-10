@@ -16,6 +16,10 @@
                         //$lng = 112.7971214;
                         ?>
                         <div class="col-lg-12 text-center">
+                            <ol class="breadcrumb">
+                                <li><a href="<?php echo site_url('pemilik/beranda') ?>">Kos</a></li>
+                                <li class="active"><?php echo $row->namaKos ?></li>      
+                            </ol>
                             <h2><?php echo $row->namaKos ?></h2>
                             <hr class="small" style="border-color: black;">
                             <h3>Alamat</h3>
@@ -153,6 +157,7 @@
                                         <th>Jenis Kamar</th>
                                         <th>Harga Kamar</th>
                                         <th>Jumlah Kamar</th>
+                                        <th>Luas Kamar (Dalam m)</th>
                                         <th></th>
                                       </tr>
                                     </thead>
@@ -163,6 +168,7 @@
                                                     <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><p><?php echo $row->jenisKamar ?></p></a></td>
                                                     <td><p><?php echo number_format($row->hargaKamar) ?></p></td>
                                                     <td><p><?php echo $row->jumlahKamar ?></p></td>
+                                                    <td><p><?php echo $row->luasKamar ?></p></td>
                                                     <td>
                                                         <form action="<?php echo site_url('kamar/delete') ?>" method="post">
                                                             <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
@@ -209,10 +215,18 @@
 	                            <div class="form-group">
 	                                <h4>Jumlah Kamar</h4>
 	                                <div class="input-group">
-	                                	<input type="name" class="form-control" name="jumlah" required>
+	                                	<input type="number" min="1" class="form-control" name="jumlah" required>
 	                                	<span class="input-group-addon">Kamar</span>
 	                                </div>
 	                            </div>
+                                <div class="form-group">
+                                    <h4>Luas Kamar (Dalam m)</h4>
+                                    <div class="input-group">
+                                        <input type="name" class="form-control" name="panjang" style="width: 50%; float: right;" required>
+                                        <span class="input-group-addon">X</span>
+                                        <input type="name" class="form-control" name="lebar" style="width: 50%;" required>
+                                    </div>
+                                </div>
 	                            <div class="form-group">
 	                                <h4>Fasilitas Kamar</h4>
 	                                <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitas[]">
@@ -225,7 +239,7 @@
 	                            </div>
                                 <div class="form-group">
                                     <h4>Foto Kamar</h4>
-                                    <input type="file" name="foto[]" multiple required>
+                                    <input type="file" name="foto[]" multiple>
                                 </div>
 	                            <div class="form-group">
 	                                <input type="hidden" class="form-control" name="id" value="<?php echo $id ?>">

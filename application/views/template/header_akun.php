@@ -45,7 +45,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>                        
           </button>
-          <a class="navbar-brand" href="<?php echo site_url('home/index') ?>">CariKos</a>
+          <a href="<?php echo site_url('home/index') ?>"><img class="navbar-brand" src="<?php echo base_url();?>assets/images/carikos-logo.png" style="width: 11%; height: 11%; margin-top: -1%;margin-bottom: -30%;"></a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
           <ul class="nav navbar-nav navbar-right">
@@ -55,9 +55,9 @@
                     Transaksi  <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> Daftar Transaksi</a>
+                    <li><a href="<?php echo site_url('transaksi/daftar') ?>"><i class="fa fa-user fa-fw"></i> Daftar Transaksi</a>
                     </li>
-                    <li><a href="<?php echo site_url('transaksi/konfirmasi') ?>"><i class="fa fa-user fa-fw"></i> Verifikasi Pembayaran</a>
+                    <li><a href="<?php echo site_url('transaksi/konfirmasi') ?>"><i class="fa fa-user fa-fw"></i> Konfirmasi Pembayaran</a>
                     </li>
                 </ul>
                 <!-- /.dropdown-user -->

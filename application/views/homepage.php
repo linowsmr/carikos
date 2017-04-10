@@ -5,10 +5,9 @@
     <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1>CariKos</h1>
-            <h3>Cari Kos Menjadi Lebih Mudah</h3>
-            <br>
-            <a href="#contact" class="btn btn-dark btn-lg">Cari Kos</a>
+            <img src="<?php echo base_url();?>assets/images/carikos-logo.png" style="width: 28%; height: 25%;">
+            <br><br>
+            <a href="#cari" class="btn btn-dark btn-lg">Cari Kos</a>
             <?php
                 if($akun == 0){ ?>
                     <a href="#daftar" class="btn btn-dark btn-lg">Daftar Kos</a>
@@ -17,7 +16,7 @@
         </div>
     </header>
 
-    <section id="tentang" class="about">
+    <section id="cari" class="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">

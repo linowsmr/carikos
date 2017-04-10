@@ -35,29 +35,3 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-
-<body>
-    <!-- Navigation -->
-    <div id="top"></div>
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>CariKos</a>
-            </li>
-            <li>
-                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Cari Kos</a>
-            </li>
-            <li>
-                <a href="<?php echo site_url('home/index') ?>" onclick=$("#menu-close").click();>Daftar Kos</a>
-            </li>
-            <li>
-                <a href="<?php echo site_url('pemilik/masuk') ?>" onclick=$("#menu-close").click();>Masuk Akun</a>
-            </li>
-            <li>
-                <a href="<?php echo site_url('pemilik/daftar') ?>" onclick=$("#menu-close").click();>Daftar Akun</a>
-            </li>
-        </ul>
-    </nav>
-</body>

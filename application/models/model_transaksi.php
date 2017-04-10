@@ -18,6 +18,13 @@ class Model_transaksi extends CI_Model {
 			return "Gagal";
  	}
 
+ 	function jumlah_kamar($idPemesanan)
+ 	{
+ 		$query = "SELECT km.idKamar, km.jumlahKamar FROM kamar km, pemesanan p WHERE km.idKamar = p.idKamar AND p.idPemesanan = $idPemesanan";
+ 		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
  	function data_transaksi()
  	{
  		$query = "SELECT * FROM transaksi";
@@ -42,6 +49,7 @@ class Model_transaksi extends CI_Model {
 			return "Gagal";
  	}
 
+<<<<<<< HEAD
  	function updateVerifikasi($idTransaksi,$status)
  	{
  		$data = array (
@@ -75,5 +83,29 @@ class Model_transaksi extends CI_Model {
  		$query = "SELECT km.hargaKamar, p.durasiPemesanan, t.totalPembayaran from transaksi t, kamar km, pemesanan p where t.idPemesanan = p.idPemesanan and p.idKamar = km.idKamar";
  		$run = $this->db->query($query);
  		return $run->result();
+=======
+ 	function count_transaksi($username)
+ 	{
+ 		$query = "SELECT * FROM pemesanan p, transaksi t WHERE p.idPemesanan = t.idPemesanan AND p.usernameAkun = '$username'";
+ 		$run = $this->db->query($query);
+		return $run->num_rows();
+ 	}
+
+ 	function ambil_transaksi($username)
+ 	{
+ 		$query = "SELECT * FROM pemesanan p, transaksi t, akun a, kamar km, kos k WHERE p.idPemesanan = t.idPemesanan AND p.usernameAkun = a.username AND p.idKamar = km.idKamar AND km.idKos = k.idKos AND p.usernameAkun = '$username' ORDER BY t.idTransaksi DESC";
+ 		$run = $this->db->query($query);
+		return $run->result();
+ 	}
+
+ 	function pembatalan_transaksi($transaksi, $status)
+ 	{
+ 		$data = array (
+ 			'STATUS' => $status
+		);
+
+		$this->db->where('IDTRANSAKSI',$transaksi);
+		$run = $this->db->update('transaksi',$data);
+>>>>>>> aa3a3034562646dea5d37e2533e4dcb52d96fa7d
  	}
 }

@@ -63,6 +63,14 @@
                             <h4>Harga Kamar</h4>
                             <h5>Rp<?php echo $hargaKamar ?>/bulan</h5>
                         </div>
+                        <div class="col-lg-6">
+                            <h4>Tanggal Masuk</h4>
+                            <h5><?php echo $masuk ?></h5>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>Tanggal Keluar</h4>
+                            <h5><?php echo $keluar ?></h5>
+                        </div>
                     </div>
                     <div class="col-lg-4">
                     </div>

@@ -45,9 +45,11 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
             $data['kos'] = $this->model_kos->jumlahKos();
             $data['kamar'] = $this->model_kamar->jumlahKamar();
             $data['pemilik'] = $this->model_pemilik->jumlahPemilik();
+            $data['transaksi'] = $this->model_transaksi->jumlahTransaksi();
 
             $this->load->view('admin/admheader', $nama);
             $this->load->view('admin/index', $data);
@@ -69,6 +71,7 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
             $data['kos'] = $this->model_kos->lihatKos();
 			$id = $this->input->get('kos');
 			$data['id'] = $id;
@@ -87,6 +90,7 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
             $data['pemesanan'] = $this->model_pemesanan->daftar_pemesanan();
 
 			$this->load->view('admin/admheader',$nama);
@@ -104,6 +108,7 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
             $data['transaksi'] = $this->model_transaksi->data_transaksi();
 
 			$this->load->view('admin/admheader',$nama);
@@ -119,10 +124,16 @@ class Admin extends CI_Controller {
 		if(!empty($this->session->userdata('logged_in_admin')))
         {
             $session_data = $this->session->userdata('logged_in_admin');
+            $bulan = 0;
+            $tahun = 0;
             $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
+            $bulan = $this->input->get('bulan');
+            $tahun = $this->input->get('tahun');
+            $data['transaksi'] = $this->model_transaksi->laporanKeuangan($bulan,$tahun);
 
             $this->load->view('admin/admheader',$nama);
-			$this->load->view('admin/laporan');
+			$this->load->view('admin/laporan',$data);
         }
         else
         {
@@ -135,6 +146,7 @@ class Admin extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
 
             $id = $this->input->get('kos');
 			$data['id'] = $id;
@@ -155,7 +167,7 @@ class Admin extends CI_Controller {
 		$status = 2;
 		$idTransaksi = $this->input->post('transaksi');
 
-		$update = $this->model_transaksi->verifikasi($idTransaksi,$status);
+		$update = $this->model_transaksi->updateVerifikasi($idTransaksi,$status);
 		if($cek != 'Gagal'){
 			redirect('admin/trans');
 		}

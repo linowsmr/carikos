@@ -41,4 +41,39 @@ class Model_transaksi extends CI_Model {
 		else
 			return "Gagal";
  	}
+
+ 	function updateVerifikasi($idTransaksi,$status)
+ 	{
+ 		$data = array (
+			'STATUS' => $status
+		);
+		$this->db->where('IDTRANSAKSI',$idTransaksi);
+		$run = $this->db->update('transaksi',$data);
+
+		if($run)
+			return "Berhasil";
+		else
+			return "Gagal";
+ 	}
+
+ 	function notifTransaksi()
+ 	{
+ 		$query = "SELECT COUNT(*) as totalTransaksi from transaksi where status = 1";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+
+ 	function laporanKeuangan($bulan,$tahun)
+ 	{
+ 		$query = "SELECT DISTINCT t.idTransaksi, date(t.tanggalTransaksi) as tanggal, km.hargaKamar, p.durasiPemesanan, p.hargaPemesanan from transaksi t, kamar km, pemesanan p where p.idKamar = km.idKamar and t.idPemesanan = p.idPemesanan and month(t.tanggalTransaksi) = '$bulan' and year(t.tanggalTransaksi) = '$tahun'";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+
+ 	function jumlahTransaksi()
+ 	{
+ 		$query = "SELECT km.hargaKamar, p.durasiPemesanan, t.totalPembayaran from transaksi t, kamar km, pemesanan p where t.idPemesanan = p.idPemesanan and p.idKamar = km.idKamar";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
 }

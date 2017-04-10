@@ -54,12 +54,28 @@
             <div class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="fa fa-bell fa-fw"></i><span class="caret"></span>
+                      <i class="fa fa-bell fa-fw"></i>
+                      <?php
+                        foreach ($notifTransaksi as $row) {
+                             if($row->totalTransaksi > 0){ ?>
+                                <span class="badge"><?php echo $row->totalTransaksi;?></span>
+                            <?php }?>
+                        <?php }?>
+                      <span class="caret"></span>
                   </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="<?php echo site_url('admin/trans')?>"><h5 style="margin-left: 20px;">Transaksi <?php
+                        foreach ($notifTransaksi as $row) {
+                             if($row->totalTransaksi > 0){ ?>
+                                <span class="badge"><?php echo $row->totalTransaksi;?></span>
+                            <?php }?>
+                        <?php }?></h5></li></a>
+                  </ul>
                 </li>
                 <li class="dropdown">
                   <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                      <i class="fa fa-user fa-fw"></i><span class="caret"></span>
+                      <i class="fa fa-user fa-fw"></i>
+                        <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
                       <li><h4 style="margin-left: 20px; text-transform: uppercase; font-weight: bold;"><?php echo $username?></h4></li>

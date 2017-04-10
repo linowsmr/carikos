@@ -61,13 +61,19 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-3">
-                            <i class="fa fa-bell fa-3x"></i>
+                            <i class="fa fa-dollar fa-3x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
                         <?php
-                        foreach ($pemilik as $pemilik_item) {?>
-                            <div class="huge"><?php echo $pemilik_item->total;}?></div>
-                            <div>Reservasi</div>
+                        $totalSemua = 0;
+                        foreach ($transaksi as $row) {
+                            $hargaAsli = $row->hargaKamar * $row->durasiPemesanan;
+                            $hargaBaru = $row->totalPembayaran;
+                            $total = $hargaBaru - $hargaAsli; 
+                            $totalSemua += $total;
+                        }?>
+                            <div class="huge"><h5>Rp<?php echo number_format($totalSemua);?></h5></div>
+                            <div>Keuntungan</div>
                         </div>
                     </div>
                 </div>

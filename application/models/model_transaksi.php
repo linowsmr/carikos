@@ -49,7 +49,6 @@ class Model_transaksi extends CI_Model {
 			return "Gagal";
  	}
 
-<<<<<<< HEAD
  	function updateVerifikasi($idTransaksi,$status)
  	{
  		$data = array (
@@ -83,7 +82,8 @@ class Model_transaksi extends CI_Model {
  		$query = "SELECT km.hargaKamar, p.durasiPemesanan, t.totalPembayaran from transaksi t, kamar km, pemesanan p where t.idPemesanan = p.idPemesanan and p.idKamar = km.idKamar";
  		$run = $this->db->query($query);
  		return $run->result();
-=======
+ 	}
+ 	
  	function count_transaksi($username)
  	{
  		$query = "SELECT * FROM pemesanan p, transaksi t WHERE p.idPemesanan = t.idPemesanan AND p.usernameAkun = '$username'";
@@ -106,6 +106,5 @@ class Model_transaksi extends CI_Model {
 
 		$this->db->where('IDTRANSAKSI',$transaksi);
 		$run = $this->db->update('transaksi',$data);
->>>>>>> aa3a3034562646dea5d37e2533e4dcb52d96fa7d
  	}
 }

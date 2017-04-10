@@ -13,7 +13,8 @@
 <head>
     <style>
       #map {
-        height: 0%;
+        height: 100%;
+        width: 100%;
       }
       .loader {
           border: 16px solid #f3f3f3;
@@ -50,20 +51,21 @@
         <aside class="call-to-action">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12 text-center">
+                    <div class="col-lg-12 text-center" style="margin-top: -100%;">
                         <div class="container">
                             <div class="row">
                                 <div id="map"></div>
                             </div>
                             <script>
                                 var map;
+                                var infoWindow;
                                 var service;
                                 var array = [];
 
                                 function initMap() {
                                   map = new google.maps.Map(document.getElementById('map'), {
                                     center: {lat: <?php Print($lat); ?>, lng: <?php Print($lng); ?>},
-                                    zoom: 16,
+                                    zoom: 15,
                                     styles: [{
                                       stylers: [{ visibility: 'simplified' }]
                                     }, {
@@ -72,6 +74,7 @@
                                     }]
                                   });
 
+                                  infoWindow = new google.maps.InfoWindow();
                                   service = new google.maps.places.PlacesService(map);
 
                                   // The idle event is a debounced event, so we can query & listen without
@@ -82,7 +85,7 @@
                                 function performSearch() {
                                   var request = {
                                     bounds: map.getBounds(),
-                                    keyword: 'Masjid'
+                                    keyword: 'mosque'
                                   };
                                   service.radarSearch(request, callback);
                                 }
@@ -95,9 +98,32 @@
                                   for (var i = 0, result; result = results[i]; i++) {
                                     var origin = {lat: <?php Print($lat); ?>, lng: <?php Print($lng); ?>};
                                     var destination = result.geometry.location;
-
                                     getDistance(origin, destination);
+                                    addMarker(result);
                                   }
+                                }
+
+                                function addMarker(place) {
+                                  var marker = new google.maps.Marker({
+                                    map: map,
+                                    position: place.geometry.location,
+                                    icon: {
+                                      url: 'https://developers.google.com/maps/documentation/javascript/images/circle.png',
+                                      anchor: new google.maps.Point(10, 10),
+                                      scaledSize: new google.maps.Size(10, 17)
+                                    }
+                                  });
+
+                                  google.maps.event.addListener(marker, 'click', function() {
+                                    service.getDetails(place, function(result, status) {
+                                      if (status !== google.maps.places.PlacesServiceStatus.OK) {
+                                        console.error(status);
+                                        return;
+                                      }
+                                      infoWindow.setContent(result.name);
+                                      infoWindow.open(map, marker);
+                                    });
+                                  });
                                 }
 
                                 function getDistance(origin, destination){
@@ -134,7 +160,7 @@
                                         }
                                       }
                                     }
-                                    //console.log(array[0]);
+                                    console.log(array[0]);
                                     form(array[0]);
                                   });
                                 }

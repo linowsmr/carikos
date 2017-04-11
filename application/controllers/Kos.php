@@ -16,6 +16,7 @@ class Kos extends CI_Controller {
 	{
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
+		$kota = strtolower($this->input->post('kota'));
 		$latlng = $this->input->post('latlng');
 		$telepon = $this->input->post('telepon');
 		$parkiran = $this->input->post('parkiran');
@@ -23,7 +24,7 @@ class Kos extends CI_Controller {
 		$fasilitas = $this->input->post('fasilitas');
 		$pemilik = $this->input->post('pemilik');
 
-		$insert = $this->model_kos->insert($nama, $alamat, $latlng, $telepon, $tipe, $parkiran, $pemilik);
+		$insert = $this->model_kos->insert($nama, $alamat, $kota, $latlng, $telepon, $tipe, $parkiran, $pemilik);
 
 		if($insert != "Gagal"){
 	        for($b=0; $b<sizeof($fasilitas); $b++){

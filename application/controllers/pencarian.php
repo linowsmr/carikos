@@ -14,7 +14,7 @@ class Pencarian extends CI_Controller {
 
 	public function index()
 	{
-		$kota = $this->input->get('kota');
+		$kota = strtolower($this->input->get('kota'));
 		
 		$harga = $this->input->get('harga');
 		if($harga == 1){
@@ -44,7 +44,7 @@ class Pencarian extends CI_Controller {
 
 		$nilaiDestinasi = 0;
 
-		$hasilPencarian = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+		$hasilPencarian = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 
 		$cluster = $this->model_cluster->ambil_cluster();
 		foreach($hasilPencarian as $row){
@@ -173,10 +173,10 @@ class Pencarian extends CI_Controller {
 			foreach ($jurusan as $row) {
 				$idJurusan = $row->idJurusan;
 			}
-			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $idJurusan);
+			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $idJurusan);
 		}
 		else{
-			$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+			$data['hasil'] = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 		}
 
 		$data['kamarTerpakai'] = $this->model_kamar->terpakai();

@@ -192,19 +192,15 @@ class Cluster extends CI_Controller {
 					redirect('cluster/destinasi');
 				}
 				else{
-					unset($_SESSION['destinasi']);
-					//unset($_SESSION['kos']);
 					unset($_SESSION['cluster']);
-					//redirect('kos/beranda?kos='.$id.'');
-					redirect('jurusan/jarak');
+					$_SESSION['destinasi'] = "banjir";
+					redirect('cluster/destinasi');
 				}
 			}
 			else{
-				unset($_SESSION['destinasi']);
-				//unset($_SESSION['kos']);
 				unset($_SESSION['cluster']);
-				//redirect('kos/beranda?kos='.$id.'');
-				redirect('jurusan/jarak');
+				$_SESSION['destinasi'] = "banjir";
+				redirect('cluster/destinasi');
 			}
 		}
 
@@ -273,6 +269,20 @@ class Cluster extends CI_Controller {
 				$_SESSION['destinasi'] = "lain";
 				redirect('cluster/destinasi');
 			}
+		}
+
+		else if($_SESSION['destinasi'] == "banjir"){
+			$data['kos'] = $this->model_kos->detail_kos($_SESSION['kos']);
+			$this->load->view('template/header-2');
+			$this->load->view('kos_banjir', $data);
+			$this->load->view('template/footer-2');
+		}
+
+		else if($_SESSION['destinasi'] == "ramai"){
+			$data['kos'] = $this->model_kos->detail_kos($_SESSION['kos']);
+			$this->load->view('template/header-2');
+			$this->load->view('kos_ramai', $data);
+			$this->load->view('template/footer-2');
 		}
 	}
 
@@ -361,4 +371,24 @@ class Cluster extends CI_Controller {
 		redirect('cluster/destinasi');
 	}
 
+	function kos_banjir()
+	{
+		$idKos = $this->input->post('kos');
+		$nilaiBanjir = $this->input->post('nilai')*0.05;
+
+		$this->model_kos->nilai_banjir($idKos, $nilaiBanjir);
+		unset($_SESSION['destinasi']);
+		$_SESSION['destinasi'] = "ramai";
+		redirect('cluster/destinasi');
+	}
+
+	function kos_ramai()
+	{
+		$idKos = $this->input->post('kos');
+		$nilaiRamai = $this->input->post('nilai')*0.03;
+
+		$this->model_kos->nilai_ramai($idKos, $nilaiRamai);
+		unset($_SESSION['destinasi']);
+		redirect('jurusan/jarak');
+	}
 }

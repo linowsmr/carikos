@@ -71,6 +71,10 @@
                                     <input type="name" class="form-control" name="nama" required>
                                 </div>
                                 <div class="form-group">
+                                    <h4>Kota Kos</h4>
+                                    <input type="name" class="form-control" name="kota" required>
+                                </div>
+                                <div class="form-group">
                                     <h4>Alamat Kos</h4>
                                     <textarea class="form-control" rows="3" id="alamat" name="alamat" required></textarea>
                                     <input id="submit" type="button" value="Verifikasi Alamat"  class="btn btn-lg btn-light" onclick="myFunction()">

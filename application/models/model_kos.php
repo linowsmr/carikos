@@ -42,11 +42,12 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
- 	function insert($nama, $alamat, $latlng, $telepon, $tipe, $parkiran, $pemilik)
+ 	function insert($nama, $alamat, $kota, $latlng, $telepon, $tipe, $parkiran, $pemilik)
  	{
  		$data = array(
 	   		'NAMAKOS' => $nama,
 	   		'ALAMATKOS' => $alamat,
+	   		'KOTAKOS' => $kota,
 	   		'LATLNGKOS' => $latlng,
 	   		'TELEPONKOS' => $telepon,
 	   		'IDTIPEKOS' => $tipe,
@@ -232,5 +233,25 @@ class Model_kos extends CI_Model {
  		$query = "SELECT namaKos FROM kos where idKos = '$id'";
  		$run = $this->db->query($query);
  		return $run->result();
+ 	}
+
+ 	function nilai_banjir($idKos, $nilai)
+ 	{
+ 		$data = array (
+				'NILAIBANJIR' => $nilai
+		);
+
+		$this->db->where('IDKOS', $idKos);
+	    $run = $this->db->update('kos', $data);
+ 	}
+
+ 	function nilai_ramai($idKos, $nilai)
+ 	{
+ 		$data = array (
+				'NILAIRAMAI' => $nilai
+		);
+
+		$this->db->where('IDKOS', $idKos);
+	    $run = $this->db->update('kos', $data);
  	}
 }

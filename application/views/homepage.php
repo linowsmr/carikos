@@ -70,7 +70,7 @@
 	                                ?>
 	                            </select>
 	                        </div>
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <h4>Dekat dengan Jurusan</h4>
                                 <select class="selectpicker" name="jurusan" data-live-search="true" title="Tidak Ada yang Dipilih">
                                     <optgroup label="Institut Teknologi Sepuluh Nopember">
@@ -81,7 +81,7 @@
                                         ?>
                                     </optgroup>
                                 </select>
-                            </div> -->
+                            </div>
 	                    	<button type="submit" class="btn btn-lg btn-dark">Cari</button>
 	                    </form>
 	                </div>

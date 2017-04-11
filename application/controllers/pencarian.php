@@ -37,10 +37,7 @@ class Pencarian extends CI_Controller {
 		$tipe = $this->input->get('tipe');
 		$kos = $this->input->get('fasilitaskos');
 		$kamar = $this->input->get('fasilitaskamar');
-		// $jurusan = $this->input->get('jurusan');
-
-		// if($jurusan != "")
-		// 	$data['jurusan'] = $this->model_pencarian->ambil_jurusan($jurusan);
+		$jurusanDipilih = $this->input->get('jurusan');
 
 		$fasilitaskos = implode(",", $kos);
 		$fasilitaskamar = implode(",", $kamar);
@@ -171,7 +168,17 @@ class Pencarian extends CI_Controller {
 
 
 		//exit();
-		$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+		if($jurusanDipilih != ""){
+			$jurusan = $this->model_pencarian->ambil_jurusan($jurusanDipilih);
+			foreach ($jurusan as $row) {
+				$idJurusan = $row->idJurusan;
+			}
+			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $idJurusan);
+		}
+		else{
+			$data['hasil'] = $this->model_pencarian->pencarian($minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+		}
+
 		$data['kamarTerpakai'] = $this->model_kamar->terpakai();
 
 		if(!empty($this->session->userdata('logged_in_akun')))

@@ -44,12 +44,20 @@
                                 $idKamar = $row->idKamar;
                                 $jmlKamar = $row->jumlahKamar;
 
+                                if(isset($row->nilaiClusterJurusan)){
+                                    $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar + $row->nilaiClusterJurusan;
+                                }
+                                else{
+                                    $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar;
+                                    $skor = $skor*0.83;
+                                }
+
                                 foreach($kamarTerpakai as $row2){
                                     if($idKamar == $row2->idKamar)
                                         $jmlKamar = $jmlKamar - $row2->jmlKamar;
                                 }
 
-                                $skor = $row->nilaiDestinasiCluster + $row->nilaiParkiranPenjagaKos + $row->nilaiFasilitasKamar;
+                                
                                 $bulan = date("m");
 
                                 $lr = 0.5;

@@ -9,6 +9,7 @@ class Cluster extends CI_Controller {
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_kamar','',TRUE);
 	   	$this->load->model('model_cluster','',TRUE);
+	   	$this->load->model('model_jurusan','',TRUE);
  	}
 
  	public function kmeans()
@@ -57,12 +58,18 @@ class Cluster extends CI_Controller {
 
 		$this->model_cluster->hapus_cluster();
 		$this->model_cluster->hapus_cluster_destinasi();
+		$this->model_jurusan->hapus_cluster_jurusan();
 		
 		// display the cluster centers and attached points
 		foreach ($clusters as $i => $cluster){
 			//printf("Cluster %s (%f,%f): %d points <br>", $i, $cluster[0], $cluster[1], count($cluster));
 			$latLngCluster = "($cluster[0], $cluster[1])";
 			$idCluster = $this->model_cluster->cluster($latLngCluster);
+
+			$jurusan = $this->model_jurusan->ambil_semua_jurusan();
+			foreach($jurusan as $row){
+				$this->model_jurusan->input_cluster_jurusan($idCluster, $row->idJurusan);
+			}
 
 			foreach ($cluster as $j => $member){
 				$latlng = "($member[0], $member[1])";
@@ -186,16 +193,18 @@ class Cluster extends CI_Controller {
 				}
 				else{
 					unset($_SESSION['destinasi']);
-					unset($_SESSION['kos']);
+					//unset($_SESSION['kos']);
 					unset($_SESSION['cluster']);
-					redirect('kos/beranda?kos='.$id.'');
+					//redirect('kos/beranda?kos='.$id.'');
+					redirect('jurusan/jarak');
 				}
 			}
 			else{
 				unset($_SESSION['destinasi']);
-				unset($_SESSION['kos']);
+				//unset($_SESSION['kos']);
 				unset($_SESSION['cluster']);
-				redirect('kos/beranda?kos='.$id.'');
+				//redirect('kos/beranda?kos='.$id.'');
+				redirect('jurusan/jarak');
 			}
 		}
 

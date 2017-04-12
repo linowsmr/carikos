@@ -79,7 +79,7 @@
                                 </section>
                             </div>
                             <br>
-                            <input type="hidden" name="username" value="linowsmr"></input>
+                            <input type="hidden" name="username" value="<?php echo $usernameAkun ?>"></input>
                             <input type="hidden" name="kamar" value="<?php echo $idKamar ?>"></input>
                             <input type="hidden" name="kos" value="<?php echo $idKos ?>"></input>
                             <input type="hidden" name="harga" value="<?php echo $harga ?>"></input>

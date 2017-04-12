@@ -34,8 +34,10 @@
                                                     if($row->status == 0)
                                                         $status = "Belum Bayar";
                                                     else if($row->status == 1)
-                                                        $status = "Lunas";
+                                                        $status = "Pembayaran Belum Diverifikasi";
                                                     else if($row->status == 2)
+                                                        $status = "Lunas";
+                                                    else if($row->status == 3)
                                                         $status = "Batal";
                                                     ?>
                                                     <tr>

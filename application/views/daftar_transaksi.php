@@ -18,6 +18,7 @@
                                     <table class="table table-stripped">
                                         <thead>
                                           <tr>
+                                            <th>ID Transaksi</th>
                                             <th>Nama Kos</th>
                                             <th>Jenis Kamar</th>
                                             <th>Tanggal Transaksi</th>
@@ -40,11 +41,12 @@
                                                         $status = "Batal";
                                                     ?>
                                                     <tr>
+                                                        <td><p><?php echo $row->idTransaksi ?></p></td>
                                                         <td><p><?php echo $row->namaKos ?></p></td>
                                                         <td><p><?php echo $row->jenisKamar ?></p></td>
                                                         <td><p><?php echo substr($row->tanggalTransaksi, 0, 10) ?></p></td>
                                                         <td><p><?php echo $row->durasiPemesanan ?> bulan</p></td>
-                                                        <td><p>Rp<?php echo number_format($row->durasiPemesanan*$row->hargaKamar) ?></p></td>
+                                                        <td><p>Rp<?php echo number_format($row->totalPembayaran) ?></p></td>
                                                         <td><p><?php echo $status ?></p></td>
                                                         <?php
                                                             if($row->status == 0){ ?>

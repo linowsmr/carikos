@@ -58,6 +58,9 @@
             <li>
                 <a href="<?php echo site_url('pemilik/daftar') ?>" onclick=$("#menu-close").click();>Daftar Akun</a>
             </li>
+            <li>
+                <a href="<?php echo site_url('promo/index') ?>" onclick=$("#menu-close").click();>Promo</a>
+            </li>
         </ul>
     </nav>
 </body>

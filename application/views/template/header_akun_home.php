@@ -55,6 +55,9 @@
                 <a href="<?php echo site_url('Transaksi/konfirmasi') ?>" onclick=$("#menu-close").click();>Konfirmasi Pembayaran</a>
             </li>
             <li>
+                <a href="<?php echo site_url('promo/index') ?>" onclick=$("#menu-close").click();>Promo</a>
+            </li>
+            <li>
                 <a href="#" onclick=$("#menu-close").click();>Edit Profil</a>
             </li>
             <li>

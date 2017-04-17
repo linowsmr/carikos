@@ -19,12 +19,15 @@
                                     <h4>
                                         Periode Sewa: 
                                         <?php
-                                            if($row->periodeSewaMulai == "-" || $row->periodeSewaSelesai == "-"){ ?>
+                                            if($row->periodeSewaMulai == "-" || $row->periodeSewaAkhir == "-"){ ?>
                                                 Kapan Pun
                                             <?php }
+                                            else{ 
+                                                echo "$row->periodeSewaMulai - $row->periodeSewaAkhir";        
+                                            }
                                         ?>
                                     </h4>
-                                    <button class="btn btn-light">Lihat Promo</button>
+                                    <a href="<?php echo site_url('promo/lihat_promo?promo='.$row->idPromo.'') ?>"><button class="btn btn-light">Lihat Promo</button></a>
                                 </div>                                    
                             </div>
                         <?php }

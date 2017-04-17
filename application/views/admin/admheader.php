@@ -108,6 +108,17 @@
                             </ul>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-table fa-fw"></i> Promo<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="<?php echo site_url('admin/promo')?>"><i class="fa fa-dollar fa-fw"></i> Daftar Promo</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('admin/tambah_promo')?>"><i class="fa fa-dollar fa-fw"></i> Tambah Promo</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
                             <a href="<?php echo site_url('admin/lapkeu')?>"><i class="fa fa-dollar fa-fw"></i> Laporan Keuangan</a>
                         </li>
                     </ul>

@@ -62,6 +62,7 @@
                 </ul>
                 <!-- /.dropdown-user -->
             </li>
+            <li><a href="<?php echo site_url('promo/index') ?>">Promo</a></li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <?php echo $username ?>  <i class="fa fa-caret-down"></i>

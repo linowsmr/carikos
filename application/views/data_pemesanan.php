@@ -79,6 +79,16 @@
                                 </section>
                             </div>
                             <br>
+                            <div style="border: 1px solid #dedede;">
+                                <h3 style="margin-left: 2.5%; margin-bottom: 3%;">Kode Promo</h3>
+                                <section style="margin-left: 5%; margin-right: 5%;">
+                                    <div class="form-group" style="width: 50%;">
+                                        <h4>Kode</h4>
+                                        <input type="text" class="form-control" name="kode" style="text-transform:uppercase">
+                                    </div>
+                                </section>
+                            </div>
+                            <br>
                             <input type="hidden" name="username" value="<?php echo $usernameAkun ?>"></input>
                             <input type="hidden" name="kamar" value="<?php echo $idKamar ?>"></input>
                             <input type="hidden" name="kos" value="<?php echo $idKos ?>"></input>

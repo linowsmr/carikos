@@ -86,11 +86,21 @@
                         <div class="col-lg-6">
                             <h4><?php echo $jenisKamar ?></h4>
                             <h4>Durasi Sewa</h4>
+                            <?php
+                                if($idPromo > 0){?>
+                                    <h4>Promo</h4>
+                                <?php }
+                            ?>
                             <h3>Total Pembayaran</h3>
                         </div>
                         <div class="col-lg-6">
                             <h4>Rp<?php echo $hargaKamar ?></h4>
                             <h4><?php echo $durasi ?> bulan</h4>
+                            <?php
+                                if($idPromo > 0){?>
+                                    <h4>-Rp<?php echo number_format($potonganHarga) ?></h4>
+                                <?php }
+                            ?>
                             <h3>Rp<?php echo number_format($totalPembayaran) ?></h3>
                         </div>
                     </div>
@@ -101,9 +111,10 @@
                     </div>
                     <div class="col-lg-2"></div>
                     <div class="col-lg-6">
-                        <form action="<?php echo site_url('transaksi/')?>" method="POST">
+                        <form action="<?php echo site_url('transaksi/index')?>" method="POST">
                             <input type="hidden" name="pemesanan" value="<?php echo $idPemesanan ?>"></input>
                             <input type="hidden" name="totalPembayaran" value="<?php echo $totalPembayaran ?>"></input>
+                            <input type="hidden" name="promo" value="<?php echo $idPromo ?>"></input>
                             <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Lanjut Ke Pembayaran</button>
                         </form>
                     </div>

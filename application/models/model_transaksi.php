@@ -1,10 +1,11 @@
 <?php
 class Model_transaksi extends CI_Model {
  	
- 	function transaksi($idPemesanan, $totalBayar,$status)
+ 	function transaksi($idPemesanan, $promo, $totalBayar,$status)
  	{
  		$data = array(
 	   		'IDPEMESANAN' => $idPemesanan,
+	   		'IDPROMO' => $promo,
 	   		'TOTALPEMBAYARAN' => $totalBayar,
 	   		'STATUS' => $status
 	   	);

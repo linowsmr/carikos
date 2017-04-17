@@ -10,6 +10,7 @@ class Pemesanan extends CI_Controller {
 	   	$this->load->model('model_kamar','',TRUE);
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_pemesanan','',TRUE);
+	   	$this->load->model('model_promo','',TRUE);
  	}
 
 	public function index()
@@ -77,7 +78,70 @@ class Pemesanan extends CI_Controller {
 			$idKos = $this->input->post('kos');
 			$data['harga'] = $this->input->post('harga');
 			$data['totalPembayaran'] = $data['durasi']*$data['harga'];
+			$idPromo = 0;
 
+			$kode = strtoupper($this->input->post('kode'));
+			if($kode != ""){
+				$promo = $this->model_promo->cek_promo($kode);
+				if($promo){
+					foreach($promo as $row){
+						$idPromo = $row->idPromo;
+						$data['potonganHarga'] = $row->potonganHarga;
+						$periodeBookingMulai = date_create_from_format('Y-m-d', $row->periodeBookingMulai);
+						$periodeBookingSelesai = date_create_from_format('Y-m-d', $row->periodeBookingSelesai);
+
+						if($row->periodeSewaMulai == '-' && $row->periodeSewaAkhir == '-'){
+							$periodeSewaMulai = $row->periodeSewaMulai;
+							$periodeSewaAkhir = $row->periodeSewaAkhir;
+						}
+						
+						else{
+							$periodeSewaMulai = date_create_from_format('Y-m-d', $row->periodeSewaMulai);
+							$periodeSewaAkhir = date_create_from_format('Y-m-d', $row->periodeSewaAkhir);
+						}
+
+						$minimumTransaksi = $row->minimumTransaksi;
+						$minimumDurasiPemesanan = $row->minimumDurasiPemesanan;
+					}
+					date_default_timezone_set("Asia/Bangkok");
+					$tanggalSekarang = date("Y-m-d");
+					if($tanggalSekarang >= $periodeBookingMulai->format('Y-m-d') && $tanggalSekarang <= $periodeBookingSelesai->format('Y-m-d')){
+						if($data['totalPembayaran'] >= $minimumTransaksi){
+							if($data['durasi'] >= $minimumDurasiPemesanan){
+								if($periodeSewaMulai == '-' && $periodeSewaAkhir == '-'){
+									$data['totalPembayaran'] = $data['totalPembayaran'] - $data['potonganHarga'];
+									$data['idPromo'] = $idPromo; 
+									//echo $data['totalPembayaran'];
+								}
+								else{
+									if($masuk >= $periodeSewaMulai->format('Y-m-d') && $keluar <= $periodeSewaAkhir->format('Y-m-d')){
+										$data['totalPembayaran'] = $data['totalPembayaran'] - $data['potonganHarga'];
+										$data['idPromo'] = $idPromo;
+										//echo $data['totalPembayaran'];
+									}
+									else{
+										echo "Periode Pemesanan Tidak Memenuhi";
+									}
+								}
+							}
+							else{
+								echo "Minimum Durasi Pemesanan Tidak Memenuhi";
+							}
+						}
+						else{
+							echo "Minimum Transaksi Tidak Memenuhi";
+						}
+					}
+					else{
+						echo "Tanggal Tidak Memenuhi";
+					}
+				}
+				else{
+					echo "Kode Salah";
+					
+				}
+			}
+			
 			$data['detailKamar'] =  $this->model_kamar->detail_kamar($idKamar);
 			$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
 			$data['tipeKos'] =  $this->model_kos->tipe_kos($idKos);

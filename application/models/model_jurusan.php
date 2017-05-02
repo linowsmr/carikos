@@ -36,5 +36,12 @@ class Model_jurusan extends CI_Model {
  		$query = "DELETE FROM cluster_jurusan";
 		$run = $this->db->query($query);
  	}
+
+ 	function latlng_jurusan($idJurusan)
+ 	{
+ 		$query = "SELECT idJurusan, latJurusan, lngJurusan FROM jurusan where idJurusan = $idJurusan";
+		$run = $this->db->query($query);
+		return $run->result();
+ 	}
  	
 }

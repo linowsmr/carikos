@@ -171,6 +171,7 @@
                                         <form action="<?php echo site_url('pencarian/lihatKamar')?>" method="post">
                                             <input type="hidden" name="idKamar" class="form-control" value="<?php echo $row->idKamar?>">
                                             <input type="hidden" name="idKos" class="form-control" value="<?php echo $row->idKos?>">
+                                            <input type="hidden" name="idJurusan" class="form-control" value="<?php echo $idJurusan?>">
                                             <input type="hidden" name="hargaKamar" class="form-control" value="<?php echo round($hargaBaru)?>">
                                             <input type="hidden" name="jmlKamar" value="<?php echo $jmlKamar ?>"></input>
                                             <button type="submit" class="btn btn-light">Lihat Kamar</button>

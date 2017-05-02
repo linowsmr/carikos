@@ -1,6 +1,7 @@
 <body>
+    <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
     <!-- Footer -->
-    <footer>
+    <!-- <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
@@ -30,8 +31,8 @@
                 </div>
             </div>
         </div>
-        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-    </footer>
+        
+    </footer> -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>

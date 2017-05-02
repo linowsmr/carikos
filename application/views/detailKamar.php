@@ -6,6 +6,9 @@
         $teleponKos = $row->teleponKos;
         $luasParkiran = $row->luasParkiran;
         $latlong = substr($row->latLngKos, 1, -1);
+        $coord = explode(", ", $latlong);
+        $latKos = $coord[0];
+        $lngKos = $coord[1];
     }
 
     foreach($tipeKos as $row){
@@ -32,6 +35,16 @@
     }
 
     $hargaKamar = number_format($harga);
+
+    if(isset($jurusan)){
+        foreach($jurusan as $row){
+            $idJurusan = $row->idJurusan;
+            $koma = ', ';
+            $latLngJurusan = $row->latJurusan.$koma.$row->lngJurusan;
+        }
+    }
+    else
+        $idJurusan = 0;                   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -167,43 +180,171 @@
                             <h4>&plusmn;<?php echo $jarakSupermarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakMasjid ?> KM</h4>
                         </div>
-                        <div class="col-lg-6" id="map">
-                            <script type="text/javascript">
-                                function initMap() {
-                                    var myLatlng = new google.maps.LatLng(<?php Print($latlong); ?>);
-                                    var mapOptions = {
-                                      zoom: 18,
-                                      center: myLatlng
-                                    }
-                                    var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                        <?php
+                            if($idJurusan == 0){ ?>
+                                <div class="col-lg-6" id="map">
+                                    <script type="text/javascript">
+                                        function initMap() {
+                                            var myLatlng = new google.maps.LatLng(<?php Print($latlong); ?>);
+                                            var mapOptions = {
+                                              zoom: 15,
+                                              center: myLatlng
+                                            }
+                                            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-                                    // var contentString = '<div id="content">'+
-                                    //                     '<div id="siteNotice">'+
-                                    //                     '</div>'+
-                                    //                     '<h1 id="firstHeading" class="firstHeading">Nama Kos</h1>'+
-                                    //                     '<div id="bodyContent">'+
-                                    //                     '<p>Deskripsi dan Informasi Mengenai Kos</p>'+
-                                    //                     '</div>'+
-                                    //                     '</div>';
+                                            var location = new google.maps.LatLng(<?php Print($latlong); ?>);
+                                            var markerKos = new google.maps.Marker({
+                                                position: location
+                                            });
+                                            markerKos.addListener('click', function() {
+                                                infowindow.open(map, markerKos);
+                                            });
+                                            markerKos.setMap(map);
 
-                                    // var infowindow = new google.maps.InfoWindow({
-                                    //     content: contentString
-                                    // });
+                                            downloadUrl("<?php echo site_url('Portal/index') ?>", function(data) {
+                                                var xml = data.responseXML;
+                                                var markers = xml.documentElement.getElementsByTagName('marker');
+                                                Array.prototype.forEach.call(markers, function(markerElem) {
+                                                    var jenisKendaraanPortal = markerElem.getAttribute('jenisKendaraanPortal');
+                                                    var aksesPortal = markerElem.getAttribute('aksesPortal');
+                                                    var waktuBukaPortal = markerElem.getAttribute('waktuBukaPortal');
+                                                    var waktuTutupportal = markerElem.getAttribute('waktuTutupportal');
+                                                    var point = new google.maps.LatLng(
+                                                        parseFloat(markerElem.getAttribute('latPortal')),
+                                                        parseFloat(markerElem.getAttribute('lngPortal')));
 
-                                    var location = new google.maps.LatLng(<?php Print($latlong); ?>);
-                                    var marker = new google.maps.Marker({
-                                        position: location
-                                    });
-                                    marker.addListener('click', function() {
-                                        infowindow.open(map, marker);
-                                    });
-                                    marker.setMap(map);
-                                }
-                            </script>
-                            <script async defer
-                                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
-                            </script>
-                        </div>
+                                                    var contentString = '<p><b>Jenis Kendaraan: ' + jenisKendaraanPortal + '<br><b>Akses Portal: ' + aksesPortal + '<br><b>Waktu Buka Portal: ' + waktuBukaPortal + '<br><b>Waktu Tutup Portal: ' + waktuTutupportal; 
+                                                    var infoWindow = new google.maps.InfoWindow({
+                                                        content: contentString
+                                                    });
+
+                                                    var image = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png';
+                                                    var marker = new google.maps.Marker({
+                                                        map: map,
+                                                        position: point,
+                                                        icon : image
+                                                        //label: icon.label
+                                                    });
+                                                    marker.addListener('click', function() {
+                                                        infoWindow.open(map, marker);
+                                                    });
+                                                });
+                                            });
+                                        }
+                                        function downloadUrl(url, callback) {
+                                            var request = window.ActiveXObject ?
+                                                new ActiveXObject('Microsoft.XMLHTTP') :
+                                                new XMLHttpRequest;
+
+                                            request.onreadystatechange = function() {
+                                              if (request.readyState == 4) {
+                                                request.onreadystatechange = doNothing;
+                                                callback(request, request.status);
+                                              }
+                                            };
+
+                                            request.open('GET', url, true);
+                                            request.send(null);
+                                        }
+
+                                        function doNothing() {}
+                                    </script>
+                                    <script async defer
+                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
+                                    </script>
+                                </div>
+                            <?php }
+                            else { ?>
+                                <div class="col-lg-6" id="map">
+                                    <script type="text/javascript">
+                                        function initMap() {
+                                            var kos = new google.maps.LatLng(<?php Print($latlong); ?>),
+                                                jurusan = new google.maps.LatLng(<?php Print($latLngJurusan); ?>),
+                                                myOptions = {
+                                                    zoom: 15,
+                                                    center: kos
+                                                },
+                                                map = new google.maps.Map(document.getElementById('map'), myOptions),
+                                                // Instantiate a directions service.
+                                                directionsService = new google.maps.DirectionsService,
+                                                directionsDisplay = new google.maps.DirectionsRenderer({
+                                                    map: map
+                                                });
+
+                                            // get route from A to B
+                                            calculateAndDisplayRoute(directionsService, directionsDisplay, kos, jurusan);
+
+                                            downloadUrl("<?php echo site_url('Portal/index') ?>", function(data) {
+                                                var xml = data.responseXML;
+                                                var markers = xml.documentElement.getElementsByTagName('marker');
+                                                Array.prototype.forEach.call(markers, function(markerElem) {
+                                                    var jenisKendaraanPortal = markerElem.getAttribute('jenisKendaraanPortal');
+                                                    var aksesPortal = markerElem.getAttribute('aksesPortal');
+                                                    var waktuBukaPortal = markerElem.getAttribute('waktuBukaPortal');
+                                                    var waktuTutupportal = markerElem.getAttribute('waktuTutupportal');
+                                                    var point = new google.maps.LatLng(
+                                                        parseFloat(markerElem.getAttribute('latPortal')),
+                                                        parseFloat(markerElem.getAttribute('lngPortal')));
+
+                                                    var contentString = '<p><b>Jenis Kendaraan: ' + jenisKendaraanPortal + '<br><b>Akses Portal: ' + aksesPortal + '<br><b>Waktu Buka Portal: ' + waktuBukaPortal + '<br><b>Waktu Tutup Portal: ' + waktuTutupportal; 
+                                                    var infoWindow = new google.maps.InfoWindow({
+                                                        content: contentString
+                                                    });
+
+                                                    var image = 'http://maps.google.com/mapfiles/kml/pal4/icon53.png';
+                                                    var marker = new google.maps.Marker({
+                                                        map: map,
+                                                        position: point,
+                                                        icon : image
+                                                        //label: icon.label
+                                                    });
+                                                    marker.addListener('click', function() {
+                                                        infoWindow.open(map, marker);
+                                                    });
+                                                });
+                                            });
+                                        }
+
+                                        function calculateAndDisplayRoute(directionsService, directionsDisplay, kos, jurusan) {
+                                            directionsService.route({
+                                                origin: kos,
+                                                destination: jurusan,
+                                                avoidTolls: true,
+                                                avoidHighways: false,
+                                                travelMode: google.maps.TravelMode.DRIVING
+                                            }, function (response, status) {
+                                                if (status == google.maps.DirectionsStatus.OK) {
+                                                    directionsDisplay.setDirections(response);
+                                                } else {
+                                                    window.alert('Directions request failed due to ' + status);
+                                                }
+                                            });
+                                        }
+
+                                        function downloadUrl(url, callback) {
+                                            var request = window.ActiveXObject ?
+                                                new ActiveXObject('Microsoft.XMLHTTP') :
+                                                new XMLHttpRequest;
+
+                                            request.onreadystatechange = function() {
+                                              if (request.readyState == 4) {
+                                                request.onreadystatechange = doNothing;
+                                                callback(request, request.status);
+                                              }
+                                            };
+
+                                            request.open('GET', url, true);
+                                            request.send(null);
+                                        }
+
+                                        function doNothing() {}
+                                    </script>
+                                    <script async defer
+                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
+                                    </script>
+                                </div>
+                            <?php }
+                        ?>
                     </div>
                 </div>
             </div>

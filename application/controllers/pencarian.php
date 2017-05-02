@@ -10,6 +10,7 @@ class Pencarian extends CI_Controller {
 	   	$this->load->model('model_kamar','',TRUE);
 	   	$this->load->model('model_kos','',TRUE);
 	   	$this->load->model('model_cluster','',TRUE);
+	   	$this->load->model('model_jurusan','',TRUE);
  	}
 
 	public function index()
@@ -174,9 +175,11 @@ class Pencarian extends CI_Controller {
 				$idJurusan = $row->idJurusan;
 			}
 			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $idJurusan);
+			$data['idJurusan'] = $jurusanDipilih;
 		}
 		else{
 			$data['hasil'] = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+			$data['idJurusan'] = 0;
 		}
 
 		$data['kamarTerpakai'] = $this->model_kamar->terpakai();
@@ -204,6 +207,9 @@ class Pencarian extends CI_Controller {
 		$idKos = $this->input->post('idKos');
 		$data['jmlKamar'] = $this->input->post('jmlKamar');
 		$data['harga'] = $this->input->post('hargaKamar');
+
+		if($this->input->post('idJurusan') != 0)
+			$data['jurusan'] = $this->model_jurusan->latlng_jurusan($this->input->post('idJurusan'));
 		
 		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
 		foreach($data['detailKos'] as $row){

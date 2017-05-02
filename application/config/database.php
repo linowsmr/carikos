@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
+	'hostname' => '10.151.64.105',
+	'username' => 'carikos',
+	'password' => 'carikosdb',
 	'database' => 'carikos',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

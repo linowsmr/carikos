@@ -9,7 +9,12 @@
                     <?php
                         foreach($detail as $row) { 
                             $luasParkir = $row->idParkiranKos;
-                            $idKos = $row->idKos; ?>
+                            $idKos = $row->idKos; 
+                            $latlong = substr($row->latLngKos, 1, -1);
+                            $coord = explode(", ", $latlong);
+                            $latKos = $coord[0];
+                            $lngKos = $coord[1];
+                            ?>
                             <h2>Ubah Kos "<?php echo $row->namaKos ?>"</h2>
                             <hr class="small">
                             <div class="row">
@@ -21,8 +26,12 @@
                                             <input type="name" class="form-control" name="nama" value="<?php echo $row->namaKos ?>" required>
                                         </div>
                                         <div class="form-group">
+                                            <h4>Kota Kos</h4>
+                                            <input type="name" class="form-control" name="kota" value="<?php echo $row->kotaKos ?>" required>
+                                        </div>
+                                        <div class="form-group">
                                             <h4>Alamat Kos</h4>
-                                            <textarea class="form-control" rows="3" name="alamat" required><?php echo $row->alamatKos ?></textarea>
+                                            <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $row->alamatKos ?>" required>
                                         </div>
                                         <div class="form-group">
                                             <h4>Telepon Kos</h4>
@@ -46,6 +55,12 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <input type="hidden" class="form-control" id="lat" name="lat" value="<?php echo $latKos ?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" class="form-control" id="lng" name="lng" value="<?php echo $lngKos ?>">
+                                        </div>
+                                        <div class="form-group">
                                             <input type="hidden" class="form-control" name="id" value="<?php echo $idKos ?>">
                                         </div>
                                     </div>
@@ -59,6 +74,22 @@
             </div>
         </div>
     </aside>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&libraries=places">
+    </script>
+    <script>
+        function initialize(){
+            var input = document.getElementById('alamat');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                document.getElementById('lat').value = place.geometry.location.lat();
+                document.getElementById('lng').value = place.geometry.location.lng();
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 </body>
 
 </html>

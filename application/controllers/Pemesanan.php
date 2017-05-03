@@ -79,6 +79,7 @@ class Pemesanan extends CI_Controller {
 			$data['harga'] = $this->input->post('harga');
 			$data['totalPembayaran'] = $data['durasi']*$data['harga'];
 			$idPromo = 0;
+			$data['idPromo'] = $idPromo;
 
 			$kode = strtoupper($this->input->post('kode'));
 			if($kode != ""){

@@ -17,12 +17,18 @@ class Kos extends CI_Controller {
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
 		$kota = strtolower($this->input->post('kota'));
-		$latlng = $this->input->post('latlng');
 		$telepon = $this->input->post('telepon');
 		$parkiran = $this->input->post('parkiran');
 		$tipe = $this->input->post('tipe');
 		$fasilitas = $this->input->post('fasilitas');
 		$pemilik = $this->input->post('pemilik');
+
+		$lat = $this->input->post('lat');
+		$lng = $this->input->post('lng');
+		$awal = "(";
+		$akhir = ")";
+		$koma = ", ";
+		$latlng = $awal.$lat.$koma.$lng.$akhir;
 
 		$insert = $this->model_kos->insert($nama, $alamat, $kota, $latlng, $telepon, $tipe, $parkiran, $pemilik);
 
@@ -150,10 +156,18 @@ class Kos extends CI_Controller {
 		$id = $this->input->post('id');
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
+		$kota = strtolower($this->input->post('kota'));
 		$telepon = $this->input->post('telepon');
 		$parkiran = $this->input->post('parkiran');
 
-		$update = $this->model_kos->update($id, $nama, $alamat, $telepon, $parkiran);
+		$lat = $this->input->post('lat');
+		$lng = $this->input->post('lng');
+		$awal = "(";
+		$akhir = ")";
+		$koma = ", ";
+		$latlng = $awal.$lat.$koma.$lng.$akhir;
+
+		$update = $this->model_kos->update($id, $nama, $alamat, $kota, $latlng, $telepon, $parkiran);
 		if($update == 'Berhasil'){
 			redirect('kos/beranda?kos='.$id.'');
 		}

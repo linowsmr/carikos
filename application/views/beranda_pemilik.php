@@ -76,85 +76,84 @@
                                 </div>
                                 <div class="form-group">
                                     <h4>Alamat Kos</h4>
-                                    <textarea class="form-control" rows="3" id="alamat" name="alamat" required></textarea>
-                                    <input id="submit" type="button" value="Verifikasi Alamat"  class="btn btn-lg btn-light" onclick="myFunction()">
+                                    <input type="text" class="form-control" id="alamat" name="alamat" required>
                                 </div>
-                                <div id="form-2" style="display: none;">
-                                    <br>
-                                    <div class="form-group">
-                                        <h4>Telepon Kos</h4>
-                                        <input type="name" class="form-control" name="telepon" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>Luas Parkiran (Dalam m<sup>2</sup>)</h4>
-                                        <select class="form-control" name="parkiran">
-                                        	<option></option>
-                                            <?php
-                                                foreach($parkir as $row){ ?>
-                                                    <option value="<?php echo $row->idParkiranKos ?>"><?php echo $row->luasParkiran ?></option>
-                                                <?php }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>Tipe Kos</h4>
-                                        <select class="form-control" name="tipe" required>
-                                            <?php
-                                                foreach($tipe as $row){ ?>
-                                                    <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
-                                                <?php }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>Fasilitas Kos</h4>
-                                        <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitas[]">
-                                            <?php
-                                                foreach($fasilitas as $row){ ?>
-                                                    <option value="<?php echo $row->idFasilitasKos ?>"><?php echo $row->namaFasilitasKos ?></option>
-                                                <?php }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <h4>Foto Kos</h4>
-                                        <input type="file" name="foto[]" multiple>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" id="latlng" name="latlng">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" name="pemilik" value="<?php echo $username ?>">
-                                    </div>
-                                    <div class="col-lg-4"></div>
-                                    <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-lg btn-light">Daftar</button>
-                                    </div>
+                                <div class="form-group">
+                                    <h4>Telepon Kos</h4>
+                                    <input type="name" class="form-control" name="telepon" required>
                                 </div>
+                                <div class="form-group">
+                                    <h4>Luas Parkiran (Dalam m<sup>2</sup>)</h4>
+                                    <select class="form-control" name="parkiran">
+                                    	<option></option>
+                                        <?php
+                                            foreach($parkir as $row){ ?>
+                                                <option value="<?php echo $row->idParkiranKos ?>"><?php echo $row->luasParkiran ?></option>
+                                            <?php }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Tipe Kos</h4>
+                                    <select class="form-control" name="tipe" required>
+                                        <?php
+                                            foreach($tipe as $row){ ?>
+                                                <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
+                                            <?php }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Fasilitas Kos</h4>
+                                    <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitas[]">
+                                        <?php
+                                            foreach($fasilitas as $row){ ?>
+                                                <option value="<?php echo $row->idFasilitasKos ?>"><?php echo $row->namaFasilitasKos ?></option>
+                                            <?php }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <h4>Foto Kos</h4>
+                                    <input type="file" name="foto[]" multiple>
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="lat" name="lat">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" id="lng" name="lng">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" class="form-control" name="pemilik" value="<?php echo $username ?>">
+                                </div>
+                            </div>
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-lg btn-light">Daftar</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </aside>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&libraries=places">
+    </script>
     <script>
-        function myFunction() {
-            var geocoder = new google.maps.Geocoder();
-            var address = document.getElementById('alamat').value;
-            geocoder.geocode({'address': address}, function(results, status) {
-                if (status === google.maps.GeocoderStatus.OK) {
-                  document.getElementById("latlng").value = results[0].geometry.location;
-                  alert('Alamat Tersedia');
-                  document.getElementById('form-2').style.display = "";
-                } else {
-                  alert('Alamat Tidak Terdaftar');
-                }
+        function initialize(){
+            var input = document.getElementById('alamat');
+            var autocomplete = new google.maps.places.Autocomplete(input);
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                document.getElementById('lat').value = place.geometry.location.lat();
+                document.getElementById('lng').value = place.geometry.location.lng();
             });
         }
+        google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo">
-    </script>
+    
 </body>
 
 </html>

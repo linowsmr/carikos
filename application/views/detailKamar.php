@@ -101,7 +101,7 @@
                         <div class="col-lg-2"></div>
                         <div class="col-lg-4" style="text-align: right;">
                             <h4><b>Alamat Kos</b></h4>
-                            <br>
+                            <br><br><br>
                             <h4><b>Telepon Kos</b></h4>
                             <br>
                             <h4><b>Tipe Kos</b></h4>

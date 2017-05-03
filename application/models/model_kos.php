@@ -127,11 +127,13 @@ class Model_kos extends CI_Model {
 		return $run->result();
  	}
 
- 	function update($id, $nama, $alamat, $telepon, $parkiran)
+ 	function update($id, $nama, $alamat, $kota, $latlng, $telepon, $parkiran)
  	{
  		$data = array (
 					'NAMAKOS' => $nama,
 			   		'ALAMATKOS' => $alamat,
+			   		'KOTAKOS' => $kota,
+			   		'LATLNGKOS' => $latlng,
 			   		'TELEPONKOS' => $telepon,
 			   		'IDPARKIRANKOS' => $parkiran
 		);

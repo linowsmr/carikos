@@ -2,14 +2,14 @@
 <html lang="en">
 
 <body>
-    <aside class="call-to-action bg-primary">
+    <aside class="call-to-action">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <?php
                         foreach($detail as $row) { ?>
                             <h2>Ubah Kamar "<?php echo $row->jenisKamar ?>"</h2>
-                            <hr class="small">
+                            <hr class="small"style="border-color: black;">
                             <div class="row">
                                 <form action="<?php echo site_url('kamar/update_data')?>" method="post">
                                     <div class="col-lg-4"></div>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="col-lg-4"></div>
                                     <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-lg btn-light">Ubah</button>
+                                        <button type="submit" class="btn btn-lg btn-dark">Ubah</button>
                                     </div>
                                 </form>
                             </div>

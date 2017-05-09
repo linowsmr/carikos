@@ -102,9 +102,13 @@ class Kamar extends CI_Controller {
 		$jenis = $this->input->post('jenis');
 		$harga = $this->input->post('harga');
 		$jumlah = $this->input->post('jumlah');
+		$panjang = $this->input->post('panjang');
+		$lebar = $this->input->post('lebar');
+		$kali = " X ";
+		$luas = $panjang.$kali.$lebar;
 		$id = $this->input->post('id');
 
-		$update = $this->model_kamar->update($id, $jenis, $harga, $jumlah);
+		$update = $this->model_kamar->update($id, $jenis, $harga, $jumlah, $luas);
 
 		if($update == "Berhasil"){
 	        redirect('kamar/beranda?kamar='.$id.'');

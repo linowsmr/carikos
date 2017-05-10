@@ -19,6 +19,8 @@
                             <p><?php echo $row->hargaKamar ?></p>
                             <h3>Jumlah</h3>
                             <p><?php echo $row->jumlahKamar ?></p>
+                            <h3>Luas Kamar</h3>
+                            <p><?php echo $row->luasKamar ?></p>
                         </div>
                         <div class="col-lg-6" style="text-align: right;">
                             <form action="<?php echo site_url('kamar/update') ?>" method="get">

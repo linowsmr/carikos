@@ -2,12 +2,12 @@
 <html lang="en">
 
 <body>
-    <aside class="call-to-action bg-primary">
+    <aside class="call-to-action">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2>Tambah Foto Kos</h2>
-                    <hr class="small">
+                    <hr class="small" style="border-color: black;">
                     <div class="row">
                         <form action="<?php echo site_url('kos/tambah_foto_baru')?>" method="post" enctype="multipart/form-data">
                             <div class="col-lg-4"></div>
@@ -22,7 +22,7 @@
                             </div>
                             <div class="col-lg-4"></div>
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-lg btn-light">Tambah</button>
+                                <button type="submit" class="btn btn-lg btn-dark">Tambah</button>
                             </div>
                         </form>
                     </div>

@@ -81,12 +81,13 @@ class Model_kamar extends CI_Model {
  		$this->db->delete('kamar_fasilitaskamar');
  	}
 
- 	function update($id, $jenis, $harga, $jumlah)
+ 	function update($id, $jenis, $harga, $jumlah, $luas)
  	{
  		$data = array(
 	   		'JENISKAMAR' => $jenis,
 	   		'HARGAKAMAR' => $harga,
-	   		'JUMLAHKAMAR' => $jumlah
+	   		'JUMLAHKAMAR' => $jumlah,
+	   		'LUASKAMAR' => $luas
 	   	);
 
 	   	$this->db->where('IDKAMAR', $id);

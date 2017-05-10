@@ -270,15 +270,6 @@ class Kos extends CI_Controller {
         redirect('kos/beranda?kos='.$id.'');
 	}
 
-	public function delete_tipe()
-	{
-		$kos = $this->input->post('kos');
-		$id = $this->input->post('tipe');
-		$this->model_kos->hapus_tipe($id);
-
-		redirect('kos/beranda?kos='.$kos.'');
-	}
-
 	public function tambah_fasilitas()
 	{
 		if(!empty($this->session->userdata('logged_in_pemilik')))

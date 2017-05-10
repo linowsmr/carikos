@@ -184,7 +184,7 @@ class Kos extends CI_Controller {
             $dataPemilik['username'] = $session_data['username'];
             $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
             
-            $id = $this->input->post('kos');
+            $id = $this->input->get('kos');
 
             $data['detail'] = $this->model_kos->detail_kos($id);
 
@@ -195,7 +195,6 @@ class Kos extends CI_Controller {
 
 	            if($dataPemilik['username'] == $pemilik){
 	            	$this->model_kos->delete_fasilitas_kos($id);
-	            	$this->model_kos->delete_tipe_kos($id);
 
 	            	$data['foto'] = $this->model_kos->list_foto($id);
 	            	foreach($data['foto'] as $row){
@@ -325,11 +324,39 @@ class Kos extends CI_Controller {
 
 	public function delete_fasilitas()
 	{
-		$kos = $this->input->post('kos');
-		$id = $this->input->post('fasilitas');
-		$this->model_kos->hapus_fasilitas($id);
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $dataPemilik['username'] = $session_data['username'];
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
+            $kos = $this->input->get('kos');
 
-		redirect('kos/beranda?kos='.$kos.'');
+            $data['detail'] = $this->model_kos->detail_kos($kos);
+
+            if($data['detail']){
+	            foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($dataPemilik['username'] == $pemilik){
+					$id = $this->input->get('fasilitas');
+					$this->model_kos->hapus_fasilitas($id);
+
+					redirect('kos/beranda?kos='.$kos.'');
+	            }
+	            else {
+	            	echo "Bukan Kos Anda";
+	            }
+            }
+            else {
+            	echo "Data Tidak Ditemukan";
+            }
+            
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
 	}
 
 	public function tambah_foto()
@@ -404,13 +431,41 @@ class Kos extends CI_Controller {
 
 	public function hapus_foto()
 	{
-		$kos = $this->input->post('kos');
-		$id = $this->input->post('foto');
-		$nama_file = $this->input->post('nama');
-		$this->model_kos->hapus_foto($id);
-		unlink("assets/images/kos/".$nama_file);
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $dataPemilik['username'] = $session_data['username'];
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
+            
+            $kos = $this->input->get('kos');
 
-		redirect('kos/beranda?kos='.$kos.'');
+            $data['detail'] = $this->model_kos->detail_kos($kos);
+
+            if($data['detail']){
+	            foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($dataPemilik['username'] == $pemilik){
+					$id = $this->input->get('foto');
+					$nama_file = $this->input->get('nama');
+					$this->model_kos->hapus_foto($id);
+					unlink("assets/images/kos/".$nama_file);
+
+					redirect('kos/beranda?kos='.$kos.'');
+	            }
+	            else {
+	            	echo "Bukan Kos Anda";
+	            }
+            }
+            else {
+            	echo "Data Tidak Ditemukan";
+            }
+            
+        }
+        else {
+            redirect('pemilik/masuk');
+        }
 	}
 
 }

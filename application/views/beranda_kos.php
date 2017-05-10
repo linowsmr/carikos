@@ -40,13 +40,25 @@
                             </form>
                         </div>
                         <div class="col-lg-6">
-                            <form action="<?php echo site_url('kos/delete') ?>" method="post">
-                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
+                            <button class="btn btn-danger" data-href="<?php echo site_url('kos/delete?kos='.$row->idKos.'') ?>" data-toggle="modal" data-target="#confirm-delete-kos">
+							    Hapus
+							</button>
+							<div class="modal fade" id="confirm-delete-kos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							    <div class="modal-dialog">
+							        <div class="modal-content">
+							            <div class="modal-body" style="text-align: center; font-size: 20px;">
+							                Anda akan menghapus kos <b><?php echo $row->namaKos ?></b>
+							            </div>
+							            <div class="modal-footer">
+							                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+							                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+							            </div>
+							        </div>
+							    </div>
+							</div>
                             <form action="<?php echo site_url('kos/tambah_fasilitas') ?>" method="get">
                                 <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                <button type="submit" class="btn btn-primary">Tambah Fasilitas Kos</button>
+                                <button type="submit" class="btn btn-primary" style="margin-top: 4.5%">Tambah Fasilitas Kos</button>
                             </form>
                         </div>
                     <?php } ?>
@@ -82,13 +94,24 @@
                                     <?php
                                         foreach($fasilitas as $row) { ?>
                                             <tr>
-                                                <td><p><?php echo $row->namaFasilitasKos ?></p></td>
+                                                <td><?php echo $row->namaFasilitasKos ?></td>
                                                 <td>
-                                                    <form action="<?php echo site_url('kos/delete_fasilitas') ?>" method="post">
-                                                        <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                                        <input type="hidden" name="fasilitas" value="<?php echo $row->idKosFasilitasKos ?>"></input>
-                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                    </form>
+                                                    <button class="btn btn-danger btn-sm" data-href="<?php echo site_url('kos/delete_fasilitas?kos='.$row->idKos.'&fasilitas='.$row->idKosFasilitasKos.'') ?>" data-toggle="modal" data-target="#confirm-delete-fasilitas">
+													    Hapus
+													</button>
+													<div class="modal fade" id="confirm-delete-fasilitas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+													    <div class="modal-dialog">
+													        <div class="modal-content">
+													            <div class="modal-body" style="font-size: 20px;">
+													                Anda akan menghapus fasilitas kos</b>
+													            </div>
+													            <div class="modal-footer">
+													                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+													                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+													            </div>
+													        </div>
+													    </div>
+													</div>
                                                 </td>
                                             </tr>
                                         <?php }
@@ -113,12 +136,22 @@
                                         <a class="thumbnail fancybox" rel="ligthbox" href="<?php echo base_url();?>assets/images/kos/<?php echo $row->namaFile ?>">
                                             <img class="img-responsive" alt="" src="<?php echo base_url();?>assets/images/kos/<?php echo $row->namaFile ?>" />
                                         </a>
-                                        <form action="<?php echo site_url('kos/hapus_foto') ?>" method="post">
-                                            <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                            <input type="hidden" name="foto" value="<?php echo $row->idFotoKos ?>"></input>
-                                            <input type="hidden" name="nama" value="<?php echo $row->namaFile ?>"></input>
-                                            <button type="submit" class="btn btn-danger btn-xs">Hapus Foto</button>
-                                        </form>
+                                        <button class="btn btn-danger btn-xs" data-href="<?php echo site_url('kos/hapus_foto?kos='.$row->idKos.'&foto='.$row->idFotoKos.'$nama='.$row->namaFile.'') ?>" data-toggle="modal" data-target="#confirm-delete-foto">
+										    Hapus
+										</button>
+										<div class="modal fade" id="confirm-delete-foto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+										    <div class="modal-dialog">
+										        <div class="modal-content">
+										            <div class="modal-body" style="text-align: center; font-size: 20px; color: black;">
+										                Anda akan menghapus foto kos</b>
+										            </div>
+										            <div class="modal-footer">
+										                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+										                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+										            </div>
+										        </div>
+										    </div>
+										</div>
                                     </div>
                                 <?php }
                             ?>
@@ -165,16 +198,27 @@
                                         <?php
                                             foreach($kamar as $row) { ?>
                                                 <tr>
-                                                    <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><p><?php echo $row->jenisKamar ?></p></a></td>
-                                                    <td><p><?php echo number_format($row->hargaKamar) ?></p></td>
-                                                    <td><p><?php echo $row->jumlahKamar ?></p></td>
-                                                    <td><p><?php echo $row->luasKamar ?></p></td>
+                                                    <td><a href="<?php echo site_url('kamar/beranda?kamar='.$row->idKamar.'')?>"><?php echo $row->jenisKamar ?></a></td>
+                                                    <td><?php echo number_format($row->hargaKamar) ?></td>
+                                                    <td><?php echo $row->jumlahKamar ?></td>
+                                                    <td><?php echo $row->luasKamar ?></td>
                                                     <td>
-                                                        <form action="<?php echo site_url('kamar/delete') ?>" method="post">
-                                                            <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                                            <input type="hidden" name="kamar" value="<?php echo $row->idKamar ?>"></input>
-                                                            <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                        </form>
+                                                    	<button class="btn btn-danger btn-sm" data-href="<?php echo site_url('kamar/delete?kos='.$row->idKos.'&kamar='.$row->idKamar.'') ?>" data-toggle="modal" data-target="#confirm-delete-kamar">
+														    Hapus
+														</button>
+														<div class="modal fade" id="confirm-delete-kamar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+														    <div class="modal-dialog">
+														        <div class="modal-content">
+														            <div class="modal-body" style="font-size: 20px;">
+														                Anda akan menghapus kamar <b><?php echo $row->jenisKamar ?></b>
+														            </div>
+														            <div class="modal-footer">
+														                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+														                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+														            </div>
+														        </div>
+														    </div>
+														</div>
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -255,6 +299,20 @@
             </div>
         </div>
     </aside>
+    <script type="text/javascript">
+    	$('#confirm-delete-kos').on('show.bs.modal', function(e) {
+		    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});
+		$('#confirm-delete-fasilitas').on('show.bs.modal', function(e) {
+		    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});
+		$('#confirm-delete-foto').on('show.bs.modal', function(e) {
+		    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});
+		$('#confirm-delete-kamar').on('show.bs.modal', function(e) {
+		    $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+		});
+    </script>
 </body>
 
 </html>

@@ -29,11 +29,22 @@
                             </form>
                         </div>
                         <div class="col-lg-6">
-                            <form action="<?php echo site_url('kamar/delete') ?>" method="post">
-                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                <input type="hidden" name="kamar" value="<?php echo $row->idKamar ?>"></input>
-                                <button type="submit" class="btn btn-danger">Hapus</button>
-                            </form>
+                            <button class="btn btn-danger" data-href="<?php echo site_url('kamar/delete?kos='.$row->idKos.'&kamar='.$row->idKamar.'') ?>" data-toggle="modal" data-target="#confirm-delete-kamar">
+                                Hapus
+                            </button>
+                            <div class="modal fade" id="confirm-delete-kamar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-body" style="text-align: center; font-size: 20px;">
+                                            Anda akan menghapus kamar <b><?php echo $row->jenisKamar ?></b>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                            <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-lg-12 text-center">
                             <form action="<?php echo site_url('kamar/tambah_fasilitas') ?>" method="get">
@@ -55,13 +66,24 @@
                                     <?php
                                         foreach($fasilitas as $row) { ?>
                                             <tr>
-                                                <td><p><?php echo $row->namaFasilitasKamar ?></p></td>
+                                                <td><?php echo $row->namaFasilitasKamar ?></td>
                                                 <td>
-                                                    <form action="<?php echo site_url('kamar/delete_fasilitas') ?>" method="post">
-                                                        <input type="hidden" name="kamar" value="<?php echo $row->idKamar ?>"></input>
-                                                        <input type="hidden" name="fasilitas" value="<?php echo $row->idKamarFasilitasKamar ?>"></input>
-                                                        <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                    </form>
+                                                    <button class="btn btn-danger btn-sm" data-href="<?php echo site_url('kamar/delete_fasilitas?kamar='.$row->idKamar.'&fasilitas='.$row->idKamarFasilitasKamar.'') ?>" data-toggle="modal" data-target="#confirm-delete-fasilitas">
+                                                        Hapus
+                                                    </button>
+                                                    <div class="modal fade" id="confirm-delete-fasilitas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-body" style="font-size: 20px;">
+                                                                    Anda akan menghapus fasilitas kamar</b>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                                    <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         <?php }
@@ -88,12 +110,22 @@
                                         <a class="thumbnail fancybox" rel="ligthbox" href="<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>">
                                             <img class="img-responsive" alt="" src="<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>" />
                                         </a>
-                                        <form action="<?php echo site_url('kamar/hapus_foto') ?>" method="post">
-                                            <input type="hidden" name="kamar" value="<?php echo $row->idKamar ?>"></input>
-                                            <input type="hidden" name="foto" value="<?php echo $row->idFotoKamar ?>"></input>
-                                            <input type="hidden" name="nama" value="<?php echo $row->namaFileKamar ?>"></input>
-                                            <button type="submit" class="btn btn-danger btn-xs">Hapus Foto</button>
-                                        </form>
+                                        <button class="btn btn-danger btn-xs" data-href="<?php echo site_url('kamar/hapus_foto?kamar='.$row->idKamar.'&foto='.$row->idFotoKamar.'$nama='.$row->namaFileKamar.'') ?>" data-toggle="modal" data-target="#confirm-delete-foto">
+                                            Hapus
+                                        </button>
+                                        <div class="modal fade" id="confirm-delete-foto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="text-align: center; font-size: 20px; color: black;">
+                                                        Anda akan menghapus foto kamar</b>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                                                        <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 <?php }
                             ?>
@@ -107,6 +139,17 @@
             </div>
         </div>
     </aside>
+    <script type="text/javascript">
+        $('#confirm-delete-fasilitas').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+        $('#confirm-delete-foto').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+        $('#confirm-delete-kamar').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
 </body>
 
 </html>

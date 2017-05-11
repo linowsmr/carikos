@@ -108,4 +108,11 @@ class Model_transaksi extends CI_Model {
 		$this->db->where('IDTRANSAKSI',$transaksi);
 		$run = $this->db->update('transaksi',$data);
  	}
+
+ 	function eticket($idTransaksi)
+ 	{
+ 		$query = "SELECT distinct t.idTransaksi, p.tanggalMasuk, p.tanggalKeluar, km.jenisKamar, fk.namaFileKamar, k.namaKos, k.alamatKos, k.teleponKos, a.namaAkun, fks.namaFile from transaksi t, pemesanan p, kamar km, kos k, fotokamar fk, akun a, fotokos fks where t.idTransaksi = '$idTransaksi'and t.idPemesanan = p.idPemesanan and p.idKamar = km.idKamar and km.idKamar = fk.idKamar and km.idKos = k.idKos and k.idKos = fks.namaFile and p.usernameAkun = a.username";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
 }

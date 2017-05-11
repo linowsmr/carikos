@@ -120,20 +120,41 @@ class Kamar extends CI_Controller {
 
 	public function delete()
 	{
-		$kos = $this->input->post('kos');
-		$id = $this->input->post('kamar');
-		$this->model_kamar->delete_fasilitas_kamar($id);
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $dataPemilik['username'] = $session_data['username'];
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
 
-		$data['foto'] = $this->model_kamar->list_foto($id);
-		foreach($data['foto'] as $row){
-			unlink("assets/images/kamar/".$row->namaFileKamar);
+			$id = $this->input->get('kamar');
+
+			$data['detail'] = $this->model_kamar->detail_kamar($id);
+
+			if($data['detail']){
+				foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($dataPemilik['username'] == $pemilik){
+	            	$kos = $this->input->get('kos');
+	            	$this->model_kamar->delete_fasilitas_kamar($id);
+
+					$data['foto'] = $this->model_kamar->list_foto($id);
+					foreach($data['foto'] as $row){
+						unlink("assets/images/kamar/".$row->namaFileKamar);
+					}
+					
+
+					$this->model_kamar->delete_foto_kamar($id);
+					$this->model_kamar->delete($id);
+
+					redirect('kos/beranda?kos='.$kos.'');
+	            }
+	            else {
+	            	echo "Bukan Kamar Anda";
+	            }
+			}
 		}
-		
-
-		$this->model_kamar->delete_foto_kamar($id);
-		$this->model_kamar->delete($id);
-
-		redirect('kos/beranda?kos='.$kos.'');
 	}
 
 	public function beranda()
@@ -231,11 +252,32 @@ class Kamar extends CI_Controller {
 
 	public function delete_fasilitas()
 	{
-		$kamar = $this->input->post('kamar');
-		$id = $this->input->post('fasilitas');
-		$this->model_kamar->hapus_fasilitas($id);
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $dataPemilik['username'] = $session_data['username'];
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
 
-		redirect('kamar/beranda?kamar='.$kamar.'');
+			$kamar = $this->input->get('kamar');
+
+			$data['detail'] = $this->model_kamar->detail_kamar($kamar);
+
+			if($data['detail']){
+				foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($dataPemilik['username'] == $pemilik){
+					$id = $this->input->get('fasilitas');
+					$this->model_kamar->hapus_fasilitas($id);
+
+					redirect('kamar/beranda?kamar='.$kamar.'');
+	            }
+	            else {
+	            	echo "Bukan Kamar Anda";
+	            }
+			}
+		}
 	}
 
 	public function tambah_foto()
@@ -310,13 +352,34 @@ class Kamar extends CI_Controller {
 
 	public function hapus_foto()
 	{
-		$kamar = $this->input->post('kamar');
-		$id = $this->input->post('foto');
-		$nama_file = $this->input->post('nama');
-		$this->model_kamar->hapus_foto($id);
-		unlink("assets/images/kamar/".$nama_file);
+		if(!empty($this->session->userdata('logged_in_pemilik')))
+        {
+            $session_data = $this->session->userdata('logged_in_pemilik');
+            $dataPemilik['username'] = $session_data['username'];
+            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
 
-		redirect('kamar/beranda?kamar='.$kamar.'');
+			$kamar = $this->input->get('kamar');
+
+			$data['detail'] = $this->model_kamar->detail_kamar($kamar);
+
+			if($data['detail']){
+				foreach($data['detail'] as $row){
+	            	$pemilik = $row->usernamePemilik;
+	            }
+
+	            if($dataPemilik['username'] == $pemilik){
+					$id = $this->input->get('foto');
+					$nama_file = $this->input->get('nama');
+					$this->model_kamar->hapus_foto($id);
+					unlink("assets/images/kamar/".$nama_file);
+
+					redirect('kamar/beranda?kamar='.$kamar.'');
+	            }
+	            else {
+	            	echo "Bukan Kamar Anda";
+	            }
+			}
+		}
 	}
 
 }

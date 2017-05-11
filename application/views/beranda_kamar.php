@@ -39,8 +39,8 @@
                                             Anda akan menghapus kamar <b><?php echo $row->jenisKamar ?></b>
                                         </div>
                                         <div class="modal-footer">
-                                            <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                            <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+                                            <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+                                            <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
                                         </div>
                                     </div>
                                 </div>
@@ -78,8 +78,8 @@
                                                                     Anda akan menghapus fasilitas kamar</b>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                                    <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+                                                                    <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+                                                                    <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -110,7 +110,7 @@
                                         <a class="thumbnail fancybox" rel="ligthbox" href="<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>">
                                             <img class="img-responsive" alt="" src="<?php echo base_url();?>assets/images/kamar/<?php echo $row->namaFileKamar ?>" />
                                         </a>
-                                        <button class="btn btn-danger btn-xs" data-href="<?php echo site_url('kamar/hapus_foto?kamar='.$row->idKamar.'&foto='.$row->idFotoKamar.'$nama='.$row->namaFileKamar.'') ?>" data-toggle="modal" data-target="#confirm-delete-foto">
+                                        <button class="btn btn-danger btn-xs" data-href="<?php echo site_url('kamar/hapus_foto?kamar='.$row->idKamar.'&foto='.$row->idFotoKamar.'&nama='.$row->namaFileKamar.'') ?>" data-toggle="modal" data-target="#confirm-delete-foto">
                                             Hapus
                                         </button>
                                         <div class="modal fade" id="confirm-delete-foto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -120,8 +120,8 @@
                                                         Anda akan menghapus foto kamar</b>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-                                                        <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+                                                        <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+                                                        <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
                                                     </div>
                                                 </div>
                                             </div>

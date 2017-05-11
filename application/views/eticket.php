@@ -75,6 +75,7 @@ $head = '
 	<div>
 		<h1 style="text-align: center; font-size: 30px;">E-TICKET</h1>
 		<p style="text-align: center; font-size: 30px;">Pemesanan Indekos</p>
+		<hr>
 		</br> 
 		<h1>ID TRANSAKSI : '.$idTransaksi.'</h1>
 		</br>
@@ -82,6 +83,7 @@ $head = '
 		</br>
 		<p style="font-style:italic; font-size:12px;">'.$alamatKos.'</p>
 		<p style="font-size:12px;">'.$teleponKos.'</p>
+		<hr>
 	</div>
 </body>
 ';
@@ -104,8 +106,8 @@ $tglKeluar ='
 
 // Print text using writeHTMLCell()
 $pdf->writeHTMLCell(0, 0, '', '30', $head, 0, 1, 0, true, '', true);
-$pdf->writeHTMLCell(0, 0, '', '80', $detail, 0, 1, 0, true, '', true);
-$pdf->writeHTMLCell(0, 0, '110', '80', $gambar, 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, '', '85', $detail, 0, 1, 0, true, '', true);
+$pdf->writeHTMLCell(0, 0, '110', '85', $gambar, 0, 1, 0, true, '', true);
 //$pdf->writeHTMLCell(0, 0, '80', '55', $head1, 0, 1, 0, true, '', true);
 //$pdf->writeHTMLCell(100, 0, '100', '70', $tglMasuk, 0, 1, 0, true, '', true);
 //$pdf->writeHTMLCell(100, 0, '150', '70', $tglKeluar, 0, 1, 0, true, '', true);

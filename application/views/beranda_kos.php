@@ -50,8 +50,8 @@
 							                Anda akan menghapus kos <b><?php echo $row->namaKos ?></b>
 							            </div>
 							            <div class="modal-footer">
-							                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-							                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+							                <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+							                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
 							            </div>
 							        </div>
 							    </div>
@@ -106,8 +106,8 @@
 													                Anda akan menghapus fasilitas kos</b>
 													            </div>
 													            <div class="modal-footer">
-													                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-													                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+													                <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+													                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
 													            </div>
 													        </div>
 													    </div>
@@ -136,7 +136,7 @@
                                         <a class="thumbnail fancybox" rel="ligthbox" href="<?php echo base_url();?>assets/images/kos/<?php echo $row->namaFile ?>">
                                             <img class="img-responsive" alt="" src="<?php echo base_url();?>assets/images/kos/<?php echo $row->namaFile ?>" />
                                         </a>
-                                        <button class="btn btn-danger btn-xs" data-href="<?php echo site_url('kos/hapus_foto?kos='.$row->idKos.'&foto='.$row->idFotoKos.'$nama='.$row->namaFile.'') ?>" data-toggle="modal" data-target="#confirm-delete-foto">
+                                        <button class="btn btn-danger btn-xs" data-href="<?php echo site_url('kos/hapus_foto?kos='.$row->idKos.'&foto='.$row->idFotoKos.'&nama='.$row->namaFile.'') ?>" data-toggle="modal" data-target="#confirm-delete-foto">
 										    Hapus
 										</button>
 										<div class="modal fade" id="confirm-delete-foto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -146,8 +146,8 @@
 										                Anda akan menghapus foto kos</b>
 										            </div>
 										            <div class="modal-footer">
-										                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-										                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+										                <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+										                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
 										            </div>
 										        </div>
 										    </div>
@@ -213,8 +213,8 @@
 														                Anda akan menghapus kamar <b><?php echo $row->jenisKamar ?></b>
 														            </div>
 														            <div class="modal-footer">
-														                <a type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
-														                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Hapus</a>
+														                <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+														                <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
 														            </div>
 														        </div>
 														    </div>

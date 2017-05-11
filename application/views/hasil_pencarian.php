@@ -20,17 +20,17 @@
                     <br>
                     <div class="row">
                         <?php
-                            foreach ($bp as $row) {
-                                $a = $row->a;
-                                $b = $row->b;
-                                $c = $row->c;
-                                $d = $row->d;
-                                $e = $row->e;
-                                $f = $row->f;
-                                $g = $row->g;
-                                $h = $row->h;
-                                $i = $row->i;
-                            }
+                            // foreach ($bp as $row) {
+                            //     $a = $row->a;
+                            //     $b = $row->b;
+                            //     $c = $row->c;
+                            //     $d = $row->d;
+                            //     $e = $row->e;
+                            //     $f = $row->f;
+                            //     $g = $row->g;
+                            //     $h = $row->h;
+                            //     $i = $row->i;
+                            // }
 
                             if(isset($jurusan)){
                                 foreach($jurusan as $row){
@@ -60,104 +60,70 @@
                                 
                                 $bulan = date("m");
 
-                                $lr = 0.5;
-                                $err = 1;
-                                $a = rand(-1,1) / 10;
-                                $b = rand(-1,1) / 10;
-                                $c = rand(-1,1) / 10;
-                                $d = rand(-1,1) / 10;
-                                $e = rand(-1,1) / 10;
-                                $f = rand(-1,1) / 10;
-                                $g = rand(-1,1) / 10;
-                                $h = rand(-1,1) / 10;
-                                $i = rand(-1,1) / 10;
+                                //$lr = 0.7;
+                                $a = 0.27561841435694;
+                                $b = -1.0991004393801;
+                                $c = -2.1804039337464;
+                                $d = -1.9634680187429;
+                                $e = -0.19928174968044;
+                                $f = 2.554269942058;
+                                $g = -1.4855817680429;
+                                $h = -1.5459370526401;
+                                $i = 3.9808489206053;
 
-                                if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 10 || $bulan == 11 || $bulan == 12){
+                                if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 11 || $bulan == 12){
+                                    $nilaiBulan = 0;
+                                }
+                                if($bulan == 5 || $bulan == 10){
                                     $nilaiBulan = 1;
                                 }
-                                if($bulan == 5 || $bulan == 6){
+                                if($bulan == 6 || $bulan == 7 || $bulan == 8 || $bulan == 9){
                                     $nilaiBulan = 2;
-                                }
-                                if($bulan == 7 || $bulan == 8 || $bulan == 9){
-                                    $nilaiBulan = 3;
                                 }
 
                                 if($skor >= 0 && $skor < 25){
-                                    $nilaiSkor = 1;
+                                    $nilaiSkor = 0;
                                 }
                                 if($skor >= 25 && $skor < 50){
-                                    $nilaiSkor = 2;
+                                    $nilaiSkor = 1;
                                 }
                                 if($skor >= 50 && $skor < 76){
-                                    $nilaiSkor = 3;
+                                    $nilaiSkor = 2;
                                 }
                                 if($skor >= 76 && $skor <= 100){
-                                    $nilaiSkor = 4;
+                                    $nilaiSkor = 3;
                                 }
-                                //echo $nilaiSkor;
+                                //ECHO $skor;
+                                for($i=0;$i<100;$i++) {
+                                    $nh1 = $a + $nilaiSkor*$b + $nilaiBulan*$c;
+                                    $nh2 = $d + $nilaiSkor*$d + $nilaiBulan*$f;
 
-                                 while ( $err >= 0.005) {
-                                    $oh1 = $a + $nilaiSkor*$b + $nilaiBulan*$c;
-                                    $oh2 = $d + $nilaiSkor*$d + $nilaiBulan*$f;
+                                    $oh1 = 1 / (1+exp($nh1*(-1)));
+                                    $oh2 = 1 / (1+exp($nh2*(-1)));
 
-                                    $z1 = 1 / (1+exp($oh1*(-1)));
-                                    $z2 = 1 / (1+exp($oh2*(-1)));
+                                    $no = $g + $oh1*$h + $oh2*$i;
+                                    $out = 1 / (1+exp($no*(-1)));
 
-                                    $ok = $g + $oh1*$h + $oh2*$i;
-                                    $y = 1 / (1+exp($ok*(-1)));
-
-                                    $err = pow((1-$y), 2)/2;
-
-                                    $ey = (1-$y)*(1-$y)*$y;
-
-                                    $ug = $g + $lr * $ey;
-                                    $uh = $h + $lr * $ey * $z1;
-                                    $ui = $i + $lr * $ey * $z2;
-
-                                    $eh = $ey * $h;
-                                    $ei = $ey * $i;
-
-                                    $ez1 = $eh * $z1 * (1-$z1);
-                                    $ez2 = $ei * $z2 * (1-$z2);
-
-                                    $ua = $a + $lr * $ez1;
-                                    $ud = $d + $lr * $ez2;
-                                    $ub = $b + $lr * $ez1 * $nilaiSkor;
-                                    $ue = $e + $lr * $ez2 * $nilaiBulan;
-                                    $uc = $c + $lr * $ez1 * $nilaiSkor;
-                                    $uf = $f + $lr * $ez2 * $nilaiBulan;
-
-                                    $a = $ua;
-                                    $b = $ub;
-                                    $c = $uc;
-                                    $d = $ud;
-                                    $e = $ue;
-                                    $f = $uf;
-                                    $g = $ug;
-                                    $h = $uh;
-                                    $i = $ui;
                                 }
-
-                                $oh1 = $a + $nilaiSkor*$b + $nilaiBulan*$c;
-                                $oh2 = $d + $nilaiSkor*$d + $nilaiBulan*$f;
-                                
-                                //$h1 = 1 / (1+exp($oh1*(-1)));
-                                //$h2 = 1 / (1+exp($0h2*(-1)));
-
-                                $ok = $g + $oh1*$h + $oh2*$i;
-                                $y = 1 / (1+exp($ok*(-1)));
-
+                                //echo $out;
                                 $hargaLama = $row->hargaKamar;
+                                $max = $hargaLama + (0.05*$hargaLama);
+                                //echo $max;
+                                $min = $hargaLama - (0.025*$hargaLama);
+                                //echo $min;
 
-                                if($nilaiBulan == 1){
-                                    $hargaBaru = $hargaLama - $hargaLama * ($y/20);
-                                }
-                                if($nilaiBulan == 2){
-                                    $hargaBaru = $hargaLama + $hargaLama * ($y/20);
-                                }
-                                if($nilaiBulan == 3){
-                                    $hargaBaru = $hargaLama + $hargaLama * ($y/10);
-                                }
+                                $hargaBaru = ((($max-$min)*($out-0.1))/0.8)+$min;
+
+
+                                // if($nilaiBulan == 1){
+                                //     $hargaBaru = $hargaLama - $hargaLama * ($y/20);
+                                // }
+                                // if($nilaiBulan == 2){
+                                //     $hargaBaru = $hargaLama + $hargaLama * ($y/20);
+                                // }
+                                // if($nilaiBulan == 3){
+                                //     $hargaBaru = $hargaLama + $hargaLama * ($y/10);
+                                // }
                                 ?>
                                 <!-- <a href="<?php echo site_url('pencarian/kamar?kamar='.$row->idKamar.'&harga='.round($hargaBaru).'')?>"> -->
                                 <div class="col-lg-3">

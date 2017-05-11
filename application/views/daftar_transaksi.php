@@ -35,12 +35,8 @@
                                                         $status = "Belum Bayar";
                                                     else if($row->status == 1)
                                                         $status = "Pembayaran Sedang Diverifikasi";
-                                                    else if($row->status == 2){?>
-                                                        <form action="<?php echo site_url('transaksi/eticket')?>" method="POST">
-                                                            <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
-                                                            <button type="submit" class="btn btn-success btn-sm">E-ticket</button>
-                                                        </form>
-                                                    <?php }
+                                                    else if($row->status == 2)
+                                                        $status = "Lunas";
                                                     else if($row->status == 3)
                                                         $status = "Batal";
                                                     ?>
@@ -51,7 +47,16 @@
                                                         <td><p><?php echo substr($row->tanggalTransaksi, 0, 10) ?></p></td>
                                                         <td><p><?php echo $row->durasiPemesanan ?> bulan</p></td>
                                                         <td><p>Rp<?php echo number_format($row->totalPembayaran) ?></p></td>
-                                                        <td><p><?php echo $status ?></p></td>
+                                                        <td><p><?php 
+                                                                if($status=="Lunas"){?>
+                                                                    <form action="<?php echo site_url('transaksi/eticket')?>" method="POST">
+                                                                        <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
+                                                                        <button type="submit" class="btn btn-success btn-sm">E-ticket</button>
+                                                                    </form>
+                                                                <?php }
+                                                                else{
+                                                                    echo $status;
+                                                                }?></p></td>
                                                         <?php
                                                             if($row->status == 0){ ?>
                                                                 <td>

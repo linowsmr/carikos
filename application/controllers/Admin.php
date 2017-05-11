@@ -262,4 +262,58 @@ class Admin extends CI_Controller {
 
         redirect('admin/promo');
     }
+
+    public function portal()
+    {
+        if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
+            $data['portal'] = $this->model_admin->viewPortal();
+
+            $this->load->view('admin/admheader',$nama);
+            $this->load->view('admin/portal',$data);
+        }
+        else
+        {
+            redirect('admin');
+        }   
+    }
+
+    public function tambahPortal()
+    {
+        if(!empty($this->session->userdata('logged_in_admin')))
+        {
+            $session_data = $this->session->userdata('logged_in_admin');
+            $nama['username'] = $session_data['username'];
+            $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
+
+            $this->load->view('admin/admheader',$nama);
+            $this->load->view('admin/insertPortal');
+        }
+        else
+        {
+            redirect('admin');
+        }
+    }
+
+    public function insertPortal()
+    {
+        $jenisKendaraan = $this->input->post('jeniskendaraan');
+        $lat = $this->input->post('lat');
+        $lng = $this->input->post('lng');
+        $aksesportal = $this->input->post('aksesportal');
+        $waktubuka = $this->input->post('waktubuka');
+        $waktututup = $this->input->post('waktututup');
+        echo $jenisKendaraan;
+
+        $input = $this->model_admin->insertPortal($jenisKendaraan,$lat,$lng,$aksesportal,$waktubuka,$waktututup);
+        if($input!='Gagal'){
+            redirect('admin/portal');
+        }
+        else{
+            echo 'Gagal';
+        }
+    }
 }

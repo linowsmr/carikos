@@ -31,14 +31,26 @@
                                                 foreach($kos as $row) { ?>
                                                     <tr>
                                                         <td>
-                                                            <a href="<?php echo site_url('kos/beranda?kos='.$row->idKos.'')?>"><p><?php echo $row->namaKos ?></p></a>
+                                                            <a href="<?php echo site_url('kos/beranda?kos='.$row->idKos.'')?>"><?php echo $row->namaKos ?></a>
                                                         </td>
-                                                        <td><p><?php echo $row->alamatKos ?></p></td>
+                                                        <td><?php echo $row->alamatKos ?></td>
                                                         <td>
-                                                            <form action="<?php echo site_url('kos/delete') ?>" method="post">
-                                                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                                                <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
-                                                            </form>
+                                                            <button class="btn btn-danger btn-sm" data-href="<?php echo site_url('kos/delete?kos='.$row->idKos.'') ?>" data-toggle="modal" data-target="#confirm-delete-kos">
+                                                                Hapus
+                                                            </button>
+                                                            <div class="modal fade" id="confirm-delete-kos" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-body" style="font-size: 20px;">
+                                                                            Anda akan menghapus kos</b>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+                                                                            <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </td>
                                                     </tr>
                                                 <?php }
@@ -153,7 +165,11 @@
         }
         google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-    
+    <script type="text/javascript">
+        $('#confirm-delete-kos').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
 </body>
 
 </html>

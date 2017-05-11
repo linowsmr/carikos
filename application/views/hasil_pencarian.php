@@ -58,7 +58,7 @@
                                 }
 
                                 
-                                $bulan = 2;
+                                $bulan = date("m");
 
                                 //$lr = 0.7;
                                 $a = 0.27561841435694;
@@ -105,7 +105,7 @@
                                     $out = 1 / (1+exp($no*(-1)));
 
                                 }
-                                echo $out;
+                                //echo $out;
                                 $hargaLama = $row->hargaKamar;
                                 $max = $hargaLama + (0.05*$hargaLama);
                                 //echo $max;

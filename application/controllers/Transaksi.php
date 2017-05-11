@@ -94,4 +94,12 @@ class Transaksi extends CI_Controller {
 
 		redirect('transaksi/daftar');
 	}
+
+	public function eticket()
+	{
+		$idTransaksi = $this->input->post('transaksi');
+		$data['eticket'] = $this->model_transaksi->eticket($idTransaksi);
+
+		$this->load->view('eticket',$data);
+	}
 }

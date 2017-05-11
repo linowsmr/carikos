@@ -35,8 +35,12 @@
                                                         $status = "Belum Bayar";
                                                     else if($row->status == 1)
                                                         $status = "Pembayaran Sedang Diverifikasi";
-                                                    else if($row->status == 2)
-                                                        $status = "Lunas";
+                                                    else if($row->status == 2){?>
+                                                        <form action="<?php echo site_url('transaksi/eticket')?>" method="POST">
+                                                            <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
+                                                            <button type="submit" class="btn btn-success btn-sm">E-ticket</button>
+                                                        </form>
+                                                    <?php }
                                                     else if($row->status == 3)
                                                         $status = "Batal";
                                                     ?>

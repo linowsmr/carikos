@@ -11,4 +11,28 @@ class Model_admin extends CI_Model {
 			return false;
  	}
 
+ 	function insertPortal($jenisKendaraan,$lat,$lng,$aksesPortal,$waktuBuka,$waktuTutup)
+ 	{
+ 		$data = array(
+ 				'JENISKENDARAANPORTAL' => $jenisKendaraan,
+ 				'LATPORTAL' => $lat,
+ 				'LNGPORTAL' => $lng,
+ 				'AKSESPORTAL' => $aksesPortal,
+ 				'WAKTUBUKAPORTAL' => $waktuBuka,
+ 				'WAKTUTUTUPPORTAL' => $waktuTutup
+ 			);
+
+ 		$run = $this->db->insert('portal', $data);
+		if($run)
+			return "Berhasil";
+		else
+			return "Gagal";
+ 	}
+
+ 	function viewPortal()
+	{
+		$query = "SELECT * FROM portal";
+		$run = $this->db->query($query);
+		return $run->result();
+	}
 }

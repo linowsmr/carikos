@@ -104,7 +104,9 @@
                                 <li>
                                     <a href="<?php echo site_url('admin/trans')?>"><i class="fa fa-dollar fa-fw"></i> Transaksi</a>
                                 </li>
-                                
+                                <li>
+                                    <a href="<?php echo site_url('admin/portal')?>"><i class="fa fa-dollar fa-fw"></i> Portal</a>
+                                </li>
                             </ul>
                         </li>
                         <li>

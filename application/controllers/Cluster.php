@@ -36,33 +36,23 @@ class Cluster extends CI_Controller {
 				$dataPoint[$i][$j] = array_shift($point);
 			}
 		}
-
-		// $dataPoint[0][0] = $point[0];
-		// $dataPoint[0][1] = $point[1];
-		// $dataPoint[1][0] = $point[2];
-		// $dataPoint[1][1] = $point[3];
 		
 		require_once "assets/KMeans/Space.php";
 		require_once "assets/KMeans/Point.php";
 		require_once "assets/KMeans/Cluster.php";
 
-		// create a 2-dimentions space
 		$space = new KMeans\Space(2);
 
-		// add points to space
 		foreach ($dataPoint as $coordinates)
 			$space->addPoint($coordinates);
 
-		// cluster these 50 points in 3 clusters
 		$clusters = $space->solve(2);
 
 		$this->model_cluster->hapus_cluster();
 		$this->model_cluster->hapus_cluster_destinasi();
 		$this->model_jurusan->hapus_cluster_jurusan();
 		
-		// display the cluster centers and attached points
 		foreach ($clusters as $i => $cluster){
-			//printf("Cluster %s (%f,%f): %d points <br>", $i, $cluster[0], $cluster[1], count($cluster));
 			$latLngCluster = "($cluster[0], $cluster[1])";
 			$idCluster = $this->model_cluster->cluster($latLngCluster);
 
@@ -76,7 +66,6 @@ class Cluster extends CI_Controller {
 				$idKos = $this->model_cluster->pencarian_by_latlng($latlng);
 				foreach($idKos as $row){
 					$this->model_cluster->update_idcluster($row->idKos, $idCluster);
-					//echo "- $row->idKos <br>";
 				}
 			}
 		}
@@ -90,7 +79,6 @@ class Cluster extends CI_Controller {
 		if($_SESSION['destinasi'] == "minimarket"){
 			$id = $_SESSION['kos'];
 		
-			//$id = $this->input->get('kos');
 			$data['detail'] = $this->model_kos->detail_kos($id);
 
 			foreach($data['detail'] as $row){
@@ -99,7 +87,6 @@ class Cluster extends CI_Controller {
 			}
 
 			$result = $this->model_cluster->cek_destinasi($idCluster, 1);
-			//unset($_SESSION['kos']);
 
 			if($result == 0) {
 				if($data['detail']){
@@ -109,7 +96,6 @@ class Cluster extends CI_Controller {
 				}
 			}
 			else {
-				//$_SESSION['kos'] = $id;
 				unset($_SESSION['destinasi']);
 				$_SESSION['destinasi'] = "supermarket";
 				redirect('cluster/destinasi');
@@ -117,9 +103,7 @@ class Cluster extends CI_Controller {
 		}
 
 		else if($_SESSION['destinasi'] == "supermarket"){
-			//echo "Masuk ke Supermarket";
 			$id = $_SESSION['kos'];
-			//$id = $this->input->get('kos');
 			$data['detail'] = $this->model_kos->detail_kos($id);
 
 			foreach($data['detail'] as $row){
@@ -145,7 +129,6 @@ class Cluster extends CI_Controller {
 
 		else if($_SESSION['destinasi'] == "masjid"){
 			$id = $_SESSION['kos'];
-			//$id = $this->input->get('kos');
 			$data['detail'] = $this->model_kos->detail_kos($id);
 
 			foreach($data['detail'] as $row){
@@ -227,7 +210,6 @@ class Cluster extends CI_Controller {
 		}
 
 		else if($_SESSION['destinasi'] == "supermarket lain"){
-			//echo "Masuk ke Supermarket";
 			$data['idKos'] = $_SESSION['kos'];
 
 			$idCluster = $_SESSION['cluster'];
@@ -294,8 +276,6 @@ class Cluster extends CI_Controller {
 		$distance = $this->input->post('distance');
 
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
-		//$this->load->view('berhasil');
-		//$_SESSION['kos'] = $id;
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "supermarket";
 		redirect('cluster/destinasi');
@@ -337,7 +317,6 @@ class Cluster extends CI_Controller {
 		$distance = $this->input->post('distance');
 
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
-		//$this->load->view('berhasil');
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "supermarket lain";
 		redirect('cluster/destinasi');
@@ -351,7 +330,6 @@ class Cluster extends CI_Controller {
 		$distance = $this->input->post('distance');
 
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
-		//$this->load->view('berhasil');
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "masjid lain";
 		redirect('cluster/destinasi');
@@ -365,7 +343,6 @@ class Cluster extends CI_Controller {
 		$distance = $this->input->post('distance');
 
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
-		//$this->load->view('berhasil');
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "lain";
 		redirect('cluster/destinasi');

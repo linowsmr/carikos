@@ -158,9 +158,7 @@ class Pemesanan extends CI_Controller {
 				echo "Gagal";
         }
         else
-        	echo "Anda Harus Login Terlebih Dahulu";
-
-		
+        	redirect('pemilik/masuk');
 	}
 
 	public function pemilik()

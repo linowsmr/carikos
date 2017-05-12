@@ -42,7 +42,7 @@ class Pemilik extends CI_Controller {
 			    redirect('pemilik/beranda');
 	    	}
 	    	else
-	    		echo "Gagal Masuk Session";
+	    		redirect('pemilik/masuk');
     	}
     	else if($cekAkun > 0){
     		$result = $this->model_akun->login($username, $password);
@@ -59,10 +59,10 @@ class Pemilik extends CI_Controller {
 			    redirect('home/index');
 	    	}
 	    	else
-	    		echo "Gagal Masuk Session";
+	    		redirect('pemilik/masuk');
     	}
     	else
-    		echo "Gagal Masuk";
+    		redirect('pemilik/masuk');
     	
 	}
 
@@ -102,7 +102,7 @@ class Pemilik extends CI_Controller {
 			    	redirect('home/index');
 				}
 				else
-					echo "Gagal Masuk Session";
+					redirect('pemilik/masuk');
 			}
 			else if($akses == "pemilik"){
 				$status = $this->model_pemilik->daftar($username, $password, $nama, $email, $telepon);
@@ -115,7 +115,7 @@ class Pemilik extends CI_Controller {
 			    	redirect('pemilik/beranda');
 				}
 				else
-					echo "Gagal Masuk Session";
+					redirect('pemilik/masuk');
 			}
 		}
 	}

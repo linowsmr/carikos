@@ -40,9 +40,6 @@ class Pencarian extends CI_Controller {
 		$kamar = $this->input->get('fasilitaskamar');
 		$jurusanDipilih = $this->input->get('jurusan');
 
-		$fasilitaskos = implode(",", $kos);
-		$fasilitaskamar = implode(",", $kamar);
-
 		$nilaiDestinasi = 0;
 
 		$hasilPencarian = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);

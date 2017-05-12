@@ -19,6 +19,13 @@
                     <hr class="small" style="border-color: black;">
                     <br>
                     <div class="row">
+                    	<?php
+							$data = sizeof($hasil);
+							if($data == 0){ ?>
+								<h4>Tidak Menemukan Hasil Pencarian</h4>
+								<a href="<?php echo site_url('home/index') ?>"><button class="btn btn-dark btn-lg">Kembali</button></a>
+							<?php }
+						?>
                         <?php
                             // foreach ($bp as $row) {
                             //     $a = $row->a;

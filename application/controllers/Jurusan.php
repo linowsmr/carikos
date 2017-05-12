@@ -12,16 +12,12 @@ class Jurusan extends CI_Controller {
 
 	public function jarak()
 	{
-		//$idCluster = array();
 		$cluster = $this->model_cluster->ambil_cluster();
 		foreach($cluster as $row){
-			//array_push($idCluster, $row->idCluster);
 			$jurusan = $this->model_jurusan->ambil_semua_jurusan();
 			foreach ($jurusan as $row2) {
 				$cekNilai = $this->model_jurusan->cek_nilai($row->idCluster, $row2->idJurusan);
-				//echo $cekNilai;
 				if($cekNilai == 1){
-					//echo "$row->idCluster dan $row2->idJurusan <br>";
 					$data['idCluster'] = $row->idCluster;
 					$latlong = substr($row->latLngCluster, 1, -1);
 			        $coord = explode(", ", $latlong);
@@ -36,10 +32,7 @@ class Jurusan extends CI_Controller {
 				
 			}
 		}
-		//exit();
-		//echo "$idCluster dan $idJurusan";
 		
-		//var_dump($data);
 		if(isset($data)){
 			$this->load->view('template/header-2');
 			$this->load->view('jarak_jurusan', $data);
@@ -49,7 +42,6 @@ class Jurusan extends CI_Controller {
 			$id = $_SESSION['kos'];
 			unset($_SESSION['kos']);
 			redirect('kos/beranda?kos='.$id.'');
-			//echo "Selesai!";
 		}
 		
 	}
@@ -73,9 +65,6 @@ class Jurusan extends CI_Controller {
 			$nilaiDestinasi = $nilaiDestinasi + 25*$bobotJurusan;
 		else if($jarakClusterJurusan > 5)
 			$nilaiDestinasi = $nilaiDestinasi + 0*$bobotJurusan;
-
-		// echo "$idCluster dan $idJurusan, $jarakClusterJurusan, $nilaiDestinasi";
-		// exit();
 
 		$this->model_jurusan->jarak_cluster_jurusan($idCluster, $idJurusan, $jarakClusterJurusan, $nilaiDestinasi);
 

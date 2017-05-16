@@ -263,7 +263,6 @@ class Admin extends CI_Controller {
         redirect('admin/promo');
     }
 
-<<<<<<< HEAD
     public function portal()
     {
         if(!empty($this->session->userdata('logged_in_admin')))
@@ -317,6 +316,9 @@ class Admin extends CI_Controller {
             echo 'Gagal';
         }
     }
-=======
->>>>>>> 97fd2b0e1aea84fb32731779225a3589be4ee309
+
+    public function tes()
+    {
+    	
+    }
 }

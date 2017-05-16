@@ -316,9 +316,4 @@ class Admin extends CI_Controller {
             echo 'Gagal';
         }
     }
-
-    public function tes()
-    {
-    	
-    }
 }

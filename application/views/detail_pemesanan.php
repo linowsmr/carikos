@@ -17,6 +17,12 @@
     }
 
     $hargaKamar = number_format($harga);
+
+    if(isset($pesan)){ ?>
+        <script type="text/javascript">
+            alert('<?php echo $pesan ?>');
+        </script>
+    <?php }
 ?>
 <!DOCTYPE html>
 <html lang="en">

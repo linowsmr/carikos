@@ -87,19 +87,57 @@ class Transaksi extends CI_Controller {
 
 	public function pembatalan()
 	{
-		$idTransaksi = $this->input->post('transaksi');
-		$status = 3;
-		
-		$batal = $this->model_transaksi->pembatalan_transaksi($idTransaksi, $status);
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
 
-		redirect('transaksi/daftar');
+            $idTransaksi = $this->input->get('transaksi');
+            $data['akun'] = $this->model_transaksi->cek_transaksi($idTransaksi);
+            foreach($data['akun'] as $row){
+            	$akun = $row->username;
+            }
+
+            if($akun == $dataAkun['username']){
+				$status = 3;
+				
+				$batal = $this->model_transaksi->pembatalan_transaksi($idTransaksi, $status);
+
+				redirect('transaksi/daftar');
+            }
+            else{
+            	echo "Bukan Transaksi Anda";
+            }
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
+
+		
 	}
 
 	public function eticket()
 	{
-		$idTransaksi = $this->input->post('transaksi');
-		$data['eticket'] = $this->model_transaksi->eticket($idTransaksi);
+		if(!empty($this->session->userdata('logged_in_akun')))
+        {
+            $session_data = $this->session->userdata('logged_in_akun');
+            $dataAkun['username'] = $session_data['username'];
 
-		$this->load->view('eticket',$data);
+            $idTransaksi = $this->input->get('transaksi');
+            $data['akun'] = $this->model_transaksi->cek_transaksi($idTransaksi);
+            foreach($data['akun'] as $row){
+            	$akun = $row->username;
+            }
+
+            if($akun == $dataAkun['username']){
+            	$data['eticket'] = $this->model_transaksi->eticket($idTransaksi);
+
+				$this->load->view('eticket',$data);
+            }
+            else{
+            	echo "Bukan Transaksi Anda";
+            }
+        }
+        else
+        	echo "Anda Harus Login Terlebih Dahulu";
 	}
 }

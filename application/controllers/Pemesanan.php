@@ -121,24 +121,24 @@ class Pemesanan extends CI_Controller {
 										//echo $data['totalPembayaran'];
 									}
 									else{
-										echo "Periode Pemesanan Tidak Memenuhi";
+										$data['pesan'] = "Periode Pemesanan Tidak Memenuhi";
 									}
 								}
 							}
 							else{
-								echo "Minimum Durasi Pemesanan Tidak Memenuhi";
+								$data['pesan'] = "Minimum Durasi Pemesanan Tidak Memenuhi";
 							}
 						}
 						else{
-							echo "Minimum Transaksi Tidak Memenuhi";
+							$data['pesan'] = "Minimum Transaksi Tidak Memenuhi";
 						}
 					}
 					else{
-						echo "Tanggal Tidak Memenuhi";
+						$data['pesan'] = "Tanggal Tidak Memenuhi";
 					}
 				}
 				else{
-					echo "Kode Salah";
+					$data['pesan'] = "Kode Salah";
 					
 				}
 			}

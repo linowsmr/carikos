@@ -41,37 +41,60 @@
                                                         $status = "Batal";
                                                     ?>
                                                     <tr>
-                                                        <td><p><?php echo $row->idTransaksi ?></p></td>
-                                                        <td><p><?php echo $row->namaKos ?></p></td>
-                                                        <td><p><?php echo $row->jenisKamar ?></p></td>
-                                                        <td><p><?php echo substr($row->tanggalTransaksi, 0, 10) ?></p></td>
-                                                        <td><p><?php echo $row->durasiPemesanan ?> bulan</p></td>
-                                                        <td><p>Rp<?php echo number_format($row->totalPembayaran) ?></p></td>
-                                                        <td><p><?php 
+                                                        <td><?php echo $row->idTransaksi ?></td>
+                                                        <td><?php echo $row->namaKos ?></td>
+                                                        <td><?php echo $row->jenisKamar ?></td>
+                                                        <td><?php echo substr($row->tanggalTransaksi, 0, 10) ?></td>
+                                                        <td><?php echo $row->durasiPemesanan ?> bulan</td>
+                                                        <td>Rp<?php echo number_format($row->totalPembayaran) ?></td>
+                                                        <td><?php 
                                                                 if($status=="Lunas"){?>
-                                                                    <form action="<?php echo site_url('transaksi/eticket')?>" method="POST">
-                                                                        <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
-                                                                        <button type="submit" class="btn btn-success btn-sm">E-ticket</button>
-                                                                    </form>
+                                                                    <a href="<?php echo site_url('transaksi/eticket?transaksi='.$row->idTransaksi.'')?>" target="_blank"><button class="btn btn-success btn-sm">
+                                                                        E-Ticket
+                                                                    </button></a>
                                                                 <?php }
                                                                 else{
                                                                     echo $status;
-                                                                }?></p></td>
+                                                                }?></td>
                                                         <?php
                                                             if($row->status == 0){ ?>
                                                                 <td>
-                                                                    <form action="<?php echo site_url('transaksi/pembatalan')?>" method="POST">
-                                                                        <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
-                                                                        <button type="submit" class="btn btn-danger btn-sm">Pembatalan</button>
-                                                                    </form>
+                                                                    <button class="btn btn-danger btn-sm" data-href="<?php echo site_url('transaksi/pembatalan?transaksi='.$row->idTransaksi.'') ?>" data-toggle="modal" data-target="#confirm-delete-transaksi">
+                                                                        Batal
+                                                                    </button>
+                                                                    <div class="modal fade" id="confirm-delete-transaksi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-body" style="text-align: center; font-size: 20px;">
+                                                                                    Anda akan membatalkan pemesanan kamar
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+                                                                                    <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </td>
                                                             <?php }
                                                             else{ ?>
                                                                 <td>
-                                                                    <form action="<?php echo site_url('transaksi/pembatalan')?>" method="POST">
-                                                                        <input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
-                                                                        <button type="submit" class="btn btn-danger btn-sm" disabled>Pembatalan</button>
-                                                                    </form>
+                                                                    <button class="btn btn-danger btn-sm" data-href="<?php echo site_url('transaksi/pembatalan?transaksi='.$row->idTransaksi.'') ?>" data-toggle="modal" data-target="#confirm-delete-transaksi" disabled>
+                                                                        Batal
+                                                                    </button>
+                                                                    <div class="modal fade" id="confirm-delete-transaksi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-body" style="text-align: center; font-size: 20px;">
+                                                                                    Anda akan membatalkan pemesanan kamar
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    <a type="button" class="btn btn-default" data-dismiss="modal">Tidak</a>
+                                                                                    <a class="btn btn-danger btn-ok" style="margin-top: 0%">Ya</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </td>
                                                             <?php }
                                                         ?>
@@ -88,6 +111,11 @@
             </div>
         </div>
     </aside>
+    <script type="text/javascript">
+        $('#confirm-delete-transaksi').on('show.bs.modal', function(e) {
+            $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+        });
+    </script>
 </body>
 
 </html>

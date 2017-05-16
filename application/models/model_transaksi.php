@@ -115,4 +115,11 @@ class Model_transaksi extends CI_Model {
  		$run = $this->db->query($query);
  		return $run->result();
  	}
+
+ 	function cek_transaksi($id)
+ 	{
+ 		$query = "SELECT a.username FROM pemesanan p, transaksi t, akun a, kamar km, kos k WHERE p.idPemesanan = t.idPemesanan AND p.usernameAkun = a.username AND p.idKamar = km.idKamar AND km.idKos = k.idKos AND t.idTransaksi = '$id'";
+ 		$run = $this->db->query($query);
+		return $run->result();
+ 	}
 }

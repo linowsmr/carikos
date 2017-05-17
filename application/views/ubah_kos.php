@@ -8,6 +8,7 @@
                 <div class="col-lg-12 text-center">
                     <?php
                         foreach($detail as $row) { 
+                            $tipeKos = $row->idTipeKos;
                             $luasParkir = $row->idParkiranKos;
                             $idKos = $row->idKos; 
                             $latlong = substr($row->latLngKos, 1, -1);
@@ -40,7 +41,6 @@
                                         <div class="form-group">
                                             <h4>Luas Parkiran (Dalam m<sup>2</sup>)</h4>
                                             <select class="form-control" name="parkiran">
-                                                <option></option>
                                                 <?php
                                                     }
                                                     foreach($parkir as $row){ 
@@ -49,6 +49,21 @@
                                                     <?php
                                                         } else { ?>
                                                             <option value="<?php echo $row->idParkiranKos ?>"><?php echo $row->luasParkiran ?></option>
+                                                        <?php }
+                                                    }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <h4>Tipe Kos</h4>
+                                            <select class="form-control" name="tipe">
+                                                <?php
+                                                    foreach($tipe as $row){ 
+                                                        if($tipeKos == $row->idTipeKos) { ?>
+                                                            <option value="<?php echo $row->idTipeKos ?>" selected><?php echo $row->tipeKos ?></option>
+                                                    <?php
+                                                        } else { ?>
+                                                            <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
                                                         <?php }
                                                     }
                                                 ?>

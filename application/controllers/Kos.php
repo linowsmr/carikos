@@ -126,6 +126,7 @@ class Kos extends CI_Controller {
 
             $data['detail'] = $this->model_kos->detail_kos($id);
             $data['parkir'] = $this->model_kos->parkiran();
+            $data['tipe'] = $this->model_kos->tipe();
 
             if($data['detail']){
 	            foreach($data['detail'] as $row){
@@ -159,6 +160,7 @@ class Kos extends CI_Controller {
 		$kota = strtolower($this->input->post('kota'));
 		$telepon = $this->input->post('telepon');
 		$parkiran = $this->input->post('parkiran');
+		$tipe = $this->input->post('tipe');
 
 		$lat = $this->input->post('lat');
 		$lng = $this->input->post('lng');
@@ -167,7 +169,7 @@ class Kos extends CI_Controller {
 		$koma = ", ";
 		$latlng = $awal.$lat.$koma.$lng.$akhir;
 
-		$update = $this->model_kos->update($id, $nama, $alamat, $kota, $latlng, $telepon, $parkiran);
+		$update = $this->model_kos->update($id, $nama, $alamat, $kota, $latlng, $telepon, $parkiran, $tipe);
 		if($update == 'Berhasil'){
 			redirect('kos/beranda?kos='.$id.'');
 		}

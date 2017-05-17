@@ -34,10 +34,6 @@
                                 <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
                                 <button type="submit" class="btn btn-success">Ubah</button>
                             </form>
-                            <form action="<?php echo site_url('kos/ubah_tipe') ?>" method="get">
-                                <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                <button type="submit" class="btn btn-success">Ubah Tipe Kos</button>
-                            </form>
                         </div>
                         <div class="col-lg-6">
                             <button class="btn btn-danger" data-href="<?php echo site_url('kos/delete?kos='.$row->idKos.'') ?>" data-toggle="modal" data-target="#confirm-delete-kos">
@@ -56,9 +52,11 @@
 							        </div>
 							    </div>
 							</div>
+                        </div>
+                        <div class="col-lg-12 text-center">
                             <form action="<?php echo site_url('kos/tambah_fasilitas') ?>" method="get">
                                 <input type="hidden" name="kos" value="<?php echo $row->idKos ?>"></input>
-                                <button type="submit" class="btn btn-primary" style="margin-top: 4.5%">Tambah Fasilitas Kos</button>
+                                <button type="submit" class="btn btn-primary">Tambah Fasilitas Kos</button>
                             </form>
                         </div>
                     <?php } ?>

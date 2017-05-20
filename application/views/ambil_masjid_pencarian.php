@@ -58,7 +58,6 @@
                             </div>
                             <script>
                                 var map;
-                                var infoWindow;
                                 var service;
                                 var array = [];
 
@@ -74,7 +73,6 @@
                                     }]
                                   });
 
-                                  infoWindow = new google.maps.InfoWindow();
                                   service = new google.maps.places.PlacesService(map);
 
                                   // The idle event is a debounced event, so we can query & listen without
@@ -99,31 +97,8 @@
                                     var origin = {lat: <?php Print($lat); ?>, lng: <?php Print($lng); ?>};
                                     var destination = result.geometry.location;
                                     getDistance(origin, destination);
-                                    addMarker(result);
+                                    //addMarker(result);
                                   }
-                                }
-
-                                function addMarker(place) {
-                                  var marker = new google.maps.Marker({
-                                    map: map,
-                                    position: place.geometry.location,
-                                    icon: {
-                                      url: 'https://developers.google.com/maps/documentation/javascript/images/circle.png',
-                                      anchor: new google.maps.Point(10, 10),
-                                      scaledSize: new google.maps.Size(10, 17)
-                                    }
-                                  });
-
-                                  google.maps.event.addListener(marker, 'click', function() {
-                                    service.getDetails(place, function(result, status) {
-                                      if (status !== google.maps.places.PlacesServiceStatus.OK) {
-                                        console.error(status);
-                                        return;
-                                      }
-                                      infoWindow.setContent(result.name);
-                                      infoWindow.open(map, marker);
-                                    });
-                                  });
                                 }
 
                                 function getDistance(origin, destination){
@@ -150,13 +125,10 @@
                                           else
                                             var distance = element.distance.value;
                                           
-                                          //console.log(distance);
-                                          //if(distance < 5){
-                                            if(array.length == 0)
-                                                var newItem = array.push(distance);
-                                            else if(array[0] > distance)
-                                                array[0] = distance;
-                                          //}
+                                          if(array.length == 0)
+                                            var newItem = array.push(distance);
+                                          else if(array[0] > distance)
+                                            array[0] = distance;
                                         }
                                       }
                                     }

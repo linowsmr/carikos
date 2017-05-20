@@ -48,10 +48,10 @@ class Akun extends CI_Controller {
 				$this->load->view('template/footer');
 	    	}
 	    	else
-	    		echo "Gagal Masuk Session";
+	    		redirect('pemilik/masuk');
     	}
     	else
-    		echo "Gagal Masuk";
+    		redirect('pemilik/masuk');
 	}
 	
 	public function logout()

@@ -58,7 +58,6 @@ function initMap() {
           else
             var distance = element.distance.value;
 
-          //alert(distance);
           form(distance);
         }
       }

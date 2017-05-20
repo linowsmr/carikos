@@ -28,8 +28,7 @@ class Transaksi extends CI_Controller {
 			$this->load->view('template/footer');
         }
         else
-        	echo "Anda Harus Login Terlebih Dahulu";
-
+        	redirect('pemilik/masuk');
 	}
 
 	public function konfirmasi()
@@ -47,7 +46,7 @@ class Transaksi extends CI_Controller {
 			$this->load->view('template/footer');
         }
         else
-        	echo "Anda Harus Login Terlebih Dahulu";
+        	redirect('pemilik/masuk');
 	}
 
 	public function konfBayar()
@@ -82,7 +81,7 @@ class Transaksi extends CI_Controller {
 			$this->load->view('template/footer');
         }
         else
-        	echo "Anda Harus Login Terlebih Dahulu";
+        	redirect('pemilik/masuk');
 	}
 
 	public function pembatalan()

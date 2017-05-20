@@ -27,13 +27,13 @@
 	                    <form action="<?php echo site_url('pencarian/index') ?>" method="get">
 	                		<div class="form-group">
 	                            <h4>Kota</h4>
-	                            <select class="form-control selectpicker" name="kota" title="Tidak Ada yang Dipilih">
+	                            <select class="form-control selectpicker" name="kota" title="Tidak Ada yang Dipilih" required>
 	                            	<option value="Surabaya">Surabaya</option>
 	                            </select>
 	                        </div>
 	                		<div class="form-group">
 	                            <h4>Harga</h4>
-	                            <select class="form-control selectpicker" name="harga" title="Tidak Ada yang Dipilih">
+	                            <select class="form-control selectpicker" name="harga" title="Tidak Ada yang Dipilih" required>
 	                            	<option value="4">> Rp1.500.000,00</option>
 	                            	<option value="3">Rp1.000.001,00 - Rp1.500.000,00</option>
 	                            	<option value="2">Rp500.001,00 - Rp1.000.000,00</option>
@@ -42,7 +42,7 @@
 	                        </div>
 	                		<div class="form-group">
 	                            <h4>Tipe Kos</h4>
-	                            <select class="form-control selectpicker" name="tipe" title="Tidak Ada yang Dipilih">
+	                            <select class="form-control selectpicker" name="tipe" title="Tidak Ada yang Dipilih" required>
 	                                <?php
 	                                    foreach($tipe as $row){ ?>
 	                                        <option value="<?php echo $row->idTipeKos ?>"><?php echo $row->tipeKos ?></option>
@@ -52,7 +52,7 @@
 	                        </div>
 	                		<div class="form-group">
 	                            <h4>Fasilitas Kos</h4>
-	                            <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitaskos[]">
+	                            <select id="multiple-select-fasilitas" multiple="multiple" name="fasilitaskos[]" required>
 	                                <?php
 	                                    foreach($fasilitas as $row){ ?>
 	                                        <option value="<?php echo $row->idFasilitasKos ?>"><?php echo $row->namaFasilitasKos ?></option>
@@ -62,7 +62,7 @@
 	                        </div>
 	                		<div class="form-group">
 	                            <h4>Fasilitas Kamar</h4>
-	                            <select id="multiple-select-tipe" multiple="multiple" name="fasilitaskamar[]">
+	                            <select id="multiple-select-tipe" multiple="multiple" name="fasilitaskamar[]" required>
 	                                <?php
 	                                    foreach($fasilitaskamar as $row){ ?>
 	                                        <option value="<?php echo $row->idFasilitasKamar ?>"><?php echo $row->namaFasilitasKamar ?></option>

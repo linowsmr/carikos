@@ -39,8 +39,10 @@
     if(isset($jurusan)){
         foreach($jurusan as $row){
             $idJurusan = $row->idJurusan;
+            $namaJurusan = $row->namaJurusan;
             $koma = ', ';
             $latLngJurusan = $row->latJurusan.$koma.$row->lngJurusan;
+            $jarakJurusan = round($row->jarakClusterJurusan, 1);
         }
     }
     else
@@ -171,11 +173,17 @@
                         <hr class="small" style="border-color: black;">
                         <br>
                         <div class="col-lg-3" style="text-align: right;">
+                            <?php
+                                if($idJurusan != "0") ?>
+                                    <h4>Jarak ke Jurusan <b><?php echo $namaJurusan ?></b></h4><br>
                             <h4>Minimarket Terdekat</h4>
                             <h4>Supermarket Terdekat</h4>
                             <h4>Masjid Terdekat</h4>
                         </div>
                         <div class="col-lg-3" style="text-align: left;">
+                            <?php
+                                if($idJurusan != "0") ?>
+                                    <h4>&plusmn;<?php echo $jarakJurusan ?> KM</h4><br>
                             <h4>&plusmn;<?php echo $jarakMinimarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakSupermarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakMasjid ?> KM</h4>

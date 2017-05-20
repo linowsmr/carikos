@@ -323,30 +323,30 @@ class Kamar extends CI_Controller {
 	{
 		$id = $this->input->post('id');	
 		$extension=array("jpeg","jpg","png","JPEG","JPG","PNG");
-	        if(isset($_FILES['foto'])){
-	        	$name_array = $_FILES['foto']['name'];
-	        	$tmp_name_array = $_FILES['foto']['tmp_name'];
-	        	
-    	 		for($i=0; $i < count($tmp_name_array); $i++){
-    				$ext=pathinfo($name_array[$i],PATHINFO_EXTENSION);
-    				$hash = "-";
-    				$name_file = $id.$hash.$name_array[$i];
-    				if(in_array($ext,$extension)){
-    					if(!file_exists("assets/images/kamar/".$name_file)){
-    						move_uploaded_file($tmp_name_array[$i], "assets/images/kamar/".$name_file);
-    						$this->model_kamar->insert_foto($id, $name_file);
-    					}
-    					else {
-    						$filename = basename($name_file, $ext);
-    						$newFileName=$filename.time().".".$ext;
-    						move_uploaded_file($tmp_name_array[$i], "assets/images/kamar/".$newFileName);
-    						$this->model_kamar->insert_foto($id, $newFileName);
-    					}
-    				}
-    				else
-    					echo "Salah Ekstensi";
-    			}
-	        }
+        if(isset($_FILES['foto'])){
+        	$name_array = $_FILES['foto']['name'];
+        	$tmp_name_array = $_FILES['foto']['tmp_name'];
+        	
+	 		for($i=0; $i < count($tmp_name_array); $i++){
+				$ext=pathinfo($name_array[$i],PATHINFO_EXTENSION);
+				$hash = "-";
+				$name_file = $id.$hash.$name_array[$i];
+				if(in_array($ext,$extension)){
+					if(!file_exists("assets/images/kamar/".$name_file)){
+						move_uploaded_file($tmp_name_array[$i], "assets/images/kamar/".$name_file);
+						$this->model_kamar->insert_foto($id, $name_file);
+					}
+					else {
+						$filename = basename($name_file, $ext);
+						$newFileName=$filename.time().".".$ext;
+						move_uploaded_file($tmp_name_array[$i], "assets/images/kamar/".$newFileName);
+						$this->model_kamar->insert_foto($id, $newFileName);
+					}
+				}
+				else
+					echo "Salah Ekstensi";
+			}
+        }
 	    redirect('kamar/beranda?kamar='.$id.'');    
 	}
 

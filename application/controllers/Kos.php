@@ -221,56 +221,6 @@ class Kos extends CI_Controller {
         }
 	}
 
-	public function ubah_tipe()
-	{
-		if(!empty($this->session->userdata('logged_in_pemilik')))
-        {
-            $session_data = $this->session->userdata('logged_in_pemilik');
-            $dataPemilik['username'] = $session_data['username'];
-            $dataPemilik['notifikasi'] = $this->model_pemesanan->count_pemesanan($dataPemilik['username']);
-            
-            $id = $this->input->get('kos');
-            $data['id'] = $id;
-
-            $data['detail'] = $this->model_kos->detail_kos($id);
-            $data['tipe'] = $this->model_kos->tipe_kos_non($id);
-
-            if($data['detail']){
-	            $data['tipe_kos'] = $this->model_kos->tipe_kos($id);
-
-	            foreach($data['detail'] as $row){
-	            	$data['nama'] = $row->namaKos;
-	            	$pemilik = $row->usernamePemilik;
-	            }
-
-	            if($dataPemilik['username'] == $pemilik){
-	            	$this->load->view('template/header_pemilik', $dataPemilik);
-					$this->load->view('tambah_tipe_kos', $data);
-					$this->load->view('template/footer');
-	            }
-	            else {
-	            	echo "Bukan Kos Anda";
-	            }
-            }
-            else {
-            	echo "Data Tidak Ditemukan";
-            }
-            
-        }
-        else {
-            redirect('pemilik/masuk');
-        }
-	}
-
-	public function ubah_tipe_baru()
-	{
-		$tipe = $this->input->post('tipe');
-		$id = $this->input->post('id');
-
-        $this->model_kos->update_tipe($id, $tipe);
-        redirect('kos/beranda?kos='.$id.'');
-	}
-
 	public function tambah_fasilitas()
 	{
 		if(!empty($this->session->userdata('logged_in_pemilik')))

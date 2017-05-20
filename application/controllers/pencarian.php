@@ -40,19 +40,17 @@ class Pencarian extends CI_Controller {
 		$kamar = $this->input->get('fasilitaskamar');
 		$jurusanDipilih = $this->input->get('jurusan');
 
+		$fasilitaskos = implode(",", $kos);
+		$fasilitaskamar = implode(",", $kamar);
+		
 		$nilaiDestinasi = 0;
 
 		$hasilPencarian = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 
 		$cluster = $this->model_cluster->ambil_cluster();
-		foreach($hasilPencarian as $row){
+		foreach($cluster as $row){
 			$idCluster = $row->idCluster;
 			if($row->nilaiDestinasiCluster == 0 || $row->nilaiDestinasiCluster == ""){
-
-				$cekMinimarket = $this->model_cluster->cek_destinasi($idCluster, 1);
-				if($cekMinimarket == 0){
-					//redirect('')
-				}
 
 				$jarakMinimarket = $this->model_cluster->jarak_destinasi($idCluster, 1);
 				$jarakSupermarket = $this->model_cluster->jarak_destinasi($idCluster, 2);
@@ -65,7 +63,6 @@ class Pencarian extends CI_Controller {
 					$jarakMarket = $jarakMinimarket;
 				}
 
-				//var_dump($jarakMarket);
 				foreach($jarakMarket as $row){
 					$jarakFinalMarket = $row->jarakDestinasi;
 					$bobotMarket = 0.22;
@@ -80,8 +77,6 @@ class Pencarian extends CI_Controller {
 						$nilaiDestinasi = $nilaiDestinasi + 25*$bobotMarket;
 					else if($jarakFinalMarket > 5)
 						$nilaiDestinasi = $nilaiDestinasi + 0*$bobotMarket;
-					
-					//echo "ID Cluster = $idCluster, Nilai Sementara = $nilaiDestinasi <br>";
 				}
 
 				$jarakMasjid = $this->model_cluster->jarak_destinasi($idCluster, 3);
@@ -100,15 +95,11 @@ class Pencarian extends CI_Controller {
 						$nilaiDestinasi = $nilaiDestinasi + 25*$bobotTempatIbadah;
 					else if($jarakFinalMasjid > 5)
 						$nilaiDestinasi = $nilaiDestinasi + 0*$bobotTempatIbadah;
-					
-					//echo "ID Cluster = $idCluster, Nilai Sementara = $nilaiDestinasi <br>";
 				}
 				$this->model_cluster->nilai_destinasi($idCluster, $nilaiDestinasi);
 			}
 			$nilaiDestinasi = 0;
 		}
-
-		//exit();
 		
 		$data['bp'] = $this->model_pencarian->bp();
 
@@ -160,12 +151,8 @@ class Pencarian extends CI_Controller {
 				}
 				$this->model_cluster->update_nilai_kamar($idKamar, $nilaiFasilitasKamar);
 			}
-			
-			//echo "Nilai Parkiran dan Penjaga = $nilaiParkiranPenjaga dan Nilai Fasilitas Kamar = $nilaiFasilitasKamar <br>";
 		}
 
-
-		//exit();
 		if($jurusanDipilih != ""){
 			$jurusan = $this->model_pencarian->ambil_jurusan($jurusanDipilih);
 			foreach ($jurusan as $row) {

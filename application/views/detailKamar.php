@@ -46,7 +46,7 @@
         }
     }
     else
-        $idJurusan = 0;                   
+        $idJurusan = 0;             
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -174,16 +174,20 @@
                         <br>
                         <div class="col-lg-3" style="text-align: right;">
                             <?php
-                                if($idJurusan != "0") ?>
+                                if($idJurusan != "0"){ ?>
                                     <h4>Jarak ke Jurusan <b><?php echo $namaJurusan ?></b></h4><br>
+                                <?php }
+                            ?>        
                             <h4>Minimarket Terdekat</h4>
                             <h4>Supermarket Terdekat</h4>
                             <h4>Masjid Terdekat</h4>
                         </div>
                         <div class="col-lg-3" style="text-align: left;">
                             <?php
-                                if($idJurusan != "0") ?>
+                                if($idJurusan != "0"){ ?>
                                     <h4>&plusmn;<?php echo $jarakJurusan ?> KM</h4><br>
+                                <?php }
+                            ?>
                             <h4>&plusmn;<?php echo $jarakMinimarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakSupermarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakMasjid ?> KM</h4>

@@ -37,9 +37,9 @@ class Model_jurusan extends CI_Model {
 		$run = $this->db->query($query);
  	}
 
- 	function latlng_jurusan($idJurusan)
+ 	function latlng_jurusan($idJurusan, $idCluster)
  	{
- 		$query = "SELECT idJurusan, latJurusan, lngJurusan FROM jurusan where idJurusan = $idJurusan";
+ 		$query = "SELECT * FROM jurusan j, cluster_jurusan cj WHERE j.idJurusan = cj.idJurusan AND j.idJurusan = $idJurusan AND cj.idCluster = $idCluster";
 		$run = $this->db->query($query);
 		return $run->result();
  	}

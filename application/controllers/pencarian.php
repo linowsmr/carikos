@@ -191,13 +191,14 @@ class Pencarian extends CI_Controller {
 		$idKos = $this->input->post('idKos');
 		$data['jmlKamar'] = $this->input->post('jmlKamar');
 		$data['harga'] = $this->input->post('hargaKamar');
-
-		if($this->input->post('idJurusan') != 0)
-			$data['jurusan'] = $this->model_jurusan->latlng_jurusan($this->input->post('idJurusan'));
 		
 		$data['detailKos'] =  $this->model_kos->detail_kos($idKos);
 		foreach($data['detailKos'] as $row){
 			$idCluster = $row->idCluster;
+		}
+
+		if($this->input->post('idJurusan') != 0){
+			$data['jurusan'] = $this->model_jurusan->latlng_jurusan($this->input->post('idJurusan'), $idCluster);
 		}
 
 		$data['fasilitasKos'] =  $this->model_kos->fasilitas_kos_min_penjaga($idKos);

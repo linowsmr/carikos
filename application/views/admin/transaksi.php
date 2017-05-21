@@ -25,9 +25,29 @@
 		      			<th><?php echo $row->idPemesanan?></th>
 		      			<th><?php echo $row->tanggalTransaksi?></th>
 		      			<th>Rp<?php echo number_format($row->totalPembayaran)?></th>
-		      			<th>Bank <?php echo $row->bank?></th>
-		      			<th><?php echo $row->nomorRekening?></th>
-		      			<th><?php echo $row->namaTabungan?></th>
+		      			<th>
+		      			<?php
+		      				if($row->status == 0 || $row->status == 3){?>
+		      				-
+		      				<?php }
+		      				else {?>
+		      				Bank <?php echo $row->bank;}?>
+		      			</th>
+		      			<th>
+		      			<?php 
+		      				if($row->status == 0 || $row->status == 3){?>
+		      				-
+		      				<?php }
+		      				else {
+		      				echo $row->nomorRekening;}?></th>
+		      			<th>
+		      			<?php
+		      				if($row->status == 0 || $row->status == 3){?>
+		      				-
+		      				<?php }
+		      				else { 
+		      				echo $row->namaTabungan;}?>
+		      			</th>
 		      			<?php
 		      				if($row->status == 0) {?>
 		      					<th>Belum bayar</th>

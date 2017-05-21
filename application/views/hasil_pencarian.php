@@ -68,50 +68,89 @@
                                 $bulan = date("m");
 
                                 //$lr = 0.7;
-                                $a = 0.27561841435694;
-                                $b = -1.0991004393801;
-                                $c = -2.1804039337464;
-                                $d = -1.9634680187429;
-                                $e = -0.19928174968044;
-                                $f = 2.554269942058;
-                                $g = -1.4855817680429;
-                                $h = -1.5459370526401;
-                                $i = 3.9808489206053;
+                                $a = 1.2817164322232;
+                                $b = -2.0161081024844;
+                                $c = -2.4820055708634;
+                                $d = 0.39234709422736;
+                                $e = -1.4500143409141;
+                                $f = -1.8379153691184;
+                                $g = 3.2170084420988;
+                                $h = -3.7499228156667;
+                                $i = -3.788658534876;
+                                $j = 3.5249716409331;
+                                $k = -3.2197327590555;
+                                $l = -2.0392787777114;
+                                $m = -5.9333871155382;
 
-                                if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 11 || $bulan == 12){
-                                    $nilaiBulan = 0;
+                                if($bulan==1){
+                                    $nilaiBulan = 8;
                                 }
-                                if($bulan == 5 || $bulan == 10){
-                                    $nilaiBulan = 1;
-                                }
-                                if($bulan == 6 || $bulan == 7 || $bulan == 8 || $bulan == 9){
+                                if($bulan==11 || $bulan == 2){
                                     $nilaiBulan = 2;
                                 }
+                                if($bulan==3 || $bulan == 4){
+                                    $nilaiBulan = 4;
+                                }
+                                if($bulan == 5){
+                                    $nilaiBulan = 15;
+                                }
+                                if($bulan==6){
+                                    $nilaiBulan = 25;
+                                }
+                                if($bulan==7){
+                                    $nilaiBulan = 32;
+                                }
+                                if($bulan==8){
+                                    $nilaiBulan = 35;
+                                }
+                                if($bulan==9){
+                                    $nilaiBulan = 29;
+                                }
+                                if($bulan==10){
+                                    $nilaiBulan = 26;
+                                }
+                                if($bulan==12){
+                                    $nilaiBulan = 3;
+                                }
 
-                                if($skor >= 0 && $skor < 25){
-                                    $nilaiSkor = 0;
-                                }
-                                if($skor >= 25 && $skor < 50){
-                                    $nilaiSkor = 1;
-                                }
-                                if($skor >= 50 && $skor < 76){
-                                    $nilaiSkor = 2;
-                                }
-                                if($skor >= 76 && $skor <= 100){
-                                    $nilaiSkor = 3;
-                                }
+                                $nilaiBln = (((0.8*$nilaiBulan)-(0.8*2))/(35-2))+0.1;
+                                //echo $nilaiBln;
+                                $nilaiSkor = (((0.8*$skor)-(0.8*0))/(100-0))+0.1;
+                                //echo $nilaiSkor;
+                                // if($bulan == 1 || $bulan == 2 || $bulan == 3 || $bulan == 4 || $bulan == 11 || $bulan == 12){
+                                //     $nilaiBulan = 0;
+                                // }
+                                // if($bulan == 5 || $bulan == 10){
+                                //     $nilaiBulan = 1;
+                                // }
+                                // if($bulan == 6 || $bulan == 7 || $bulan == 8 || $bulan == 9){
+                                //     $nilaiBulan = 2;
+                                // }
+
+                                // if($skor >= 0 && $skor < 25){
+                                //     $nilaiSkor = 0;
+                                // }
+                                // if($skor >= 25 && $skor < 50){
+                                //     $nilaiSkor = 1;
+                                // }
+                                // if($skor >= 50 && $skor < 76){
+                                //     $nilaiSkor = 2;
+                                // }
+                                // if($skor >= 76 && $skor <= 100){
+                                //     $nilaiSkor = 3;
+                                // }
                                 //ECHO $skor;
-                                for($i=0;$i<100;$i++) {
-                                    $nh1 = $a + $nilaiSkor*$b + $nilaiBulan*$c;
-                                    $nh2 = $d + $nilaiSkor*$d + $nilaiBulan*$f;
+                                $nh1 = $a + $nilaiSkor*$b + $nilaiBln*$c;
+                                $nh2 = $d + $nilaiSkor*$d + $nilaiBln*$f;
+                                $nh3 = $g + $h*$nilaiSkor + $i*$nilaiBln;
 
-                                    $oh1 = 1 / (1+exp($nh1*(-1)));
-                                    $oh2 = 1 / (1+exp($nh2*(-1)));
+                                $oh1 = 1 / (1+exp($nh1*(-1)));
+                                $oh2 = 1 / (1+exp($nh2*(-1)));
+                                $oh3 = 1 / (1+exp($nh3*(-1)));
 
-                                    $no = $g + $oh1*$h + $oh2*$i;
-                                    $out = 1 / (1+exp($no*(-1)));
-
-                                }
+                                $no= $j + ($oh1*$k) + ($oh2*$l) + ($oh3*$m);
+                                $out = 1 / (1+exp($no*(-1)));
+                            
                                 //echo $out;
                                 $hargaLama = $row->hargaKamar;
                                 $max = $hargaLama + (0.05*$hargaLama);

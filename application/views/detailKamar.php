@@ -172,7 +172,7 @@
                         <h2>Lokasi Kos</h2>
                         <hr class="small" style="border-color: black;">
                         <br>
-                        <div class="col-lg-3" style="text-align: right;">
+                        <div class="col-lg-4" style="text-align: right;">
                             <?php
                                 if($idJurusan != "0"){ ?>
                                     <h4>Jarak ke Jurusan <b><?php echo $namaJurusan ?></b></h4><br>
@@ -182,7 +182,7 @@
                             <h4>Supermarket Terdekat</h4>
                             <h4>Masjid Terdekat</h4>
                         </div>
-                        <div class="col-lg-3" style="text-align: left;">
+                        <div class="col-lg-2" style="text-align: left;">
                             <?php
                                 if($idJurusan != "0"){ ?>
                                     <h4>&plusmn;<?php echo $jarakJurusan ?> KM</h4><br>

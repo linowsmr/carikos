@@ -344,6 +344,7 @@ class Cluster extends CI_Controller {
 
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
 		unset($_SESSION['destinasi']);
+
 		$_SESSION['destinasi'] = "lain";
 		redirect('cluster/destinasi');
 	}

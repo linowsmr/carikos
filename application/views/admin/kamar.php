@@ -5,7 +5,7 @@
             	<?php echo $namaKos_item->namaKos?><?php } ?></h1>
         </div>
     </div>
-    <table class="table table-hover">
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		<thead>
 		    <tr>
 		        <th>Jenis Kamar</th>
@@ -17,9 +17,9 @@
 		    <?php
 		    foreach ($kamar as $kamar_item) {?>
 		      <tr>
-		        <th><?php echo $kamar_item->jenisKamar ?></th>
-		        <th><?php echo $kamar_item->jumlahKamar ?></th>
-		        <th><?php echo number_format($kamar_item->hargaKamar) ?></th>
+		        <td><?php echo $kamar_item->jenisKamar ?></td>
+		        <td><?php echo $kamar_item->jumlahKamar ?></td>
+		        <td><?php echo number_format($kamar_item->hargaKamar) ?></td>
 		      <?php } ?>
 		</tbody>
 	</table>

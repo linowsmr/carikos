@@ -5,7 +5,7 @@
             <h1 class="page-header">Pemesanan</h1>
         </div>
     </div>
-    <table class="table table-hover">
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		<thead>
 		    <tr>
 		        <th>ID Pemesanan</th>
@@ -20,12 +20,12 @@
 			<?php 
 			foreach ($pemesanan as $row) {?>
 				<tr>
-					<th><?php echo $row->idPemesanan?></th>
-					<th><?php echo $row->namaAkun?></th>
-					<th><?php echo $row->durasiPemesanan?> bulan</th>
-					<th>Rp<?php echo number_format($row->hargaPemesanan)?></th>
-					<th><?php echo $row->namaKos?></th>
-					<th><?php echo $row->jenisKamar?></th>
+					<td><?php echo $row->idPemesanan?></td>
+					<td><?php echo $row->namaAkun?></td>
+					<td><?php echo $row->durasiPemesanan?> bulan</td>
+					<td>Rp<?php echo number_format($row->hargaPemesanan)?></td>
+					<td><?php echo $row->namaKos?></td>
+					<td><?php echo $row->jenisKamar?></td>
 				</tr>
 			<?php }?>
 		</tbody>

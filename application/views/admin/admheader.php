@@ -16,6 +16,7 @@
 
     <!-- MetisMenu CSS -->
     <link href="<?php echo base_url(); ?>assets/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
@@ -132,6 +133,8 @@
 
   <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -146,3 +149,8 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url(); ?>assets/Admin/dist/js/sb-admin-2.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        $('#example').DataTable();
+    } );
+    </script>

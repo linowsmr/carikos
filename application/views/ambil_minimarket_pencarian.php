@@ -106,7 +106,7 @@
                                   service.getDistanceMatrix({
                                     origins: [origin],
                                     destinations: [destination],
-                                    travelMode: google.maps.TravelMode.DRIVING,
+                                    travelMode: google.maps.TravelMode.WALKING,
                                     unitSystem: google.maps.UnitSystem.METRIC
                                   }, function(response, status) {
                                     if (status !== google.maps.DistanceMatrixStatus.OK) {

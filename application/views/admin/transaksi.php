@@ -4,7 +4,7 @@
             <h1 class="page-header">Transaksi</h1>
         </div>
     </div>
-    	<table class="table table-hover">
+    	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		    <thead>
 		      <tr>
 		        <th>ID Transaksi</th>
@@ -21,51 +21,51 @@
 		      <?php 
 		      	foreach ($transaksi as $row) {?>
 		      		<tr>
-		      			<th><?php echo $row->idTransaksi?></th>
-		      			<th><?php echo $row->idPemesanan?></th>
-		      			<th><?php echo $row->tanggalTransaksi?></th>
-		      			<th>Rp<?php echo number_format($row->totalPembayaran)?></th>
-		      			<th>
+		      			<td><?php echo $row->idTransaksi?></td>
+		      			<td><?php echo $row->idPemesanan?></td>
+		      			<td><?php echo $row->tanggalTransaksi?></td>
+		      			<td>Rp<?php echo number_format($row->totalPembayaran)?></td>
+		      			<td>
 		      			<?php
 		      				if($row->status == 0 || $row->status == 3){?>
 		      				-
 		      				<?php }
 		      				else {?>
 		      				Bank <?php echo $row->bank;}?>
-		      			</th>
-		      			<th>
+		      			</td>
+		      			<td>
 		      			<?php 
 		      				if($row->status == 0 || $row->status == 3){?>
 		      				-
 		      				<?php }
 		      				else {
-		      				echo $row->nomorRekening;}?></th>
-		      			<th>
+		      				echo $row->nomorRekening;}?></td>
+		      			<td>
 		      			<?php
 		      				if($row->status == 0 || $row->status == 3){?>
 		      				-
 		      				<?php }
 		      				else { 
 		      				echo $row->namaTabungan;}?>
-		      			</th>
+		      			</td>
 		      			<?php
 		      				if($row->status == 0) {?>
-		      					<th>Belum bayar</th>
+		      					<td>Belum bayar</td>
 		      				<?php }
 		      				else if ($row->status == 1) 
 		      				{?>
-		      					<th><form action="<?php echo site_url('admin/verTrans')?>" method="POST">
+		      					<td><form action="<?php echo site_url('admin/verTrans')?>" method="POST">
 		      							<input type="hidden" name="transaksi" value="<?php echo $row->idTransaksi?>"></input>
 		      							<button type="submit" class="btn btn-primary">Verifikasi</button>
-		      						</form></th>
+		      						</form></td>
 		      				<?php }
 		      				else if ($row->status == 2){?>
-		      					<th>Lunas</th>
+		      					<td>Lunas</td>
 							<?php }
 		      				else if($row->status == 3){?>
-		      					<th>Batal</th>
+		      					<td>Batal</td>
 		      				<?php } ?>
-		      			</th>
+		      			</td>
 		      		</tr>
 		      	<?php }?>
 		    </tbody>

@@ -7,7 +7,7 @@
             </form>
         </div>
     </div>
-    <table class="table table-hover">
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		<thead>
 		    <tr>
 		        <th>ID Portal</th>
@@ -23,13 +23,13 @@
 		    <?php
 		    foreach ($portal as $row) {?>
 		      <tr>
-		        <th><?php echo $row->idPortal ?></th>
-		        <th><?php echo $row->jenisKendaraanPortal ?></th>
-		        <th><?php echo $row->latPortal ?></th>
-		        <th><?php echo $row->lngPortal ?></th>
-		        <th><?php echo $row->aksesPortal ?></th>
-		        <th><?php echo $row->waktuBukaPortal ?></th>
-		        <th><?php echo $row->waktuTutupportal ?></th>
+		        <td><?php echo $row->idPortal ?></td>
+		        <td><?php echo $row->jenisKendaraanPortal ?></td>
+		        <td><?php echo $row->latPortal ?></td>
+		        <td><?php echo $row->lngPortal ?></td>
+		        <td><?php echo $row->aksesPortal ?></td>
+		        <td><?php echo $row->waktuBukaPortal ?></td>
+		        <td><?php echo $row->waktuTutupportal ?></td>
 		        
 		      <?php } ?>
 		</tbody>

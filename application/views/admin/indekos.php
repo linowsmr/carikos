@@ -4,7 +4,7 @@
             <h1 class="page-header">Indekos</h1>
         </div>
     </div>
-    <table class="table table-hover">
+    <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		<thead>
 		    <tr>
 		        <th>Nama</th>
@@ -12,19 +12,17 @@
 		        <th>Telepon</th>
 		        <th width="50px">Jumlah Kamar</th>
 		        <th>Pemilik</th>
-		        <th></th>
 		   </tr>
 		</thead>
 		<tbody>
 		    <?php
 		    foreach ($kos as $kos_item) {?>
 		      <tr>
-		        <th><a href="<?php echo site_url('admin/lihatKamar?kos='.$kos_item['idKos'].'')?>"><?php echo $kos_item['namaKos'] ?></a></th>
-		        <th><?php echo $kos_item['alamatKos'] ?></th>
-		        <th><?php echo $kos_item['teleponKos'] ?></th>
-		        <th><?php echo $kos_item['jumlahKamar'] ?></th>
-		        <th><?php echo $kos_item['namaPemilik'] ?></th>
-		        <th></th>
+		        <td><a href="<?php echo site_url('admin/lihatKamar?kos='.$kos_item['idKos'].'')?>"><?php echo $kos_item['namaKos'] ?></a></td>
+		        <td><?php echo $kos_item['alamatKos'] ?></td>
+		        <td><?php echo $kos_item['teleponKos'] ?></td>
+		        <td><?php echo $kos_item['jumlahKamar'] ?></td>
+		        <td><?php echo $kos_item['namaPemilik'] ?></td>
 		      <?php } ?>
 		</tbody>
 	</table>

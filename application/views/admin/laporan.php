@@ -36,7 +36,7 @@
 		    	</div>
         	</div>
         </form>
-    	<table class="table table-hover">
+    	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		    <thead>
 		      <tr>
 		        <th>ID Transaksi</th>
@@ -51,21 +51,23 @@
 		    		$totalSemua = 0;
 		    		foreach ($transaksi as $row) {?>
 		    		<tr>
-		    			<th><?php echo $row->idTransaksi;?></th>
-		    			<th><?php echo $row->tanggal;?></th>
-		    			<th><?php $hargaAsli = $row->hargaKamar * $row->durasiPemesanan; echo number_format($hargaAsli);?></th>
-		    			<th><?php $hargaBaru = $row->hargaPemesanan * $row->durasiPemesanan; echo number_format($hargaBaru);?></th>
-		    			<th>
+		    			<td><?php echo $row->idTransaksi;?></td>
+		    			<td><?php echo $row->tanggal;?></td>
+		    			<td><?php $hargaAsli = $row->hargaKamar * $row->durasiPemesanan; echo number_format($hargaAsli);?></td>
+		    			<td><?php $hargaBaru = $row->hargaPemesanan * $row->durasiPemesanan; echo number_format($hargaBaru);?></td>
+		    			<td>
 		    				<?php
 		    				$total = $hargaBaru - $hargaAsli; 
 		    				$totalSemua += $total;
-		    				echo number_format($total);?> </th>
+		    				echo number_format($total);?> </td>
 		    		</tr>
 		    	<?php }?>
-		    		<tr>
-		    			<th colspan="4" style="text-align: center;"><b>Total</b></th>
-		    			<th><?php echo number_format($totalSemua);?></th>
-		    		</tr>
 		    </tbody>
+		    <tfoot>
+		    	<tr>
+		    		<th colspan="4" style="text-align: center;"><b>Total</b></th>
+		    		<th><?php echo number_format($totalSemua);?></th>
+		    	</tr>
+		    </tfoot>
 		</table>
 </div>

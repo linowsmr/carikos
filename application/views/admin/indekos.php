@@ -4,7 +4,7 @@
             <h1 class="page-header">Indekos</h1>
         </div>
     </div>
-    <table class="table table-hover">
+    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
 		<thead>
 		    <tr>
 		        <th>Nama</th>

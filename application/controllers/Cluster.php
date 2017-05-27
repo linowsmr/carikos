@@ -46,7 +46,7 @@ class Cluster extends CI_Controller {
 		foreach ($dataPoint as $coordinates)
 			$space->addPoint($coordinates);
 
-		$clusters = $space->solve(2);
+		$clusters = $space->solve(3);
 
 		$this->model_cluster->hapus_cluster();
 		$this->model_cluster->hapus_cluster_destinasi();
@@ -77,6 +77,7 @@ class Cluster extends CI_Controller {
 	public function destinasi()
 	{
 		if($_SESSION['destinasi'] == "minimarket"){
+
 			$id = $_SESSION['kos'];
 		
 			$data['detail'] = $this->model_kos->detail_kos($id);
@@ -137,6 +138,7 @@ class Cluster extends CI_Controller {
 			}
 
 			$result = $this->model_cluster->cek_destinasi($idCluster, 3);
+			$status = $this->model_cluster->status_cluster($idCluster, 1);
 
 			if($result == 0) {
 				if($data['detail']){
@@ -157,10 +159,10 @@ class Cluster extends CI_Controller {
 			$id = $_SESSION['kos'];
 			$idCluster = $_SESSION['cluster'];
 
-			$clusterLainNum = $this->model_cluster->cek_cluster_num($idCluster);
+			$clusterLainNum = $this->model_cluster->cek_cluster_num();
 			
 			if($clusterLainNum > 0){
-				$clusterLain = $this->model_cluster->cek_cluster($idCluster);
+				$clusterLain = $this->model_cluster->cek_cluster();
 
 				foreach($clusterLain as $row){
 					$idClusterBaru = $row->idCluster;
@@ -238,6 +240,7 @@ class Cluster extends CI_Controller {
 			$data['detail'] = $this->model_cluster->ambil_cluster_id($idCluster);
 
 			$result = $this->model_cluster->cek_destinasi($idCluster, 3);
+			$status = $this->model_cluster->status_cluster($idCluster, 1);
 
 			if($result == 0) {
 				if($data['detail']){

@@ -142,17 +142,27 @@ class Model_Cluster extends CI_Model {
 	    $run = $this->db->update('kamar', $data);
  	}
 
- 	function cek_cluster($idCluster)
+ 	function cek_cluster()
  	{
- 		$query = "SELECT * FROM cluster c WHERE c.nilaiDestinasiCluster = 0 AND c.idCluster NOT LIKE $idCluster LIMIT 1";
+ 		$query = "SELECT * FROM cluster c WHERE c.statusCluster != 1 LIMIT 1";
 		$run = $this->db->query($query);
 		return $run->result();
  	}
 
- 	function cek_cluster_num($idCluster)
+ 	function cek_cluster_num()
  	{
- 		$query = "SELECT * FROM cluster c WHERE c.nilaiDestinasiCluster = 0 AND c.idCluster NOT LIKE $idCluster LIMIT 1";
+ 		$query = "SELECT * FROM cluster c WHERE c.statusCluster != 1 LIMIT 1";
 		$run = $this->db->query($query);
 		return $run->num_rows();
+ 	}
+
+ 	function status_cluster($idCluster, $status)
+ 	{
+ 		$data = array(
+	   		'STATUSCLUSTER' => $status
+	   	);
+
+	   	$this->db->where('IDCLUSTER', $idCluster);
+	    $run = $this->db->update('cluster', $data);
  	}
 }

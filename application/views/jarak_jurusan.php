@@ -126,8 +126,7 @@ function form(jarak)
 </script>
 <div style="position: absolute; top: 30%; left: 45%;">
     <h2 style="margin-left: -19%;">Harap Menunggu</h2>
-    <br>
-    <div class="loader"></div>
+    <h3 style="margin-left: -40%;">Proses Pendaftaran Sedang Berlangsung</h3>
 </div>
 <aside class="call-to-action bg-primary" style="display: none;">
     <div class="container">

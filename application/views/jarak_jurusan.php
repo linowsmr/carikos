@@ -70,7 +70,7 @@ function form(jarak)
     // Fetching HTML Elements in Variables by ID.
     var x = document.getElementById("form");
     var createform = document.createElement('form'); // Create New Element Form
-    createform.setAttribute("action", "<?php echo site_url('jurusan/data_jarak')?>"); // Setting Action Attribute on Form
+    createform.setAttribute("action", "<?php echo site_url('cluster/data_jarak')?>"); // Setting Action Attribute on Form
     createform.setAttribute("method", "post"); // Setting Method Attribute on Form
     x.appendChild(createform);
 

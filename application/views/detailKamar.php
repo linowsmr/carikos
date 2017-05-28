@@ -69,7 +69,14 @@
                             <input type="hidden" name="kamar" value="<?php echo $idKamar ?>"></input>
                             <input type="hidden" name="kos" value="<?php echo $idKos ?>"></input>
                             <input type="hidden" name="harga" value="<?php echo $harga ?>"></input>
-                            <button type="submit" class="btn btn-lg btn-dark">Pesan Kamar</button>
+                            <?php
+                                if($jmlKamar > 0){ ?>
+                                    <button type="submit" class="btn btn-lg btn-dark">Pesan Kamar</button>
+                                <?php }
+                                else{ ?>
+                                    <button type="submit" class="btn btn-lg btn-dark" disabled>Pesan Kamar</button>
+                                <?php }
+                            ?>
                         </form>
     			 	</div>
                     <div class="col-lg-6 text-center">

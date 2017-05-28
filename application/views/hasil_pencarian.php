@@ -178,6 +178,7 @@
                                         <h4><?php echo $row->jenisKamar ?></h4>
                                         <hr style="margin-top: 0%; margin-bottom: 0%">
                                         <h4><?php echo $row->namaKos ?></h4>
+                                        <h4><strike>Rp<?php echo number_format($hargaLama)?>/bulan</strike></h4>
                                         <h4>Rp<?php echo number_format(round($hargaBaru))?>/bulan</h4>
                                         <h4>Tersedia <?php echo $jmlKamar ?> Kamar</h4>
                                         <form action="<?php echo site_url('pencarian/lihatKamar')?>" method="post">

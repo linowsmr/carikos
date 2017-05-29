@@ -56,11 +56,6 @@ class Cluster extends CI_Controller {
 			$latLngCluster = "($cluster[0], $cluster[1])";
 			$idCluster = $this->model_cluster->cluster($latLngCluster);
 
-			$jurusan = $this->model_jurusan->ambil_semua_jurusan();
-			foreach($jurusan as $row){
-				$this->model_jurusan->input_cluster_jurusan($idCluster, $row->idJurusan);
-			}
-
 			foreach ($cluster as $j => $member){
 				$latlng = "($member[0], $member[1])";
 				$idKos = $this->model_cluster->pencarian_by_latlng($latlng);
@@ -71,10 +66,10 @@ class Cluster extends CI_Controller {
 		}
 		$_SESSION['kos'] = $id;
 		$_SESSION['destinasi'] = "cek";
-		redirect('cluster/destinasi');
+		redirect('cluster/proses');
 	}
 
-	public function destinasi()
+	public function proses()
 	{
 		if($_SESSION['destinasi'] == "minimarket"){
 
@@ -91,7 +86,7 @@ class Cluster extends CI_Controller {
 			else {
 				unset($_SESSION['destinasi']);
 				$_SESSION['destinasi'] = "supermarket";
-				redirect('cluster/destinasi');
+				redirect('cluster/proses');
 			}
 		}
 
@@ -109,7 +104,7 @@ class Cluster extends CI_Controller {
 			else {
 				unset($_SESSION['destinasi']);
 				$_SESSION['destinasi'] = "masjid";
-				redirect('cluster/destinasi');
+				redirect('cluster/proses');
 			}
 		}
 
@@ -127,7 +122,7 @@ class Cluster extends CI_Controller {
 			else {
 				unset($_SESSION['destinasi']);
 				$_SESSION['destinasi'] = "cek";
-				redirect('cluster/destinasi');
+				redirect('cluster/proses');
 			}
 		}
 
@@ -149,18 +144,18 @@ class Cluster extends CI_Controller {
 
 				if($cekMinimarket == 0){
 					$_SESSION['destinasi'] = "minimarket";
-					redirect('cluster/destinasi');
+					redirect('cluster/proses');
 				}
 				else{
 					unset($_SESSION['cluster']);
 					$_SESSION['destinasi'] = "banjir";
-					redirect('cluster/destinasi');
+					redirect('cluster/proses');
 				}
 			}
 			else{
 				unset($_SESSION['cluster']);
 				$_SESSION['destinasi'] = "banjir";
-				redirect('cluster/destinasi');
+				redirect('cluster/proses');
 			}
 		}
 
@@ -177,40 +172,6 @@ class Cluster extends CI_Controller {
 			$this->load->view('kos_ramai', $data);
 			$this->load->view('template/footer-2');
 		}
-
-		else if($_SESSION['destinasi'] == "jurusan"){
-			$cluster = $this->model_cluster->ambil_cluster();
-			foreach($cluster as $row){
-				$jurusan = $this->model_jurusan->ambil_semua_jurusan();
-				foreach ($jurusan as $row2) {
-					$cekNilai = $this->model_jurusan->cek_nilai($row->idCluster, $row2->idJurusan);
-					if($cekNilai == 1){
-						$data['idCluster'] = $row->idCluster;
-						$latlong = substr($row->latLngCluster, 1, -1);
-				        $coord = explode(", ", $latlong);
-				        $data['latCluster'] = $coord[0];
-				        $data['lngCluster'] = $coord[1];
-
-						$data['idJurusan'] = $row2->idJurusan;
-						$data['latJurusan'] = $row2->latJurusan;
-						$data['lngJurusan'] = $row2->lngJurusan;
-						break 2;
-					}
-					
-				}
-			}
-			
-			if(isset($data)){
-				$this->load->view('template/header-2');
-				$this->load->view('jarak_jurusan', $data);
-				$this->load->view('template/footer-2');	
-			}
-			else{
-				$id = $_SESSION['kos'];
-				unset($_SESSION['kos']);
-				redirect('kos/beranda?kos='.$id.'');
-			}
-		}
 	}
 
 	function cluster_data_minimarket()
@@ -222,7 +183,7 @@ class Cluster extends CI_Controller {
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "supermarket";
-		redirect('cluster/destinasi');
+		redirect('cluster/proses');
 	}
 
 	function cluster_data_supermarket()
@@ -234,7 +195,7 @@ class Cluster extends CI_Controller {
 		$this->model_cluster->destinasi($idCluster, $idDestination, $distance);
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "masjid";
-		redirect('cluster/destinasi');
+		redirect('cluster/proses');
 	}
 
 	function cluster_data_masjid()
@@ -249,7 +210,7 @@ class Cluster extends CI_Controller {
 
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "cek";
-		redirect('cluster/destinasi');
+		redirect('cluster/proses');
 	}
 
 	function kos_banjir()
@@ -260,7 +221,7 @@ class Cluster extends CI_Controller {
 		$this->model_kos->nilai_banjir($idKos, $nilaiBanjir);
 		unset($_SESSION['destinasi']);
 		$_SESSION['destinasi'] = "ramai";
-		redirect('cluster/destinasi');
+		redirect('cluster/proses');
 	}
 
 	function kos_ramai()
@@ -270,8 +231,8 @@ class Cluster extends CI_Controller {
 
 		$this->model_kos->nilai_ramai($idKos, $nilaiRamai);
 		unset($_SESSION['destinasi']);
-		$_SESSION['destinasi'] = "jurusan";
-		redirect('cluster/destinasi');
+		unset($_SESSION['kos']);
+		redirect('kos/beranda?kos='.$idKos.'');
 	}
 
 	public function data_jarak()
@@ -293,9 +254,9 @@ class Cluster extends CI_Controller {
 		else if($jarakClusterJurusan > 5)
 			$nilaiDestinasi = $nilaiDestinasi + 0*$bobotJurusan;
 
-		$this->model_jurusan->jarak_cluster_jurusan($idCluster, $idJurusan, $jarakClusterJurusan, $nilaiDestinasi);
+		$this->model_jurusan->input_cluster_jurusan($idCluster, $idJurusan, $jarakClusterJurusan, $nilaiDestinasi);
 
-		redirect('cluster/destinasi');
+		redirect('pencarian/proses');
 
 	}
 }

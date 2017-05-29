@@ -13,36 +13,88 @@ class Pencarian extends CI_Controller {
 	   	$this->load->model('model_jurusan','',TRUE);
  	}
 
-	public function index()
-	{
-		$kota = strtolower($this->input->get('kota'));
+ 	public function index()
+ 	{
+ 		$_SESSION['kota'] = strtolower($this->input->get('kota'));
 		
 		$harga = $this->input->get('harga');
 		if($harga == 1){
-			$minHarga = 0;
-			$maxHarga = 500000;
+			$_SESSION['minHarga'] = 0;
+			$_SESSION['maxHarga'] = 500000;
 		}
 		else if($harga == 2){
-			$minHarga = 500001;
-			$maxHarga = 1000000;
+			$_SESSION['minHarga'] = 500001;
+			$_SESSION['maxHarga'] = 1000000;
 		}
 		else if($harga == 3){
-			$minHarga = 1000001;
-			$maxHarga = 1500000;
+			$_SESSION['minHarga'] = 1000001;
+			$_SESSION['maxHarga'] = 1500000;
 		}
 		else if($harga == 4){
-			$minHarga = 1500001;
-			$maxHarga = 9999999;
+			$_SESSION['minHarga'] = 1500001;
+			$_SESSION['maxHarga'] = 9999999;
 		}
 
-		$tipe = $this->input->get('tipe');
+		$_SESSION['tipe'] = $this->input->get('tipe');
 		$kos = $this->input->get('fasilitaskos');
 		$kamar = $this->input->get('fasilitaskamar');
-		$jurusanDipilih = $this->input->get('jurusan');
+		if($this->input->get('jurusan') != ""){
+			$_SESSION['jurusanDipilih'] = $this->input->get('jurusan');
 
-		$fasilitaskos = implode(",", $kos);
-		$fasilitaskamar = implode(",", $kamar);
+			$_SESSION['fasilitaskos'] = implode(",", $kos);
+			$_SESSION['fasilitaskamar'] = implode(",", $kamar);
+
+			redirect('pencarian/proses');
+		}
+		else{
+			$_SESSION['jurusanDipilih'] = "";
+			redirect('pencarian/hasil');
+		}
+ 	}
+
+ 	public function proses()
+	{
+		$cluster = $this->model_cluster->ambil_cluster();
+		foreach($cluster as $row){
+			$cekNilai = $this->model_jurusan->cek_nilai($row->idCluster, $_SESSION['jurusanDipilih']);
+
+			if($cekNilai == 0){
+				$jurusan = $this->model_jurusan->ambil_jurusan($_SESSION['jurusanDipilih']);
+				foreach ($jurusan as $row2) {
+					$data['idCluster'] = $row->idCluster;
+					$latlong = substr($row->latLngCluster, 1, -1);
+			        $coord = explode(", ", $latlong);
+			        $data['latCluster'] = $coord[0];
+			        $data['lngCluster'] = $coord[1];
+
+					$data['idJurusan'] = $row2->idJurusan;
+					$data['latJurusan'] = $row2->latJurusan;
+					$data['lngJurusan'] = $row2->lngJurusan;
+					break 2;	
+				}
+			}
+		}
 		
+		if(isset($data)){
+			$this->load->view('template/header-2');
+			$this->load->view('jarak_jurusan', $data);
+			$this->load->view('template/footer-2');	
+		}
+		else{
+			redirect('pencarian/hasil');
+		}
+	}
+
+	public function hasil()
+	{
+		$kota = $_SESSION['kota'];
+		$minHarga = $_SESSION['minHarga'];
+		$maxHarga = $_SESSION['maxHarga'];
+		$tipe = $_SESSION['tipe'];
+		$fasilitaskos = $_SESSION['fasilitaskos'];
+		$fasilitaskamar = $_SESSION['fasilitaskamar'];
+		$jurusanDipilih = $_SESSION['jurusanDipilih'];
+
 		$nilaiDestinasi = 0;
 
 		$hasilPencarian = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
@@ -151,11 +203,7 @@ class Pencarian extends CI_Controller {
 		}
 
 		if($jurusanDipilih != ""){
-			$jurusan = $this->model_pencarian->ambil_jurusan($jurusanDipilih);
-			foreach ($jurusan as $row) {
-				$idJurusan = $row->idJurusan;
-			}
-			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $idJurusan);
+			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $jurusanDipilih);
 			$data['idJurusan'] = $jurusanDipilih;
 		}
 		else{

@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h4>Nomor Rekening</h4>
-                                        <input type="text" class="form-control" name="norek" required>
+                                        <input type="number" class="form-control" name="norek" required>
                                         <small>Isi nomor rekening yang dipakai untuk pembayaran</small>
                                     </div>
                                     <div class="form-group">
@@ -63,7 +63,7 @@
                                         <h4>Sebesar</h4>
                                         <div class="input-group">
                                             <span class="input-group-addon">Rp</span>
-                                            <input type="number" min="0" max="<?php echo $totalPembayaran;?>" class="form-control" name="totalBayar" required>
+                                            <input type="number" min="<?php echo $totalPembayaran;?>" max="<?php echo $totalPembayaran;?>" class="form-control" name="totalBayar" required>
                                         </div>
                                         <small>Total yang harus dibayar <b>Rp<?php echo number_format($totalPembayaran)?></b></small>
                                     </div>

@@ -15,9 +15,22 @@ class Pemesanan extends CI_Controller {
 
 	public function index()
 	{
-		$data['kamar'] = $this->input->post('kamar');
-		$data['kos'] = $this->input->post('kos');
-		$data['harga'] = $this->input->post('harga');
+		if(isset($_SESSION['idKos']) && isset($_SESSION['idKamar']) && isset($_SESSION['harga']) && isset($_SESSION['pesan'])){
+			$data['kos'] = $_SESSION['idKos'];
+			$data['kamar'] = $_SESSION['idKamar'];
+			$data['harga'] = $_SESSION['harga'];
+			$data['pesan'] = $_SESSION['pesan'];
+
+			unset($_SESSION['kos']);
+			unset($_SESSION['kamar']);
+			unset($_SESSION['harga']);
+			unset($_SESSION['pesan']);
+		}
+		else {
+			$data['kamar'] = $this->input->post('kamar');
+			$data['kos'] = $this->input->post('kos');
+			$data['harga'] = $this->input->post('harga');
+		}
 		
 		if(!empty($this->session->userdata('logged_in_akun')))
         {
@@ -55,10 +68,24 @@ class Pemesanan extends CI_Controller {
 			$data['masuk'] = $this->input->post('masuk');
 			$data['keluar'] = $this->input->post('keluar');
 
+			$idKamar = $this->input->post('kamar');
+			$idKos = $this->input->post('kos');
+			$data['harga'] = $this->input->post('harga');
+
+			date_default_timezone_set("Asia/Bangkok");
 			$masuk = date_create($data['masuk']);
 			$keluar = date_create($data['keluar']);
 
 			$diff = date_diff($masuk, $keluar);
+			$interval = $diff->format("%R");
+
+			if($interval == "-"){
+				$_SESSION['idKos'] = $idKos;
+				$_SESSION['idKamar'] = $idKamar;
+				$_SESSION['harga'] = $data['harga'];
+				$_SESSION['pesan'] = "Tanggal Tidak Memenuhi";
+				redirect('pemesanan/index');
+			}
 
 			$tahun = $diff->format("%y");
 			$bulan = $diff->format("%m");
@@ -74,13 +101,10 @@ class Pemesanan extends CI_Controller {
 			if($data['durasi'] < 1)
 				echo "Salah Input Tanggal";
 
-			$idKamar = $this->input->post('kamar');
-			$idKos = $this->input->post('kos');
-			$data['harga'] = $this->input->post('harga');
 			$data['totalPembayaran'] = $data['durasi']*$data['harga'];
 			$idPromo = 0;
 			$data['idPromo'] = $idPromo;
-
+			
 			$kode = strtoupper($this->input->post('kode'));
 			if($kode != ""){
 				$promo = $this->model_promo->cek_promo($kode);
@@ -104,7 +128,7 @@ class Pemesanan extends CI_Controller {
 						$minimumTransaksi = $row->minimumTransaksi;
 						$minimumDurasiPemesanan = $row->minimumDurasiPemesanan;
 					}
-					date_default_timezone_set("Asia/Bangkok");
+					
 					$tanggalSekarang = date("Y-m-d");
 					if($tanggalSekarang >= $periodeBookingMulai->format('Y-m-d') && $tanggalSekarang <= $periodeBookingSelesai->format('Y-m-d')){
 						if($data['totalPembayaran'] >= $minimumTransaksi){

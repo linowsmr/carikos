@@ -109,48 +109,45 @@ class Pencarian extends CI_Controller {
 			$nilaiParkiranPenjagaKos = $row->nilaiParkiranPenjagaKos;
 			$nilaiFasilitas = $row->nilaiFasilitasKamar;
 
-			if($nilaiParkiranPenjagaKos == 0 || $nilaiParkiranPenjagaKos == ""){
-				$luasParkiran = $this->model_cluster->luas_parkiran($idKos);
-				$bobotLuasParkiran = 0.1;
-				foreach($luasParkiran as $row){
-					$luas = $row->idParkiranKos;
-					if($luas == 1)
-						$nilaiLuasParkir = 100*$bobotLuasParkiran;
-					else if($luas == 2)
-						$nilaiLuasParkir = 75*$bobotLuasParkiran;
-					else if($luas == 3)
-						$nilaiLuasParkir = 50*$bobotLuasParkiran;
-					else if($luas == 4)
-						$nilaiLuasParkir = 25*$bobotLuasParkiran;
-					else if($luas == 5)
-						$nilaiLuasParkir = 0*$bobotLuasParkiran;
-				}
-
-				$penjagaKos = $this->model_cluster->penjaga_kos($idKos);
-				$bobotPenjagaKos = 0.07;
-				if($penjagaKos == 1)
-					$nilaiPenjagaKos = 100*$bobotPenjagaKos;
-				else
-					$nilaiPenjagaKos = 0*$bobotPenjagaKos;
-
-				$nilaiParkiranPenjaga = $nilaiLuasParkir + $nilaiPenjagaKos;
-				$this->model_cluster->update_nilai_kos($idKos, $nilaiParkiranPenjaga);
+			$luasParkiran = $this->model_cluster->luas_parkiran($idKos);
+			$bobotLuasParkiran = 0.1;
+			foreach($luasParkiran as $row){
+				$luas = $row->idParkiranKos;
+				if($luas == 1)
+					$nilaiLuasParkir = 100*$bobotLuasParkiran;
+				else if($luas == 2)
+					$nilaiLuasParkir = 75*$bobotLuasParkiran;
+				else if($luas == 3)
+					$nilaiLuasParkir = 50*$bobotLuasParkiran;
+				else if($luas == 4)
+					$nilaiLuasParkir = 25*$bobotLuasParkiran;
+				else if($luas == 5)
+					$nilaiLuasParkir = 0*$bobotLuasParkiran;
 			}
+
+			$penjagaKos = $this->model_cluster->penjaga_kos($idKos);
+			$bobotPenjagaKos = 0.07;
+			if($penjagaKos == 1)
+				$nilaiPenjagaKos = 100*$bobotPenjagaKos;
+			else
+				$nilaiPenjagaKos = 0*$bobotPenjagaKos;
+
+			$nilaiParkiranPenjaga = $nilaiLuasParkir + $nilaiPenjagaKos;
+			$this->model_cluster->update_nilai_kos($idKos, $nilaiParkiranPenjaga);
 			
-			if($nilaiFasilitas == 0 || $nilaiFasilitas == ""){
-				$fasilitas = $this->model_cluster->fasilitas_lengkap($idKamar);
-				$bobotFasilitasKamar = 0.34;
-				foreach($fasilitas as $row){
-					$fasilitasKamar = $row->fasilitasTiga;
-					if($fasilitasKamar == 3)
-						$nilaiFasilitasKamar = 100*$bobotFasilitasKamar;
-					else if($fasilitasKamar == 2)
-						$nilaiFasilitasKamar = 50*$bobotFasilitasKamar;
-					else
-						$nilaiFasilitasKamar = 0*$bobotFasilitasKamar;
-				}
-				$this->model_cluster->update_nilai_kamar($idKamar, $nilaiFasilitasKamar);
+			$fasilitas = $this->model_cluster->fasilitas_lengkap($idKamar);
+			$bobotFasilitasKamar = 0.34;
+			foreach($fasilitas as $row){
+				$fasilitasKamar = $row->fasilitasTiga;
+				if($fasilitasKamar == 3)
+					$nilaiFasilitasKamar = 100*$bobotFasilitasKamar;
+				else if($fasilitasKamar == 2)
+					$nilaiFasilitasKamar = 50*$bobotFasilitasKamar;
+				else
+					$nilaiFasilitasKamar = 0*$bobotFasilitasKamar;
 			}
+			$this->model_cluster->update_nilai_kamar($idKamar, $nilaiFasilitasKamar);
+			
 		}
 
 		if($jurusanDipilih != ""){

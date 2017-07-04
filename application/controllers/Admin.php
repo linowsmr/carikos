@@ -110,7 +110,7 @@ class Admin extends CI_Controller {
             $session_data = $this->session->userdata('logged_in_admin');
             $nama['username'] = $session_data['username'];
             $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
-            $data['transaksi'] = $this->model_transaksi->data_transaksi();
+            $data['transaksi'] = $this->model_transaksi->transaksi_data();
 
 			$this->load->view('admin/admheader',$nama);
 			$this->load->view('admin/transaksi', $data);

@@ -37,9 +37,10 @@ class Transaksi extends CI_Controller {
         {
             $session_data = $this->session->userdata('logged_in_akun');
             $dataAkun['username'] = $session_data['username'];
+            $idTransaksi = $this->input->get('transaksi');
 
-            $data['idTransaksi'] = $this->model_transaksi->data_transaksi();
-  			$data['totalPembayaran'] = $this->model_transaksi->data_transaksi();
+            //$data['idTransaksi'] = $this->model_transaksi->data_transaksi();
+  			$data['totalPembayaran'] = $this->model_transaksi->data_transaksi($idTransaksi);
 
 			$this->load->view('template/header_akun', $dataAkun);
 			$this->load->view('konfirmasi_pembayaran', $data);
@@ -59,7 +60,7 @@ class Transaksi extends CI_Controller {
 		
 		$cek = $this->model_transaksi->verifikasi($idTransaksi,$norek,$namarek,$bank,$status);
 		if($cek != 'Gagal'){
-			redirect('home');
+			redirect('transaksi/daftar');
 		}
 		else{
 			echo 'Gagal';

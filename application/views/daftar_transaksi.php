@@ -53,6 +53,11 @@
                                                                         E-Ticket
                                                                     </button></a>
                                                                 <?php }
+                                                                elseif ($status == "Belum Bayar") {?>
+                                                                    <a href="<?php echo site_url('transaksi/konfirmasi?transaksi='.$row->idTransaksi.'')?>" target="_blank"> <button class="btn btn-primary btn-sm">
+                                                                            Konfirmasi
+                                                                    </button>
+                                                                <?php }
                                                                 else{
                                                                     echo $status;
                                                                 }?></td>

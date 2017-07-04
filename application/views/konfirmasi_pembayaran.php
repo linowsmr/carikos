@@ -1,9 +1,7 @@
 <?php 
  foreach ($totalPembayaran as $row) {
-     $totalPembayaran = $row->totalPembayaran;
- }
- foreach ($idTransaksi as $row) {
      $idTransaksi = $row->idTransaksi;
+     $totalPembayaran = $row->totalPembayaran;
  }?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,8 +30,7 @@
                                 <section style="margin-left: 5%; margin-right: 5%;">
                                     <div class="form-group">
                                         <h4>ID Transaksi</h4>
-                                        <input type="text" class="form-control" name="idTransaksi" required>
-                                        <small>ID Transaksi yang Didapat Saat Melakukan Pemesanan</small>
+                                        <input type="text" class="form-control" name="idTransaksi" value="<?php echo $idTransaksi ?>" required>
                                     </div>
                                     <div class="form-group">
                                         <h4>Bank Rekening Asal</h4>
@@ -63,7 +60,7 @@
                                         <h4>Sebesar</h4>
                                         <div class="input-group">
                                             <span class="input-group-addon">Rp</span>
-                                            <input type="number" min="0" max="<?php echo $totalPembayaran;?>" class="form-control" name="totalBayar" required>
+                                            <input type="number" min="<?php echo $totalPembayaran;?>" max="<?php echo $totalPembayaran;?>" class="form-control" name="totalBayar" required>
                                         </div>
                                         <small>Total yang harus dibayar <b>Rp<?php echo number_format($totalPembayaran)?></b></small>
                                     </div>

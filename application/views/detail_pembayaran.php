@@ -106,10 +106,10 @@
                     <br>
                     <div class="col-lg-3"></div>
                     <div class="col-lg-6">
-                        <form action="<?php echo site_url('transaksi/Konfirmasi')?>" method="POST">
+                        <form action="<?php echo site_url('transaksi/daftar')?>" method="POST">
                             <input type="hidden" name="pemesanan" value="<?php echo $idPemesanan ?>"></input>
                             <input type="hidden" name="totalPembayaran" value="<?php echo $totalPembayaran ?>"></input>
-                            <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Konfirmasi Pembayaran</button>
+                            <button type="submit" class="btn btn-lg btn-dark" style="float: right; margin-right: -2.5%;">Oke</button>
                         </form>
                     </div>
                     <div class="col-lg-3"></div>

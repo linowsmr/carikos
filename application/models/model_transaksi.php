@@ -26,9 +26,15 @@ class Model_transaksi extends CI_Model {
 		return $run->result();
  	}
 
- 	function data_transaksi()
+ 	function transaksi_data()
  	{
  		$query = "SELECT * FROM transaksi";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
+ 	function data_transaksi($idTransaksi)
+ 	{
+ 		$query = "SELECT * FROM transaksi t WHERE t.idTransaksi= $idTransaksi";
  		$run = $this->db->query($query);
  		return $run->result();
  	}

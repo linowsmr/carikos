@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="form-group">
                                         <h4>Nomor Rekening</h4>
-                                        <input type="text" class="form-control" name="norek" required>
+                                        <input type="number" class="form-control" name="norek" required>
                                         <small>Isi nomor rekening yang dipakai untuk pembayaran</small>
                                     </div>
                                     <div class="form-group">

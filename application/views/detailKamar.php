@@ -20,18 +20,19 @@
         $jenisKamar = $row->jenisKamar;
         $jumlahKamar = $row->jumlahKamar;
         $luasKamar = $row->luasKamar;
+        $hargaAwalKamar = $row->hargaKamar;
     }
 
     foreach($minimarket as $row){
-        $jarakMinimarket = round($row->jarakDestinasi, 1);
+        $jarakMinimarket = round($row->jarakDestinasi, 2);
     }
 
     foreach($supermarket as $row){
-        $jarakSupermarket = round($row->jarakDestinasi, 1);
+        $jarakSupermarket = round($row->jarakDestinasi, 2);
     }
 
     foreach($masjid as $row){
-        $jarakMasjid = round($row->jarakDestinasi, 1);
+        $jarakMasjid = round($row->jarakDestinasi, 2);
     }
 
     $hargaKamar = number_format($harga);
@@ -42,7 +43,7 @@
             $namaJurusan = $row->namaJurusan;
             $koma = ', ';
             $latLngJurusan = $row->latJurusan.$koma.$row->lngJurusan;
-            $jarakJurusan = round($row->jarakClusterJurusan, 1);
+            $jarakJurusan = round($row->jarakClusterJurusan, 2);
         }
     }
     else

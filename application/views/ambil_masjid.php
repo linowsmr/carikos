@@ -1,11 +1,9 @@
 <?php
-    foreach($detail as $row){ 
+    foreach($cluster as $row){ 
         $latlong = substr($row->latLngCluster, 1, -1);
         $coord = explode(", ", $latlong);
         $lat = $coord[0];
         $lng = $coord[1];
-        $idCluster = $row->idCluster;
-        $idKos = $row->idKos;
     } 
 ?>
 
@@ -17,29 +15,6 @@
         height: 100%;
         width: 100%;
       }
-      .loader {
-          border: 16px solid #f3f3f3;
-          border-radius: 50%;
-          border-top: 16px solid blue;
-          border-right: 16px solid green;
-          border-bottom: 16px solid red;
-          border-left: 16px solid pink;
-          width: 120px;
-          height: 120px;
-          -webkit-animation: spin 2s linear infinite;
-          animation: spin 2s linear infinite;
-
-        }
-
-        @-webkit-keyframes spin {
-          0% { -webkit-transform: rotate(0deg); }
-          100% { -webkit-transform: rotate(360deg); }
-        }
-
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body>
@@ -145,60 +120,17 @@
                                     createform.setAttribute("method", "post"); // Setting Method Attribute on Form
                                     x.appendChild(createform);
 
-                                    var linebreak = document.createElement('br');
-                                    createform.appendChild(linebreak);
-
-                                    var idKos = document.createElement('label'); // Create Label for Name Field
-                                    idKos.innerHTML = "Kos ID : "; // Set Field Labels
-                                    createform.appendChild(idKos);
-
-                                    var idKosElement = document.createElement('input'); // Create Input Field for Name
-                                    idKosElement.setAttribute("type", "text");
-                                    idKosElement.setAttribute("name", "kos");
-                                    idKosElement.setAttribute("value", "<?php echo $idKos ?>");
-                                    createform.appendChild(idKosElement);
-
-                                    var messagebreak = document.createElement('br');
-                                    createform.appendChild(messagebreak);
-
-                                    var idCluster = document.createElement('label'); // Create Label for Name Field
-                                    idCluster.innerHTML = "Cluster ID : "; // Set Field Labels
-                                    createform.appendChild(idCluster);
-
-                                    var idClusterElement = document.createElement('input'); // Create Input Field for Name
-                                    idClusterElement.setAttribute("type", "text");
-                                    idClusterElement.setAttribute("name", "cluster");
-                                    idClusterElement.setAttribute("value", "<?php echo $idCluster ?>");
-                                    createform.appendChild(idClusterElement);
-
-                                    var messagebreak = document.createElement('br');
-                                    createform.appendChild(messagebreak);
-
-                                    var idDestination = document.createElement('label'); // Create Label for Name Field
-                                    idDestination.innerHTML = "Destination ID : "; // Set Field Labels
-                                    createform.appendChild(idDestination);
-
                                     var idDestinationElement = document.createElement('input'); // Create Input Field for Name
                                     idDestinationElement.setAttribute("type", "text");
                                     idDestinationElement.setAttribute("name", "destination");
                                     idDestinationElement.setAttribute("value", 3);
                                     createform.appendChild(idDestinationElement);
 
-                                    var messagebreak = document.createElement('br');
-                                    createform.appendChild(messagebreak);
-
-                                    var namelabel = document.createElement('label'); // Create Label for Name Field
-                                    namelabel.innerHTML = "Your Name : "; // Set Field Labels
-                                    createform.appendChild(namelabel);
-
                                     var inputelement = document.createElement('input'); // Create Input Field for Name
                                     inputelement.setAttribute("type", "text");
                                     inputelement.setAttribute("name", "distance");
                                     inputelement.setAttribute("value", num);
                                     createform.appendChild(inputelement);
-
-                                    var messagebreak = document.createElement('br');
-                                    createform.appendChild(messagebreak);
 
                                     var submitelement = document.createElement('input'); // Append Submit Button
                                     submitelement.setAttribute("type", "submit");

@@ -57,8 +57,6 @@
                 <ul class="dropdown-menu dropdown-user">
                     <li><a href="<?php echo site_url('transaksi/daftar') ?>"><i class="fa fa-user fa-fw"></i> Daftar Transaksi</a>
                     </li>
-                    <li><a href="<?php echo site_url('transaksi/konfirmasi') ?>"><i class="fa fa-user fa-fw"></i> Konfirmasi Pembayaran</a>
-                    </li>
                 </ul>
                 <!-- /.dropdown-user -->
             </li>

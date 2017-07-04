@@ -259,4 +259,39 @@ class Cluster extends CI_Controller {
 		redirect('pencarian/proses');
 
 	}
+
+	public function lihat_visualisasi()
+	{	
+		$data['kos'] = $this->model_kos->semua_kos();
+		$this->load->view('template/header');
+		$this->load->view('visualisasi_cluster', $data);
+	}
+
+	public function visualisasi()
+	{
+		$dom = new DOMDocument("1.0");
+		$node = $dom->createElement("cluster");
+		$parnode = $dom->appendChild($node);
+
+		header("Content-type: text/xml");
+
+		$kos = $this->model_kos->semua_kos();
+		foreach($kos as $row){
+		  $node = $dom->createElement("cluster");
+		  $newnode = $parnode->appendChild($node);
+		  $newnode->setAttribute("idKos",$row->idKos);
+		  $newnode->setAttribute("namaKos",$row->namaKos);
+
+		  $latlong = substr($row->latLngKos, 1, -1);
+	      $coord = explode(", ", $latlong);
+	      $latKos = $coord[0];
+	      $lngKos = $coord[1];
+		  
+		  $newnode->setAttribute("latKos",$latKos);
+		  $newnode->setAttribute("lngKos",$lngKos);
+		  $newnode->setAttribute("idCluster",$row->idCluster);
+		}
+
+		echo $dom->saveXML();
+	}
 }

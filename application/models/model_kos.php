@@ -257,4 +257,11 @@ class Model_kos extends CI_Model {
 		$this->db->where('IDKOS', $idKos);
 	    $run = $this->db->update('kos', $data);
  	}
+
+ 	function semua_kos()
+ 	{
+ 		$query = "SELECT * FROM kos";
+ 		$run = $this->db->query($query);
+ 		return $run->result();
+ 	}
 }

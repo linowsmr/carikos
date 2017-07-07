@@ -35,7 +35,39 @@
 		    		<button type="submit" class="btn btn-default">Pilih</button>
 		    	</div>
         	</div>
+        	</br>
         </form>
+        	</br>
+        	</br>
+        	</br>
+	        <?php if($bulan > 0){?>
+	        <h2>Laporan Bulan 
+	        <?php 
+	        	if($bulan == 1)
+	        		$bln = "Januari";
+	        	if($bulan == 2)
+	        		$bln = "Februari";
+	        	if($bulan == 3)
+	        		$bln = "Maret";
+	        	if($bulan == 4)
+	        		$bln = "April";
+	        	if($bulan == 5)
+	        		$bln = "Mei";
+	        	if($bulan == 6)
+	        		$bln = "Juni";
+	        	if($bulan == 7)
+	        		$bln = "Juli";
+	        	if($bulan == 8)
+	        		$bln = "Agustus";
+	        	if($bulan == 9)
+	        		$bln = "September";
+	        	if($bulan == 10)
+	        		$bln = "Oktober";
+	        	if($bulan == 11)
+	        		$bln = "November";
+	        	if($bulan == 12)
+	        		$bln = "Desember";
+	        	echo $bln;?> <?php echo $tahun;?></h2><?php }?>
     	<table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
 		    <thead>
 		      <tr>

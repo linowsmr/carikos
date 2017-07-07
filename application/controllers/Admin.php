@@ -131,6 +131,8 @@ class Admin extends CI_Controller {
             $nama['notifTransaksi'] = $this->model_transaksi->notifTransaksi();
             $bulan = $this->input->get('bulan');
             $tahun = $this->input->get('tahun');
+            $data['bulan'] = $bulan;
+            $data['tahun'] = $tahun;
             $data['transaksi'] = $this->model_transaksi->laporanKeuangan($bulan,$tahun);
 
             $this->load->view('admin/admheader',$nama);

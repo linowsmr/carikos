@@ -62,7 +62,6 @@ class Kos extends CI_Controller {
     					echo "Salah Ekstensi";
     			}
 	        }
-
 	        redirect('cluster/kmeans?kos='.$insert.'');
 		}
 		else {
@@ -157,6 +156,7 @@ class Kos extends CI_Controller {
 		$id = $this->input->post('id');
 		$nama = $this->input->post('nama');
 		$alamat = $this->input->post('alamat');
+		$alamatLama = $this->input->post('alamatLama');
 		$kota = strtolower($this->input->post('kota'));
 		$telepon = $this->input->post('telepon');
 		$parkiran = $this->input->post('parkiran');
@@ -171,7 +171,12 @@ class Kos extends CI_Controller {
 
 		$update = $this->model_kos->update($id, $nama, $alamat, $kota, $latlng, $telepon, $parkiran, $tipe);
 		if($update == 'Berhasil'){
-			redirect('kos/beranda?kos='.$id.'');
+			if($alamat == $alamatLama){
+				redirect('kos/beranda?kos='.$id.'');
+			}
+			else {
+				redirect('cluster/kmeans?kos='.$id.'');
+			}
 		}
 		else{
 			echo "Gagal Update Data";

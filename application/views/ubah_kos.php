@@ -35,6 +35,9 @@
                                             <input type="text" class="form-control" id="alamat" name="alamat" value="<?php echo $row->alamatKos ?>" required>
                                         </div>
                                         <div class="form-group">
+                                            <input type="hidden" class="form-control" name="alamatLama" value="<?php echo $row->alamatKos ?>" required>
+                                        </div>
+                                        <div class="form-group">
                                             <h4>Telepon Kos</h4>
                                             <input type="name" class="form-control" name="telepon" value="<?php echo $row->teleponKos ?>" required>
                                         </div>

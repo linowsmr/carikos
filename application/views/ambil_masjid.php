@@ -21,7 +21,7 @@
     <div>
         <div style="position: absolute; top: 30%; left: 45%;">
             <h2 style="margin-left: -19%;">Harap Menunggu</h2>
-            <h3 style="margin-left: -40%;">Proses Pendaftaran Sedang Berlangsung</h3>
+            <h3 style="margin-left: -32%;">Proses Sedang Berlangsung</h3>
         </div>
         <aside class="call-to-action" style="margin-top: -100%;">
             <div class="container">

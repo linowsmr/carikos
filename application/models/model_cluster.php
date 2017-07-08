@@ -166,7 +166,7 @@ class Model_Cluster extends CI_Model {
 	    $run = $this->db->update('cluster', $data);
  	}
 
- 	function jumlah_cluster()
+ 	function cek_jumlah()
  	{
  		$query = "SELECT DISTINCT idCluster FROM kos";
  		$run = $this->db->query($query);

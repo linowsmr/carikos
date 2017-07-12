@@ -38,6 +38,8 @@ class Pencarian extends CI_Controller {
 		$_SESSION['tipe'] = $this->input->get('tipe');
 		$kos = $this->input->get('fasilitaskos');
 		$kamar = $this->input->get('fasilitaskamar');
+		$_SESSION['tglMasuk'] = $this->input->get('masuk');
+		$_SESSION['tglKeluar'] = $this->input->get('keluar');
 		if($this->input->get('jurusan') != ""){
 			$_SESSION['jurusanDipilih'] = $this->input->get('jurusan');
 

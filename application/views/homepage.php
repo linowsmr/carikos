@@ -70,6 +70,14 @@
 	                                ?>
 	                            </select>
 	                        </div>
+                             <div class="form-group">
+                                <h4>Tanggal Masuk</h4>
+                                <input type="date" name="masuk" required>
+                            </div>
+                            <div class="form-group">
+                                <h4>Tanggal Keluar</h4>
+                                <input type="date" name="keluar" required>
+                            </div>
                             <div class="form-group">
                                 <h4>Dekat dengan Jurusan</h4>
                                 <select class="selectpicker" name="jurusan" data-live-search="true" title="Tidak Ada yang Dipilih">

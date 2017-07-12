@@ -204,11 +204,14 @@ class Pencarian extends CI_Controller {
 		}
 
 		if($jurusanDipilih != ""){
-			$data['hasil'] = $this->model_pencarian->pencarian_jurusan($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $jurusanDipilih);
+			$data['rekomendasi'] = $this->model_pencarian->pencarian_jurusan($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $jurusanDipilih);
+			$data['hasil'] = $this->model_pencarian->pencarian_jurusan_semua($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar, $jurusanDipilih);
+
 			$data['idJurusan'] = $jurusanDipilih;
 		}
 		else{
-			$data['hasil'] = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+			$data['rekomendasi'] = $this->model_pencarian->pencarian($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
+			$data['hasil'] = $this->model_pencarian->pencarian_semua($kota, $minHarga, $maxHarga, $tipe, $fasilitaskos, $fasilitaskamar);
 			$data['idJurusan'] = 0;
 		}
 

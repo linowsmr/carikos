@@ -79,14 +79,14 @@ class Model_transaksi extends CI_Model {
 
  	function laporanKeuangan($bulan,$tahun)
  	{
- 		$query = "SELECT DISTINCT t.idTransaksi, date(t.tanggalTransaksi) as tanggal, km.hargaKamar, p.durasiPemesanan, p.hargaPemesanan from transaksi t, kamar km, pemesanan p where p.idKamar = km.idKamar and t.idPemesanan = p.idPemesanan and month(t.tanggalTransaksi) = '$bulan' and year(t.tanggalTransaksi) = '$tahun'";
+ 		$query = "SELECT DISTINCT t.idTransaksi, date(t.tanggalTransaksi) as tanggal, km.hargaKamar, p.durasiPemesanan, p.hargaPemesanan from transaksi t, kamar km, pemesanan p where p.idKamar = km.idKamar and t.idPemesanan = p.idPemesanan and month(t.tanggalTransaksi) = '$bulan' and year(t.tanggalTransaksi) = '$tahun' and t.status = 2";
  		$run = $this->db->query($query);
  		return $run->result();
  	}
 
  	function jumlahTransaksi()
  	{
- 		$query = "SELECT km.hargaKamar, p.durasiPemesanan, t.totalPembayaran from transaksi t, kamar km, pemesanan p where t.idPemesanan = p.idPemesanan and p.idKamar = km.idKamar";
+ 		$query = "SELECT km.hargaKamar, p.durasiPemesanan, t.totalPembayaran from transaksi t, kamar km, pemesanan p where t.idPemesanan = p.idPemesanan and p.idKamar = km.idKamar and t.status = 2";
  		$run = $this->db->query($query);
  		return $run->result();
  	}

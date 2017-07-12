@@ -18,6 +18,11 @@ class Home extends CI_Controller {
 	    $data['fasilitaskamar'] = $this->model_kamar->fasilitas();
 	    $data['jurusan'] = $this->model_pencarian->list_jurusan();
 
+	    if(isset($_SESSION['pesan'])){
+	    	$data['pesan'] = $_SESSION['pesan'];
+	    	unset($_SESSION['pesan']);
+	    }
+
 		if(!empty($this->session->userdata('logged_in_akun')))
         {
             $session_data = $this->session->userdata('logged_in_akun');

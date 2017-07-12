@@ -25,6 +25,7 @@ class Pemesanan extends CI_Controller {
 			unset($_SESSION['kamar']);
 			unset($_SESSION['harga']);
 			unset($_SESSION['pesan']);
+			
 		}
 		else {
 			$data['kamar'] = $this->input->post('kamar');
@@ -32,6 +33,12 @@ class Pemesanan extends CI_Controller {
 			$data['harga'] = $this->input->post('harga');
 		}
 		
+		$data['tglMasuk'] = $_SESSION['tglMasuk'];
+		$data['tglKeluar'] = $_SESSION['tglKeluar'];
+
+		unset($_SESSION['tglMasuk']);
+		unset($_SESSION['tglKeluar']);
+
 		if(!empty($this->session->userdata('logged_in_akun')))
         {
             $session_data = $this->session->userdata('logged_in_akun');
@@ -77,15 +84,6 @@ class Pemesanan extends CI_Controller {
 			$keluar = date_create($data['keluar']);
 
 			$diff = date_diff($masuk, $keluar);
-			$interval = $diff->format("%R");
-
-			if($interval == "-"){
-				$_SESSION['idKos'] = $idKos;
-				$_SESSION['idKamar'] = $idKamar;
-				$_SESSION['harga'] = $data['harga'];
-				$_SESSION['pesan'] = "Tanggal Tidak Memenuhi";
-				redirect('pemesanan/index');
-			}
 
 			$tahun = $diff->format("%y");
 			$bulan = $diff->format("%m");

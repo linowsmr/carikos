@@ -38,8 +38,23 @@ class Pencarian extends CI_Controller {
 		$_SESSION['tipe'] = $this->input->get('tipe');
 		$kos = $this->input->get('fasilitaskos');
 		$kamar = $this->input->get('fasilitaskamar');
+
+		date_default_timezone_set("Asia/Bangkok");
+		$masuk = date_create($this->input->get('masuk'));
+		$keluar = date_create($this->input->get('keluar'));
+
+		$diff = date_diff($masuk, $keluar);
+		$interval = $diff->format("%R");
+
+		if($interval == "-"){
+			$_SESSION['pesan'] = "Tanggal Tidak Memenuhi";
+			redirect('home/index');
+			
+		}
+		
 		$_SESSION['tglMasuk'] = $this->input->get('masuk');
 		$_SESSION['tglKeluar'] = $this->input->get('keluar');
+
 		if($this->input->get('jurusan') != ""){
 			$_SESSION['jurusanDipilih'] = $this->input->get('jurusan');
 
@@ -216,7 +231,11 @@ class Pencarian extends CI_Controller {
 		}
 
 		$data['kamarTerpakai'] = $this->model_kamar->terpakai();
-
+		$tanggalMasuk = date_create_from_format('Y-m-d', $_SESSION['tglMasuk']);
+		$tanggalKeluar = date_create_from_format('Y-m-d', $_SESSION['tglKeluar']);
+		$data['tglMasuk'] = $tanggalMasuk->format("m");
+		$data['tglKeluar'] = $tanggalKeluar->format("m");
+		
 		if(!empty($this->session->userdata('logged_in_akun')))
         {
             $session_data = $this->session->userdata('logged_in_akun');

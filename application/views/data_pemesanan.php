@@ -72,6 +72,16 @@
                                         <input type="email" class="form-control" name="email" value="<?php echo $emailAkun ?>" required>
                                         <small>Contoh: email@example.com</small>
                                     </div>
+                                    <div class="form-group">
+                                        <h4>Tanggal Masuk</h4>
+                                        <h6><?php echo $tglMasuk;?></h6>
+                                        <input type="hidden" class="form-control" name="masuk" value="<?php echo $tglMasuk ?>" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <h4>Tanggal Keluar</h4>
+                                        <h6><?php echo $tglKeluar;?></h6>
+                                        <input type="hidden" class="form-control" name="keluar" value="<?php echo $tglKeluar ?>" required>
+                                    </div>
                                 </section>
                             </div>
                             <br>

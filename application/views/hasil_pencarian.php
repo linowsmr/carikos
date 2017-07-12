@@ -69,34 +69,34 @@
                                 $l = -2.0392787777114;
                                 $m = -5.9333871155382;
 
-                                if($bulan==01){
+                                if($bulan=="01"){
                                     $nilaiBulan = 8;
                                 }
-                                if($bulan==11 || $bulan == 02){
+                                if($bulan=="11" || $bulan == "02"){
                                     $nilaiBulan = 2;
                                 }
-                                if($bulan==03 || $bulan == 04){
+                                if($bulan=="03" || $bulan == "04"){
                                     $nilaiBulan = 4;
                                 }
-                                if($bulan == 05){
+                                if($bulan == "05"){
                                     $nilaiBulan = 15;
                                 }
-                                if($bulan==06){
+                                if($bulan=="06"){
                                     $nilaiBulan = 25;
                                 }
-                                if($bulan==07){
+                                if($bulan=="07"){
                                     $nilaiBulan = 32;
                                 }
-                                if($bulan==08){
+                                if($bulan=="08"){
                                     $nilaiBulan = 35;
                                 }
-                                if($bulan==09){
+                                if($bulan=="09"){
                                     $nilaiBulan = 29;
                                 }
-                                if($bulan==10){
+                                if($bulan=="10"){
                                     $nilaiBulan = 26;
                                 }
-                                if($bulan==12){
+                                if($bulan=="12"){
                                     $nilaiBulan = 3;
                                 }
 
@@ -131,6 +131,7 @@
                                         <h4><?php echo $row->namaKos ?></h4>
                                         <h4>Rp<?php echo number_format(round($hargaBaru))?>/bulan</h4>
                                         <h4>Tersedia <?php echo $jmlKamar ?> Kamar</h4>
+
                                         <form action="<?php echo site_url('pencarian/lihatKamar')?>" method="post">
                                             <input type="hidden" name="idKamar" class="form-control" value="<?php echo $row->idKamar?>">
                                             <input type="hidden" name="idKos" class="form-control" value="<?php echo $row->idKos?>">
@@ -183,7 +184,7 @@
                                 }
 
                                 
-                                $bulan = 10;
+                                $bulan = $tglMasuk;;
 
                                 //$lr = 0.7;
                                 $a = 1.2817164322232;
@@ -200,34 +201,34 @@
                                 $l = -2.0392787777114;
                                 $m = -5.9333871155382;
 
-                                if($bulan==1){
+                                if($bulan=="01"){
                                     $nilaiBulan = 8;
                                 }
-                                if($bulan==11 || $bulan == 2){
+                                if($bulan=="11" || $bulan == "02"){
                                     $nilaiBulan = 2;
                                 }
-                                if($bulan==3 || $bulan == 4){
+                                if($bulan=="03" || $bulan == "04"){
                                     $nilaiBulan = 4;
                                 }
-                                if($bulan == 5){
+                                if($bulan == "05"){
                                     $nilaiBulan = 15;
                                 }
-                                if($bulan==6){
+                                if($bulan=="06"){
                                     $nilaiBulan = 25;
                                 }
-                                if($bulan==7){
+                                if($bulan=="07"){
                                     $nilaiBulan = 32;
                                 }
-                                if($bulan==8){
+                                if($bulan=="08"){
                                     $nilaiBulan = 35;
                                 }
-                                if($bulan==9){
+                                if($bulan=="09"){
                                     $nilaiBulan = 29;
                                 }
-                                if($bulan==10){
+                                if($bulan=="10"){
                                     $nilaiBulan = 26;
                                 }
-                                if($bulan==12){
+                                if($bulan=="12"){
                                     $nilaiBulan = 3;
                                 }
 

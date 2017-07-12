@@ -233,6 +233,7 @@ class Pencarian extends CI_Controller {
 		$data['kamarTerpakai'] = $this->model_kamar->terpakai();
 		$tanggalMasuk = date_create_from_format('Y-m-d', $_SESSION['tglMasuk']);
 		$tanggalKeluar = date_create_from_format('Y-m-d', $_SESSION['tglKeluar']);
+		
 		$data['tglMasuk'] = $tanggalMasuk->format("m");
 		$data['tglKeluar'] = $tanggalKeluar->format("m");
 		

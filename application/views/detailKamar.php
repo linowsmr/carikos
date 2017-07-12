@@ -62,7 +62,7 @@
 	<body>
         <aside class="call-to-action">
     		<div class="container">
-    			<div class="row">
+    			<div class="row mobile-none">
     			 	<div class="col-lg-12 text-center">
     			 	 	<h2><?php echo "$jenisKamar - $namaKos"; ?></h2>
     			 	 	<hr class="small" style="border-color: black;">
@@ -140,6 +140,68 @@
                     </div>
     			</div>
     		</div>
+            <div class="row desktop-none">
+                    <div class="col-lg-12 text-center">
+                        <h2><?php echo "$jenisKamar - $namaKos"; ?></h2>
+                        <hr class="small" style="border-color: black;">
+                        <form action="<?php echo site_url('pemesanan/index') ?>" method="POST">
+                            <input type="hidden" name="kamar" value="<?php echo $idKamar ?>"></input>
+                            <input type="hidden" name="kos" value="<?php echo $idKos ?>"></input>
+                            <input type="hidden" name="harga" value="<?php echo $harga ?>"></input>
+                            <?php
+                                if($jmlKamar > 0){ ?>
+                                    <button type="submit" class="btn btn-lg btn-dark">Pesan Kamar</button>
+                                <?php }
+                                else{ ?>
+                                    <button type="submit" class="btn btn-lg btn-dark" disabled>Pesan Kamar</button>
+                                <?php }
+                            ?>
+                        </form>
+                    </div>
+                    <div class="col-lg-12 text-center">
+                        <h3>Detail Kamar</h3>
+                        <hr class="small" style="border-color: black;">
+                            <h4><b>Harga Kamar</b></h4>
+                            <h4>Rp<?php echo $hargaKamar ?>/bulan</h4>
+                            <br>
+                            <h4><b>Jumlah Kamar yang Tersedia</b></h4>
+                            <h4><?php echo $jmlKamar ?> Kamar</h4>
+                            <br>
+                            <h4><b>Luas Kamar (Dalam m)</b></h4>
+                            <h4><?php echo $luasKamar ?></h4>
+                            <br>
+                            <h4><b>Fasilitas Kamar</b></h4>
+                            <?php foreach($fasilitasKamar as $row){ ?>
+                                <h4><?php echo $row->namaFasilitasKamar ?></h4>
+                            <?php } ?>
+                    </div>
+                    <br>
+                    <hr style="border-color: #b3b3b3">
+                    <div class="col-lg-6 text-center">
+                        <h3>Detail Kos</h3>
+                        <hr class="small" style="border-color: black;">
+                        <h4><b>Alamat Kos</b></h4>
+                        <h4><?php echo $alamatKos ?></h4>
+                        <br>
+                        <h4><b>Telepon Kos</b></h4>
+                        <h4><?php echo $teleponKos ?></h4>
+                        <br>
+                        <h4><b>Tipe Kos</b></h4>
+                        <h4><?php echo $tipeKos ?></h4>
+                        <br>
+                        <h4><b>Penjaga Kos</b></h4>
+                        <h4><?php echo $penjagaKos ?></h4>
+                        <br>
+                        <h4><b>Luas Parkiran (dalam m<sup>2</sup>)</b></h4>
+                        <h4><?php echo $luasParkiran ?></h4>
+                        <br>
+                        <h4><b>Fasilitas Kos</b></h4>
+                        <?php foreach($fasilitasKos as $row){ ?>
+                                <h4><?php echo $row->namaFasilitasKos ?></h4>
+                            <?php } ?>
+                    </div>
+                </div>
+            </div>
     	</aside>
     	<aside class="call-to-action bg-primary">
             <div class="container">
@@ -180,7 +242,7 @@
                         <h2>Lokasi Kos</h2>
                         <hr class="small" style="border-color: black;">
                         <br>
-                        <div class="col-lg-4" style="text-align: right;">
+                        <div class="col-lg-4 mobile-none" style="text-align: right;">
                             <?php
                                 if($idJurusan != "0"){ ?>
                                     <h4>Jarak ke Jurusan <b><?php echo $namaJurusan ?></b></h4><br>
@@ -190,7 +252,7 @@
                             <h4>Supermarket Terdekat</h4>
                             <h4>Masjid Terdekat</h4>
                         </div>
-                        <div class="col-lg-2" style="text-align: left;">
+                        <div class="col-lg-2 mobile-none" style="text-align: left;">
                             <?php
                                 if($idJurusan != "0"){ ?>
                                     <h4>&plusmn;<?php echo $jarakJurusan ?> KM</h4><br>
@@ -199,6 +261,20 @@
                             <h4>&plusmn;<?php echo $jarakMinimarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakSupermarket ?> KM</h4>
                             <h4>&plusmn;<?php echo $jarakMasjid ?> KM</h4>
+                        </div>
+                        <div class="desktop-none">
+                            <?php
+                                if($idJurusan != "0"){ ?>
+                                    <h4>Jarak ke Jurusan <b><?php echo $namaJurusan ?></b></h4>
+                                    <h4>&plusmn;<?php echo $jarakJurusan ?> KM</h4><br>
+                                <?php }
+                            ?>        
+                            <h4>Minimarket Terdekat</h4>
+                            <h4>&plusmn;<?php echo $jarakMinimarket ?> KM</h4><br>
+                            <h4>Supermarket Terdekat</h4>
+                            <h4>&plusmn;<?php echo $jarakSupermarket ?> KM</h4><br>
+                            <h4>Masjid Terdekat</h4>
+                            <h4>&plusmn;<?php echo $jarakMasjid ?> KM</h4><br>
                         </div>
                         <?php
                             if($idJurusan == 0){ ?>
@@ -269,10 +345,8 @@
 
                                         function doNothing() {}
                                     </script>
-                                    <script async defer
-                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
-                                    </script>
                                 </div>
+
                             <?php }
                             else { ?>
                                 <div class="col-lg-6" id="map">
@@ -359,12 +433,12 @@
 
                                         function doNothing() {}
                                     </script>
-                                    <script async defer
-                                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
-                                    </script>
                                 </div>
                             <?php }
                         ?>
+                        <script async defer
+                            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDota_CEvGFaIOddKRMzYjg487U1dL9qWo&callback=initMap">
+                        </script>
                     </div>
                 </div>
             </div>

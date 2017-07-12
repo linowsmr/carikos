@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+/*untuk desktop */
+@media (min-width: 1201px){
+	.desktop-none {
+		display: none;
+	}
+}
+
+/*untuk mobile */
+@media (max-width: 1201px){
+	.mobile-none {
+		display: none;
+	}
+
+	#map {
+		width: 100%;
+	}
+}

@@ -54,13 +54,14 @@ class Pencarian extends CI_Controller {
 		
 		$_SESSION['tglMasuk'] = $this->input->get('masuk');
 		$_SESSION['tglKeluar'] = $this->input->get('keluar');
-
+		$_SESSION['jurusanDipilih'] = $this->input->get('jurusan');
+		
 		if($this->input->get('jurusan') != ""){
 			$_SESSION['jurusanDipilih'] = $this->input->get('jurusan');
 
 			$_SESSION['fasilitaskos'] = implode(",", $kos);
 			$_SESSION['fasilitaskamar'] = implode(",", $kamar);
-
+			
 			redirect('pencarian/proses');
 		}
 		else{
@@ -74,8 +75,8 @@ class Pencarian extends CI_Controller {
 		$cluster = $this->model_cluster->ambil_cluster();
 		foreach($cluster as $row){
 			$cekNilai = $this->model_jurusan->cek_nilai($row->idCluster, $_SESSION['jurusanDipilih']);
-
-			if($cekNilai == 0){
+			
+			if($cekNilai == 0) {
 				$jurusan = $this->model_jurusan->ambil_jurusan($_SESSION['jurusanDipilih']);
 				foreach ($jurusan as $row2) {
 					$data['idCluster'] = $row->idCluster;

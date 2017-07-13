@@ -97,9 +97,15 @@ function form(jarak)
     createform.submit();
 }
 </script>
-<div style="position: absolute; top: 30%; left: 45%;">
+<div class="mobile-none" style="position: absolute; top: 30%; left: 45%;">
     <h2 style="margin-left: -19%;">Harap Menunggu</h2>
     <h3 style="margin-left: -40%;">Proses Pencarian Sedang Berlangsung</h3>
+</div>
+<div class="desktop-none" style="position: absolute; top: 35%; left: 0%;">
+    <div class="col-lg-12 text-center">  
+        <h2 style="margin-left: 0%;">Harap Menunggu</h2>
+        <h3 style="margin-left: 0%;">Proses Pencarian Sedang Berlangsung</h3>
+    </div>
 </div>
 <aside class="call-to-action bg-primary" style="display: none;">
     <div class="container">

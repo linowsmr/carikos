@@ -18,6 +18,7 @@
     <link href="<?php echo base_url();?>assets/css/bootstrap-multiselect.min.css" rel="stylesheet">
 
     <link href="<?php echo base_url();?>assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo base_url();?>assets/css/mobile.css" rel="stylesheet">
     
     <!-- Custom Fonts -->
     <link href="<?php echo base_url();?>assets/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">

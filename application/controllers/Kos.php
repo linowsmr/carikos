@@ -201,6 +201,19 @@ class Kos extends CI_Controller {
 	            }
 
 	            if($dataPemilik['username'] == $pemilik){
+	            	$data['kamar'] = $this->model_kamar->list_kamar($id);
+
+	            	foreach($data['kamar'] as $row2){
+	            		$data['foto'] = $this->model_kamar->list_foto($row2->idKamar);
+						foreach($data['foto'] as $row3){
+							unlink("assets/images/kamar/".$row3->namaFileKamar);
+						}
+						
+						$this->model_kamar->delete_fasilitas_kamar($row2->idKamar);
+						$this->model_kamar->delete_foto_kamar($row2->idKamar);
+						$this->model_kamar->delete($row2->idKamar);
+	            	}
+
 	            	$this->model_kos->delete_fasilitas_kos($id);
 
 	            	$data['foto'] = $this->model_kos->list_foto($id);

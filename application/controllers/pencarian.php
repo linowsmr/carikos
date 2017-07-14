@@ -134,7 +134,7 @@ class Pencarian extends CI_Controller {
 
 			foreach($jarakMarket as $row){
 				$jarakFinalMarket = $row->jarakDestinasi;
-				$bobotMarket = 0.22;
+				$bobotMarket = 0.16;
 
 				if($jarakFinalMarket <= 2)
 					$nilaiDestinasi = $nilaiDestinasi + 100*$bobotMarket;
@@ -152,7 +152,7 @@ class Pencarian extends CI_Controller {
 
 			foreach($jarakMasjid as $row){
 				$jarakFinalMasjid = $row->jarakDestinasi;
-				$bobotTempatIbadah = 0.02;
+				$bobotTempatIbadah = 0.05;
 
 				if($jarakFinalMasjid <= 2)
 					$nilaiDestinasi = $nilaiDestinasi + 100*$bobotTempatIbadah;
@@ -179,7 +179,7 @@ class Pencarian extends CI_Controller {
 			$nilaiFasilitas = $row->nilaiFasilitasKamar;
 
 			$luasParkiran = $this->model_cluster->luas_parkiran($idKos);
-			$bobotLuasParkiran = 0.1;
+			$bobotLuasParkiran = 0.08;
 			foreach($luasParkiran as $row){
 				$luas = $row->idParkiranKos;
 				if($luas == 1)
@@ -195,7 +195,7 @@ class Pencarian extends CI_Controller {
 			}
 
 			$penjagaKos = $this->model_cluster->penjaga_kos($idKos);
-			$bobotPenjagaKos = 0.07;
+			$bobotPenjagaKos = 0.02;
 			if($penjagaKos == 1)
 				$nilaiPenjagaKos = 100*$bobotPenjagaKos;
 			else
@@ -205,7 +205,7 @@ class Pencarian extends CI_Controller {
 			$this->model_cluster->update_nilai_kos($idKos, $nilaiParkiranPenjaga);
 			
 			$fasilitas = $this->model_cluster->fasilitas_lengkap($idKamar);
-			$bobotFasilitasKamar = 0.34;
+			$bobotFasilitasKamar = 0.35;
 			foreach($fasilitas as $row){
 				$fasilitasKamar = $row->fasilitasTiga;
 				if($fasilitasKamar == 3)

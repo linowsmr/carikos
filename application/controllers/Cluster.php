@@ -222,7 +222,7 @@ class Cluster extends CI_Controller {
 	function kos_banjir()
 	{
 		$idKos = $this->input->post('kos');
-		$nilaiBanjir = $this->input->post('nilai')*0.05;
+		$nilaiBanjir = $this->input->post('nilai')*0.21;
 
 		$this->model_kos->nilai_banjir($idKos, $nilaiBanjir);
 		unset($_SESSION['destinasi']);
@@ -248,7 +248,7 @@ class Cluster extends CI_Controller {
 		$jarakClusterJurusan = $this->input->post('jarak');
 
 		$nilaiDestinasi = 0;
-		$bobotJurusan = 0.16;
+		$bobotJurusan = 0.1;
 		if($jarakClusterJurusan <= 2)
 			$nilaiDestinasi = $nilaiDestinasi + 100*$bobotJurusan;
 		else if($jarakClusterJurusan > 2 && $jarakClusterJurusan <=3)

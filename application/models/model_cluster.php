@@ -172,4 +172,11 @@ class Model_Cluster extends CI_Model {
  		$run = $this->db->query($query);
 		return $run->num_rows();
  	}
+
+ 	function cluster_kos()
+ 	{
+ 		$query = "SELECT DISTINCT * FROM cluster c, kos k";
+ 		$run = $this->db->query($query);
+		return $run->result();
+ 	}
 }

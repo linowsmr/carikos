@@ -281,7 +281,7 @@ class Cluster extends CI_Controller {
 
 		header("Content-type: text/xml");
 
-		$kos = $this->model_kos->semua_kos();
+		$kos = $this->model_cluster->cluster_kos();
 		foreach($kos as $row){
 		  $node = $dom->createElement("cluster");
 		  $newnode = $parnode->appendChild($node);
@@ -295,6 +295,15 @@ class Cluster extends CI_Controller {
 		  
 		  $newnode->setAttribute("latKos",$latKos);
 		  $newnode->setAttribute("lngKos",$lngKos);
+
+		  $latlongCluster = substr($row->latLngCluster, 1, -1);
+	      $coordCluster = explode(", ", $latlongCluster);
+	      $latCluster = $coordCluster[0];
+	      $lngCluster = $coordCluster[1];
+
+	      $newnode->setAttribute("latCluster",$latCluster);
+		  $newnode->setAttribute("lngCluster",$lngCluster);
+
 		  $newnode->setAttribute("idCluster",$row->idCluster);
 		}
 

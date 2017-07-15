@@ -1,6 +1,7 @@
 <?php
     $cluster = array();
     $clusterUnique = array();
+
     foreach ($kos as $row) {
         array_push($cluster, $row->idCluster);
     }
@@ -73,6 +74,30 @@
                             }
                             marker.addListener('click', function() {
                                 infoWindow.open(map, marker);
+                            });
+
+                            var pointCluster = new google.maps.LatLng(
+                                parseFloat(markerElem.getAttribute('latCluster')),
+                                parseFloat(markerElem.getAttribute('lngCluster')));
+                            
+                            var contentStringCluster = '<p><b>ID Cluster: ' + idCluster; 
+                            var infoWindowCluster = new google.maps.InfoWindow({
+                                content: contentStringCluster
+                            });
+
+                            var iconCentroidCluster = {
+                                url: "http://maps.google.com/mapfiles/kml/paddle/ylw-stars.png",
+                                scaledSize: new google.maps.Size(85, 85)
+                            };
+
+                            var markerCluster = new google.maps.Marker({
+                                map: map,
+                                position: pointCluster,
+                                icon: iconCentroidCluster
+                            });
+
+                            markerCluster.addListener('click', function() {
+                                infoWindowCluster.open(map, markerCluster);
                             });
                         });
                     });

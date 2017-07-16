@@ -1,4 +1,8 @@
 <?php
+    $jarakMinimarket = "-";
+    $jarakSupermarket = "-";
+    $jarakMasjid = "-";
+    
     foreach($detailKos as $row){
         $idKos = $row->idKos;
         $namaKos = $row->namaKos;

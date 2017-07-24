@@ -65,14 +65,14 @@ class Cluster extends CI_Controller {
 			}
 		}
 
-		$cek_jumlah_cluster = $this->model_cluster->cek_jumlah();
-		if($cek_jumlah_cluster !=3)
-			redirect('cluster/kmeans?kos='.$id.'');
-		else {
+		//$cek_jumlah_cluster = $this->model_cluster->cek_jumlah();
+		//if($cek_jumlah_cluster !=3)
+		//	redirect('cluster/kmeans?kos='.$id.'');
+		//else {
 			$_SESSION['kos'] = $id;
 			$_SESSION['destinasi'] = "cek";
 			redirect('cluster/proses');
-		}
+		//}
 	}
 
 	public function proses()
